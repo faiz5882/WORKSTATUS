@@ -1,0 +1,53 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"				
+		Icon="/Assets/avalonia-logo.ico"
+        x:Class="WorkStatus.Views.Dashboard"
+        Title="Dashboard">
+	<Grid ShowGridLines="True" Margin="0,20,0,0">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="250"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>			
+		</Grid.RowDefinitions>
+		
+
+		<Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="20"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+
+			</Grid.ColumnDefinitions>			
+			<!--<TextBlock Grid.Row="1" Grid.Column="1"
+					   x:Name="TxtWelcome"
+					   Text="Welcome" 
+					   FontStyle="Normal" TextAlignment="Center"
+					   Foreground="Blue"					  
+					   HorizontalAlignment="Center"></TextBlock>-->
+			<Border Grid.Row="1" Grid.Column="1" 
+					Background="Blue"
+              CornerRadius="8"
+              Padding="16">
+				<TextBlock>Rounded Corners</TextBlock>
+			</Border>
+			<Image Grid.Row="1" Grid.Column="2" Source="/Assets/avalonia-logo.ico"
+					   Width="100" Height="50"></Image>
+		</Grid>
+
+		<Image Grid.Row="0" Grid.Column="1" Source="/Assets/avalonia-logo.ico"
+					   Width="100" Height="80"></Image>
+		
+		
+	</Grid>
+</Window>

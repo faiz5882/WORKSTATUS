@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WorkStatus": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Projects\\2021\\ProjectLive\\windows\\WorkStatus\\WorkStatus"
+    }
+  }
+}

@@ -1,0 +1,143 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"
+        mc:Ignorable="d" Width="653" Height="500"
+        x:Class="WorkStatus.Views.Login"
+		WindowStartupLocation="CenterScreen"
+		CanResize="False"
+		Icon="/Assets/avalonia-logo.ico"
+        Title="Login">
+	
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="120"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>			
+			<RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>
+
+		<StackPanel x:Name="StackPanelHeader" Grid.Row="0" Background="{Binding StackPanelLogo,Mode=TwoWay}">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+				
+				<Image Grid.Row="0" Source="/Assets/avalonia-logo.ico" 
+					   Width="100" Height="80"></Image>
+			<TextBlock x:Name="TxtWelcome" Grid.Row="1" 
+					   Text="Welcome to WorkForest" FontStyle="Normal" TextAlignment="Center"
+					   Foreground="{Binding TxtWelcomeColor,Mode=TwoWay}"
+					   FontWeight="500"
+					   HorizontalAlignment="Center"
+					    FontSize="25"></TextBlock>				
+			</Grid>
+		</StackPanel>
+		<Grid Grid.Row="2"  Margin="0,30,0,0">
+			<Label  HorizontalContentAlignment="Center" Foreground="#212529" 
+					FontWeight="500" FontStyle="Normal" 
+					FontSize="25" Content="Log in to Continue"></Label>
+		</Grid>
+		<!--Email Address-->
+		<Grid Grid.Row="3" HorizontalAlignment="Center" Margin="0,20,0,0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>				
+
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="*" Foreground="Red" Grid.Row="1" Grid.Column="0"></TextBlock>
+			<TextBox Text="{Binding Email,Mode=TwoWay}" Grid.Row="1"  Watermark="Email Address" Classes="Filled clearButton"
+					 Width="413" Height="50" Grid.Column="1"></TextBox>			
+		</Grid>
+
+		<!--Password-->
+		<Grid Grid.Row="4" HorizontalAlignment="Center" Margin="0,20,0,0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="*" Foreground="Red" Grid.Row="1" Grid.Column="0"></TextBlock>
+			<StackPanel Grid.Row="1" Grid.Column="1" 
+						VerticalAlignment="Center"
+						HorizontalAlignment="Center">
+			<TextBox Text="{Binding Password,Mode=TwoWay}" 
+					 Watermark="Password" PasswordChar="*" Classes="Filled revealPasswordButton" 
+					   Width="413" Height="50">				
+			</TextBox>
+				<!--<Image HorizontalAlignment="Right" Margin="0,-30,0,0"
+					   Grid.Row="1" Grid.Column="1" 
+					   Source="/Assets/eyehide.png"
+					   Width="20" Height="20"></Image>-->
+			</StackPanel>
+			<Grid Grid.Row="2"  Grid.Column="1" Margin="0,20,0,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="200"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+
+				</Grid.ColumnDefinitions>				
+				<CheckBox Grid.Row="0" Grid.Column="0" Foreground="#212529" FontSize="12" FontWeight="400"
+						  IsChecked="false">Remember Me</CheckBox>
+				<TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" 
+						   Margin="0,8,0,0"
+						   Foreground="#212529" FontWeight="400" FontSize="12" Text="Forgot Password"></TextBlock>
+				<!--<Button Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Background="Blue">Forgot Password</Button>-->
+			</Grid>
+			<StackPanel Grid.Row="3"  Grid.Column="1" Margin="0,20,0,0" >
+				<Button Width="413" Height="40" Command="{Binding CommandLogin}"
+						Foreground="White" HorizontalContentAlignment="Center" 
+					Background="{Binding StackPanelLogo,Mode=TwoWay}">Login</Button>
+			</StackPanel>
+			
+			<Grid Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" 
+				  Margin="0,20,0,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"></RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>					
+
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Row="0"  Grid.Column="0"
+						   FontWeight="400" Foreground="#212529" 
+						   HorizontalAlignment="Center" FontSize="14"
+						   Text="Don’t have an account? "></TextBlock>
+				
+					<TextBlock 
+						   Grid.Row="0"  Grid.Column="1"
+						   HorizontalAlignment="Center" FontWeight="700" FontSize="14" 
+						   Foreground="#1665D8"
+					   Text=" Sign Up">
+					</TextBlock>
+				
+				
+
+			</Grid>
+		</Grid>
+
+		
+	
+	</Grid>
+	
+</Window>
