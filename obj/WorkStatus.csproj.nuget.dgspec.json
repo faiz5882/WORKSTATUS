@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\2021\\ProjectLive\\windows\\WorkStatus\\WorkStatus\\WorkStatus.csproj": {}
+    "C:\\Projects\\2021\\CompanyProject\\WorkStatus\\WorkStatus.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\2021\\ProjectLive\\windows\\WorkStatus\\WorkStatus\\WorkStatus.csproj": {
+    "C:\\Projects\\2021\\CompanyProject\\WorkStatus\\WorkStatus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\2021\\ProjectLive\\windows\\WorkStatus\\WorkStatus\\WorkStatus.csproj",
+        "projectUniqueName": "C:\\Projects\\2021\\CompanyProject\\WorkStatus\\WorkStatus.csproj",
         "projectName": "WorkStatus",
-        "projectPath": "C:\\Projects\\2021\\ProjectLive\\windows\\WorkStatus\\WorkStatus\\WorkStatus.csproj",
+        "projectPath": "C:\\Projects\\2021\\CompanyProject\\WorkStatus\\WorkStatus.csproj",
         "packagesPath": "C:\\Users\\vinove\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\2021\\ProjectLive\\windows\\WorkStatus\\WorkStatus\\obj\\",
+        "outputPath": "C:\\Projects\\2021\\CompanyProject\\WorkStatus\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Projects\\2021\\ProjectLive\\windows\\WorkStatus\\WorkStatus\\NuGet.Config",
+          "C:\\Projects\\2021\\CompanyProject\\WorkStatus\\NuGet.Config",
           "C:\\Users\\vinove\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"

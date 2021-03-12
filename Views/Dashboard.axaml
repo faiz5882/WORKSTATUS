@@ -2,52 +2,339 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"				
+        mc:Ignorable="d" Width="800" Height="600"
 		Icon="/Assets/avalonia-logo.ico"
         x:Class="WorkStatus.Views.Dashboard"
+		CanResize="False"
+		WindowStartupLocation="CenterScreen"
         Title="Dashboard">
-	<Grid ShowGridLines="True" Margin="0,20,0,0">
+	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="250"></ColumnDefinition>
-			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="Auto"></ColumnDefinition>
+			<ColumnDefinition Width="1"></ColumnDefinition>
+			<ColumnDefinition Width="Auto"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>			
+			<RowDefinition Height="Auto"></RowDefinition>
 		</Grid.RowDefinitions>
-		
-
-		<Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+		<Grid x:Name="gridLeft"
+			  Grid.Row="0" Grid.Column="0"
+			  VerticalAlignment="Top">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="20"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+
+				<RowDefinition Height="*"></RowDefinition>
+			</Grid.RowDefinitions>
+			<Image Grid.Row="0"
+				   Source="/Assets/WorkStatus_logo.png"
+								Height="50"></Image>
+			<Grid Grid.Row="3" Margin="20,10,20,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+
+				<Image Grid.Row="0" Grid.Column="0"
+					   Width="30" Height="30"
+					   Source="/Assets/Group_8.png"></Image>
+
+				<Border Width="208" Grid.Row="0" Grid.Column="1"
+						Height="48"
+						Background="#1665D8" Margin="10,0,0,0"
+				  CornerRadius="8"
+				  Padding="16">
+					<TextBlock VerticalAlignment="Center"
+							   Foreground="#FFFFFF" 
+							   FontWeight="600"
+							   FontSize="20"
+							   HorizontalAlignment="Center">07:03:45</TextBlock>
+				</Border>
+				<Image Grid.Row="0" Grid.Column="3" Width="30"
+					   Height="30" Margin="10,0,0,0"
+					   Source="/Assets/Group_9.png"></Image>
+
+			</Grid>
+			<Grid Grid.Row="4" HorizontalAlignment="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Row="0"
+						   Text="WS_p2"
+						Foreground="#212529"
+					FontWeight="Bold" FontStyle="Normal"
+					FontSize="16" LineHeight="19"
+				Margin="0,10,0,0">
+
+				</TextBlock>
+			</Grid>
+			<Grid Grid.Row="5" HorizontalAlignment="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Row="0"
+						   FontWeight="500" Foreground="Blue"
+									   FontSize="16"
+						   Text="No Weekly Limit" Margin="30,10,0,0"></TextBlock>
+			</Grid>
+			<Grid Grid.Row="6" HorizontalAlignment="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Row="0"
+						   FontWeight="Bold" FontStyle="Normal"
+				FontSize="16"
+						   Text="Total worked today : 07:30"
+						   Margin="0,10,0,0"></TextBlock>
+			</Grid>
+			<Grid Grid.Row="7"  Margin="0,10,0,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"></RowDefinition>
+				</Grid.RowDefinitions>
+				<Border  Grid.Row="0" Width="270"
+                    BorderBrush="#E2E2E2"
+            BorderThickness="2"
+                         Background="#F7F7F7"
+                    HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            CornerRadius="5">
+					<StackPanel Margin="1"
+				Orientation="Horizontal">
+
+						<TextBox BorderBrush="Transparent"   Height="25"
+								 FontSize="14" Width="270" HorizontalAlignment="Stretch"
+								 VerticalAlignment="Stretch"  >
+							<!--<TextBox.Template>
+								<ControlTemplate TargetType="{x:Type TextBox}">
+									<Grid Background="#F7F7F7">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*"/>
+											<ColumnDefinition Width="30"/>
+										</Grid.ColumnDefinitions>
+									</Grid>
+								</ControlTemplate>
+							</TextBox.Template>
+							<TextBox.Template>
+								<ControlTemplate TargetType="{x:Type TextBox}">
+									<Grid Background="#F7F7F7">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*"/>
+											<ColumnDefinition Width="30"/>
+										</Grid.ColumnDefinitions>
+										<ScrollViewer Grid.Column="0" />										
+										<Button Cursor="Hand" Margin="0,0,0,0" Grid.Column="1"  
+												HorizontalAlignment="Right" Height="20" Width="30"
+												 >
+											<Button.Template>
+												<ControlTemplate>
+													<Border x:Name="theBorder" BorderBrush="Transparent" BorderThickness="0">
+														<Image  Source="/Assets/button_blue_play.png"  Width="20" Height="20" HorizontalAlignment="Center"/>
+													</Border>
+												</ControlTemplate>
+											</Button.Template>
+										</Button>
+									</Grid>
+								</ControlTemplate>
+							</TextBox.Template>-->
+						</TextBox>
+					</StackPanel>
+				</Border>
+			</Grid>
+			<Grid Grid.Row="8" Margin="0,10,0,0" 
+				  Background="#E8F3FF">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="30"></RowDefinition>
+					<RowDefinition Height="*"></RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="1.5*"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Row="0" Grid.Column="0"
+						   VerticalAlignment="Center"
+						   Margin="5,0,0,0"
+						   Foreground="Black"
+						   FontSize="16"
+						   FontWeight="Bold"
+						   Text="Ws_Org">
+				</TextBlock>								
+					<TextBlock Grid.Row="0" Grid.Column="2"
+						   HorizontalAlignment="Right"
+							   Margin="0,0,10,0"
+							   VerticalAlignment="Center"
+						  FontWeight="Bold" FontStyle="Normal"
+					     FontSize="16" Foreground="#1665D8"
+						   Text="Change"></TextBlock>
+				
+				<Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+					  Margin="-5,10,0,0" Height="255">
+					<ListBox Background="White" SelectionMode="Single"  ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+							 Items="{Binding FindOrganisationDetails,Mode=TwoWay}">												
+						<ListBox.ItemTemplate>
+							<DataTemplate>																	
+								<StackPanel Orientation="Horizontal">
+									<Grid>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"></RowDefinition>
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="20"></ColumnDefinition>
+											<ColumnDefinition Width="100"></ColumnDefinition>
+											<ColumnDefinition Width="200"></ColumnDefinition>
+										</Grid.ColumnDefinitions>
+										<Image  Grid.Row="0"
+												Grid.Column="0"
+											   Source="/Assets/Group_8.png"
+											 Width="20" Height="20"
+											 HorizontalAlignment="Left" />
+										<TextBlock Grid.Row="0" Grid.Column="1"
+												   Width="66" FontStyle="Normal"
+												  FontWeight="Normal"
+												   HorizontalAlignment="Center"
+												   VerticalAlignment="Center" Text="{Binding OrganizationId}"
+												   FontSize="16"></TextBlock>
+										<TextBlock Grid.Row="0"
+												   Grid.Column="2" Text="{Binding OrganizationName}"
+												   HorizontalAlignment="Right"
+												   VerticalAlignment="Center"></TextBlock>
+									</Grid>
+								</StackPanel>									
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+						<!--<ListBoxItem>
+							<StackPanel Orientation="Horizontal">
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto"></RowDefinition>
+									</Grid.RowDefinitions>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="20"></ColumnDefinition>
+										<ColumnDefinition Width="100"></ColumnDefinition>
+										<ColumnDefinition Width="200"></ColumnDefinition>
+									</Grid.ColumnDefinitions>
+									<Image  Grid.Row="0"
+											Grid.Column="0"
+										   Source="/Assets/Group_8.png"
+										 Width="20" Height="20"
+										 HorizontalAlignment="Left" />
+									<TextBlock Grid.Row="0" Grid.Column="1"
+											   Width="66" FontStyle="Normal"
+											  FontWeight="Normal" 
+											   HorizontalAlignment="Center" 
+											   VerticalAlignment="Center"
+											   FontSize="16">Item #1</TextBlock>
+									<TextBlock Grid.Row="0"
+											   Grid.Column="2"
+											   HorizontalAlignment="Right"
+											   VerticalAlignment="Center">Item #1</TextBlock>
+								</Grid>
+							</StackPanel>
+						</ListBoxItem>
+						<ListBoxItem>
+							<StackPanel Orientation="Horizontal">
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto"></RowDefinition>
+									</Grid.RowDefinitions>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="20"></ColumnDefinition>
+										<ColumnDefinition Width="100"></ColumnDefinition>
+										<ColumnDefinition Width="200"></ColumnDefinition>
+									</Grid.ColumnDefinitions>
+									<Image  Grid.Row="0"
+											Grid.Column="0"
+										   Source="/Assets/Group_8.png"
+										 Width="20" Height="20"
+										 HorizontalAlignment="Left" />
+									<TextBlock Grid.Row="0" Grid.Column="1"
+											   Width="66" FontStyle="Normal"
+											  FontWeight="Normal"
+											   HorizontalAlignment="Center"
+											   VerticalAlignment="Center"
+											   FontSize="16">Item #1</TextBlock>
+									<TextBlock Grid.Row="0"
+											   Grid.Column="2"
+											   HorizontalAlignment="Right"
+											   VerticalAlignment="Center">Item #1</TextBlock>
+								</Grid>
+							</StackPanel>
+						</ListBoxItem>-->
+						
+					</ListBox>
+				</Grid>
+			</Grid>
+			<Grid Grid.Row="9" Margin="0,25,0,0" Background="#1665D8">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"></RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Image Grid.Row="0"
+				   Grid.Column="0"
+				   Source="/Assets/refresh.png"
+								Height="20"></Image>
+				<Label Grid.Row="0" Grid.Column="1"
+					   FontStyle="Normal"
+					   FontSize="14"
+					   FontWeight="400"
+					   VerticalContentAlignment="Center"
+					   HorizontalContentAlignment="Center"
+					   Content="Last updated at: 06/08/20"></Label>
+				<Image Grid.Row="0"
+				   Grid.Column="2" Margin="80,0,0,0"
+				   Source="/Assets/maximize.png"
+								Height="20"></Image>
+				<Button Grid.Row="0" Grid.Column="3"
+						Foreground="#1665D8" Background="#1665D8">
+					<Image Grid.Row="0"
+				   Grid.Column="3"
+				   Source="/Assets/arrowhead-right.png"
+								Height="20"></Image>
+				</Button>
+
+
+			</Grid>
+		</Grid>
+		<Grid x:Name="grdCenter" Grid.Row="0" Grid.Column="1">
+			<Rectangle  Fill="WhiteSmoke" Height="800"/>
+		</Grid>
+		<Grid x:Name="grdRight" Grid.Row="0" Grid.Column="2">
+			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"></RowDefinition>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto"></ColumnDefinition>
-				<ColumnDefinition Width="Auto"></ColumnDefinition>
-				<ColumnDefinition Width="Auto"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
 
-			</Grid.ColumnDefinitions>			
-			<!--<TextBlock Grid.Row="1" Grid.Column="1"
-					   x:Name="TxtWelcome"
-					   Text="Welcome" 
-					   FontStyle="Normal" TextAlignment="Center"
-					   Foreground="Blue"					  
-					   HorizontalAlignment="Center"></TextBlock>-->
-			<Border Grid.Row="1" Grid.Column="1" 
-					Background="Blue"
-              CornerRadius="8"
-              Padding="16">
-				<TextBlock>Rounded Corners</TextBlock>
-			</Border>
-			<Image Grid.Row="1" Grid.Column="2" Source="/Assets/avalonia-logo.ico"
-					   Width="100" Height="50"></Image>
 		</Grid>
 
-		<Image Grid.Row="0" Grid.Column="1" Source="/Assets/avalonia-logo.ico"
-					   Width="100" Height="80"></Image>
-		
-		
+
+
 	</Grid>
 </Window>

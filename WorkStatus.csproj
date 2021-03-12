@@ -15,8 +15,48 @@
     <None Remove="Style\**" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Assets\eyehide.png" />
-    <None Remove="Fonts\FontsFree-Net-SFProDisplay-Regular.ttf" />
+    <AvaloniaResource Remove="Assets\Fonts\AirbnbCerealBlack.ttf" />
+    <AvaloniaResource Remove="Assets\Fonts\AirbnbCerealBold.ttf" />
+    <AvaloniaResource Remove="Assets\Fonts\AirbnbCerealBook.ttf" />
+    <AvaloniaResource Remove="Assets\Fonts\AirbnbCerealExtraBold.ttf" />
+    <AvaloniaResource Remove="Assets\Fonts\AirbnbCerealLight.ttf" />
+    <AvaloniaResource Remove="Assets\Fonts\AirbnbCerealMedium.ttf" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Assets\arrowhead-right.png" />
+    <None Remove="Assets\button_blue_play.png" />
+    <None Remove="Assets\eyehide.png" />    
+    <None Remove="Assets\Group_8.png" />
+    <None Remove="Assets\Group_9.png" />
+    <None Remove="Assets\maximize.png" />
+    <None Remove="Assets\office.jpg" />
+    <None Remove="Assets\refresh.png" />
+    <None Remove="Assets\WorkStatus logo_Minimal-1.png" />
+    <None Remove="Assets\WorkStatus_logo.png" />
+    <None Remove="Assets\WorkStatus_logo_Minimal.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Fonts\AirbnbCerealBlack.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+	  <EmbeddedResource Include="Assets\Fonts\AirbnbCerealBold.ttf">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Assets\Fonts\AirbnbCerealBook.ttf">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Assets\Fonts\AirbnbCerealExtraBold.ttf">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Assets\Fonts\AirbnbCerealLight.ttf">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Assets\Fonts\AirbnbCerealMedium.ttf">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+
+	  </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.0" />
@@ -30,6 +70,6 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Fonts\FontsFree-Net-SFProDisplay-Regular.ttf" />
+    <Resource Include="Assets\WorkStatus_logo_Minimal.ico" />
   </ItemGroup>
 </Project>

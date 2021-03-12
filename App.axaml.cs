@@ -21,7 +21,7 @@ namespace WorkStatus
                 //{
                 //    DataContext = new MainWindowViewModel(),
                 //};
-                desktop.MainWindow = new ResetPassword();
+                desktop.MainWindow = new Login();
             }
 
             base.OnFrameworkInitializationCompleted();

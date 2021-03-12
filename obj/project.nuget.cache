@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LOHhfFo58NFBdvHYCzSnbj0ndUkDx/DcTIFMF7o+oNJ1W4DQhqmi1ZXexglmf7baLFu9V4sJ3fJc66JyFcYr2Q==",
+  "dgSpecHash": "nkt4YPOiHrGnlK2OA/cfW35GgsnWJkox8ngywcGtYiSaaRH9yTNbxHQKs3faxaqQ9j9KCN6vMQ1ZTepiOotkiA==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\2021\\ProjectLive\\windows\\WorkStatus\\WorkStatus\\WorkStatus.csproj",
+  "projectFilePath": "C:\\Projects\\2021\\CompanyProject\\WorkStatus\\WorkStatus.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vinove\\.nuget\\packages\\avalonia\\0.10.0\\avalonia.0.10.0.nupkg.sha512",
     "C:\\Users\\vinove\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.0.2020091801\\avalonia.angle.windows.natives.2.1.0.2020091801.nupkg.sha512",

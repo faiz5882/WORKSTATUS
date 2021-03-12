@@ -8,5 +8,11 @@
 
     <Application.Styles>
         <FluentTheme Mode="Light"/>
+		<!--<FontFamily x:Key="AirbnbCerealBold">/WorkStatus;component/Fonts/AirbnbCerealBold.ttf#Airbnb Cereal App</FontFamily>
+		<Style Selector="TextBlock.h1">
+			<Setter property="TextElement.FontFamily" Value="{StaticResource AirbnbCerealBold}"/>
+		</Style>-->
     </Application.Styles>
+	
 </Application>
+
