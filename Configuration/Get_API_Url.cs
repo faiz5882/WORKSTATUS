@@ -20,8 +20,14 @@ namespace WorkStatus.Configuration
         {
             return string.Format("{0}?email={1}&password={2}", BaseUrl, Email,Password);
         }
-       
 
+
+        #endregion
+        #region organization
+        //public string Organizationlist()
+        //{
+        //    return string.Format("{0}?email={1}&password={2}", BaseUrl, Email, Password);
+        //}
         #endregion
     }
 }

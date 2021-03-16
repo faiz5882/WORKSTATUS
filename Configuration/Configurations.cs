@@ -44,7 +44,7 @@ namespace WorkStatus.Configuration
         #endregion
 
         #region OrganisationDetails APIEndPoints
-
+        
         #endregion
     }
 }
