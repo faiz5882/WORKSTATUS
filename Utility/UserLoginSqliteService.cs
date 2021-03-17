@@ -8,14 +8,14 @@ using WorkStatus.Models;
 
 namespace WorkStatus.Utility
 {
-   public class UserLoginSqliteService:BaseService<tbl_UserDetails>        
+   public class UserLoginSqliteService
     {
-        public UserLoginSqliteService()
-            : base(Storage.ConnectionString) { }
-
+        
         public long InsertUser(tbl_UserDetails tbl_User)
         {
-            return new UserLoginSqliteService().Add(tbl_User);
+            BaseService<tbl_UserDetails> gg = new BaseService<tbl_UserDetails>();
+           
+            return  gg.Add(tbl_User);
         }
     }
 }

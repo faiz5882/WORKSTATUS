@@ -20,6 +20,7 @@ using WorkStatus.Utility;
 using System.Configuration;
 using WorkStatus.Views;
 using Avalonia.Controls.ApplicationLifetimes;
+using WorkStatus.Common;
 
 namespace WorkStatus.ViewModels
 {
@@ -44,19 +45,19 @@ namespace WorkStatus.ViewModels
             _loginResponse = new LoginResponse();                                 
             StackPanelLogo = ThemeManager.StackPanelLogoColor;
             TxtWelcomeColor = ThemeManager.TxtWelcomeColor;
-            BuildConnectionString();
+            //BuildConnectionString();
         }
 
         #endregion
         #region Methods  
 
-        public void BuildConnectionString()
-        {
-            if (String.IsNullOrEmpty(Storage.ConnectionString))
-            {
-                Storage.ConnectionString =Configuration.Configurations.GetConnectionString();
-            }
-        }
+        //public void BuildConnectionString()
+        //{
+        //    if (String.IsNullOrEmpty(Storage.ConnectionString))
+        //    {
+        //        Storage.ConnectionString =Configuration.Configurations.GetConnectionString();
+        //    }
+        //}
         
         async void Login()
         {
@@ -85,6 +86,7 @@ namespace WorkStatus.ViewModels
                 {
                     if (_loginResponse.Response.Code == "200")
                     {
+                        Common.Storage.TokenId = _loginResponse.Response.Data.Token;
                         tbl_UserDetails user = new tbl_UserDetails()
                         {
                             UserId = _loginResponse.Response.Data.Id,

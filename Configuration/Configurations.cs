@@ -33,18 +33,33 @@ namespace WorkStatus.Configuration
                 return "login";
             }
         }
-
         public static string ForgotPasswordApiConstant
         {
             get
             {
-                return "url here";
+                return "forgotPassword";
             }
         }
+
+        
         #endregion
 
         #region OrganisationDetails APIEndPoints
-        
+        public static string UserOrganisationListApiConstant
+        {
+            get
+            {
+                return "user/organization/list";
+            }
+        }
+
+        public static string UserProjectlistByOrganizationIDApiConstant
+        {
+            get
+            {
+                return "project/list";
+            }
+        }
         #endregion
     }
 }

@@ -12,6 +12,6 @@ namespace WorkStatus.Interfaces
    public interface IAccounts
     {        
         Task<LoginResponse> LoginAsync(string uri, LoginDTOEntity _objRequest);
-        Task<tbl_UserDetails> ForgotPasswordAsync(string uri, ForgotPasswordDTOEntity _objRequest);
+        Task<ForgetPasswordResponseModel> ForgotPasswordAsync(string uri, ForgetPasswordReqeuestModel _objRequest);
     }
 }

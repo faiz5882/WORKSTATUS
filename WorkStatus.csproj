@@ -37,6 +37,13 @@
     <None Remove="Assets\WorkStatus logo_Minimal-1.png" />
     <None Remove="Assets\WorkStatus_logo.png" />
     <None Remove="Assets\WorkStatus_logo_Minimal.ico" />
+    <None Remove="TempDB.db" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="TempDB.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\Fonts\AirbnbCerealBlack.ttf">

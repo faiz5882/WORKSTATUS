@@ -21,13 +21,21 @@ namespace WorkStatus.Configuration
             return string.Format("{0}?email={1}&password={2}", BaseUrl, Email,Password);
         }
 
-
+        public string ForgotPasswordApi(string BaseUrl)
+        {
+            return BaseUrl;
+        }
         #endregion
-        #region organization
-        //public string Organizationlist()
-        //{
-        //    return string.Format("{0}?email={1}&password={2}", BaseUrl, Email, Password);
-        //}
+        #region OrganisationDetails
+        public string UserOrganizationlist(string BaseUrl)
+        {
+            return BaseUrl;
+        }
+
+        public string UserProjectlistByOrganizationID(string BaseUrl)
+        {
+            return BaseUrl;
+        }
         #endregion
     }
 }

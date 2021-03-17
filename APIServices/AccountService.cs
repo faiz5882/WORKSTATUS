@@ -45,9 +45,9 @@ namespace WorkStatus.APIServices
                 }
             }
         }
-        public async Task<tbl_UserDetails> ForgotPasswordAsync(string uri, ForgotPasswordDTOEntity _objRequest)
+        public async Task<ForgetPasswordResponseModel> ForgotPasswordAsync(string uri, ForgetPasswordReqeuestModel _objRequest)
         {
-            tbl_UserDetails objFPResponse;
+            ForgetPasswordResponseModel objFPResponse;
             string s = JsonConvert.SerializeObject(_objRequest);
             HttpResponseMessage response = null;
             using (var stringContent = new StringContent(s, System.Text.Encoding.UTF8, "application/json"))
@@ -60,18 +60,18 @@ namespace WorkStatus.APIServices
                 if (response.IsSuccessStatusCode)
                 {
                     var SucessResponse = await response.Content.ReadAsStringAsync();
-                    objFPResponse = JsonConvert.DeserializeObject<tbl_UserDetails>(SucessResponse);
+                    objFPResponse = JsonConvert.DeserializeObject<ForgetPasswordResponseModel>(SucessResponse);
                     return objFPResponse;
                 }
                 else
                 {
                     var ErrorResponse = await response.Content.ReadAsStringAsync();
-                    objFPResponse = JsonConvert.DeserializeObject<tbl_UserDetails>(ErrorResponse);
+                    objFPResponse = JsonConvert.DeserializeObject<ForgetPasswordResponseModel>(ErrorResponse);
                     return objFPResponse;
                 }
             }
         }
 
-        
+
     }
 }

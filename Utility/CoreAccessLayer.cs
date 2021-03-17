@@ -47,7 +47,7 @@ public class DbColumnAttribute:Attribute
     /// Use with Entity/Model class only
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class BaseService<T> where T : class, new()
+    public class BaseService<T> where T : class, new()
     {
         #region Constructor
         public BaseService()
@@ -73,7 +73,7 @@ public class DbColumnAttribute:Attribute
         /// <returns>SQLiteConnection object</returns>
         public SqliteConnection GetConnection()
         {
-            return new SqliteConnection(Context.ConnectionString);
+            return new SqliteConnection(Configuration.Configurations.GetConnectionString());
         }
         /// <summary>
         /// Inserts the single record into table
@@ -295,6 +295,45 @@ public class DbColumnAttribute:Attribute
 
 
             return entity;
+        }
+        public IList<T> GetAllById(object id, string DbColumnRequest= "")
+        {
+            IList<T> entities = new List<T>();
+            T entity = new T();
+            StringBuilder clause = new StringBuilder();
+
+            IList<PropertyInfo> pInfos = GetPropertyInfoList(entity);
+
+            foreach (var pi in pInfos)
+            {
+                if(!string.IsNullOrEmpty(DbColumnRequest))
+                {
+                    clause.Append(string.Format("[{0}]='{1}'", DbColumnRequest, id));
+                    break;
+                }
+                else
+                {
+                    var pk = pi.GetCustomAttribute(typeof(DbColumnAttribute)) as DbColumnAttribute;
+                    if (pk != null && pk.IsPrimary)
+                    {
+                        clause.Append(string.Format("[{0}]='{1}'", pi.Name, id));
+                        break;
+                    }
+                }
+               
+            }
+
+            if (clause.ToString() != string.Empty)
+            {
+                StringBuilder qry = new StringBuilder();
+                qry.Append(string.Format("SELECT * FROM [{0}] WHERE {1}", entity.GetType().Name, clause));
+                entities = ExecuteGet(qry.ToString());
+                //if (_entities != null && _entities.Count > 0)
+                //    entity = _entities[0];
+            }
+
+
+            return entities;
         }
         public IList<T> Find(IEnumerable<object> ids)
         {
