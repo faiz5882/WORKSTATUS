@@ -47,5 +47,31 @@ namespace WorkStatus.APIServices
                 }
             }
         }
+        public async Task<ToDoListResponseModel> GetUserToDoListAsync(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, ToDoListRequestModel _objRequest)
+        {
+            ToDoListResponseModel objFPResponse;
+            string strJson = JsonConvert.SerializeObject(_objRequest);
+            HttpResponseMessage response = null;
+            using (var stringContent = new StringContent(strJson, System.Text.Encoding.UTF8, "application/json"))
+            {
+                if (IsHeaderRequired)
+                {
+                    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", objHeaderModel.SessionID);
+                }
+                response = await _client.PostAsync(uri, stringContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    var SucessResponse = await response.Content.ReadAsStringAsync();
+                    objFPResponse = JsonConvert.DeserializeObject<ToDoListResponseModel>(SucessResponse);
+                    return objFPResponse;
+                }
+                else
+                {
+                    var ErrorResponse = await response.Content.ReadAsStringAsync();
+                    objFPResponse = JsonConvert.DeserializeObject<ToDoListResponseModel>(ErrorResponse);
+                    return objFPResponse;
+                }
+            }
+        }
     }
 }

@@ -167,6 +167,7 @@ C:\Projects\2021\CompanyProject\WorkStatus\bin\Debug\net5.0\runtimes\unix\lib\ne
 C:\Projects\2021\CompanyProject\WorkStatus\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Projects\2021\CompanyProject\WorkStatus\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Projects\2021\CompanyProject\WorkStatus\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.csprojAssemblyReference.cache
 C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.GeneratedMSBuildEditorConfig.editorconfig
 C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.AssemblyInfoInputs.cache
 C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.AssemblyInfo.cs
@@ -176,4 +177,3 @@ C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.dll
 C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\ref\WorkStatus.dll
 C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.pdb
 C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.genruntimeconfig.cache
-C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.csprojAssemblyReference.cache

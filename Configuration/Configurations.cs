@@ -60,6 +60,13 @@ namespace WorkStatus.Configuration
                 return "project/list";
             }
         }
+        public static string UserToDoListApiConstant
+        {
+            get
+            {
+                return "todos/list";
+            }
+        }
         #endregion
     }
 }

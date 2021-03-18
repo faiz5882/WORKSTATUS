@@ -12,5 +12,6 @@ namespace WorkStatus.Interfaces
    public interface IDashboard:IGetRequest
     {
         Task<UserProjectlistByOrganizationIDResponse> GetUserProjectlistByOrganizationIDAsync(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, OrganizationDTOEntity _objRequest);
+        Task<ToDoListResponseModel> GetUserToDoListAsync(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, ToDoListRequestModel _objRequest);
     }
 }

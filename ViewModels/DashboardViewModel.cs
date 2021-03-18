@@ -29,6 +29,8 @@ namespace WorkStatus.ViewModels
         private UserProjectlistByOrganizationIDResponse userProjectlistResponse;
         private tbl_OrganisationDetails tbl_OrganisationDetails;
         private tbl_Organisation_Projects tbl_organisation_Projects;
+        private ToDoListResponseModel toDoListResponseModel;
+        private tbl_AddTodoDetails tbl_AddTodoDetails;
 
         #region All ReactiveCommand
         public ReactiveCommand<Unit, Unit> CommandPlay { get; }
@@ -74,14 +76,14 @@ namespace WorkStatus.ViewModels
             }
         }
 
-        private Uri _playIcon;// = new ObservableCollection<tbl_Organisation_Projects>();
-        public Uri PlayIcon
+        private bool isPlaying;// = new ObservableCollection<tbl_Organisation_Projects>();
+        public bool IsPlaying
         {
-            get => _playIcon;
+            get => isPlaying;
             set
             {
-                _playIcon = value;
-                RaisePropertyChanged("PlayIcon");
+                isPlaying = value;
+                RaisePropertyChanged("IsPlaying");
             }
         }
         #region constructor  
@@ -90,8 +92,8 @@ namespace WorkStatus.ViewModels
             _services = new DashboardService();
             objHeaderModel = new HeaderModel();
             CommandPlay = ReactiveCommand.Create(PlayTimer);
-            string pathImage =System.Configuration.ConfigurationSettings.AppSettings["PlayIcon"];
-            PlayIcon = new Uri(@"\"+ pathImage + "", UriKind.RelativeOrAbsolute);
+            // string pathImage =System.Configuration.ConfigurationSettings.AppSettings["PlayIcon"];
+            IsPlaying = true;
             objHeaderModel.SessionID = "";
             FindOrganisationDetails = new ObservableCollection<tbl_OrganisationDetails>();
            // BindUserOrganisationListFromApi();//1st call api and store in localDB            
@@ -102,12 +104,48 @@ namespace WorkStatus.ViewModels
         #endregion
 
         #region Methods
+        async void BindUserToDoListFromApi()
+        {
+            _baseURL = Configurations.UrlConstant + Configurations.UserToDoListApiConstant;
+            toDoListResponseModel = new ToDoListResponseModel();
+            objHeaderModel = new HeaderModel();
+            objHeaderModel.SessionID = Common.Storage.TokenId;
+            ToDoListRequestModel _toDoList = new ToDoListRequestModel()
+            {
+                project_id = 272,
+                organization_id = 245,
+                userid = 717
+            };
+            toDoListResponseModel = await _services.GetUserToDoListAsync(new Get_API_Url().UserToDoList(_baseURL), true, objHeaderModel, _toDoList);
+            if (toDoListResponseModel.Response.Code == "200")
+            {
+                foreach (var item in toDoListResponseModel.Response.Data)
+                {
+                    tbl_AddTodoDetails = new tbl_AddTodoDetails()
+                    {
+                        ToDoName = item.name,
+                        CurrentUserId = Convert.ToString(item.user_id),
+                        CurrentProjectId = Convert.ToString(item.project_id),
+                        CurrentOrganisationId = Convert.ToString(item.organization_id),
+                        StartDate = Convert.ToString(item.startDate),
+                        EndDate = Convert.ToString(item.endDate),
+                        EstimatedHours = Convert.ToString(item.estiamtedHours),
+                        Description = Convert.ToString(item.description),
+                        IsOffline = false,
+                        ToDoTimeConsumed = ""
+                    };
+                    // _OrganisationDetails.Add(tbl_OrganisationDetails);
+                    new DashboardSqliteService().InsertUserToDoList(tbl_AddTodoDetails);
+                }
+                // new DashboardSqliteService().InsertUserOrganisation(_OrganisationDetails);
 
+            }
+        }
         #region PlayTimer        
         public void PlayTimer()
-        {            
-            string pathImage = System.Configuration.ConfigurationSettings.AppSettings["StopIcon"];
-            PlayIcon = new Uri(@"\" + pathImage + "", UriKind.RelativeOrAbsolute);
+        {
+
+            IsPlaying = false;
         }
         #endregion
         #region OrganisationDetails

@@ -36,6 +36,11 @@ namespace WorkStatus.Configuration
         {
             return BaseUrl;
         }
+        public string UserToDoList(string BaseUrl)
+        {
+            return BaseUrl;
+        }
+
         #endregion
     }
 }

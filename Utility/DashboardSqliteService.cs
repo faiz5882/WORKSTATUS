@@ -44,6 +44,12 @@ namespace WorkStatus.Utility
             BaseService<tbl_Organisation_Projects> service = new BaseService<tbl_Organisation_Projects>();
             return new List<tbl_Organisation_Projects>(service.GetAllById(OrganisationId, "OrganisationId"));
         }
+
+        public void InsertUserToDoList(tbl_AddTodoDetails tbl_ToDoList)
+        {
+            BaseService<tbl_AddTodoDetails> gg = new BaseService<tbl_AddTodoDetails>();
+            gg.Add(tbl_ToDoList);
+        }
     }
    
 }
