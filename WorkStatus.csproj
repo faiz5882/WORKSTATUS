@@ -31,6 +31,7 @@
     <None Remove="Assets\Group_9.png" />
     <None Remove="Assets\icon.png" />
     <None Remove="Assets\iconplus.png" />
+    <None Remove="Assets\ic_shortcut_maximize.png" />
     <None Remove="Assets\maximize.png" />
     <None Remove="Assets\office.jpg" />
     <None Remove="Assets\refresh.png" />

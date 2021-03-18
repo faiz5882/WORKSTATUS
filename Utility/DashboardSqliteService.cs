@@ -14,10 +14,10 @@ namespace WorkStatus.Utility
 
         public void InsertUserOrganisation(tbl_OrganisationDetails tbl_Organisation)
         {
-            BaseService<tbl_OrganisationDetails> gg = new BaseService<tbl_OrganisationDetails>();
+            BaseService<tbl_OrganisationDetails> gg = new BaseService<tbl_OrganisationDetails>();           
             gg.Add(tbl_Organisation);
         }
-
+                  
         public void InsertUserOrganisationList(List<tbl_OrganisationDetails> tbl_Organisation)
         {
             BaseService<tbl_OrganisationDetails> gg = new BaseService<tbl_OrganisationDetails>();
@@ -25,7 +25,7 @@ namespace WorkStatus.Utility
         }
         public void InsertUserProjectsByOrganisationID(tbl_Organisation_Projects tbl_OrganisationProjects)
         {
-            BaseService<tbl_Organisation_Projects> gg = new BaseService<tbl_Organisation_Projects>();
+            BaseService<tbl_Organisation_Projects> gg = new BaseService<tbl_Organisation_Projects>();           
             gg.Add(tbl_OrganisationProjects);
         }
         public void InsertUserProjectsListByOrganisationID(List<tbl_Organisation_Projects> tbl_OrganisationProjects)

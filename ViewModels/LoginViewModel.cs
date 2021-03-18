@@ -32,6 +32,7 @@ namespace WorkStatus.ViewModels
         private string _baseURL = string.Empty;
         private readonly IAccounts _services;
         public LoginDTOEntity _loginEntity { get; set; }
+        private tbl_UserDetails user;
         #region All ReactiveCommand
         public ReactiveCommand<Unit, Unit> CommandLogin { get; }
         #endregion
@@ -86,8 +87,10 @@ namespace WorkStatus.ViewModels
                 {
                     if (_loginResponse.Response.Code == "200")
                     {
+                        BaseService<tbl_UserDetails> dbService = new BaseService<tbl_UserDetails>();
+                        dbService.Delete(new tbl_UserDetails());
                         Common.Storage.TokenId = _loginResponse.Response.Data.Token;
-                        tbl_UserDetails user = new tbl_UserDetails()
+                         user = new tbl_UserDetails()
                         {
                             UserId = _loginResponse.Response.Data.Id,
                             UserEmail = _loginResponse.Response.Data.Email,

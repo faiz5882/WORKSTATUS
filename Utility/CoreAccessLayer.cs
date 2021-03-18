@@ -79,8 +79,16 @@ public class DbColumnAttribute:Attribute
         /// Inserts the single record into table
         /// </summary>
         /// <param name="entity"></param>
-        public long Add(T entity)
+        
+
+        public void Delete(T entity)
         {
+            T entityDelete = new T();
+            ExecuteGet(string.Format("DELETE FROM [{0}]", entityDelete.GetType().Name));
+        }
+        public long Add(T entity)
+        {            
+
             long identity = 0;
             bool hasIdentity = false;
 
