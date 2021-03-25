@@ -4,7 +4,7 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Import Project="$(NuGetPackageRoot)materialdesignthemes\4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('$(NuGetPackageRoot)materialdesignthemes\4.0.0\build\MaterialDesignThemes.targets')" />
     <Import Project="$(NuGetPackageRoot)avalonia\0.10.0\buildTransitive\Avalonia.targets" Condition="Exists('$(NuGetPackageRoot)avalonia\0.10.0\buildTransitive\Avalonia.targets')" />
+    <Import Project="$(NuGetPackageRoot)materialdesignthemes\4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('$(NuGetPackageRoot)materialdesignthemes\4.0.0\build\MaterialDesignThemes.targets')" />
   </ImportGroup>
 </Project>

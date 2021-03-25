@@ -45,10 +45,15 @@ namespace WorkStatus.Utility
             return new List<tbl_Organisation_Projects>(service.GetAllById(OrganisationId, "OrganisationId"));
         }
 
-        public void InsertUserToDoList(tbl_AddTodoDetails tbl_ToDoList)
+        public void InsertUserToDoList(tbl_ServerTodoDetails tbl_ToDoList)
         {
-            BaseService<tbl_AddTodoDetails> gg = new BaseService<tbl_AddTodoDetails>();
+            BaseService<tbl_ServerTodoDetails> gg = new BaseService<tbl_ServerTodoDetails>();
             gg.Add(tbl_ToDoList);
+        }
+        public List<tbl_ServerTodoDetails> GetToDoListData(int CurrentProjectId)
+        {
+            BaseService<tbl_ServerTodoDetails> service = new BaseService<tbl_ServerTodoDetails>();
+            return new List<tbl_ServerTodoDetails>(service.GetAllById(CurrentProjectId, "CurrentProjectId"));
         }
     }
    

@@ -21,7 +21,7 @@ namespace WorkStatus
                 //{
                 //    DataContext = new MainWindowViewModel(),
                 //};
-                desktop.MainWindow = new Dashboard();
+                desktop.MainWindow = new Login();
             }
 
             base.OnFrameworkInitializationCompleted();

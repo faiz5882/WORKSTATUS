@@ -21,12 +21,15 @@ using System.Configuration;
 using WorkStatus.Views;
 using Avalonia.Controls.ApplicationLifetimes;
 using WorkStatus.Common;
+using Avalonia.Controls;
+using MessageBoxAvaloniaEnums = MessageBox.Avalonia.Enums;
 
 namespace WorkStatus.ViewModels
 {
     public class LoginViewModel : ReactiveObject, INotifyPropertyChanged//ReactiveObject
     {
         ThemeManager ThemeManager;
+       private Window _Window;
         public object UserLoginSqliteService;
         private LoginResponse _loginResponse;
         private string _baseURL = string.Empty;
@@ -35,14 +38,16 @@ namespace WorkStatus.ViewModels
         private tbl_UserDetails user;
         #region All ReactiveCommand
         public ReactiveCommand<Unit, Unit> CommandLogin { get; }
+        public ReactiveCommand<Unit, Unit> CommandForgotPassword { get; }
         #endregion
         #region constructor       
-        public LoginViewModel(IManagedNotificationManager notificationManager)
+        public LoginViewModel(Window window)
         {
-            ThemeManager = new ThemeManager();
-            _notificationManager = notificationManager;
+            _Window = window;
+            ThemeManager = new ThemeManager();          
             _services = new AccountService();
             CommandLogin = ReactiveCommand.Create(Login);
+            CommandForgotPassword = ReactiveCommand.Create(NavigateToForgotPasswordScreen);
             _loginResponse = new LoginResponse();                                 
             StackPanelLogo = ThemeManager.StackPanelLogoColor;
             TxtWelcomeColor = ThemeManager.TxtWelcomeColor;
@@ -52,27 +57,24 @@ namespace WorkStatus.ViewModels
         #endregion
         #region Methods  
 
-        //public void BuildConnectionString()
-        //{
-        //    if (String.IsNullOrEmpty(Storage.ConnectionString))
-        //    {
-        //        Storage.ConnectionString =Configuration.Configurations.GetConnectionString();
-        //    }
-        //}
+       
         
         async void Login()
         {
             
             if(string.IsNullOrEmpty(Email))
             {
-                
-                 NotificationManager.Show(new Avalonia.Controls.Notifications.Notification("Error", "Email is required!", NotificationType.Error));
-                // MessageBox.Show("This program is designed to be run from Counterpoint.  For information about how to install it into " +
-                //"an instance of Counterpoint, see Readme file provided along with this program.", "C&K Admissions");
+
+               
+                var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
+               .GetMessageBoxStandardWindow("Error", "Email is required!", MessageBoxAvaloniaEnums.ButtonEnum.Ok);
+                var r = await messageBoxStandardWindow.ShowDialog(_Window);
             }
             else if(string.IsNullOrEmpty(Password))
             {
-                NotificationManager.Show(new Avalonia.Controls.Notifications.Notification("Error", "Password is required!", NotificationType.Error));
+                var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
+              .GetMessageBoxStandardWindow("Error", "Password is required!", MessageBoxAvaloniaEnums.ButtonEnum.Ok);
+                var r = await messageBoxStandardWindow.ShowDialog(_Window);
             }
             else
             {
@@ -113,19 +115,14 @@ namespace WorkStatus.ViewModels
             }
         }
 
-        //public long InsertUser(tbl_UserDetails tbl_User)
-        //{
-        //    return new UserLoginSqliteService().Add(tbl_User);
-        //}
-        #endregion
-        #region NotificationManager
-        private IManagedNotificationManager _notificationManager;
-        public IManagedNotificationManager NotificationManager
+        async void NavigateToForgotPasswordScreen()
         {
-            get { return _notificationManager; }
-            set { this.RaiseAndSetIfChanged(ref _notificationManager, value); }
+            var dialog = new ForgotPassword();
+            var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+            await dialog.ShowDialog(mainWindow);            
         }
         #endregion
+        
         #region DataBinding Members
 
         private SolidColorBrush _stackPanelLogo;

@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls.Notifications;
+﻿using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Media;
 using ReactiveUI;
 using System;
@@ -14,11 +15,15 @@ using WorkStatus.Interfaces;
 using WorkStatus.Models.ReadDTO;
 using WorkStatus.Models.WriteDTO;
 using WorkStatus.Views;
+using Avalonia.Controls;
+using MessageBoxAvaloniaEnums = MessageBox.Avalonia.Enums;
+using Avalonia.Controls.ApplicationLifetimes;
 
 namespace WorkStatus.ViewModels
 {
     public class ForgotPasswordViewModel : ReactiveObject, INotifyPropertyChanged//ReactiveObject
     {
+        private Window _window;
         ThemeManager ThemeManager;
         public object UserLoginSqliteService;
         private ForgetPasswordResponseModel _forgotPasswordResponse;
@@ -26,18 +31,23 @@ namespace WorkStatus.ViewModels
         private readonly IAccounts _services;
         #region All ReactiveCommand
         public ReactiveCommand<Unit, Unit> CommandLogin { get; }
+        public ReactiveCommand<Unit, Unit> CommandClosed { get; }
+
+
         #endregion
         #region constructor
-        public ForgotPasswordViewModel(IManagedNotificationManager notificationManager)
+        public ForgotPasswordViewModel(Window window)
         {
-            ThemeManager = new ThemeManager();
-            _notificationManager = notificationManager;
+            _window = window;
+            ThemeManager = new ThemeManager();            
             _services = new AccountService();
             CommandLogin = ReactiveCommand.Create(ForgotPassword);
+            CommandClosed = ReactiveCommand.Create(ClosedWindow);
+
+            
             _forgotPasswordResponse = new ForgetPasswordResponseModel();
             StackPanelLogo = ThemeManager.StackPanelLogoColor;
-            TxtWelcomeColor = ThemeManager.TxtWelcomeColor;
-           
+            TxtWelcomeColor = ThemeManager.TxtWelcomeColor;           
         }
 
         #endregion
@@ -77,15 +87,19 @@ namespace WorkStatus.ViewModels
 
         #endregion
 
-        #region Methods
-
+        #region Methods      
         
-
+        void ClosedWindow()
+        {
+            _window.Close();
+        }
         async void ForgotPassword()
         {
             if (string.IsNullOrEmpty(Email))
             {
-                NotificationManager.Show(new Avalonia.Controls.Notifications.Notification("Error", "Email is required!", NotificationType.Error));
+                var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
+              .GetMessageBoxStandardWindow("Error", "Email is required!", MessageBoxAvaloniaEnums.ButtonEnum.Ok);
+                var r = await messageBoxStandardWindow.ShowDialog(_window);
             }
             else
             {
@@ -99,13 +113,15 @@ namespace WorkStatus.ViewModels
                 {
                     if (_forgotPasswordResponse.Response.Code == "200")
                     {
-                        //MainWindow mainwindow = new MainWindow();
-                       // await MessageBox.Show(mainwindow, "Success", _forgotPasswordResponse.Response.Message, MessageBox.MessageBoxButtons.YesNoCancel);
-                        NotificationManager.Show(new Avalonia.Controls.Notifications.Notification("Success", _forgotPasswordResponse.Response.Message, NotificationType.Success));
+                        var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
+                         .GetMessageBoxStandardWindow("Success", _forgotPasswordResponse.Response.Message, MessageBoxAvaloniaEnums.ButtonEnum.Ok);
+                        var r = await messageBoxStandardWindow.ShowDialog(_window);
                     }
                     else
                     {
-                        NotificationManager.Show(new Avalonia.Controls.Notifications.Notification("Error", _forgotPasswordResponse.Response.Message, NotificationType.Error));
+                        var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
+                        .GetMessageBoxStandardWindow("Error", _forgotPasswordResponse.Response.Message, MessageBoxAvaloniaEnums.ButtonEnum.Ok);
+                        var r = await messageBoxStandardWindow.ShowDialog(_window);
                     }
                 }
 

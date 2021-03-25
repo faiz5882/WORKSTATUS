@@ -34,7 +34,9 @@
     <None Remove="Assets\ic_shortcut_maximize.png" />
     <None Remove="Assets\maximize.png" />
     <None Remove="Assets\office.jpg" />
+    <None Remove="Assets\Pause.png" />
     <None Remove="Assets\refresh.png" />
+    <None Remove="Assets\search.png" />
     <None Remove="Assets\WorkStatus logo_Minimal-1.png" />
     <None Remove="Assets\WorkStatus_logo.png" />
     <None Remove="Assets\WorkStatus_logo_Minimal.ico" />
@@ -74,10 +76,12 @@
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
+    <PackageReference Include="MessageBox.Avalonia" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\WorkStatus_logo_Minimal.ico" />

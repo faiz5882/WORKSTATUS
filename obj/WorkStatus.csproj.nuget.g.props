@@ -20,7 +20,7 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\vinove\.nuget\packages\microsoft.codeanalysis.analyzers\2.9.6</PkgMicrosoft_CodeAnalysis_Analyzers>
-    <PkgMaterialDesignThemes Condition=" '$(PkgMaterialDesignThemes)' == '' ">C:\Users\vinove\.nuget\packages\materialdesignthemes\4.0.0</PkgMaterialDesignThemes>
     <PkgAvalonia Condition=" '$(PkgAvalonia)' == '' ">C:\Users\vinove\.nuget\packages\avalonia\0.10.0</PkgAvalonia>
+    <PkgMaterialDesignThemes Condition=" '$(PkgMaterialDesignThemes)' == '' ">C:\Users\vinove\.nuget\packages\materialdesignthemes\4.0.0</PkgMaterialDesignThemes>
   </PropertyGroup>
 </Project>

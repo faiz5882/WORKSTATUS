@@ -11,6 +11,8 @@ namespace WorkStatus.Common
         public static string ConnectionString { get; set; }
         public static bool IsLogin { get; set; }
         public static string TokenId { get; set; }
-		
+        public static int timeIntervel { get; set; }
+        public static bool checkTodoApiCallOrNot { get; set; }
+
     }
 }

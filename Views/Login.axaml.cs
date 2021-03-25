@@ -10,19 +10,16 @@ namespace WorkStatus.Views
 {
     public class Login : Window
     {
-        private WindowNotificationManager _notificationArea;
-       
-        // public LoginViewModel _loginVM;
+        
         public Login()
         {
             InitializeComponent();
-           // _loginVM = new LoginViewModel();
-          //  this.DataContext = _loginVM;
-            _notificationArea = new WindowNotificationManager(this)
-            {
-                Position = NotificationPosition.BottomLeft                              
-            };
-            DataContext = new LoginViewModel(_notificationArea);            
+        
+            //_notificationArea = new WindowNotificationManager(this)
+            //{
+            //    Position = NotificationPosition.BottomLeft                              
+            //};
+            this.DataContext = new LoginViewModel(this);            
 
 #if DEBUG
             this.AttachDevTools();

@@ -8,15 +8,11 @@ namespace WorkStatus.Views
 {
     public class ForgotPassword : Window
     {
-        private WindowNotificationManager _notificationArea;
+        
         public ForgotPassword()
         {
-            InitializeComponent();
-            _notificationArea = new WindowNotificationManager(this)
-            {
-                Position = NotificationPosition.BottomLeft
-            };
-            DataContext = new ForgotPasswordViewModel(_notificationArea);
+            InitializeComponent();            
+            this.DataContext = new ForgotPasswordViewModel(this);
 #if DEBUG
             this.AttachDevTools();
 #endif

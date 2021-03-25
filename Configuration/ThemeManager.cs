@@ -43,7 +43,18 @@ namespace WorkStatus.Configuration
                 _textBoxTextColor = value;
             }
         }
-
+        private SolidColorBrush _onSiteColor = "#0AA7FF".ToSolidColorBrush();
+        public SolidColorBrush OnSiteColor
+        {
+            get { return _onSiteColor; }
+            set { _onSiteColor = value; }
+        }
+        private SolidColorBrush _offSiteColor = "#F5BE2F".ToSolidColorBrush();
+        public SolidColorBrush OffSiteColor
+        {
+            get { return _offSiteColor; }
+            set { _offSiteColor = value; }
+        }
         /// <summary>
         /// The size of the font normal.
         /// </summary>

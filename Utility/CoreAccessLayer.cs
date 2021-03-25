@@ -275,7 +275,26 @@ public class DbColumnAttribute:Attribute
         /// Find single item
         /// </summary>
         /// <param name="cmdText"></param>
-        public T GetById(object id)
+        /// 
+        public IList<T> SearchToDoByString(string sText, int projectid, int organization_id)
+        {
+            IList<T> entities = new List<T>();
+
+            StringBuilder qry = new StringBuilder();
+            qry.Append(string.Format("Select * from tbl_ServerTodoDetails where ToDoName like '%" + sText + "%' and CurrentProjectId = " + projectid + " and CurrentOrganisationId = " + organization_id + ""));
+            entities = ExecuteGet(qry.ToString());
+            return entities;
+        }
+        public IList<T> SearchProjectByString(string sText, int projectid, int organization_id)
+        {
+            IList<T> entities = new List<T>();
+
+            StringBuilder qry = new StringBuilder();
+            qry.Append(string.Format("Select * from tbl_Organisation_Projects where ProjectName like '%" + sText + "%' and OrganisationId = " + organization_id + ""));
+            entities = ExecuteGet(qry.ToString());
+            return entities;
+        }
+        public T GetById(object id, string DbColumnRequest = "")
         {
             T entity = new T();
             StringBuilder clause = new StringBuilder();
@@ -284,11 +303,19 @@ public class DbColumnAttribute:Attribute
 
             foreach (var pi in pInfos)
             {
-                var pk = pi.GetCustomAttribute(typeof(DbColumnAttribute)) as DbColumnAttribute;
-                if (pk != null && pk.IsPrimary)
+                if (!string.IsNullOrEmpty(DbColumnRequest))
                 {
-                    clause.Append(string.Format("[{0}]='{1}'", pi.Name, id));
+                    clause.Append(string.Format("[{0}]='{1}'", DbColumnRequest, id));
                     break;
+                }
+                else
+                {
+                    var pk = pi.GetCustomAttribute(typeof(DbColumnAttribute)) as DbColumnAttribute;
+                    if (pk != null && pk.IsPrimary)
+                    {
+                        clause.Append(string.Format("[{0}]='{1}'", pi.Name, id));
+                        break;
+                    }
                 }
             }
 

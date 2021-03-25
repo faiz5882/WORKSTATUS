@@ -31,6 +31,7 @@ C:\Users\vinove\.nuget\packages\harfbuzzsharp\2.6.1.7\lib\netstandard2.0\HarfBuz
 C:\Users\vinove\.nuget\packages\jetbrains.annotations\10.3.0\lib\netstandard1.0\JetBrains.Annotations.dll
 C:\Users\vinove\.nuget\packages\materialdesigncolors\2.0.0\lib\netcoreapp3.1\MaterialDesignColors.dll
 C:\Users\vinove\.nuget\packages\materialdesignthemes\4.0.0\lib\netcoreapp3.1\MaterialDesignThemes.Wpf.dll
+C:\Users\vinove\.nuget\packages\messagebox.avalonia\1.1.1\lib\netstandard2.0\MessageBox.Avalonia.dll
 C:\Users\vinove\.nuget\packages\microsoft.codeanalysis.csharp\3.4.0\lib\netstandard2.0\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\vinove\.nuget\packages\microsoft.codeanalysis.csharp.scripting\3.4.0\lib\netstandard2.0\Microsoft.CodeAnalysis.CSharp.Scripting.dll
 C:\Users\vinove\.nuget\packages\microsoft.codeanalysis.common\3.4.0\lib\netstandard2.0\Microsoft.CodeAnalysis.dll
@@ -42,6 +43,7 @@ C:\Users\vinove\.nuget\packages\microsoft.entityframeworkcore.abstractions\5.0.4
 C:\Users\vinove\.nuget\packages\microsoft.entityframeworkcore\5.0.4\lib\netstandard2.1\Microsoft.EntityFrameworkCore.dll
 C:\Users\vinove\.nuget\packages\microsoft.entityframeworkcore.relational\5.0.4\lib\netstandard2.1\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\vinove\.nuget\packages\microsoft.entityframeworkcore.sqlite.core\5.0.4\lib\netstandard2.1\Microsoft.EntityFrameworkCore.Sqlite.dll
+C:\Users\vinove\.nuget\packages\system.windows.interactivity.wpf\2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll
 C:\Users\vinove\.nuget\packages\microsoft.extensions.caching.abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll
 C:\Users\vinove\.nuget\packages\microsoft.extensions.caching.memory\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\vinove\.nuget\packages\microsoft.extensions.configuration.abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll
@@ -208,6 +210,7 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Web.HttpUtility.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Windows.dll
 C:\Users\vinove\.nuget\packages\system.windows.extensions\5.0.0\ref\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\vinove\.nuget\packages\system.windows.interactivity.wpf\2.0.20525\lib\net40\System.Windows.Interactivity.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Xml.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Xml.Linq.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Xml.ReaderWriter.dll

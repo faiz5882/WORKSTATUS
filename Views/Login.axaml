@@ -9,6 +9,17 @@
 		CanResize="False"		
 		Icon="/Assets/avalonia-logo.ico"
         Title="Login">
+	<Window.Styles>
+		<Style Selector="Button.LinkButton">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="Foreground" Value="skyblue"/>
+		</Style>
+		<Style Selector="Button.LinkButton:pressed/template/ContentPresenter">
+			<Setter Property="Background" Value="White"/>
+		</Style>
+	</Window.Styles>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
@@ -94,17 +105,13 @@
 								<ColumnDefinition Width="Auto"></ColumnDefinition>
 								<ColumnDefinition Width="*"></ColumnDefinition>
 							</Grid.ColumnDefinitions>
-							<TextBlock Grid.Row="0" Grid.Column="2"
-									   HorizontalAlignment="Right"
-									   Margin="0,2,0,0"
-									   Foreground="#212529"
-									   FontWeight="400"
-									   FontSize="12"
-									   FontStyle="Normal"
-									   FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
-									   
-									   Text="Forgot Password?">
-							</TextBlock>
+							<Button Classes="LinkButton" x:Name="btnforget" Cursor="Hand"
+                      HorizontalContentAlignment="Right" HorizontalAlignment="Right"
+                      Grid.Row="0" Grid.Column="2" Command="{Binding CommandForgotPassword}"
+                      FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
+                      FontSize="12" Foreground="#212529"
+                      Margin="0,2,0,0">Forgot password?</Button>
+							
 						</Grid>
 						<StackPanel Grid.Row="3"  Grid.Column="1" Margin="0,20,0,0" >
 							<Button Width="300" Height="40" Command="{Binding CommandLogin}"
