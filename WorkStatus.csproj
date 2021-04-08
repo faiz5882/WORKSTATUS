@@ -40,11 +40,11 @@
     <None Remove="Assets\WorkStatus logo_Minimal-1.png" />
     <None Remove="Assets\WorkStatus_logo.png" />
     <None Remove="Assets\WorkStatus_logo_Minimal.ico" />
-    <None Remove="TempDB.db" />
+    <None Remove="WorkStatusDB.db" />
   </ItemGroup>
   
   <ItemGroup>
-    <Content Include="TempDB.db">
+    <Content Include="WorkStatusDB.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -85,5 +85,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\WorkStatus_logo_Minimal.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Screenshots\" />
   </ItemGroup>
 </Project>

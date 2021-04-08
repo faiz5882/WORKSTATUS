@@ -1,9 +1,9 @@
-C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.csprojAssemblyReference.cache
 C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.GeneratedMSBuildEditorConfig.editorconfig
 C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.AssemblyInfoInputs.cache
 C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.AssemblyInfo.cs
 C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.csproj.CoreCompileInputs.cache
-C:\Projects\2021\CompanyProject\WorkStatus\bin\Debug\net5.0\TempDB.db
+C:\Projects\2021\CompanyProject\WorkStatus\obj\Debug\net5.0\WorkStatus.csprojAssemblyReference.cache
+C:\Projects\2021\CompanyProject\WorkStatus\bin\Debug\net5.0\WorkStatusDB.db
 C:\Projects\2021\CompanyProject\WorkStatus\bin\Debug\net5.0\WorkStatus.exe
 C:\Projects\2021\CompanyProject\WorkStatus\bin\Debug\net5.0\WorkStatus.dll.config
 C:\Projects\2021\CompanyProject\WorkStatus\bin\Debug\net5.0\WorkStatus.deps.json

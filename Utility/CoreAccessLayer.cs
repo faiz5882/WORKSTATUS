@@ -16,16 +16,16 @@ namespace WorkStatus.Utility
     /// Description : Entity/model classes as T 
     /// </summary>
     /// <typeparam name="T"> Class and newable type</typeparam>   
-   
+
 
     #region Attributes
     /// <summary>
     /// Use this attribute to decorate the properties on your model class.
     /// Only those properties that are having exactly the same column name of a DB table.
     /// </summary>
-    
 
-public class DbColumnAttribute:Attribute
+
+    public class DbColumnAttribute : Attribute
     {
         /// <summary>
         /// Set true if implicit conversion is required.
@@ -63,7 +63,7 @@ public class DbColumnAttribute:Attribute
         {
             Context.ConnectionString = connectionString;
         }
-        
+
         #endregion
 
         #region Public methods
@@ -79,15 +79,25 @@ public class DbColumnAttribute:Attribute
         /// Inserts the single record into table
         /// </summary>
         /// <param name="entity"></param>
-        
+
 
         public void Delete(T entity)
         {
             T entityDelete = new T();
             ExecuteGet(string.Format("DELETE FROM [{0}]", entityDelete.GetType().Name));
         }
+        public void DeleteSlot(long id)
+        {
+            string qry = "DELETE FROM tbl_KeyMouseTrack_Slot where Id=" +  id;
+            ExecuteGet(qry.ToString());
+        }
+        public void DeleteSlotFromtbl_Timer(long Sno)
+        {
+            string qry = "DELETE FROM tbl_Timer where Sno=" + Sno;
+            ExecuteGet(qry.ToString());
+        }
         public long Add(T entity)
-        {            
+        {
 
             long identity = 0;
             bool hasIdentity = false;
@@ -225,6 +235,70 @@ public class DbColumnAttribute:Attribute
                 Execute(qry.ToString());
             }
         }
+
+        public void UpdateIntervalToDB(string IntervalEndTime, long slotId, string CurrentDate)
+        {
+            try
+            {
+
+                string qry = "update tbl_KeyMouseTrack_Slot set  IntervalEndTime=" + "'" + IntervalEndTime + "'" + ", End=" + "'" + IntervalEndTime + "'" + " where Id=" + "" + slotId + "" + " and CreatedDate=" + "'" + CurrentDate + "'" + " ";
+                Execute(qry.ToString());
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+        }
+
+        public void UpdateStartStopProjectTimeToDB(string StopTime, long sno)
+        {
+            try
+            {
+                //TimeSpan diff = DateTime.Parse(StopTime) - DateTime.Parse(oldTime);
+                //var minutes = diff.Seconds;
+                //string qry = "update tbl_Timer set  Stop=" + "'" + StopTime + "'" + ", IntervalTime=" + "'" + minutes + "'" +" where ProjectId=" + "'" + ProjectId + "'" + " and OrgId=" + "'" + OrgId + "'" + " and Start=" + "'" + oldTime + "'" + "";
+                //string qry = "update tbl_Timer set  Stop=" + "'" + StopTime + "'" +" where Sno=" + "'" + ProjectId + "'" + " and OrgId=" + "'" + OrgId + "'" + " and Start=" + "'" + oldTime + "'" + "";
+                string qry = "update tbl_Timer set  Stop=" + "'" + StopTime + "'" + " where Sno=" + "" + sno + "";
+
+                Execute(qry.ToString());
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        public void updatetbl_ProjectDetails(string StopTime, long ProjectId, long OrganizationId)
+        {
+            string qry = "update tbl_ProjectDetails set  TotalWorkedHours=" + "'" + StopTime + "'" + " where ProjectId=" + "" + ProjectId + " and OrganizationId="+ OrganizationId + "";
+
+            Execute(qry.ToString());
+        }
+        public T Gettbl_ProjectDetailsByIDs(long ProjectId, long OrganizationId, string CurrentDate)
+        {
+            T entity = new T();
+            IList<T> entities = new List<T>();
+            string qry = "Select * from tbl_ProjectDetails where ProjectId=" + "" + ProjectId + " and OrganizationId=" + "" + OrganizationId + "" + " and CreatedDate=" + "'" + CurrentDate + "'" + "";
+            var _entities = ExecuteGet(qry.ToString());
+            if (_entities != null && _entities.Count > 0)
+                entity = _entities[0];
+            return entity;
+        }
+        public void UpdateProjectTimeToDBByToDoID(string StopTime, long sno)
+        {
+            try
+            {
+               
+                string qry = "update tbl_Timer set  Stop=" + "'" + StopTime + "'" + " where Sno=" + "" + sno + "";
+                Execute(qry.ToString());
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
         /// <summary>
         /// Updates mutiple entities in single query
         /// </summary>
@@ -331,7 +405,7 @@ public class DbColumnAttribute:Attribute
 
             return entity;
         }
-        public IList<T> GetAllById(object id, string DbColumnRequest= "")
+        public IList<T> GetAllById(object id, string DbColumnRequest = "")
         {
             IList<T> entities = new List<T>();
             T entity = new T();
@@ -341,7 +415,7 @@ public class DbColumnAttribute:Attribute
 
             foreach (var pi in pInfos)
             {
-                if(!string.IsNullOrEmpty(DbColumnRequest))
+                if (!string.IsNullOrEmpty(DbColumnRequest))
                 {
                     clause.Append(string.Format("[{0}]='{1}'", DbColumnRequest, id));
                     break;
@@ -355,7 +429,7 @@ public class DbColumnAttribute:Attribute
                         break;
                     }
                 }
-               
+
             }
 
             if (clause.ToString() != string.Empty)

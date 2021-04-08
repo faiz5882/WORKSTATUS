@@ -67,6 +67,23 @@ namespace WorkStatus.Configuration
                 return "todos/list";
             }
         }
+
+        #endregion
+        #region ActivityLog
+        public static string UserActivitySyncTimertApiConstant
+        {
+            get
+            {
+                return "activity/syncTimer";
+            }
+        }
+        public static string ActivityLogApiConstant
+        {
+            get
+            {
+                return "activity/log";
+            }
+        }
         #endregion
     }
 }

@@ -13,7 +13,7 @@ namespace WorkStatus.Models.WriteDTO
         [DbColumn(IsIdentity = true, IsPrimary = true)]
         public long Sno { get; set; }
         [DbColumn]
-        public int Id { get; set; }
+        public long Id { get; set; }
         [DbColumn]
         public string ToDoName { get; set; }
         [DbColumn]

@@ -73,5 +73,57 @@ namespace WorkStatus.APIServices
                 }
             }
         }
+        public async Task<ActivitySyncTimerResponseModel> GetActivitysynTimerDataAsync(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, ActivitySyncTimerRequestModel _objRequest)
+        {
+            ActivitySyncTimerResponseModel objFPResponse;
+            string strJson = JsonConvert.SerializeObject(_objRequest);
+            HttpResponseMessage response = null;
+            using (var stringContent = new StringContent(strJson, System.Text.Encoding.UTF8, "application/json"))
+            {
+                if (IsHeaderRequired)
+                {
+                    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", objHeaderModel.SessionID);
+                }
+                response = await _client.PostAsync(uri, stringContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    var SucessResponse = await response.Content.ReadAsStringAsync();
+                    objFPResponse = JsonConvert.DeserializeObject<ActivitySyncTimerResponseModel>(SucessResponse);
+                    return objFPResponse;
+                }
+                else
+                {
+                    var ErrorResponse = await response.Content.ReadAsStringAsync();
+                    objFPResponse = JsonConvert.DeserializeObject<ActivitySyncTimerResponseModel>(ErrorResponse);
+                    return objFPResponse;
+                }
+            }
+        }
+        public async Task<CommonResponseModel> ActivityLogAsync(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, List<ActivityLogRequestEntity> _objRequest)
+        {
+            CommonResponseModel objFPResponse;
+            string strJson = JsonConvert.SerializeObject(_objRequest);
+            HttpResponseMessage response = null;
+            using (var stringContent = new StringContent(strJson, System.Text.Encoding.UTF8, "application/json"))
+            {
+                if (IsHeaderRequired)
+                {
+                    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("token", objHeaderModel.SessionID);
+                }
+                response = await _client.PostAsync(uri, stringContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    var SucessResponse = await response.Content.ReadAsStringAsync();
+                    objFPResponse = JsonConvert.DeserializeObject<CommonResponseModel>(SucessResponse);
+                    return objFPResponse;
+                }
+                else
+                {
+                    var ErrorResponse = await response.Content.ReadAsStringAsync();
+                    objFPResponse = JsonConvert.DeserializeObject<CommonResponseModel>(ErrorResponse);
+                    return objFPResponse;
+                }
+            }
+        }
     }
 }

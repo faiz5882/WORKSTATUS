@@ -13,8 +13,7 @@ namespace WorkStatus.Utility
         
         public long InsertUser(tbl_UserDetails tbl_User)
         {
-            BaseService<tbl_UserDetails> gg = new BaseService<tbl_UserDetails>();
-           
+            BaseService<tbl_UserDetails> gg = new BaseService<tbl_UserDetails>();           
             return  gg.Add(tbl_User);
         }
     }

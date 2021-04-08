@@ -23,6 +23,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using WorkStatus.Common;
 using Avalonia.Controls;
 using MessageBoxAvaloniaEnums = MessageBox.Avalonia.Enums;
+using Avalonia;
 
 namespace WorkStatus.ViewModels
 {
@@ -52,25 +53,61 @@ namespace WorkStatus.ViewModels
             StackPanelLogo = ThemeManager.StackPanelLogoColor;
             TxtWelcomeColor = ThemeManager.TxtWelcomeColor;
             //BuildConnectionString();
+            //ActivityLogManager activity = new ActivityLogManager();
+            //activity.CallActivityLog();
         }
 
         #endregion
         #region Methods  
 
-       
-        
+        private void ChangeDashBoardWindow()
+        {
+            try
+            {
+                if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    var window = new Dashboard();
+                    var prevwindow = desktop.MainWindow;
+                    desktop.MainWindow = window;
+                    desktop.MainWindow.Show();
+                    prevwindow.Close();
+                    prevwindow = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+        }
+        private void ChangetoForgotPasswordWindow()
+        {
+            try
+            {
+                if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    var window = new ForgotPassword();
+                    var prevwindow = desktop.MainWindow;
+                    desktop.MainWindow = window;
+                    desktop.MainWindow.Show();
+                    prevwindow.Close();
+                    prevwindow = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+        }
+
         async void Login()
         {
-            
-            if(string.IsNullOrEmpty(Email))
+            if (string.IsNullOrEmpty(Email))
             {
-
-               
                 var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
                .GetMessageBoxStandardWindow("Error", "Email is required!", MessageBoxAvaloniaEnums.ButtonEnum.Ok);
                 var r = await messageBoxStandardWindow.ShowDialog(_Window);
             }
-            else if(string.IsNullOrEmpty(Password))
+            else if (string.IsNullOrEmpty(Password))
             {
                 var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
               .GetMessageBoxStandardWindow("Error", "Password is required!", MessageBoxAvaloniaEnums.ButtonEnum.Ok);
@@ -78,11 +115,6 @@ namespace WorkStatus.ViewModels
             }
             else
             {
-
-                //var dialog = new Dashboard();
-                //var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-                //await dialog.ShowDialog(mainWindow);
-
                 _baseURL = Configurations.UrlConstant + Configurations.LoginApiConstant;
                 _loginResponse = await _services.LoginAsync(new Get_API_Url().LoginApi(_baseURL, Email, Password), _loginEntity);
                 if (_loginResponse != null)
@@ -92,7 +124,7 @@ namespace WorkStatus.ViewModels
                         BaseService<tbl_UserDetails> dbService = new BaseService<tbl_UserDetails>();
                         dbService.Delete(new tbl_UserDetails());
                         Common.Storage.TokenId = _loginResponse.Response.Data.Token;
-                         user = new tbl_UserDetails()
+                        user = new tbl_UserDetails()
                         {
                             UserId = _loginResponse.Response.Data.Id,
                             UserEmail = _loginResponse.Response.Data.Email,
@@ -105,24 +137,28 @@ namespace WorkStatus.ViewModels
                         long userID = new UserLoginSqliteService().InsertUser(user);
                         if (userID > 0)
                         {
-                            var dialog = new Dashboard();
-                            var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-                            await dialog.ShowDialog(mainWindow);
+                            ChangeDashBoardWindow();
+                            //var dialog = new Dashboard();
+                            //var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+                            //await dialog.ShowDialog(mainWindow);
                         }
                     }
+                    else
+                    {
+                        var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
+                        .GetMessageBoxStandardWindow("Error", "Wrong login details", MessageBoxAvaloniaEnums.ButtonEnum.Ok);
+                        var r = await messageBoxStandardWindow.ShowDialog(_Window);
+                    }
                 }
-
             }
         }
 
         async void NavigateToForgotPasswordScreen()
         {
-            var dialog = new ForgotPassword();
-            var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-            await dialog.ShowDialog(mainWindow);            
+            ChangetoForgotPasswordWindow();
         }
         #endregion
-        
+
         #region DataBinding Members
 
         private SolidColorBrush _stackPanelLogo;

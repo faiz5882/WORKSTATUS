@@ -25,7 +25,7 @@ namespace WorkStatus.Models.WriteDTO
         [DbColumn]
         public string TimeType { get; set; }
         [DbColumn]
-        public string ToDoId { get; set; }
+        public long? ToDoId { get; set; }
         [DbColumn]
         public int IntervalTime { get; set; }
         [DbColumn]

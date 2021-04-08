@@ -1,8 +1,7 @@
 {
   "profiles": {
     "WorkStatus": {
-      "commandName": "Project",
-      "workingDirectory": "C:\\Projects\\2021\\CompanyProject\\WorkStatus"
+      "commandName": "Project"
     }
   }
 }

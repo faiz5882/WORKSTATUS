@@ -18,6 +18,7 @@ using WorkStatus.Views;
 using Avalonia.Controls;
 using MessageBoxAvaloniaEnums = MessageBox.Avalonia.Enums;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia;
 
 namespace WorkStatus.ViewModels
 {
@@ -88,10 +89,28 @@ namespace WorkStatus.ViewModels
         #endregion
 
         #region Methods      
-        
+        private void ChangeLoginWindow()
+        {
+            try
+            {
+                if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    var window = new Login();
+                    var prevwindow = desktop.MainWindow;
+                    desktop.MainWindow = window;
+                    desktop.MainWindow.Show();
+                    prevwindow.Close();
+                    prevwindow = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+        }
         void ClosedWindow()
         {
-            _window.Close();
+            ChangeLoginWindow();
         }
         async void ForgotPassword()
         {

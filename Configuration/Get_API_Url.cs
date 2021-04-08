@@ -42,5 +42,11 @@ namespace WorkStatus.Configuration
         }
 
         #endregion
+        #region ActivityLog
+        public string ActivityLogApi(string BaseUrl)
+        {
+            return BaseUrl;
+        }
+        #endregion
     }
 }
