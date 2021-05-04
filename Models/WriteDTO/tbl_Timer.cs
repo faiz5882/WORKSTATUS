@@ -10,7 +10,7 @@ namespace WorkStatus.Models.WriteDTO
    public class tbl_Timer
     {
         [DbColumn(IsIdentity = true, IsPrimary = true)]
-        public long Sno { get; set; }
+        public int Sno { get; set; }
         [DbColumn]
         public string Start { get; set; }
 
@@ -25,7 +25,7 @@ namespace WorkStatus.Models.WriteDTO
         [DbColumn]
         public string TimeType { get; set; }
         [DbColumn]
-        public long? ToDoId { get; set; }
+        public int ToDoId { get; set; }
         [DbColumn]
         public int IntervalTime { get; set; }
         [DbColumn]

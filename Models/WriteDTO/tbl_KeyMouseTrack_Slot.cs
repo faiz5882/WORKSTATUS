@@ -10,7 +10,7 @@ namespace WorkStatus.Models.WriteDTO
    public class tbl_KeyMouseTrack_Slot
     {
         [DbColumn(IsIdentity = true, IsPrimary = true)]
-        public long Id { get; set; }
+        public int Id { get; set; }
         [DbColumn]
         public string IntervalStratTime { get; set; }
         [DbColumn]

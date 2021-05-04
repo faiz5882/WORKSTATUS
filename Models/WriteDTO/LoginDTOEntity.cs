@@ -38,4 +38,11 @@ namespace WorkStatus.Models.WriteDTO
         public string Token { get; set; }
 
     }
+    public class LoginRequestDTOEntity
+    {
+        public string email { get; set; }
+        public string password { get; set; }
+        public string deviceType { get; set; }
+        public string deviceId { get; set; }
+    }
 }

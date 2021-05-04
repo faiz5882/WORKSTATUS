@@ -5,8 +5,9 @@
 			  xmlns:etc="http://schemas.microsoft.com/expression/2010/interactivity"
 				xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"
 				xmlns:user="clr-namespace:WorkStatus.Views;assembly=WorkStatus"
-        mc:Ignorable="d" Width="1000" Height="635"
-				Icon="/Assets/avalonia-logo.ico" x:Class="WorkStatus.Views.Dashboard" CanResize="False" Title="Dashboard">
+        mc:Ignorable="d" Width="1000" Height="635"	
+		Icon="avares://WorkStatus/Assets/LogoSmall.ico"
+		x:Class="WorkStatus.Views.Dashboard" CanResize="False" Title="Dashboard">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -183,7 +184,8 @@
 				</StackPanel>
 			</Grid>
 			<Grid Grid.Row="8" Background="#E8F3FF">
-				<ListBox x:Name="LayoutRoot" Background="White" AutoScrollToSelectedItem="True"
+				<ListBox x:Name="LayoutRoot" Background="White"		
+						 AutoScrollToSelectedItem="True"
 								 SelectionChanged="Lstbox_SelectionChanged" SelectionMode="Single"						
 							   ScrollViewer.HorizontalScrollBarVisibility="Auto"
 							   Items="{Binding GetProjectsList,Mode=TwoWay}">
@@ -196,8 +198,8 @@
 									</Grid.RowDefinitions>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="10"></ColumnDefinition>
-										<ColumnDefinition Width="100"></ColumnDefinition>
-										<ColumnDefinition Width="230"></ColumnDefinition>
+										<ColumnDefinition Width="200"></ColumnDefinition>
+										<ColumnDefinition Width="115"></ColumnDefinition>
 									</Grid.ColumnDefinitions>
 									<Button Grid.Row="0" Grid.Column="0" Name="txtProjectPlay"
 											Cursor="Hand"
@@ -228,9 +230,10 @@
 
 									<TextBlock Grid.Row="0" Grid.Column="1"
 											   FontStyle="Normal"
-											  FontWeight="Normal" Margin="15,0,0,0"
-											   HorizontalAlignment="Center"
+											  FontWeight="Normal" Margin="25,0,0,0"
+											   HorizontalAlignment="Left"
 											   VerticalAlignment="Center"
+											 TextTrimming="CharacterEllipsis"
 												FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
 											   Text="{Binding ProjectName}"
 											   FontSize="16"></TextBlock>
@@ -307,7 +310,14 @@
 				Text="{Binding HeaderProjectName}" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
 				Foreground="#212529" FontWeight="Bold" FontStyle="Normal" FontSize="16" LineHeight="19"/>
 				<StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
-					<ToggleButton Name="button1">
+					<Menu HorizontalAlignment="Center" VerticalAlignment="Center">
+						<MenuItem Header="..." FontSize="20" FontWeight="ExtraBold" Foreground="DodgerBlue">
+							<MenuItem Header="Sign out" Click="SignOut_Click" FontSize="12" FontWeight="Normal" Foreground="Black"/>
+							<Separator Height="2" Background="Gray" BorderThickness="0 1 0 0"/>
+							<MenuItem Header="Quit" Click="Quit_Click" FontSize="12" FontWeight="Normal" Foreground="Black"/>
+						</MenuItem>
+					</Menu>
+					<!--<ToggleButton Name="button1">
 						<ToggleButton.Template>
 							<ControlTemplate TargetType="ToggleButton">
 								<TextBlock HorizontalAlignment="Left"
@@ -323,29 +333,15 @@
 					Height="300" Width="150" >
 						<Border BoxShadow="0 0 1 gray" BorderThickness="2" Height="300" Width="150" Background="White"
 						CornerRadius="8,8,8,8" Padding="5">
-							<ListBox Background="White" SelectionMode="Single" SelectedItem="{Binding SelectedOrganisationItems,Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Auto"
-							Items="{Binding FindOrganisationDetails,Mode=TwoWay}">
-								<ListBox.ItemTemplate>
-									<DataTemplate>
-										<Grid Background="LightGray">
-											<Grid.RowDefinitions>
-												<RowDefinition Height="30"></RowDefinition>
-											</Grid.RowDefinitions>
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="150"></ColumnDefinition>
-											</Grid.ColumnDefinitions>
-											<TextBlock Grid.Row="0"
-											Grid.Column="0" Text="{Binding OrganizationName}"
-											HorizontalAlignment="Stretch"
-											VerticalAlignment="Center"></TextBlock>
-										</Grid>
-									</DataTemplate>
-								</ListBox.ItemTemplate>
-
-
-							</ListBox>
+							<Menu HorizontalAlignment="Center" VerticalAlignment="Center">
+								<MenuItem Header="..." FontSize="20" FontWeight="ExtraBold" Foreground="DodgerBlue">									
+									<MenuItem Header="Sign out" FontSize="12" FontWeight="Normal" Foreground="Black"/>
+									<Separator Height="2" Background="Gray" BorderThickness="0 1 0 0"/>
+									<MenuItem Header="Quit WorkStatus" FontSize="12" FontWeight="Normal" Foreground="Black"/>
+								</MenuItem>
+							</Menu>
 						</Border>
-					</Popup>
+					</Popup>-->
 				</StackPanel>
 			</Grid>
 			<!-- End Organisation name and Option -->
@@ -474,7 +470,7 @@
 											<RowDefinition Height="*"></RowDefinition>
 										</Grid.RowDefinitions>
 										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto"></ColumnDefinition>
+											<ColumnDefinition Width="230"></ColumnDefinition>
 											<ColumnDefinition Width="Auto"></ColumnDefinition>
 											<ColumnDefinition Width="Auto"></ColumnDefinition>
 										</Grid.ColumnDefinitions>
@@ -482,8 +478,8 @@
 										FontStyle="Normal" FontWeight="Normal" Foreground="#1665D8"
 										VerticalAlignment="Center" Margin="10,0,0,0"
 										FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
-										Text="{Binding ToDoName}" TextTrimming="WordEllipsis"
-										TextWrapping="Wrap" Padding="10,10,5,10"
+										Text="{Binding ToDoName}" TextTrimming="CharacterEllipsis"
+										 Padding="10,10,5,10"												  
 										FontSize="14"></TextBlock>
 
 										<Image Grid.Row="0"
@@ -507,6 +503,7 @@
 									FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center"></TextBlock>
+									
 									<TextBlock Grid.Row="0" Grid.Column="3"
 									Text="{Binding EndDate}" Margin="15,0,0,0"
 									HorizontalAlignment="Center" FontSize="14"
@@ -532,7 +529,7 @@
 										<Popup IsOpen="{Binding IsChecked, ElementName=button2}"
 										StaysOpen="False" PlacementMode="Right"
 										Height="300" Width="150" >
-											<Border BoxShadow="0 0 1 gray" BorderThickness="2" Height="300" Width="150" Background="White"
+											<!--<Border BoxShadow="0 0 1 gray" BorderThickness="2" Height="300" Width="150" Background="White"
 											CornerRadius="8,8,8,8" Padding="5">
 												<ListBox Background="White" SelectionMode="Single" SelectedItem="{Binding SelectedOrganisationItems,Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Auto"
 												Items="{Binding FindOrganisationDetails,Mode=TwoWay}">
@@ -555,7 +552,7 @@
 
 
 												</ListBox>
-											</Border>
+											</Border>-->
 										</Popup>
 									</StackPanel>
 								</Grid>

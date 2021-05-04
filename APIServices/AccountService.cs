@@ -19,7 +19,7 @@ namespace WorkStatus.APIServices
         {
             _client = new HttpClient();
         }
-        public async Task<LoginResponse> LoginAsync(string uri, LoginDTOEntity _objRequest)
+        public async Task<LoginResponse> LoginAsync(string uri, LoginRequestDTOEntity _objRequest)
         {
             LoginResponse objLoginResponse;
             string strJson = JsonConvert.SerializeObject(_objRequest);

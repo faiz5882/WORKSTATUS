@@ -29,8 +29,8 @@ namespace WorkStatus.Models.ReadDTO
         public string updated_time { get; set; }
         public int deleted_by { get; set; }
         public object deleted_time { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+        public DateTime? created_at { get; set; }
+        public DateTime? updated_at { get; set; }
         public object deleted_at { get; set; }
         public int archieved { get; set; }
     }
@@ -47,8 +47,8 @@ namespace WorkStatus.Models.ReadDTO
         public string name { get; set; }
         public string email { get; set; }
         public object email_verified_at { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+        public DateTime? created_at { get; set; }
+        public DateTime? updated_at { get; set; }
         public object profile { get; set; }
         public object timezone { get; set; }
         public object phone { get; set; }
@@ -94,8 +94,8 @@ namespace WorkStatus.Models.ReadDTO
         public int complete { get; set; }
         public string privacy { get; set; }
         public string site { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+        public DateTime? created_at { get; set; }
+        public DateTime? updated_at { get; set; }
         public Project project { get; set; }
         public List<Member> member { get; set; }
         public object repeat { get; set; }

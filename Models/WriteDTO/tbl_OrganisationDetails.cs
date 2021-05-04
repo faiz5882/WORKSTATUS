@@ -10,13 +10,13 @@ namespace WorkStatus.Models.WriteDTO
    public class tbl_OrganisationDetails
     {
         [DbColumn(IsIdentity = true, IsPrimary = true)]
-        public long Sno { get; set; }
+        public int Sno { get; set; }
         [DbColumn]
         public string OrganizationId { get; set; }
         [DbColumn]
         public string OrganizationName { get; set; }
         [DbColumn]
-        public bool IsOffline { get; set; }
+        public int IsOffline { get; set; }
 
     }
 }

@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
 using Avalonia.Threading;
@@ -16,6 +18,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using WorkStatus.Models;
 using WorkStatus.Models.WriteDTO;
+using WorkStatus.Utility;
 using WorkStatus.ViewModels;
 
 namespace WorkStatus.Views
@@ -39,7 +42,9 @@ namespace WorkStatus.Views
             var asyncBox = this.FindControl<AutoCompleteBox>("SearchToDo");
             asyncBox.AsyncPopulator = PopulateAsync;
             Closed += Dashboard_Closed;
-           // ListBox lstbox = this.FindControl<ListBox>("LayoutRoot");
+
+
+            // ListBox lstbox = this.FindControl<ListBox>("LayoutRoot");
             //lstbox.SelectionChanged += Lstbox_SelectionChanged;
             //var themes = this.Find<TextBox>("textOutput");
             // themes.TextInput += Themes_TextInput;
@@ -49,7 +54,7 @@ namespace WorkStatus.Views
             //  var collectionView1 = new DataGridCollectionView(Countries.All);
             //dg1.Items = collectionView1;
 
-           // lstbox.SelectedIndex = 0;
+            // lstbox.SelectedIndex = 0;
             int snapshotTime = screenShotTimeinMinutes != null ? Convert.ToInt32(screenShotTimeinMinutes) : 5;
             m_screen.Interval = TimeSpan.FromMinutes(Convert.ToInt32(snapshotTime));
             m_screen.Tick += GetScreenShots;
@@ -117,6 +122,38 @@ namespace WorkStatus.Views
             _dashboardVM.ClosedAllTimer();
         }
 
+        private async void SignOut_Click(object sender, RoutedEventArgs e)
+        {
+            _dashboardVM.ClosedAllTimer();
+            _dashboardVM.SendIntervalToServer();
+            ChangeDashBoardWindow();
+        }
+        private async void Quit_Click(object sender, RoutedEventArgs e)
+        {
+            _dashboardVM.ClosedAllTimer();
+            _dashboardVM.SendIntervalToServer();
+            this.Close();
+        }
+
+        private void ChangeDashBoardWindow()
+        {
+            try
+            {
+                if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    var window = new Login();
+                    var prevwindow = desktop.MainWindow;
+                    desktop.MainWindow = window;
+                    desktop.MainWindow.Show();
+                    prevwindow.Close();
+                    prevwindow = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+        }
         private async Task<IEnumerable<object>> PopulateAsyncprojectlist(string searchText, CancellationToken cancellationToken)
         {
             try
@@ -143,29 +180,31 @@ namespace WorkStatus.Views
             }
             return null;
         }
-        
+
         private void LstBoxToDo_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
             Avalonia.Controls.ListBox lstboxTodo = sender as Avalonia.Controls.ListBox;
+
             int indexID = lstboxTodo.SelectedIndex;
             if (indexID == -1)
             {
                 lstboxTodo.SelectedItem = _dashboardVM.SelectedprojectToDo;
                 //lstboxTodo.LayoutUpdated();
             }
-            if (lstboxTodo.SelectedItem!=null)
+            if (lstboxTodo.SelectedItem != null)
             {
-                if(e.AddedItems!=null && e.AddedItems.Count>0)
+                if (e.AddedItems != null && e.AddedItems.Count > 0)
                 {
                     var data = (tbl_ServerTodoDetails)e.AddedItems[0];
+
                     _dashboardVM.SelectedprojectToDo = data;
                 }
                 else
                 {
                     var data = (tbl_ServerTodoDetails)_dashboardVM.SelectedprojectToDo;
-                    _dashboardVM.SelectedprojectToDo = data;                    
+                    _dashboardVM.SelectedprojectToDo = data;
                 }
-            }           
+            }
         }
         //private void LstBoxOrganisation_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         //{
@@ -187,31 +226,52 @@ namespace WorkStatus.Views
         private void Lstbox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
 
-           
+
             Avalonia.Controls.ListBox lstbox = sender as Avalonia.Controls.ListBox;
 
             int selectedIndex = lstbox.SelectedIndex;
             if (selectedIndex == -1)
             {
-
-                lstbox.SelectedItem = _dashboardVM.Selectedproject;                
-               // lstbox.LayoutUpdated();
-            }
-            if (lstbox.SelectedItem !=null)
-            {                               
-                if (e.AddedItems != null && e.AddedItems.Count > 0)
+                //var p = _dashboardVM.GetProjectsList2.FirstOrDefault(x => x.ProjectId == _dashboardVM.projectIdSelected);
+                //if (p != null)
+                //{
+                //    if (!string.IsNullOrEmpty(p.ProjectId))
+                //    {
+                //        lstbox.SelectedItem = p;
+                //    }
+                //}   
+                if (_dashboardVM.projectIdSelected != null)
                 {
-                    var data = (Organisation_Projects)e.AddedItems[0];
-                    // _dashboardVM.ProjectStop(data.ProjectId);
-                    _dashboardVM.Selectedproject = data;
+                    int index = _dashboardVM.GetProjectsList2.FindIndex(x => x.ProjectId == _dashboardVM.projectIdSelected);
+                    lstbox.SelectedIndex = index;
                 }
                 else
                 {
-                    var data = (Organisation_Projects)_dashboardVM.Selectedproject;
-                    // _dashboardVM.ProjectStop(data.ProjectId);
-                    _dashboardVM.Selectedproject = data;
+                    lstbox.SelectedIndex = 0;
                 }
+                (sender as ListBox).ScrollIntoView(_dashboardVM.Selectedproject);
+                // return;
 
+            }
+            else
+            {
+                if (lstbox.SelectedItem != null)
+                {
+                    if (e.AddedItems != null && e.AddedItems.Count > 0)
+                    {
+                        var data = (Organisation_Projects)e.AddedItems[0];
+                        //  int index = _dashboardVM.listproject.SelectedItems.IndexOf(data.ProjectId);
+                        // _dashboardVM.ProjectStop(data.ProjectId);
+                        _dashboardVM.Selectedproject = data;
+                    }
+                    else
+                    {
+                        var data = (Organisation_Projects)_dashboardVM.Selectedproject;
+                        // _dashboardVM.ProjectStop(data.ProjectId);
+                        // _dashboardVM.Selectedproject = data;
+                    }
+
+                }
             }
             // if(!_dashboardVM.IsProjectRunning)
             //{

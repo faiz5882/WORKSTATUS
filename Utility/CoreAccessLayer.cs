@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using Avalonia.Controls;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,6 +8,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using WorkStatus.Views;
 
 namespace WorkStatus.Utility
 {
@@ -236,12 +238,12 @@ namespace WorkStatus.Utility
             }
         }
 
-        public void UpdateIntervalToDB(string IntervalEndTime, long slotId, string CurrentDate)
+        public void UpdateIntervalToDB(string IntervalEndTime,string EndTime, long slotId, string CurrentDate)
         {
             try
             {
 
-                string qry = "update tbl_KeyMouseTrack_Slot set  IntervalEndTime=" + "'" + IntervalEndTime + "'" + ", End=" + "'" + IntervalEndTime + "'" + " where Id=" + "" + slotId + "" + " and CreatedDate=" + "'" + CurrentDate + "'" + " ";
+                string qry = "update tbl_KeyMouseTrack_Slot set  IntervalEndTime=" + "'" + IntervalEndTime + "'" + ", End=" + "'" + EndTime + "'" + " where Id=" + "" + slotId + "" + " and CreatedDate=" + "'" + CurrentDate + "'" + " ";
                 Execute(qry.ToString());
             }
             catch (Exception ex)
@@ -251,6 +253,33 @@ namespace WorkStatus.Utility
             }
         }
 
+        public void UpdateToDoSyncTimeToLocalDB(string ToDoTimeConsumed, long ToDoId,string ProjectId)
+        {
+            try
+            {
+
+                string qry = "update tbl_ServerTodoDetails set IsOffline=true, ToDoTimeConsumed=" + "'" + ToDoTimeConsumed + "'" + " where Id=" + "" + ToDoId + " and CurrentProjectId=" + "'" + ProjectId + "'" + "";
+                Execute(qry.ToString());
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+        }
+
+        public void UpdateProjectSyncTimeToLocalDB(string ProjectTimeConsumed, long ProjectId)
+        {
+            try
+            {
+                string qry = "update tbl_Organisation_Projects set IsOffline=1, ProjectTimeConsumed=" + "'" + ProjectTimeConsumed + "'" + " where ProjectId=" + "'" + ProjectId + "'";
+                Execute(qry.ToString());
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
         public void UpdateStartStopProjectTimeToDB(string StopTime, long sno)
         {
             try
@@ -269,21 +298,72 @@ namespace WorkStatus.Utility
                 throw new Exception(ex.Message);
             }
         }
-        public void updatetbl_ProjectDetails(string StopTime, long ProjectId, long OrganizationId)
+        public void updatetbl_ProjectDetails(string TotalWorkedHours, int ProjectId, int OrganizationId)
         {
-            string qry = "update tbl_ProjectDetails set  TotalWorkedHours=" + "'" + StopTime + "'" + " where ProjectId=" + "" + ProjectId + " and OrganizationId="+ OrganizationId + "";
+           // string qry = "update tbl_Temp_SyncTimer set  TotalWorkedHours=" + "'" + TotalWorkedHours + "'" + " where SNo=" + "" + sNo + "";
+            string qry = "update tbl_Temp_SyncTimer set  TotalWorkedHours=" + "'" + TotalWorkedHours + "'" + " where ProjectId=" + "" + ProjectId + " and OrganizationId=" + "" + OrganizationId + "";
 
             Execute(qry.ToString());
         }
-        public T Gettbl_ProjectDetailsByIDs(long ProjectId, long OrganizationId, string CurrentDate)
+        public T Gettbl_ProjectDetailsByIDs(int ProjectId, int OrganizationId, string CurrentDate)
         {
             T entity = new T();
             IList<T> entities = new List<T>();
-            string qry = "Select * from tbl_ProjectDetails where ProjectId=" + "" + ProjectId + " and OrganizationId=" + "" + OrganizationId + "" + " and CreatedDate=" + "'" + CurrentDate + "'" + "";
+            string qry = "Select * from tbl_Temp_SyncTimer where ProjectId=" + "" + ProjectId + " and OrganizationId=" + "" + OrganizationId + "" + " and CreatedDate=" + "'" + CurrentDate + "'" + "";
             var _entities = ExecuteGet(qry.ToString());
             if (_entities != null && _entities.Count > 0)
                 entity = _entities[0];
             return entity;
+        }
+
+        public void UpdateProjectDetails(string ProjectId, string OrganizationId)
+        {
+                
+
+            string qry = "update tbl_Organisation_Projects set IsOffline=0  where ProjectId=" + "'" + ProjectId + "'" + "and OrganisationId=" + "'" + OrganizationId + "'" + "";            
+            Execute(qry.ToString());
+        }
+
+        public void UpdateTODODetails(string ProjectId, string OrganizationId, int todoId)
+        {
+
+
+            string qry = "update tbl_ServerTodoDetails set IsOffline=true  where CurrentProjectId=" + "'" + ProjectId + "'" + "and CurrentOrganisationId=" + "'" + OrganizationId + "'" + " and Id=" + "" + todoId + "" + "";
+            Execute(qry.ToString());
+        }
+        public T Gettbl_Temp_SyncTimerByIDs(int ProjectId, int OrganizationId, string CurrentDate,int todoId)
+        {
+            T entity = new T();
+            IList<T> entities = new List<T>();
+            string qry = "Select * from tbl_Temp_SyncTimer where ProjectId=" + "" + ProjectId + " and OrganizationId=" + "" + OrganizationId + "" + " and CreatedDate=" + "'" + CurrentDate + "'" + " and TodoId=" + "" + todoId + "" + "";
+            var _entities = ExecuteGet(qry.ToString());
+            if (_entities != null && _entities.Count > 0)
+                entity = _entities[0];
+            return entity;
+        }
+
+        public T tbl_TempSyncTimerTodoDetails(int ProjectId, int OrganizationId, string CurrentDate, int todoId)
+        {
+            T entity = new T();
+            IList<T> entities = new List<T>();
+            string qry = "Select * from tbl_TempSyncTimerTodoDetails where ProjectId=" + "" + ProjectId + " and OrganizationId=" + "" + OrganizationId + "" + " and CreatedDate=" + "'" + CurrentDate + "'" + " and TodoId=" + "" + todoId + "" + "";
+            var _entities = ExecuteGet(qry.ToString());
+            if (_entities != null && _entities.Count > 0)
+                entity = _entities[0];
+            return entity;
+        }
+
+        public void Updatetbl_TempSyncTimerTodoDetails(string StopTime, int ProjectId, int OrganizationId, int todoId)
+        {
+            string qry = "update tbl_TempSyncTimerTodoDetails set  TotalWorkedHours=" + "'" + StopTime + "'" + " where ProjectId=" + "" + ProjectId + " and OrganizationId=" + OrganizationId + " and TodoId=" + todoId + "";
+
+            Execute(qry.ToString());
+        }
+        public void Updatetbl_Temp_SyncTimer(string StopTime, long ProjectId, long OrganizationId,int todoId)
+        {
+            string qry = "update tbl_Temp_SyncTimer set  TotalWorkedHours=" + "'" + StopTime + "'" + " where ProjectId=" + "" + ProjectId + " and OrganizationId=" + OrganizationId + " and TodoId=" + todoId + "";
+
+            Execute(qry.ToString());
         }
         public void UpdateProjectTimeToDBByToDoID(string StopTime, long sno)
         {
@@ -490,7 +570,7 @@ namespace WorkStatus.Utility
         /// </summary>
         /// <param name="cmdText"></param>
         public IList<T> GetAll()
-        {
+        {           
             T entity = new T();
             return ExecuteGet(string.Format("SELECT * FROM [{0}]", entity.GetType().Name));
         }
@@ -561,9 +641,11 @@ namespace WorkStatus.Utility
         /// <returns></returns>
         private IList<T> ExecuteGet(string cmdText)
         {
+           
             using (var connection = GetConnection())
             {
                 connection.Open();
+                
                 SqliteCommand cmd = new SqliteCommand(cmdText, connection);
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -644,6 +726,22 @@ namespace WorkStatus.Utility
     public class EntityMapper
     {
         // Complete
+        public static T ChangeType<T>(object value)
+        {
+            var t = typeof(T);
+
+            if (t.IsGenericType && t.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
+            {
+                if (value == null)
+                {
+                    return default(T);
+                }
+
+                t = Nullable.GetUnderlyingType(t);
+            }
+
+            return (T)Convert.ChangeType(value, t);
+        }
         public IList<T> Map<T>(SqliteDataReader reader)
             where T : class, new()
         {
@@ -669,13 +767,24 @@ namespace WorkStatus.Utility
                             else
                             {
                                 if (reader[i.Name] != DBNull.Value)
-                                    i.SetValue(obj, reader[i.Name]);
+                                    i.SetValue(obj, Convert.ChangeType(reader[i.Name], i.PropertyType));
+                                //    if(reader[i.Name].ToString()=="ToDoId")
+                                //    {
+                                //        i.SetValue(obj, Convert.ChangeType(reader[i.Name], i.PropertyType));
+                                //    }
+                                //else
+                                //    {
+                                //        i.SetValue(obj, Convert.ChangeType(reader[i.Name], i.PropertyType));
+                                //    }
+
+                                // i.SetValue(obj, reader[i.Name]);
                             }
                         }
                     }
                     catch (Exception ex)
                     {
 #if DEBUG
+                       
                         Console.WriteLine(ex.Message);
                         Console.ReadLine();
 #endif

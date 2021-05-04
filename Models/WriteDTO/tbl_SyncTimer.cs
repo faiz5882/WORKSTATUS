@@ -10,7 +10,7 @@ namespace WorkStatus.Models.WriteDTO
    public class tbl_SyncTimer
     {
         [DbColumn(IsIdentity = true, IsPrimary = true)]
-        public long Id { get; set; }
+        public int Id { get; set; }
         [DbColumn]
         public string ProjectId { get; set; }
         [DbColumn]

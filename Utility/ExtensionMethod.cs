@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -20,7 +21,23 @@ namespace WorkStatus.Utility
             string version = Assembly.GetEntryAssembly().GetName().Version.ToString();
             return version;
         }
-               
+
+        public static int FindIndex<T>(this ObservableCollection<T> ts, Predicate<T> match)
+        {
+            return ts.FindIndex(0, ts.Count, match);
+        }
+        public static int FindIndex<T>(this ObservableCollection<T> ts, int startIndex, int count, Predicate<T> match)
+        {
+            if (startIndex < 0) startIndex = 0;
+            if (count > ts.Count) count = ts.Count;
+
+            for (int i = startIndex; i < count; i++)
+            {
+                if (match(ts[i])) return i;
+            }
+
+            return -1;
+        }
         public static string DbNullToString(this object obj)
         {
             if (Convert.IsDBNull(obj))

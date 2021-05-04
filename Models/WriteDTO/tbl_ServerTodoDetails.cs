@@ -11,9 +11,9 @@ namespace WorkStatus.Models.WriteDTO
     public class tbl_ServerTodoDetails
     {
         [DbColumn(IsIdentity = true, IsPrimary = true)]
-        public long Sno { get; set; }
+        public int Sno { get; set; }
         [DbColumn]
-        public long Id { get; set; }
+        public int Id { get; set; }
         [DbColumn]
         public string ToDoName { get; set; }
         [DbColumn]

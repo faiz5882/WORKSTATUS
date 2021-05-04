@@ -5355,24 +5355,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vinove\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Vinove\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\2021\\CompanyProject\\WorkStatus\\WorkStatus.csproj",
+      "projectUniqueName": "C:\\Project\\Inhouse\\WorkStatus_270421201\\WorkStatus\\WorkStatus\\WorkStatus.csproj",
       "projectName": "WorkStatus",
-      "projectPath": "C:\\Projects\\2021\\CompanyProject\\WorkStatus\\WorkStatus.csproj",
-      "packagesPath": "C:\\Users\\vinove\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\2021\\CompanyProject\\WorkStatus\\obj\\",
+      "projectPath": "C:\\Project\\Inhouse\\WorkStatus_270421201\\WorkStatus\\WorkStatus\\WorkStatus.csproj",
+      "packagesPath": "C:\\Users\\Vinove\\.nuget\\packages\\",
+      "outputPath": "C:\\Project\\Inhouse\\WorkStatus_270421201\\WorkStatus\\WorkStatus\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Projects\\2021\\CompanyProject\\WorkStatus\\NuGet.Config",
-        "C:\\Users\\vinove\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Project\\Inhouse\\WorkStatus_270421201\\WorkStatus\\WorkStatus\\NuGet.Config",
+        "C:\\Users\\Vinove\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -5459,7 +5459,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   },

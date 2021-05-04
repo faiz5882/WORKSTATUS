@@ -11,7 +11,7 @@ namespace WorkStatus.Interfaces
 {
    public interface IAccounts
     {        
-        Task<LoginResponse> LoginAsync(string uri, LoginDTOEntity _objRequest);
+        Task<LoginResponse> LoginAsync(string uri, LoginRequestDTOEntity _objRequest);
         Task<ForgetPasswordResponseModel> ForgotPasswordAsync(string uri, ForgetPasswordReqeuestModel _objRequest);
     }
 }

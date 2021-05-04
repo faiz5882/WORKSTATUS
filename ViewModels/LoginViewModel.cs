@@ -31,10 +31,13 @@ namespace WorkStatus.ViewModels
     {
         ThemeManager ThemeManager;
        private Window _Window;
+        private LoginRequestDTOEntity loginRequestDTO;
         public object UserLoginSqliteService;
         private LoginResponse _loginResponse;
         private string _baseURL = string.Empty;
         private readonly IAccounts _services;
+        bool isWindows = false;
+        bool isMac = false;
         public LoginDTOEntity _loginEntity { get; set; }
         private tbl_UserDetails user;
         #region All ReactiveCommand
@@ -53,8 +56,11 @@ namespace WorkStatus.ViewModels
             StackPanelLogo = ThemeManager.StackPanelLogoColor;
             TxtWelcomeColor = ThemeManager.TxtWelcomeColor;
             //BuildConnectionString();
-            //ActivityLogManager activity = new ActivityLogManager();
-            //activity.CallActivityLog();
+          
+           // email = "testuser2@mailinator.com";
+           // password = "Testing@123";
+            isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+            isMac = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
         }
 
         #endregion
@@ -115,8 +121,16 @@ namespace WorkStatus.ViewModels
             }
             else
             {
+                string deviceType = "";
+                
+                loginRequestDTO = new LoginRequestDTOEntity() { 
+                deviceId= Environment.MachineName.ToStrVal(),
+                deviceType= isWindows== true? "Windows":"Mac",
+                email= Email,
+                password= Password,
+                };
                 _baseURL = Configurations.UrlConstant + Configurations.LoginApiConstant;
-                _loginResponse = await _services.LoginAsync(new Get_API_Url().LoginApi(_baseURL, Email, Password), _loginEntity);
+                _loginResponse = await _services.LoginAsync(new Get_API_Url().LoginApi(_baseURL, Email, Password), loginRequestDTO);
                 if (_loginResponse != null)
                 {
                     if (_loginResponse.Response.Code == "200")
@@ -137,6 +151,11 @@ namespace WorkStatus.ViewModels
                         long userID = new UserLoginSqliteService().InsertUser(user);
                         if (userID > 0)
                         {
+                            BaseService<tbl_Temp_SyncTimer> service2 = new BaseService<tbl_Temp_SyncTimer>();
+                            service2.Delete(new tbl_Temp_SyncTimer());
+                            BaseService<tbl_TempSyncTimerTodoDetails> service3 = new BaseService<tbl_TempSyncTimerTodoDetails>();
+                            service3.Delete(new tbl_TempSyncTimerTodoDetails());
+                            
                             ChangeDashBoardWindow();
                             //var dialog = new Dashboard();
                             //var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;

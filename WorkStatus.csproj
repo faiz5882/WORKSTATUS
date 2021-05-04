@@ -3,6 +3,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <ApplicationIcon>LogoSmall.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
@@ -32,6 +33,7 @@
     <None Remove="Assets\icon.png" />
     <None Remove="Assets\iconplus.png" />
     <None Remove="Assets\ic_shortcut_maximize.png" />
+    <None Remove="Assets\LogoSmall.ico" />
     <None Remove="Assets\maximize.png" />
     <None Remove="Assets\office.jpg" />
     <None Remove="Assets\Pause.png" />

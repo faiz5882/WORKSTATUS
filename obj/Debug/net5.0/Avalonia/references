@@ -1,72 +1,72 @@
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Animation.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Base.dll
-C:\Users\vinove\.nuget\packages\avalonia.controls.datagrid\0.10.0\lib\netstandard2.0\Avalonia.Controls.DataGrid.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Controls.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.DesignerSupport.dll
-C:\Users\vinove\.nuget\packages\avalonia.desktop\0.10.0\lib\netstandard2.0\Avalonia.Desktop.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.DesktopRuntime.dll
-C:\Users\vinove\.nuget\packages\avalonia.diagnostics\0.10.0\lib\netstandard2.0\Avalonia.Diagnostics.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Dialogs.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.dll
-C:\Users\vinove\.nuget\packages\avalonia.freedesktop\0.10.0\lib\netstandard2.0\Avalonia.FreeDesktop.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Input.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Interactivity.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Layout.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Markup.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Markup.Xaml.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.MicroCom.dll
-C:\Users\vinove\.nuget\packages\avalonia.native\0.10.0\lib\netstandard2.0\Avalonia.Native.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.OpenGL.dll
-C:\Users\vinove\.nuget\packages\avalonia.reactiveui\0.10.0\lib\netstandard2.0\Avalonia.ReactiveUI.dll
-C:\Users\vinove\.nuget\packages\avalonia.remote.protocol\0.10.0\lib\netstandard2.0\Avalonia.Remote.Protocol.dll
-C:\Users\vinove\.nuget\packages\avalonia.skia\0.10.0\lib\netstandard2.0\Avalonia.Skia.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Styling.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Themes.Default.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Themes.Fluent.dll
-C:\Users\vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Visuals.dll
-C:\Users\vinove\.nuget\packages\avalonia.win32\0.10.0\lib\netstandard2.0\Avalonia.Win32.dll
-C:\Users\vinove\.nuget\packages\avalonia.x11\0.10.0\lib\netstandard2.0\Avalonia.X11.dll
-C:\Users\vinove\.nuget\packages\dynamicdata\6.17.14\lib\netstandard2.0\DynamicData.dll
-C:\Users\vinove\.nuget\packages\harfbuzzsharp\2.6.1.7\lib\netstandard2.0\HarfBuzzSharp.dll
-C:\Users\vinove\.nuget\packages\jetbrains.annotations\10.3.0\lib\netstandard1.0\JetBrains.Annotations.dll
-C:\Users\vinove\.nuget\packages\materialdesigncolors\2.0.0\lib\netcoreapp3.1\MaterialDesignColors.dll
-C:\Users\vinove\.nuget\packages\materialdesignthemes\4.0.0\lib\netcoreapp3.1\MaterialDesignThemes.Wpf.dll
-C:\Users\vinove\.nuget\packages\messagebox.avalonia\1.1.1\lib\netstandard2.0\MessageBox.Avalonia.dll
-C:\Users\vinove\.nuget\packages\microsoft.codeanalysis.csharp\3.4.0\lib\netstandard2.0\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\vinove\.nuget\packages\microsoft.codeanalysis.csharp.scripting\3.4.0\lib\netstandard2.0\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-C:\Users\vinove\.nuget\packages\microsoft.codeanalysis.common\3.4.0\lib\netstandard2.0\Microsoft.CodeAnalysis.dll
-C:\Users\vinove\.nuget\packages\microsoft.codeanalysis.scripting.common\3.4.0\lib\netstandard2.0\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Animation.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Base.dll
+C:\Users\Vinove\.nuget\packages\avalonia.controls.datagrid\0.10.0\lib\netstandard2.0\Avalonia.Controls.DataGrid.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Controls.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.DesignerSupport.dll
+C:\Users\Vinove\.nuget\packages\avalonia.desktop\0.10.0\lib\netstandard2.0\Avalonia.Desktop.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.DesktopRuntime.dll
+C:\Users\Vinove\.nuget\packages\avalonia.diagnostics\0.10.0\lib\netstandard2.0\Avalonia.Diagnostics.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Dialogs.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.dll
+C:\Users\Vinove\.nuget\packages\avalonia.freedesktop\0.10.0\lib\netstandard2.0\Avalonia.FreeDesktop.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Input.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Interactivity.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Layout.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Markup.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Markup.Xaml.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.MicroCom.dll
+C:\Users\Vinove\.nuget\packages\avalonia.native\0.10.0\lib\netstandard2.0\Avalonia.Native.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.OpenGL.dll
+C:\Users\Vinove\.nuget\packages\avalonia.reactiveui\0.10.0\lib\netstandard2.0\Avalonia.ReactiveUI.dll
+C:\Users\Vinove\.nuget\packages\avalonia.remote.protocol\0.10.0\lib\netstandard2.0\Avalonia.Remote.Protocol.dll
+C:\Users\Vinove\.nuget\packages\avalonia.skia\0.10.0\lib\netstandard2.0\Avalonia.Skia.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Styling.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Themes.Default.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Themes.Fluent.dll
+C:\Users\Vinove\.nuget\packages\avalonia\0.10.0\lib\netcoreapp2.0\Avalonia.Visuals.dll
+C:\Users\Vinove\.nuget\packages\avalonia.win32\0.10.0\lib\netstandard2.0\Avalonia.Win32.dll
+C:\Users\Vinove\.nuget\packages\avalonia.x11\0.10.0\lib\netstandard2.0\Avalonia.X11.dll
+C:\Users\Vinove\.nuget\packages\dynamicdata\6.17.14\lib\netstandard2.0\DynamicData.dll
+C:\Users\Vinove\.nuget\packages\harfbuzzsharp\2.6.1.7\lib\netstandard2.0\HarfBuzzSharp.dll
+C:\Users\Vinove\.nuget\packages\jetbrains.annotations\10.3.0\lib\netstandard1.0\JetBrains.Annotations.dll
+C:\Users\Vinove\.nuget\packages\materialdesigncolors\2.0.0\lib\netcoreapp3.1\MaterialDesignColors.dll
+C:\Users\Vinove\.nuget\packages\materialdesignthemes\4.0.0\lib\netcoreapp3.1\MaterialDesignThemes.Wpf.dll
+C:\Users\Vinove\.nuget\packages\messagebox.avalonia\1.1.1\lib\netstandard2.0\MessageBox.Avalonia.dll
+C:\Users\Vinove\.nuget\packages\microsoft.codeanalysis.csharp\3.4.0\lib\netstandard2.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Vinove\.nuget\packages\microsoft.codeanalysis.csharp.scripting\3.4.0\lib\netstandard2.0\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Vinove\.nuget\packages\microsoft.codeanalysis.common\3.4.0\lib\netstandard2.0\Microsoft.CodeAnalysis.dll
+C:\Users\Vinove\.nuget\packages\microsoft.codeanalysis.scripting.common\3.4.0\lib\netstandard2.0\Microsoft.CodeAnalysis.Scripting.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\Microsoft.CSharp.dll
-C:\Users\vinove\.nuget\packages\microsoft.data.sqlite.core\5.0.4\lib\netstandard2.0\Microsoft.Data.Sqlite.dll
-C:\Users\vinove\.nuget\packages\microsoft.dotnet.platformabstractions\3.1.6\lib\netstandard2.0\Microsoft.DotNet.PlatformAbstractions.dll
-C:\Users\vinove\.nuget\packages\microsoft.entityframeworkcore.abstractions\5.0.4\lib\netstandard2.1\Microsoft.EntityFrameworkCore.Abstractions.dll
-C:\Users\vinove\.nuget\packages\microsoft.entityframeworkcore\5.0.4\lib\netstandard2.1\Microsoft.EntityFrameworkCore.dll
-C:\Users\vinove\.nuget\packages\microsoft.entityframeworkcore.relational\5.0.4\lib\netstandard2.1\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Users\vinove\.nuget\packages\microsoft.entityframeworkcore.sqlite.core\5.0.4\lib\netstandard2.1\Microsoft.EntityFrameworkCore.Sqlite.dll
-C:\Users\vinove\.nuget\packages\system.windows.interactivity.wpf\2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll
-C:\Users\vinove\.nuget\packages\microsoft.extensions.caching.abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll
-C:\Users\vinove\.nuget\packages\microsoft.extensions.caching.memory\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll
-C:\Users\vinove\.nuget\packages\microsoft.extensions.configuration.abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll
-C:\Users\vinove\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\vinove\.nuget\packages\microsoft.extensions.dependencyinjection\5.0.1\lib\net5.0\Microsoft.Extensions.DependencyInjection.dll
-C:\Users\vinove\.nuget\packages\microsoft.extensions.dependencymodel\5.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyModel.dll
-C:\Users\vinove\.nuget\packages\microsoft.extensions.logging.abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Users\vinove\.nuget\packages\microsoft.extensions.logging\5.0.0\lib\netstandard2.1\Microsoft.Extensions.Logging.dll
-C:\Users\vinove\.nuget\packages\microsoft.extensions.options\5.0.0\lib\net5.0\Microsoft.Extensions.Options.dll
-C:\Users\vinove\.nuget\packages\microsoft.extensions.primitives\5.0.0\lib\netcoreapp3.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Vinove\.nuget\packages\microsoft.data.sqlite.core\5.0.4\lib\netstandard2.0\Microsoft.Data.Sqlite.dll
+C:\Users\Vinove\.nuget\packages\microsoft.dotnet.platformabstractions\3.1.6\lib\netstandard2.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Vinove\.nuget\packages\microsoft.entityframeworkcore.abstractions\5.0.4\lib\netstandard2.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Vinove\.nuget\packages\microsoft.entityframeworkcore\5.0.4\lib\netstandard2.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\Vinove\.nuget\packages\microsoft.entityframeworkcore.relational\5.0.4\lib\netstandard2.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Vinove\.nuget\packages\microsoft.entityframeworkcore.sqlite.core\5.0.4\lib\netstandard2.1\Microsoft.EntityFrameworkCore.Sqlite.dll
+C:\Users\Vinove\.nuget\packages\system.windows.interactivity.wpf\2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll
+C:\Users\Vinove\.nuget\packages\microsoft.extensions.caching.abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Vinove\.nuget\packages\microsoft.extensions.caching.memory\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Vinove\.nuget\packages\microsoft.extensions.configuration.abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Vinove\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Vinove\.nuget\packages\microsoft.extensions.dependencyinjection\5.0.1\lib\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Vinove\.nuget\packages\microsoft.extensions.dependencymodel\5.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Vinove\.nuget\packages\microsoft.extensions.logging.abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Vinove\.nuget\packages\microsoft.extensions.logging\5.0.0\lib\netstandard2.1\Microsoft.Extensions.Logging.dll
+C:\Users\Vinove\.nuget\packages\microsoft.extensions.options\5.0.0\lib\net5.0\Microsoft.Extensions.Options.dll
+C:\Users\Vinove\.nuget\packages\microsoft.extensions.primitives\5.0.0\lib\netcoreapp3.0\Microsoft.Extensions.Primitives.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\Microsoft.VisualBasic.Core.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\Microsoft.VisualBasic.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\Microsoft.Win32.Primitives.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\mscorlib.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\netstandard.dll
-C:\Users\vinove\.nuget\packages\newtonsoft.json\12.0.3\lib\netstandard2.0\Newtonsoft.Json.dll
-C:\Users\vinove\.nuget\packages\reactiveui\12.1.1\lib\netcoreapp3.1\ReactiveUI.dll
-C:\Users\vinove\.nuget\packages\skiasharp\2.80.2\lib\netstandard2.0\SkiaSharp.dll
-C:\Users\vinove\.nuget\packages\splat\9.6.1\lib\netstandard2.0\Splat.dll
-C:\Users\vinove\.nuget\packages\sqlitepclraw.bundle_e_sqlite3\2.0.4\lib\netcoreapp3.1\SQLitePCLRaw.batteries_v2.dll
-C:\Users\vinove\.nuget\packages\sqlitepclraw.core\2.0.4\lib\netstandard2.0\SQLitePCLRaw.core.dll
-C:\Users\vinove\.nuget\packages\sqlitepclraw.bundle_e_sqlite3\2.0.4\lib\netcoreapp3.1\SQLitePCLRaw.nativelibrary.dll
-C:\Users\vinove\.nuget\packages\sqlitepclraw.provider.dynamic_cdecl\2.0.4\lib\netstandard2.0\SQLitePCLRaw.provider.dynamic_cdecl.dll
+C:\Users\Vinove\.nuget\packages\newtonsoft.json\12.0.3\lib\netstandard2.0\Newtonsoft.Json.dll
+C:\Users\Vinove\.nuget\packages\reactiveui\12.1.1\lib\netcoreapp3.1\ReactiveUI.dll
+C:\Users\Vinove\.nuget\packages\skiasharp\2.80.2\lib\netstandard2.0\SkiaSharp.dll
+C:\Users\Vinove\.nuget\packages\splat\9.6.1\lib\netstandard2.0\Splat.dll
+C:\Users\Vinove\.nuget\packages\sqlitepclraw.bundle_e_sqlite3\2.0.4\lib\netcoreapp3.1\SQLitePCLRaw.batteries_v2.dll
+C:\Users\Vinove\.nuget\packages\sqlitepclraw.core\2.0.4\lib\netstandard2.0\SQLitePCLRaw.core.dll
+C:\Users\Vinove\.nuget\packages\sqlitepclraw.bundle_e_sqlite3\2.0.4\lib\netcoreapp3.1\SQLitePCLRaw.nativelibrary.dll
+C:\Users\Vinove\.nuget\packages\sqlitepclraw.provider.dynamic_cdecl\2.0.4\lib\netstandard2.0\SQLitePCLRaw.provider.dynamic_cdecl.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.AppContext.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Buffers.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Collections.Concurrent.dll
@@ -80,7 +80,7 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.ComponentModel.EventBasedAsync.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.ComponentModel.Primitives.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.ComponentModel.TypeConverter.dll
-C:\Users\vinove\.nuget\packages\system.configuration.configurationmanager\5.0.0\ref\netstandard2.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Vinove\.nuget\packages\system.configuration.configurationmanager\5.0.0\ref\netstandard2.0\System.Configuration.ConfigurationManager.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Configuration.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Console.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Core.dll
@@ -89,7 +89,7 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Data.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Diagnostics.Contracts.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Diagnostics.Debug.dll
-C:\Users\vinove\.nuget\packages\system.diagnostics.diagnosticsource\5.0.1\lib\net5.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Vinove\.nuget\packages\system.diagnostics.diagnosticsource\5.0.1\lib\net5.0\System.Diagnostics.DiagnosticSource.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Diagnostics.FileVersionInfo.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Diagnostics.Process.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Diagnostics.StackTrace.dll
@@ -98,7 +98,7 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Diagnostics.TraceSource.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Diagnostics.Tracing.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.dll
-C:\Users\vinove\.nuget\packages\system.drawing.common\5.0.0\ref\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Vinove\.nuget\packages\system.drawing.common\5.0.0\ref\netcoreapp3.0\System.Drawing.Common.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Drawing.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Drawing.Primitives.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Dynamic.Runtime.dll
@@ -145,7 +145,7 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Numerics.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Numerics.Vectors.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.ObjectModel.dll
-C:\Users\vinove\.nuget\packages\system.reactive\5.0.0\lib\net5.0\System.Reactive.dll
+C:\Users\Vinove\.nuget\packages\system.reactive\5.0.0\lib\net5.0\System.Reactive.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Reflection.DispatchProxy.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Reflection.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Reflection.Emit.dll
@@ -173,7 +173,7 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Runtime.Serialization.Json.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Runtime.Serialization.Primitives.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Runtime.Serialization.Xml.dll
-C:\Users\vinove\.nuget\packages\system.security.accesscontrol\5.0.0\ref\netstandard2.0\System.Security.AccessControl.dll
+C:\Users\Vinove\.nuget\packages\system.security.accesscontrol\5.0.0\ref\netstandard2.0\System.Security.AccessControl.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Security.Claims.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Security.Cryptography.Algorithms.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Security.Cryptography.Csp.dll
@@ -181,9 +181,9 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Security.Cryptography.Primitives.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Security.Cryptography.X509Certificates.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Security.dll
-C:\Users\vinove\.nuget\packages\system.security.permissions\5.0.0\ref\net5.0\System.Security.Permissions.dll
+C:\Users\Vinove\.nuget\packages\system.security.permissions\5.0.0\ref\net5.0\System.Security.Permissions.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Security.Principal.dll
-C:\Users\vinove\.nuget\packages\system.security.principal.windows\5.0.0\ref\netcoreapp3.0\System.Security.Principal.Windows.dll
+C:\Users\Vinove\.nuget\packages\system.security.principal.windows\5.0.0\ref\netcoreapp3.0\System.Security.Principal.Windows.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Security.SecureString.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.ServiceModel.Web.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.ServiceProcess.dll
@@ -209,8 +209,8 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Web.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Web.HttpUtility.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Windows.dll
-C:\Users\vinove\.nuget\packages\system.windows.extensions\5.0.0\ref\netcoreapp3.0\System.Windows.Extensions.dll
-C:\Users\vinove\.nuget\packages\system.windows.interactivity.wpf\2.0.20525\lib\net40\System.Windows.Interactivity.dll
+C:\Users\Vinove\.nuget\packages\system.windows.extensions\5.0.0\ref\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\Vinove\.nuget\packages\system.windows.interactivity.wpf\2.0.20525\lib\net40\System.Windows.Interactivity.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Xml.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Xml.Linq.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Xml.ReaderWriter.dll
@@ -220,5 +220,5 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Xml.XmlSerializer.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Xml.XPath.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\System.Xml.XPath.XDocument.dll
-C:\Users\vinove\.nuget\packages\tmds.dbus\0.9.0\lib\netstandard2.0\Tmds.DBus.dll
+C:\Users\Vinove\.nuget\packages\tmds.dbus\0.9.0\lib\netstandard2.0\Tmds.DBus.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\WindowsBase.dll

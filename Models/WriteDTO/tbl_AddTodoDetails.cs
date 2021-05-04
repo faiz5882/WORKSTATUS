@@ -10,7 +10,7 @@ namespace WorkStatus.Models.WriteDTO
     public class tbl_AddTodoDetails
     {
         [DbColumn(IsIdentity = true, IsPrimary = true)]
-        public long id { get; set; }
+        public int id { get; set; }
         [DbColumn]
         public string ToDoName { get; set; }
         [DbColumn]

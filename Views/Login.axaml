@@ -7,7 +7,7 @@
         x:Class="WorkStatus.Views.Login"
 		WindowStartupLocation="CenterScreen"
 		CanResize="False"		
-		Icon="/Assets/avalonia-logo.ico"
+		Icon="/Assets/LogoSmall.ico"
         Title="Login">
 	<Window.Styles>
 		<Style Selector="Button.LinkButton">
