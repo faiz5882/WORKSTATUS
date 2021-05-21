@@ -10,6 +10,23 @@ namespace WorkStatus.Utility
 {
    public static class ExtensionMethod
     {
+
+        public static string GetShortDescription(this string s, int i)
+        {
+            if (s.Length <= i)
+            {
+                return s;
+            }
+            else
+            {
+                return s.Substring(0, i) + "...";
+            }
+        }
+
+        //public string ShortDescription
+        //{
+        //    get { return this.Description.Take(25); }
+        //}
         public static bool SessionManager(string session)
         {
             if (string.IsNullOrEmpty(session))

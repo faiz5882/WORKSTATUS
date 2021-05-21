@@ -401,6 +401,7 @@ C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\bin\Debug\net5.0\A
 C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\bin\Debug\net5.0\Avalonia.X11.dll
 C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\bin\Debug\net5.0\DynamicData.dll
 C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\bin\Debug\net5.0\HarfBuzzSharp.dll
+C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\bin\Debug\net5.0\Indieteur.GlobalHooks.dll
 C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\bin\Debug\net5.0\JetBrains.Annotations.dll
 C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\bin\Debug\net5.0\MaterialDesignColors.dll
 C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\bin\Debug\net5.0\MaterialDesignThemes.Wpf.dll

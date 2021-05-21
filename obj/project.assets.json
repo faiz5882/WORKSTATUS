@@ -292,6 +292,15 @@
           }
         }
       },
+      "Indieteur.GlobalHooks/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/Indieteur.GlobalHooks.dll": {}
+        },
+        "runtime": {
+          "lib/Indieteur.GlobalHooks.dll": {}
+        }
+      },
       "JetBrains.Annotations/10.3.0": {
         "type": "package",
         "dependencies": {
@@ -2015,6 +2024,19 @@
         "runtimes/linux-arm64/native/libHarfBuzzSharp.so",
         "runtimes/linux-musl-x64/native/libHarfBuzzSharp.so",
         "runtimes/linux-x64/native/libHarfBuzzSharp.so"
+      ]
+    },
+    "Indieteur.GlobalHooks/1.0.0": {
+      "sha512": "bFmNnR7h5i4Rz6twBZdHLigiP3pFei5Jf4DNuwkNTHBSUTRBkkkVfZrVlv60L/6qOX/9YgbHIYy6CO8IM8v6rA==",
+      "type": "package",
+      "path": "indieteur.globalhooks/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "indieteur.globalhooks.1.0.0.nupkg.sha512",
+        "indieteur.globalhooks.nuspec",
+        "lib/Indieteur.GlobalHooks.dll",
+        "readme.txt"
       ]
     },
     "JetBrains.Annotations/10.3.0": {
@@ -5345,6 +5367,7 @@
       "Avalonia.Desktop >= 0.10.0",
       "Avalonia.Diagnostics >= 0.10.0",
       "Avalonia.ReactiveUI >= 0.10.0",
+      "Indieteur.GlobalHooks >= 1.0.0",
       "MaterialDesignThemes >= 4.0.0",
       "MessageBox.Avalonia >= 1.1.1",
       "Microsoft.EntityFrameworkCore >= 5.0.4",
@@ -5415,6 +5438,10 @@
             "target": "Package",
             "version": "[0.10.0, )"
           },
+          "Indieteur.GlobalHooks": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "MaterialDesignThemes": {
             "target": "Package",
             "version": "[4.0.0, )"
@@ -5464,6 +5491,16 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Indieteur.GlobalHooks 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Indieteur.GlobalHooks",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

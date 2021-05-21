@@ -83,13 +83,13 @@ namespace WorkStatus.Utility
                     Start = Common.Storage.SlotTimerStartTime,
                     End = "",
                     Hour = 0,
-                    keyboardActivity = null,
-                    MouseActivity = null,
-                    AverageActivity = null,
+                    keyboardActivity = Common.Storage.KeyBoradEventCount.ToStrVal(),
+                    MouseActivity = Common.Storage.MouseEventCount.ToStrVal(),
+                    AverageActivity = Common.Storage.AverageEventCount.ToStrVal(),
                     Id = 0,
                     Latitude=null,
                     Longitude=null,
-                    ScreenActivity=null,
+                    ScreenActivity=Common.Storage.ScreenURl,
                     CreatedDate = oCurrentDate.ToString("dd/MM/yyyy")
                 };
                 BaseService<tbl_KeyMouseTrack_Slot> gg = new BaseService<tbl_KeyMouseTrack_Slot>();
@@ -295,6 +295,25 @@ namespace WorkStatus.Utility
 
                 throw new Exception(ex.Message);
             }
+        }
+
+        public long InsertNotetoDB(tbl_AddNotes tbl_AddNote)
+        {
+            BaseService<tbl_AddNotes> gg = new BaseService<tbl_AddNotes>();
+            long data = gg.Add(tbl_AddNote);
+            return data;
+
+        }
+        public void UpdateNotetoDB(long Id)
+        {
+            BaseService<tbl_AddNotes> gg = new BaseService<tbl_AddNotes>();
+            gg.UpdateNotes(Id);
+        }
+
+        public List<tbl_AddNotes> GetNotesList()
+        {
+            BaseService<tbl_AddNotes> service = new BaseService<tbl_AddNotes>();
+            return new List<tbl_AddNotes>(service.GetAllOfflineNotes());
         }
     }
 

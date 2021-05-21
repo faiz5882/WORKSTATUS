@@ -27,9 +27,9 @@ namespace WorkStatus.Configuration
         }
         #endregion
         #region OrganisationDetails
-        public string UserOrganizationlist(string BaseUrl)
+        public string UserOrganizationlist(string BaseUrl, string Email)
         {
-            return BaseUrl;
+            return string.Format("{0}?email={1}", BaseUrl, Email);
         }
 
         public string UserProjectlistByOrganizationID(string BaseUrl)
@@ -47,6 +47,13 @@ namespace WorkStatus.Configuration
         {
             return BaseUrl;
         }
+        #endregion
+
+        #region AddNotes
+        //public string ActivityLogApi(string BaseUrl)
+        //{
+        //    return BaseUrl;
+        //}
         #endregion
     }
 }

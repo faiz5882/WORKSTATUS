@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "iBbRQooxaMSwKOW2AdHUVUh65NaRC1x9ovc45gFAKQY7LawcMtnOuT9L9uz3PwI1jXewVj+0ZcaEifIfxVUmrw==",
+  "dgSpecHash": "txIJQU3acgqQ1MMcekKl5WXQxjEbMtC961F6qI1vwUL72I8ksQU5xCnKw4VxfYG4MGMJdJ8hQvfuiNbI04QSdw==",
   "success": true,
   "projectFilePath": "C:\\Project\\Inhouse\\WorkStatus_270421201\\WorkStatus\\WorkStatus\\WorkStatus.csproj",
   "expectedPackageFiles": [
@@ -19,6 +19,7 @@
     "C:\\Users\\Vinove\\.nuget\\packages\\dynamicdata\\6.17.14\\dynamicdata.6.17.14.nupkg.sha512",
     "C:\\Users\\Vinove\\.nuget\\packages\\harfbuzzsharp\\2.6.1.7\\harfbuzzsharp.2.6.1.7.nupkg.sha512",
     "C:\\Users\\Vinove\\.nuget\\packages\\harfbuzzsharp.nativeassets.linux\\2.6.1.7\\harfbuzzsharp.nativeassets.linux.2.6.1.7.nupkg.sha512",
+    "C:\\Users\\Vinove\\.nuget\\packages\\indieteur.globalhooks\\1.0.0\\indieteur.globalhooks.1.0.0.nupkg.sha512",
     "C:\\Users\\Vinove\\.nuget\\packages\\jetbrains.annotations\\10.3.0\\jetbrains.annotations.10.3.0.nupkg.sha512",
     "C:\\Users\\Vinove\\.nuget\\packages\\materialdesigncolors\\2.0.0\\materialdesigncolors.2.0.0.nupkg.sha512",
     "C:\\Users\\Vinove\\.nuget\\packages\\materialdesignthemes\\4.0.0\\materialdesignthemes.4.0.0.nupkg.sha512",
@@ -105,6 +106,16 @@
     "C:\\Users\\Vinove\\.nuget\\packages\\tmds.dbus\\0.9.0\\tmds.dbus.0.9.0.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Indieteur.GlobalHooks 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Indieteur.GlobalHooks",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

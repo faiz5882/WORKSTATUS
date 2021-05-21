@@ -12,6 +12,7 @@
           "Avalonia.Desktop": "0.10.0",
           "Avalonia.Diagnostics": "0.10.0",
           "Avalonia.ReactiveUI": "0.10.0",
+          "Indieteur.GlobalHooks": "1.0.0",
           "MaterialDesignThemes": "4.0.0",
           "MessageBox.Avalonia": "1.1.1",
           "Microsoft.EntityFrameworkCore": "5.0.4",
@@ -332,6 +333,14 @@
             "rid": "linux-x64",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Indieteur.GlobalHooks/1.0.0": {
+        "runtime": {
+          "lib/Indieteur.GlobalHooks.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -1472,6 +1481,13 @@
       "sha512": "sha512-Aef8YgAqJ5dW0CNWCtaPNKHdJlhl+w83LmqDpaan9NmmKhG/px6Zta06iu0R2n4RrBHCRDly/Q/6kc0xQOfT9A==",
       "path": "harfbuzzsharp.nativeassets.linux/2.6.1.7",
       "hashPath": "harfbuzzsharp.nativeassets.linux.2.6.1.7.nupkg.sha512"
+    },
+    "Indieteur.GlobalHooks/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bFmNnR7h5i4Rz6twBZdHLigiP3pFei5Jf4DNuwkNTHBSUTRBkkkVfZrVlv60L/6qOX/9YgbHIYy6CO8IM8v6rA==",
+      "path": "indieteur.globalhooks/1.0.0",
+      "hashPath": "indieteur.globalhooks.1.0.0.nupkg.sha512"
     },
     "JetBrains.Annotations/10.3.0": {
       "type": "package",

@@ -15,5 +15,8 @@ namespace WorkStatus.Interfaces
         ToDoListResponseModel GetUserToDoListAsync(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, ToDoListRequestModel _objRequest);
         Task<ActivitySyncTimerResponseModel> GetActivitysynTimerDataAsync(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, ActivitySyncTimerRequestModel _objRequest);
         Task<CommonResponseModel> ActivityLogAsync(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List<ActivityLogRequestEntity> _objRequest);
+
+        Task<bool> AddNotesAPI(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List<tbl_AddNotes> _objRequest);
+        ChangeOrganizationResponseModel ChangeOrganizationAPI(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, ChangeOrganizationRequestModel _objRequest);
     }
 }

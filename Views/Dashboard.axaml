@@ -5,9 +5,14 @@
 			  xmlns:etc="http://schemas.microsoft.com/expression/2010/interactivity"
 				xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"
 				xmlns:user="clr-namespace:WorkStatus.Views;assembly=WorkStatus"
+				 xmlns:local="clr-namespace:WorkStatus.Utility"
+		
         mc:Ignorable="d" Width="1000" Height="635"	
 		Icon="avares://WorkStatus/Assets/LogoSmall.ico"
 		x:Class="WorkStatus.Views.Dashboard" CanResize="False" Title="Dashboard">
+	<Window.Resources>
+		<local:SubstringConverter x:Key="valueconverter"></local:SubstringConverter>	
+	</Window.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -61,12 +66,42 @@
 										 HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding HeaderTime}"/>
 				</Border>
 
-				<Button Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Margin="10,0,0,0" Width="40" Height="40" Background="Transparent" Foreground="Transparent" Command="{Binding CommandStop}">
-					<Panel>
-						<Image  Width="40" Height="40" Source="/Assets/Group_9.png"/>
-					</Panel>
-
-				</Button>
+				<StackPanel Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Margin="10,0,0,0">
+          <ToggleButton Name="addnotebtn">
+            <ToggleButton.Template>
+              <ControlTemplate TargetType="ToggleButton">
+               <Image  Width="40" Height="40" IsEnabled="{Binding IsAddNoteButtonEnabled}"  Source="/Assets/Group_9.png"/>
+              </ControlTemplate>
+            </ToggleButton.Template>
+          </ToggleButton>
+          <Popup IsOpen="{Binding IsChecked, ElementName=addnotebtn}" StaysOpen="False" Margin="30"
+                 PlacementMode="Right" Height="250" Width="340" >
+            <Border BoxShadow="0 0 1 gray" BorderThickness="2" Height="250" Width="340"
+                    Background="#ebedee" CornerRadius="8,8,8,8" Padding="5">
+              <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="1*"/>
+                  <RowDefinition Height="3*"/>
+                  <RowDefinition Height="1.5*"/>
+                  <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1*"/>
+                  <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+             
+              <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,20,0,5" Text="Add Note" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
+												Foreground="#212529" FontWeight="Bold" FontStyle="Normal" FontSize="16"
+                         LineHeight="19"/>
+              <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Notes,Mode=TwoWay}" Height="96" Width="290" Background="White"
+											 FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
+											 BorderThickness="1" BorderBrush="LightGray" Watermark="Add Work Note" AcceptsReturn="True" TextWrapping="Wrap" FontSize="15" Padding="10"/>
+              <Button  x:Name="btnAddNote" Grid.Row="2" Grid.Column="0"  Margin="20,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="Add"  FontSize="16" FontWeight="SemiLight" Background="#155fcc" Foreground="White" Width="100" Height="30"/>
+              <Button x:Name="btnCancel" Grid.Row="2" Grid.Column="1"  Width="100" Height="30" FontSize="16" Foreground="Black" Background="#dfe1df" Margin="-20,0,0,0" Content="Cancel" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+              </Grid>
+             </Border>
+          </Popup>
+				</StackPanel>
 			</Grid>
 			<Grid Grid.Row="3" HorizontalAlignment="Center">
 				<Grid.RowDefinitions>
@@ -116,7 +151,7 @@
 					Orientation="Horizontal">
 						<Image Source="/Assets/search.png" Opacity="0.5" Width="25" Height="25" HorizontalAlignment="Left" />
 						<AutoCompleteBox x:Name="projectlist" BorderBrush="Transparent" Watermark="Search" FilterMode="None"
-						Height="25" FontSize="14" Width="281" HorizontalAlignment="Stretch"
+						Height="25" FontSize="14" Width="281" HorizontalAlignment="Stretch" MinimumPrefixLength="0"
 						VerticalAlignment="Stretch"/>
 					</StackPanel>
 				</Border>
@@ -184,9 +219,9 @@
 				</StackPanel>
 			</Grid>
 			<Grid Grid.Row="8" Background="#E8F3FF">
-				<ListBox x:Name="LayoutRoot" Background="White"		
-						 AutoScrollToSelectedItem="True"
-								 SelectionChanged="Lstbox_SelectionChanged" SelectionMode="Single"						
+				<ListBox x:Name="LayoutRoot" Background="White"								 
+						 AutoScrollToSelectedItem="True"						 
+								 SelectionChanged="Lstbox_SelectionChanged" 						
 							   ScrollViewer.HorizontalScrollBarVisibility="Auto"
 							   Items="{Binding GetProjectsList,Mode=TwoWay}">
 					<ListBox.ItemTemplate >
@@ -239,7 +274,7 @@
 											   FontSize="16"></TextBlock>
 
 									<TextBlock  Grid.Row="0" Grid.Column="2"
-											Text="{Binding ProjectTime}"
+											Text="{Binding ProjectTime}" 
 												 FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
 										   HorizontalAlignment="Right"
 										   VerticalAlignment="Center"></TextBlock>
@@ -360,7 +395,8 @@
 					<StackPanel Margin="1" Orientation="Horizontal">
 						<Image Source="/Assets/search.png" Opacity="0.5" Width="25" Height="25" HorizontalAlignment="Left" />
 						<AutoCompleteBox x:Name="SearchToDo" BorderBrush="Transparent" Watermark="Search" FilterMode="None"
-						Height="25" FontSize="14" Width="275" HorizontalAlignment="Stretch"
+										 MinimumPrefixLength="0" Height="25" FontSize="14"
+										 Width="275" HorizontalAlignment="Stretch" 
 						VerticalAlignment="Stretch"/>
 
 
@@ -470,7 +506,7 @@
 											<RowDefinition Height="*"></RowDefinition>
 										</Grid.RowDefinitions>
 										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="230"></ColumnDefinition>
+											<ColumnDefinition Width="Auto"></ColumnDefinition>
 											<ColumnDefinition Width="Auto"></ColumnDefinition>
 											<ColumnDefinition Width="Auto"></ColumnDefinition>
 										</Grid.ColumnDefinitions>
@@ -503,6 +539,7 @@
 									FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
 									HorizontalAlignment="Center"
 									VerticalAlignment="Center"></TextBlock>
+									<!--Converter={StaticResource  valueconverter}  hide second from projecttime and todo time-->
 									
 									<TextBlock Grid.Row="0" Grid.Column="3"
 									Text="{Binding EndDate}" Margin="15,0,0,0"

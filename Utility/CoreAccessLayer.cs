@@ -98,6 +98,25 @@ namespace WorkStatus.Utility
             string qry = "DELETE FROM tbl_Timer where Sno=" + Sno;
             ExecuteGet(qry.ToString());
         }
+       
+        public void UpdateNotes(long Id)
+        {
+            try
+            {
+
+                string qry = "update tbl_AddNotes set  IsOffline = 1  where Id =" + "" + Id;
+                Execute(qry.ToString());
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        public IList<T> GetAllOfflineNotes()
+        {
+            T entity = new T();
+            return ExecuteGet(string.Format("SELECT * FROM tbl_AddNotes where IsOffline = 0"));
+        }
         public long Add(T entity)
         {
 
@@ -253,6 +272,17 @@ namespace WorkStatus.Utility
             }
         }
 
+        
+        public T CheckSlotExistNotFromDb(string Start,string CurrentDate)
+        {
+            T entity = new T();
+            IList<T> entities = new List<T>();
+            string qry = "Select * from tbl_KeyMouseTrack_Slot where Start=" + "'" + Start + "'" + " and CreatedDate=" + "" + CurrentDate + "" + "";
+            var _entities = ExecuteGet(qry.ToString());
+            if (_entities != null && _entities.Count > 0)
+                entity = _entities[0];
+            return entity;
+        }
         public void UpdateToDoSyncTimeToLocalDB(string ToDoTimeConsumed, long ToDoId,string ProjectId)
         {
             try
@@ -328,7 +358,7 @@ namespace WorkStatus.Utility
         {
 
 
-            string qry = "update tbl_ServerTodoDetails set IsOffline=true  where CurrentProjectId=" + "'" + ProjectId + "'" + "and CurrentOrganisationId=" + "'" + OrganizationId + "'" + " and Id=" + "" + todoId + "" + "";
+            string qry = "update tbl_ServerTodoDetails set IsOffline=false  where CurrentProjectId=" + "'" + ProjectId + "'" + "and CurrentOrganisationId=" + "'" + OrganizationId + "'" + " and Id=" + "" + todoId + "" + "";
             Execute(qry.ToString());
         }
         public T Gettbl_Temp_SyncTimerByIDs(int ProjectId, int OrganizationId, string CurrentDate,int todoId)

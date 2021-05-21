@@ -22,12 +22,23 @@ namespace WorkStatus.APIServices
         {
             try
             {
+                var request = new HttpRequestMessage()
+                {
+                    RequestUri = new Uri(uri),
+                    Method = HttpMethod.Get,
 
+                };
                 if (IsHeaderRequired)
                 {
-                    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", objHeaderModel.SessionID);
+                    request.Headers.Add("Authorization", "Bearer " + objHeaderModel.SessionID);
+                    request.Headers.Add("OrgID", Common.Storage.ServerOrg_Id);
+                    request.Headers.Add("SDToken", Common.Storage.ServerSd_Token);
+                    // _client.DefaultRequestHeaders.Add("Authorization",objHeaderModel.SessionID);
+                    // _client.DefaultRequestHeaders.Add("OrgID", Common.Storage.ServerOrg_Id);
+                    // _client.DefaultRequestHeaders.Add("SDToken", Common.Storage.ServerSd_Token);
+                    // _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", objHeaderModel.SessionID);
                 }
-                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpResponseMessage response = await _client.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
                     var responseContent = response.Content;

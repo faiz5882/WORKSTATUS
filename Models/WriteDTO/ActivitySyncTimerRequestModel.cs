@@ -9,5 +9,6 @@ namespace WorkStatus.Models.WriteDTO
     public class ActivitySyncTimerRequestModel
     {
         public string? date { get; set; }
+        public string tracker { get; set; }
     }
 }

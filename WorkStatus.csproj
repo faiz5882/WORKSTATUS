@@ -77,6 +77,7 @@
     <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
+    <PackageReference Include="Indieteur.GlobalHooks" Version="1.0.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
     <PackageReference Include="MessageBox.Avalonia" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />

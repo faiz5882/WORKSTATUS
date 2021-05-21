@@ -16,20 +16,20 @@ namespace WorkStatus.Common
         public static int timeIntervel { get; set; }
         public static bool checkTodoApiCallOrNot { get; set; }
         public static string ProjectStartTime { get; set; }
-        public static string TempHeaderTime { get; set; }
-
         
         public static bool IsProjectRuning { get; set; }
         public static bool IsToDoRuning { get; set; }
-
-
+      
         public static string SlotTimerStartTime { get; set; }
+        public static string SlotTimerPreviousEndTime { get; set; }
+        public static string SlotTimerPreviousStartTime { get; set; }
+
+        public static bool SlotRunning { get; set; }
+
         public static long  SlotID { get; set; }
         public static long tblTimerSno { get; set; }
         public static long tblProjectSno { get; set; }
         public static long temp_SyncTimerSno { get; set; }
-
-
 
 
         public static string CurrentOrganisationName { get; set; }
@@ -46,7 +46,7 @@ namespace WorkStatus.Common
             {
                 string v = Assembly.GetEntryAssembly().GetName().Version.ToString();
                 string[] s = v.Split(".");
-                version = "Version " + s[0] + "." + s[1] + " (895)";
+                version = "Version " + s[0] + "." + s[1] + " (898)";
             }
             catch (Exception ex)
             {
@@ -54,6 +54,17 @@ namespace WorkStatus.Common
             }
             return version;
         }
-        
+        public static string ServerOrg_Id { get; set; }
+        public static string ServerSd_Token { get; set; }
+        public static string ScreenURl { get; set; }
+        public static string LoginId { get; set; }
+
+        public static int ActivityIntervel { get; set; }
+
+        public static int KeyBoradEventCount { get; set; }
+        public static int MouseEventCount { get; set; }
+        public static int AverageEventCount { get; set; }
+
+        public static bool IsScreenShotCapture { get; set; }
     }
 }

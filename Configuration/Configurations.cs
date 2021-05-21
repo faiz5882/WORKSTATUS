@@ -22,7 +22,7 @@ namespace WorkStatus.Configuration
         {
             get
             {
-                return System.Configuration.ConfigurationSettings.AppSettings["ApiUrl"];
+                return System.Configuration.ConfigurationSettings.AppSettings["ApiLiveUrl"];
             }
         }
         #region Accounts APIEndPoints
@@ -53,6 +53,13 @@ namespace WorkStatus.Configuration
             }
         }
 
+        public static string ChangeOrganizationApiConstant
+        {
+            get
+            {
+                return "change_organization";
+            }
+        }
         public static string UserProjectlistByOrganizationIDApiConstant
         {
             get
@@ -85,5 +92,26 @@ namespace WorkStatus.Configuration
             }
         }
         #endregion
+
+        #region AddNotes
+        public static string AddNotesApiConstant
+        {
+            get
+            {
+                return "notes/add";
+            }
+        }
+        #endregion
+        #region addScreenshot
+        public static string SendScreenshotsApiConstant
+        {
+            get
+            {
+                return "interval/addScreenshot";
+            }
+        }
+        #endregion
+
+        
     }
 }

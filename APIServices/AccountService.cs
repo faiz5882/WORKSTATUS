@@ -22,6 +22,10 @@ namespace WorkStatus.APIServices
         public async Task<LoginResponse> LoginAsync(string uri, LoginRequestDTOEntity _objRequest)
         {
             LoginResponse objLoginResponse;
+            try
+            {
+
+            
             string strJson = JsonConvert.SerializeObject(_objRequest);
             HttpResponseMessage response = null;
             using (var stringContent = new StringContent(strJson, System.Text.Encoding.UTF8, "application/json"))
@@ -44,6 +48,13 @@ namespace WorkStatus.APIServices
                     return objLoginResponse;
                 }
             }
+            }
+            catch (Exception)
+            {
+                objLoginResponse = new LoginResponse();
+              //  throw;
+            }
+            return objLoginResponse;
         }
         public async Task<ForgetPasswordResponseModel> ForgotPasswordAsync(string uri, ForgetPasswordReqeuestModel _objRequest)
         {

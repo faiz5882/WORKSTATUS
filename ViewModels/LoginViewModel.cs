@@ -56,11 +56,13 @@ namespace WorkStatus.ViewModels
             StackPanelLogo = ThemeManager.StackPanelLogoColor;
             TxtWelcomeColor = ThemeManager.TxtWelcomeColor;
             //BuildConnectionString();
-          
-           // email = "testuser2@mailinator.com";
-           // password = "Testing@123";
+
+             //email = "testsonam@yopmail.com";
+           // password = "Sonam@123";
             isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
             isMac = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
+          
+            
         }
 
         #endregion
@@ -138,6 +140,10 @@ namespace WorkStatus.ViewModels
                         BaseService<tbl_UserDetails> dbService = new BaseService<tbl_UserDetails>();
                         dbService.Delete(new tbl_UserDetails());
                         Common.Storage.TokenId = _loginResponse.Response.Data.Token;
+                        Common.Storage.ServerOrg_Id = _loginResponse.Response.Data.Org_Id;
+                        Common.Storage.ServerSd_Token = _loginResponse.Response.Data.Sd_Token;
+                        Common.Storage.LoginId = _loginResponse.Response.Data.Email;
+
                         user = new tbl_UserDetails()
                         {
                             UserId = _loginResponse.Response.Data.Id,
@@ -155,7 +161,7 @@ namespace WorkStatus.ViewModels
                             service2.Delete(new tbl_Temp_SyncTimer());
                             BaseService<tbl_TempSyncTimerTodoDetails> service3 = new BaseService<tbl_TempSyncTimerTodoDetails>();
                             service3.Delete(new tbl_TempSyncTimerTodoDetails());
-                            
+
                             ChangeDashBoardWindow();
                             //var dialog = new Dashboard();
                             //var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;

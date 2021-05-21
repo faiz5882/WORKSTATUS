@@ -36,6 +36,8 @@ namespace WorkStatus.Models.WriteDTO
         public int Invite_member_status { get; set; }
         public bool Is_organiztion { get; set; }
         public string Token { get; set; }
+        public string Org_Id { get; set; }
+        public string Sd_Token { get; set; }
 
     }
     public class LoginRequestDTOEntity
@@ -44,5 +46,7 @@ namespace WorkStatus.Models.WriteDTO
         public string password { get; set; }
         public string deviceType { get; set; }
         public string deviceId { get; set; }
+      
+
     }
 }

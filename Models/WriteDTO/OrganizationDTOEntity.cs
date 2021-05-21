@@ -9,5 +9,7 @@ namespace WorkStatus.Models.WriteDTO
   public class OrganizationDTOEntity
     {
         public string organization_id { get; set; }
+        public string unarchived { get; set; }
+
     }
 }

@@ -362,3 +362,4 @@ C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\obj\Release\net5.0
 C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\obj\Release\net5.0\ref\WorkStatus.dll
 C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\obj\Release\net5.0\WorkStatus.pdb
 C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\obj\Release\net5.0\WorkStatus.genruntimeconfig.cache
+C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\bin\Release\net5.0\Indieteur.GlobalHooks.dll
