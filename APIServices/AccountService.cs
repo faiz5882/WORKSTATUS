@@ -9,6 +9,7 @@ using WorkStatus.Interfaces;
 using WorkStatus.Models;
 using WorkStatus.Models.ReadDTO;
 using WorkStatus.Models.WriteDTO;
+using WorkStatus.Utility;
 
 namespace WorkStatus.APIServices
 {
@@ -49,8 +50,9 @@ namespace WorkStatus.APIServices
                 }
             }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogFile.ErrorLog(ex);
                 objLoginResponse = new LoginResponse();
               //  throw;
             }
@@ -58,7 +60,11 @@ namespace WorkStatus.APIServices
         }
         public async Task<ForgetPasswordResponseModel> ForgotPasswordAsync(string uri, ForgetPasswordReqeuestModel _objRequest)
         {
-            ForgetPasswordResponseModel objFPResponse;
+            ForgetPasswordResponseModel objFPResponse=new ForgetPasswordResponseModel();
+            try
+            {
+
+            
             string s = JsonConvert.SerializeObject(_objRequest);
             HttpResponseMessage response = null;
             using (var stringContent = new StringContent(s, System.Text.Encoding.UTF8, "application/json"))
@@ -80,6 +86,13 @@ namespace WorkStatus.APIServices
                     objFPResponse = JsonConvert.DeserializeObject<ForgetPasswordResponseModel>(ErrorResponse);
                     return objFPResponse;
                 }
+            }
+            }
+            catch (Exception ex)
+            {
+
+                LogFile.ErrorLog(ex);
+                return objFPResponse;
             }
         }
 

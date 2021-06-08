@@ -18,5 +18,7 @@ namespace WorkStatus.Common
             int Desc;
             return InternetGetConnectedState(out Desc, 0);
         }
+
+      
     }
 }

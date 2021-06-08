@@ -8,47 +8,61 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using WorkStatus.Configuration;
 using WorkStatus.Interfaces;
 using WorkStatus.Models;
 using WorkStatus.Models.ReadDTO;
 using WorkStatus.Models.WriteDTO;
+using WorkStatus.Utility;
 using WorkStatus.Views;
+using static WorkStatus.Models.ReadDTO.ScreenshotIntervalResponse;
 
 namespace WorkStatus.APIServices
 {
-    public class DashboardService : GetRequestHandler,IDashboard
+    public class DashboardService : GetRequestHandler, IDashboard
     {
         private HttpClient _client;
-        
+
         public DashboardService()
         {
             _client = new HttpClient();
         }
 
-        public  UserProjectlistByOrganizationIDResponse GetUserProjectlistByOrganizationIDAsync(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, OrganizationDTOEntity _objRequest)
+        public UserProjectlistByOrganizationIDResponse GetUserProjectlistByOrganizationIDAsync(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, OrganizationDTOEntity _objRequest)
         {
-            UserProjectlistByOrganizationIDResponse objFPResponse;
-            string strJson = JsonConvert.SerializeObject(_objRequest);           
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.ContentType = "application/json; charset=utf-8";
-            request.Method = "POST";
-            if (IsHeaderRequired)
+            UserProjectlistByOrganizationIDResponse objFPResponse=new UserProjectlistByOrganizationIDResponse();
+            try
             {
-                request.PreAuthenticate = true;
-                request.Headers.Add("Authorization", "Bearer " + objHeaderModel.SessionID);
-                request.Headers.Add("OrgID", Common.Storage.ServerOrg_Id);
-                request.Headers.Add("SDToken", Common.Storage.ServerSd_Token);
+
+
+                string strJson = JsonConvert.SerializeObject(_objRequest);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                request.ContentType = "application/json; charset=utf-8";
+                request.Method = "POST";
+                if (IsHeaderRequired)
+                {
+                    request.PreAuthenticate = true;
+                    request.Headers.Add("Authorization", "Bearer " + objHeaderModel.SessionID);
+                    request.Headers.Add("OrgID", Common.Storage.ServerOrg_Id);
+                    request.Headers.Add("SDToken", Common.Storage.ServerSd_Token);
+                }
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(strJson);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+                WebResponse response = request.GetResponse();
+                var streamReader = new StreamReader(response.GetResponseStream());
+                var result = streamReader.ReadToEnd();
+                objFPResponse = JsonConvert.DeserializeObject<UserProjectlistByOrganizationIDResponse>(result);
             }
-            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            catch (Exception ex)
             {
-                streamWriter.Write(strJson);
-                streamWriter.Flush();
-                streamWriter.Close();
+
+                LogFile.ErrorLog(ex);
+
             }
-            WebResponse response = request.GetResponse();
-            var streamReader = new StreamReader(response.GetResponseStream());
-            var result = streamReader.ReadToEnd();
-            objFPResponse = JsonConvert.DeserializeObject<UserProjectlistByOrganizationIDResponse>(result);
             return objFPResponse;
             //HttpResponseMessage response = null;
             //using (var stringContent = new StringContent(strJson, System.Text.Encoding.UTF8, "application/json"))
@@ -72,9 +86,9 @@ namespace WorkStatus.APIServices
             //    }
             //}
         }
-        public  ToDoListResponseModel GetUserToDoListAsync(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, ToDoListRequestModel _objRequest)
+        public ToDoListResponseModel GetUserToDoListAsync(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, ToDoListRequestModel _objRequest)
         {
-            ToDoListResponseModel objFPResponse=new ToDoListResponseModel();
+            ToDoListResponseModel objFPResponse = new ToDoListResponseModel();
             try
             {
                 string strJson = JsonConvert.SerializeObject(_objRequest);
@@ -125,7 +139,8 @@ namespace WorkStatus.APIServices
             }
             catch (Exception ex)
             {
-                MyMessageBox.Show(new Avalonia.Controls.Window(), ex.Message, "Error", MyMessageBox.MessageBoxButtons.Ok);
+                LogFile.ErrorLog(ex);
+                //  MyMessageBox.Show(new Avalonia.Controls.Window(), ex.Message, "Error", MyMessageBox.MessageBoxButtons.Ok);
             }
             return objFPResponse;
         }
@@ -157,14 +172,18 @@ namespace WorkStatus.APIServices
                 var streamReader = new StreamReader(response1.GetResponseStream());
                 var result = streamReader.ReadToEnd();
                 objFPResponse = JsonConvert.DeserializeObject<ActivitySyncTimerResponseModel>(result);
+               
                 return objFPResponse;
             }
             catch (Exception ex)
             {
-                MyMessageBox.Show(new Avalonia.Controls.Window(), ex.Message, "Error", MyMessageBox.MessageBoxButtons.Ok);
+                LogFile.ErrorLog(ex);
+                //MyMessageBox.Show(new Avalonia.Controls.Window(), ex.Message, "Error", MyMessageBox.MessageBoxButtons.Ok);
             }
             return objFPResponse;
         }
+
+        
         public async Task<CommonResponseModel> ActivityLogAsync(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, List<ActivityLogRequestEntity> _objRequest)
         {
             // System.Threading.Thread.Sleep(10000);
@@ -193,12 +212,13 @@ namespace WorkStatus.APIServices
                 WebResponse response1 = request.GetResponse();
                 var streamReader = new StreamReader(response1.GetResponseStream());
                 var result = streamReader.ReadToEnd();
-                objFPResponse = JsonConvert.DeserializeObject<CommonResponseModel>(result);
+                objFPResponse = JsonConvert.DeserializeObject<CommonResponseModel>(result);                
                 return objFPResponse;
             }
             catch (Exception ex)
             {
-                MyMessageBox.Show(new Avalonia.Controls.Window(), ex.Message, "Error", MyMessageBox.MessageBoxButtons.Ok);
+                LogFile.ErrorLog(ex);
+                //MyMessageBox.Show(new Avalonia.Controls.Window(), ex.Message, "Error", MyMessageBox.MessageBoxButtons.Ok);
             }
             return objFPResponse;
             //string strJson = JsonConvert.SerializeObject(_objRequest);
@@ -225,7 +245,7 @@ namespace WorkStatus.APIServices
             //}
         }
 
-        public async Task<bool> AddNotesAPI(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, List<tbl_AddNotes> _objRequest)
+        public async Task<AddNotesResponseModel> AddNotesAPI(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, List<tbl_AddNotes> _objRequest)
         {
             AddNotesResponseModel objFPResponse = new AddNotesResponseModel();
             try
@@ -257,50 +277,178 @@ namespace WorkStatus.APIServices
                     objFPResponse = JsonConvert.DeserializeObject<AddNotesResponseModel>(result);
                     if (objFPResponse.response.message == "Note added successfully")
                     {
-                        return true;
+                        return objFPResponse;
                     }
                     else
                     {
-                        return false;
+                        return objFPResponse;
                     }
                 }
                 else
                 {
-                    return false;
+                    return objFPResponse;
                 }
 
             }
             catch (Exception ex)
             {
-                MyMessageBox.Show(new Avalonia.Controls.Window(), ex.Message, "Error", MyMessageBox.MessageBoxButtons.Ok);
-                return false;
+                LogFile.ErrorLog(ex);
+                return objFPResponse;
             }
         }
 
         public ChangeOrganizationResponseModel ChangeOrganizationAPI(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, ChangeOrganizationRequestModel _objRequest)
         {
+
             ChangeOrganizationResponseModel objFPResponse = new ChangeOrganizationResponseModel();
-            string strJson = JsonConvert.SerializeObject(_objRequest);
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.ContentType = "application/json; charset=utf-8";
-            request.Method = "POST";
-            if (IsHeaderRequired)
+            try
             {
-                request.PreAuthenticate = true;
-                request.Headers.Add("Authorization", "Bearer " + objHeaderModel.SessionID);
-                request.Headers.Add("OrgID", Common.Storage.ServerOrg_Id);
-                request.Headers.Add("SDToken", Common.Storage.ServerSd_Token);
+
+
+                string strJson = JsonConvert.SerializeObject(_objRequest);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                request.ContentType = "application/json; charset=utf-8";
+                request.Method = "POST";
+                if (IsHeaderRequired)
+                {
+                    request.PreAuthenticate = true;
+                    request.Headers.Add("Authorization", "Bearer " + objHeaderModel.SessionID);
+                    request.Headers.Add("OrgID", Common.Storage.ServerOrg_Id);
+                    request.Headers.Add("SDToken", Common.Storage.ServerSd_Token);
+                }
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(strJson);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+                WebResponse response = request.GetResponse();
+                var streamReader = new StreamReader(response.GetResponseStream());
+                var result = streamReader.ReadToEnd();
+                objFPResponse = JsonConvert.DeserializeObject<ChangeOrganizationResponseModel>(result);
             }
-            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            catch (Exception ex)
             {
-                streamWriter.Write(strJson);
-                streamWriter.Flush();
-                streamWriter.Close();
+
+                LogFile.ErrorLog(ex);
+
             }
-            WebResponse response = request.GetResponse();
-            var streamReader = new StreamReader(response.GetResponseStream());
-            var result = streamReader.ReadToEnd();
-            objFPResponse = JsonConvert.DeserializeObject<ChangeOrganizationResponseModel>(result);
+            return objFPResponse;
+        }
+
+        public ScreenshotInterval GetScreeshotIntervelFromServerAPI(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, ScreeshotIntervelFromServer _objRequest)
+        {
+            ScreenshotInterval objFPResponse = new ScreenshotInterval();
+            try
+            {
+
+
+                string strJson = JsonConvert.SerializeObject(_objRequest);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                request.ContentType = "application/json; charset=utf-8";
+                request.Method = "POST";
+                if (IsHeaderRequired)
+                {
+                    request.PreAuthenticate = true;
+                    request.Headers.Add("Authorization", "Bearer " + objHeaderModel.SessionID);
+                    request.Headers.Add("OrgID", Common.Storage.ServerOrg_Id);
+                    request.Headers.Add("SDToken", Common.Storage.ServerSd_Token);
+                }
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(strJson);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+                WebResponse response = request.GetResponse();
+                var streamReader = new StreamReader(response.GetResponseStream());
+                var result = streamReader.ReadToEnd();
+                objFPResponse = JsonConvert.DeserializeObject<ScreenshotInterval>(result);
+            }
+            catch (Exception ex)
+            {
+
+                LogFile.ErrorLog(ex);
+
+            }
+            return objFPResponse;
+        }
+
+        public async Task<bool> RenewTokenAPI(bool IsHeaderRequired, HeaderModel objHeaderModel, RefreshTokenRequest _objRequest)
+        {
+            RefreshTokenResponseModel objFPResponse;
+            try
+            {
+                string strJson = JsonConvert.SerializeObject(_objRequest);
+                string uri = Configurations.UrlConstant + Configurations.RenewTokenApiConstant;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                request.ContentType = "application/json; charset=utf-8";
+                request.Method = "POST";
+                if (IsHeaderRequired)
+                {
+                    request.PreAuthenticate = true;
+                    request.Headers.Add("Authorization", "Bearer " + objHeaderModel.SessionID);
+                    request.Headers.Add("OrgID", Common.Storage.ServerOrg_Id);
+                    request.Headers.Add("SDToken", Common.Storage.ServerSd_Token);
+                }
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(strJson);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+                WebResponse response = request.GetResponse();
+                var streamReader = new StreamReader(response.GetResponseStream());
+                var result = streamReader.ReadToEnd();
+                objFPResponse = JsonConvert.DeserializeObject<RefreshTokenResponseModel>(result);
+                if (objFPResponse.response.code == "200")
+                {
+                    Common.Storage.TokenId = objFPResponse.response.token;
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //LogFile.ErrorLog(ex);
+
+            }
+            return true;
+        }
+
+        public async Task<RenewAppResponseModel> ForceUpgardeAppAPI(string uri, RenewAppRequestModel _objRequest)
+        {
+            RenewAppResponseModel objFPResponse = new RenewAppResponseModel();
+            try
+            {
+                string strJson = JsonConvert.SerializeObject(_objRequest);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                request.ContentType = "application/json; charset=utf-8";
+                request.Method = "POST";
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(strJson);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+                WebResponse response = request.GetResponse();
+                var streamReader = new StreamReader(response.GetResponseStream());
+                var result = streamReader.ReadToEnd();
+                objFPResponse = JsonConvert.DeserializeObject<RenewAppResponseModel>(result);
+                if (objFPResponse.response.code == "200")
+                {
+                    return objFPResponse;
+                }
+                else
+                {
+                    return objFPResponse = null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return objFPResponse = null;
+            }
             return objFPResponse;
         }
     }

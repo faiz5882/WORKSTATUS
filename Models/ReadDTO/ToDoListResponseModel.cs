@@ -59,7 +59,7 @@ namespace WorkStatus.Models.ReadDTO
         public object lat { get; set; }
         public object lng { get; set; }
         public string confirmation_token { get; set; }
-        public int is_confirmed { get; set; }
+        public int? is_confirmed { get; set; }
         public object invitation_token { get; set; }
         public object invitation_status { get; set; }
         public object address { get; set; }

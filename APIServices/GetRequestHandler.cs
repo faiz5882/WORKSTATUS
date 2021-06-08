@@ -7,10 +7,11 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using WorkStatus.Models;
+using WorkStatus.Utility;
 
 namespace WorkStatus.APIServices
 {
-   public class GetRequestHandler
+    public class GetRequestHandler
     {
         private HttpClient _client;
         public GetRequestHandler()
@@ -26,7 +27,6 @@ namespace WorkStatus.APIServices
                 {
                     RequestUri = new Uri(uri),
                     Method = HttpMethod.Get,
-
                 };
                 if (IsHeaderRequired)
                 {
@@ -56,9 +56,10 @@ namespace WorkStatus.APIServices
             }
             catch (Exception ex)
             {
-                var msg = ex.Message;
-                throw;
+                LogFile.ErrorLog(ex);
+                return Tobject;
             }
+           
         }
         #endregion
     }

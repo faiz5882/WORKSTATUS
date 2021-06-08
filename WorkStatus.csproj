@@ -1,10 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
+	  
     <Nullable>enable</Nullable>
     <ApplicationIcon>LogoSmall.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.WindowsDesktop.App" />
+	</ItemGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
@@ -14,7 +24,9 @@
     <EmbeddedResource Remove="Style\**" />
     <EntityDeploy Remove="Style\**" />
     <None Remove="Style\**" />
+	 
   </ItemGroup>
+	
   <ItemGroup>
     <AvaloniaResource Remove="Assets\Fonts\AirbnbCerealBlack.ttf" />
     <AvaloniaResource Remove="Assets\Fonts\AirbnbCerealBold.ttf" />
@@ -85,11 +97,17 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+    <PackageReference Include="Tulpep.NotificationWindow" Version="1.1.38" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\WorkStatus_logo_Minimal.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Screenshots\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\PresentationCore.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

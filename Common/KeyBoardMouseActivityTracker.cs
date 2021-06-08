@@ -37,6 +37,10 @@ namespace WorkStatus.Common
 
         public void KeyBoardActivity(bool PlayStop)
         {
+            try
+            {
+
+            
             if (PlayStop)
             {
                 //We check if globalKeyHook is instantiated or not.
@@ -61,6 +65,12 @@ namespace WorkStatus.Common
                 //If the globablKeyHook is already created, we dispose the instance.
                 globalKeyHook.Dispose();
                 globalKeyHook = null; //Probably not needed but just to be sure.
+            }
+            }
+            catch (Exception ex)
+            {
+
+                //throw;
             }
         }
       

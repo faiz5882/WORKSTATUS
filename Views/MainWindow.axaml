@@ -18,6 +18,7 @@
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
 		<StackPanel>
+			
 			<Image Height="250" Stretch="Fill"
 				   Source="/Assets/office.jpg"></Image>
 		</StackPanel>

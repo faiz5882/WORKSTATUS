@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "txIJQU3acgqQ1MMcekKl5WXQxjEbMtC961F6qI1vwUL72I8ksQU5xCnKw4VxfYG4MGMJdJ8hQvfuiNbI04QSdw==",
+  "dgSpecHash": "5AMvt16gA2qRo9pu9AdRVHYtrc4s/1p5jJzrLKKj7eRPxdDZrFOK0JZ3QrY4ldUiYYpow+FR42YXyBp9+bGEzA==",
   "success": true,
   "projectFilePath": "C:\\Project\\Inhouse\\WorkStatus_270421201\\WorkStatus\\WorkStatus\\WorkStatus.csproj",
   "expectedPackageFiles": [
@@ -103,27 +103,38 @@
     "C:\\Users\\Vinove\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
     "C:\\Users\\Vinove\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512",
     "C:\\Users\\Vinove\\.nuget\\packages\\system.windows.interactivity.wpf\\2.0.20525\\system.windows.interactivity.wpf.2.0.20525.nupkg.sha512",
-    "C:\\Users\\Vinove\\.nuget\\packages\\tmds.dbus\\0.9.0\\tmds.dbus.0.9.0.nupkg.sha512"
+    "C:\\Users\\Vinove\\.nuget\\packages\\tmds.dbus\\0.9.0\\tmds.dbus.0.9.0.nupkg.sha512",
+    "C:\\Users\\Vinove\\.nuget\\packages\\tulpep.notificationwindow\\1.1.38\\tulpep.notificationwindow.1.1.38.nupkg.sha512"
   ],
   "logs": [
     {
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Indieteur.GlobalHooks 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'Indieteur.GlobalHooks 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "Indieteur.GlobalHooks",
       "targetGraphs": [
-        "net5.0"
+        "net5.0-windows7.0"
       ]
     },
     {
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'System.Windows.Interactivity.WPF 2.0.20525' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'System.Windows.Interactivity.WPF 2.0.20525' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "System.Windows.Interactivity.WPF",
       "targetGraphs": [
-        "net5.0"
+        "net5.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Tulpep.NotificationWindow 1.1.38' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Tulpep.NotificationWindow",
+      "targetGraphs": [
+        "net5.0-windows7.0"
       ]
     }
   ]

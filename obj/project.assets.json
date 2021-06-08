@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {
+    "net5.0-windows7.0": {
       "Avalonia/0.10.0": {
         "type": "package",
         "dependencies": {
@@ -1628,6 +1628,15 @@
         },
         "runtime": {
           "lib/netstandard2.0/Tmds.DBus.dll": {}
+        }
+      },
+      "Tulpep.NotificationWindow/1.1.38": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Tulpep.NotificationWindow.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Tulpep.NotificationWindow.dll": {}
         }
       }
     }
@@ -5359,10 +5368,22 @@
         "tmds.dbus.0.9.0.nupkg.sha512",
         "tmds.dbus.nuspec"
       ]
+    },
+    "Tulpep.NotificationWindow/1.1.38": {
+      "sha512": "cotu1DDvSiSqvkGIY0SOh1QN5NgXTiWJEspZCx34My+p0q9ONvtPYUZELyN+Fpo0U/KyAG5B0wEiiFdaMCesag==",
+      "type": "package",
+      "path": "tulpep.notificationwindow/1.1.38",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Tulpep.NotificationWindow.dll",
+        "tulpep.notificationwindow.1.1.38.nupkg.sha512",
+        "tulpep.notificationwindow.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
-    "net5.0": [
+    "net5.0-windows7.0": [
       "Avalonia >= 0.10.0",
       "Avalonia.Desktop >= 0.10.0",
       "Avalonia.Diagnostics >= 0.10.0",
@@ -5374,7 +5395,8 @@
       "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.4",
       "Newtonsoft.Json >= 12.0.3",
       "System.Configuration.ConfigurationManager >= 5.0.0",
-      "System.Windows.Interactivity.WPF >= 2.0.20525"
+      "System.Windows.Interactivity.WPF >= 2.0.20525",
+      "Tulpep.NotificationWindow >= 1.1.38"
     ]
   },
   "packageFolders": {
@@ -5400,15 +5422,15 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net5.0"
+        "net5.0-windows7.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net5.0-windows7.0": {
+          "targetAlias": "net5.0-windows",
           "projectReferences": {}
         }
       },
@@ -5419,8 +5441,8 @@
       }
     },
     "frameworks": {
-      "net5.0": {
-        "targetAlias": "net5.0",
+      "net5.0-windows7.0": {
+        "targetAlias": "net5.0-windows",
         "dependencies": {
           "Avalonia": {
             "target": "Package",
@@ -5469,6 +5491,10 @@
           "System.Windows.Interactivity.WPF": {
             "target": "Package",
             "version": "[2.0.20525, )"
+          },
+          "Tulpep.NotificationWindow": {
+            "target": "Package",
+            "version": "[1.1.38, )"
           }
         },
         "imports": [
@@ -5484,6 +5510,9 @@
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App": {
+            "privateAssets": "none"
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
@@ -5495,20 +5524,30 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Indieteur.GlobalHooks 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'Indieteur.GlobalHooks 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "Indieteur.GlobalHooks",
       "targetGraphs": [
-        "net5.0"
+        "net5.0-windows7.0"
       ]
     },
     {
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'System.Windows.Interactivity.WPF 2.0.20525' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'System.Windows.Interactivity.WPF 2.0.20525' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "System.Windows.Interactivity.WPF",
       "targetGraphs": [
-        "net5.0"
+        "net5.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Tulpep.NotificationWindow 1.1.38' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Tulpep.NotificationWindow",
+      "targetGraphs": [
+        "net5.0-windows7.0"
       ]
     }
   ]

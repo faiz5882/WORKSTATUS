@@ -10,6 +10,7 @@ namespace WorkStatus.Common
 {
   public class Storage
     {
+        public static string AppDownload_Link { get; set; }
         public static string ConnectionString { get; set; }
         public static bool IsLogin { get; set; }
         public static string TokenId { get; set; }
@@ -46,7 +47,7 @@ namespace WorkStatus.Common
             {
                 string v = Assembly.GetEntryAssembly().GetName().Version.ToString();
                 string[] s = v.Split(".");
-                version = "Version " + s[0] + "." + s[1] + " (898)";
+                version = "Version " + s[0] + "." + s[1] + " (900)";
             }
             catch (Exception ex)
             {
@@ -58,6 +59,8 @@ namespace WorkStatus.Common
         public static string ServerSd_Token { get; set; }
         public static string ScreenURl { get; set; }
         public static string LoginId { get; set; }
+        public static string LoginUserID { get; set; }
+
 
         public static int ActivityIntervel { get; set; }
 

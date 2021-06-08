@@ -19,6 +19,7 @@ using Avalonia.Controls;
 using MessageBoxAvaloniaEnums = MessageBox.Avalonia.Enums;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia;
+using WorkStatus.Utility;
 
 namespace WorkStatus.ViewModels
 {
@@ -106,6 +107,7 @@ namespace WorkStatus.ViewModels
             catch (Exception ex)
             {
                 var msg = ex.Message;
+                LogFile.ErrorLog(ex);
             }
         }
         void ClosedWindow()
@@ -114,6 +116,10 @@ namespace WorkStatus.ViewModels
         }
         async void ForgotPassword()
         {
+            try
+            {
+
+            
             if (string.IsNullOrEmpty(Email))
             {
                 var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
@@ -144,6 +150,11 @@ namespace WorkStatus.ViewModels
                     }
                 }
 
+            }
+            }
+            catch (Exception ex)
+            {               
+                LogFile.ErrorLog(ex);
             }
         }
         #endregion

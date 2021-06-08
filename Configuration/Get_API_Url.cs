@@ -49,11 +49,11 @@ namespace WorkStatus.Configuration
         }
         #endregion
 
-        #region AddNotes
-        //public string ActivityLogApi(string BaseUrl)
-        //{
-        //    return BaseUrl;
-        //}
+        #region Screenshot
+        public string ScreenshotApi(string BaseUrl)
+        {
+            return BaseUrl;
+        }
         #endregion
     }
 }

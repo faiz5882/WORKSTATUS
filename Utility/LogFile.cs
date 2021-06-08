@@ -36,7 +36,112 @@ namespace WorkStatus.Utility
                 return false;
             }
         }
+        public static bool ErrorLog(Exception strMessage)
+        {
+            try
+            {
+                string fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                string directoryPath = fullPath;
+                string updatedPath = directoryPath.Replace("|", "_");
+                updatedPath = directoryPath.Replace(" ", "");
+                if (!Directory.Exists(updatedPath))
+                {
+                    Directory.CreateDirectory(updatedPath);
+                }
+                string strFileName = DateTime.Now.ToString("yyyyMMdd") + "ErrorLog.txt";
+                FileStream objFilestream = new FileStream(string.Format("{0}\\{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
+                StreamWriter objStreamWriter = new StreamWriter((Stream)objFilestream);
 
-      
+                objStreamWriter.WriteLine("-------------------START-------------" + DateTime.Now);
+                objStreamWriter.WriteLine(strMessage);
+                objStreamWriter.WriteLine(strMessage.StackTrace);
+                objStreamWriter.WriteLine("-------------------END-------------" + DateTime.Now);                
+                objStreamWriter.Close();
+                objFilestream.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public static bool ErrorLogApiResponse(string strMessage)
+        {
+            try
+            {
+                string fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                string directoryPath = fullPath;
+                string updatedPath = directoryPath.Replace("|", "_");
+                updatedPath = directoryPath.Replace(" ", "");
+                if (!Directory.Exists(updatedPath))
+                {
+                    Directory.CreateDirectory(updatedPath);
+                }
+                string strFileName = DateTime.Now.ToString("yyyyMMdd") + "ErrorLog.txt";
+                FileStream objFilestream = new FileStream(string.Format("{0}\\{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
+                StreamWriter objStreamWriter = new StreamWriter((Stream)objFilestream);
+
+                objStreamWriter.WriteLine("-------------------START-------------" + DateTime.Now);
+                objStreamWriter.WriteLine(strMessage);                
+                objStreamWriter.WriteLine("-------------------END-------------" + DateTime.Now);
+                objStreamWriter.Close();
+                objFilestream.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public static bool WriteMessageLog(string strMessage)
+        {
+            try
+            {
+                string fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                string directoryPath = fullPath;
+                string updatedPath = directoryPath.Replace("|", "_");
+                updatedPath = directoryPath.Replace(" ", "");
+                if (!Directory.Exists(updatedPath))
+                {
+                    Directory.CreateDirectory(updatedPath);
+                }
+                string strFileName = DateTime.Now.ToString("yyyyMMdd") + "Timelog.txt";
+                FileStream objFilestream = new FileStream(string.Format("{0}\\{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
+                StreamWriter objStreamWriter = new StreamWriter((Stream)objFilestream);
+                objStreamWriter.WriteLine(strMessage);
+                objStreamWriter.Close();
+                objFilestream.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public static bool WriteaActivityLog(string strMessage)
+        {
+            try
+            {
+                string fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                string directoryPath = fullPath;
+                string updatedPath = directoryPath.Replace("|", "_");
+                updatedPath = directoryPath.Replace(" ", "");
+                if (!Directory.Exists(updatedPath))
+                {
+                    Directory.CreateDirectory(updatedPath);
+                }
+                string strFileName = DateTime.Now.ToString("yyyyMMdd") + "Activity" + ".txt";
+                FileStream objFilestream = new FileStream(string.Format("{0}\\{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
+                StreamWriter objStreamWriter = new StreamWriter((Stream)objFilestream);
+                objStreamWriter.WriteLine(strMessage);
+                objStreamWriter.Close();
+                objFilestream.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

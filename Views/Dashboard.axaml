@@ -23,8 +23,40 @@
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="Auto"></RowDefinition>
 		</Grid.RowDefinitions>
+		<Popup IsOpen="{Binding IsForceUpgradeApp}" StaysOpen="{Binding IsStayOpen}" Margin="30" Height="250" Width="300"
+             HorizontalOffset="355" VerticalOffset="200">
+       <Border BoxShadow="0 0 1 gray" BorderThickness="2" Height="250" Width="300" Background="WhiteSmoke" CornerRadius="8,8,8,8" Padding="5">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="1*"/>
+              <RowDefinition Height="0.5*"/>
+              <RowDefinition Height="1*"/>
+              <RowDefinition Height="1*"/>
+              <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="1*"/>
+              <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+						<Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,20,0,0" Source="/Assets/WorkStatus_logo.png" Height="50"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap"
+                       Text="{Binding AppTitle}" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
+                       Foreground="#212529" FontWeight="Bold" FontStyle="Normal" TextAlignment="Center"
+                       FontSize="16" LineHeight="19"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" TextAlignment="Center"
+                       Text="{Binding AppDescription}" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
+                       Foreground="#212529" FontStyle="Normal" FontSize="14"/>
+            <Button  x:Name="upgardeapp" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"  Margin="20,0,0,0" 
+                     VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                     VerticalAlignment="Center" HorizontalAlignment="Center" 
+                     Content="Download now"  FontSize="14" FontWeight="SemiLight" Background="#155fcc" 
+                     Foreground="White" Width="200" Height="30"/>
+            
+          </Grid>
+        </Border>
+      </Popup>
 		<!-- grdLeft Start here-->
-		<Grid x:Name="gridLeft" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top">
+		<Grid x:Name="gridLeft"  IsEnabled="{Binding IsAppBlock}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="50"></RowDefinition>
 				<RowDefinition Height="50"></RowDefinition>
@@ -66,7 +98,7 @@
 										 HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding HeaderTime}"/>
 				</Border>
 
-				<StackPanel Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Margin="10,0,0,0">
+				<StackPanel IsEnabled="{Binding IsAppBlock}" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Margin="10,0,0,0">
           <ToggleButton Name="addnotebtn">
             <ToggleButton.Template>
               <ControlTemplate TargetType="ToggleButton">
@@ -125,7 +157,7 @@
 						   FontWeight="500" Foreground="Blue"
 									   FontSize="16"
 						    FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
-						   Text="No Weekly Limit" Margin="0,10,0,0"></TextBlock>
+						   Text="{Binding WeeklylimitText}" Margin="0,10,0,0"></TextBlock>
 			</Grid>
 			<Grid Grid.Row="5" HorizontalAlignment="Center">
 				<Grid.RowDefinitions>
@@ -175,9 +207,9 @@
 						   Text="{Binding HeaderOrgName}">
 				</TextBlock>
 				<!-- Organisation Details popup-->
-				<StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,0,0"
+			<StackPanel IsEnabled="{Binding IsAppBlock}" Grid.Row="0" Grid.Column="2" Margin="0,0,0,0"
 							HorizontalAlignment="Right" VerticalAlignment="Center">
-					<ToggleButton Name="button">
+					<ToggleButton Name="changeOrgbutton">
 						<ToggleButton.Template>
 							<ControlTemplate TargetType="ToggleButton">
 								<TextBlock HorizontalAlignment="Right"
@@ -188,7 +220,7 @@
 							</ControlTemplate>
 						</ToggleButton.Template>
 					</ToggleButton>
-					<Popup IsOpen="{Binding IsChecked, ElementName=button}" StaysOpen="False" PlacementMode="Right" Height="300" Width="150" >
+					<Popup IsOpen="{Binding IsChecked, ElementName=changeOrgbutton}" StaysOpen="False" PlacementMode="Right" Height="300" Width="150" >
 						<Border BoxShadow="0 0 1 gray" BorderThickness="2" Height="300" Width="150" Background="White" CornerRadius="8,8,8,8" Padding="5">
 							<ListBox x:Name="orglist" Background="White" SelectionMode="Single"
                        SelectedItem="{Binding SelectedOrganisationItems,Mode=TwoWay}"
@@ -287,6 +319,8 @@
 					</ListBox.ItemTemplate>
 
 				</ListBox>
+				<ProgressBar x:Name="projectpgr" IsIndeterminate="True"
+					 HorizontalAlignment="Center" VerticalAlignment="Center" Width="20"/>
 			</Grid>
 			<Grid Grid.Row="9" Margin="0,0,0,0" Background="#1665D8">
 				<Grid.RowDefinitions>
@@ -323,13 +357,14 @@
 			<Rectangle  Fill="WhiteSmoke" Height="800"/>
 		</Grid>
 		<!-- grdRight Start here-->
-		<Grid x:Name="grdRight" Grid.Row="0" Margin="-15,0,0,0" Grid.Column="2">
+		<Grid x:Name="grdRight" IsEnabled="{Binding IsAppBlock}" Grid.Row="0" Margin="-15,0,0,0" Grid.Column="2">
 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="40"></RowDefinition>
 				<RowDefinition Height="50"></RowDefinition>
 				<RowDefinition Height="40"></RowDefinition>
-				<RowDefinition Height="470"></RowDefinition>
+				<RowDefinition Height="400"></RowDefinition>
+        <RowDefinition Height="70"></RowDefinition>
 				<RowDefinition Height="30"></RowDefinition>
 			</Grid.RowDefinitions>
 			<!-- Organisation name and Option -->
@@ -344,12 +379,22 @@
 				<TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="30,10,0,0"
 				Text="{Binding HeaderProjectName}" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
 				Foreground="#212529" FontWeight="Bold" FontStyle="Normal" FontSize="16" LineHeight="19"/>
-				<StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+				<StackPanel IsEnabled="{Binding IsAppBlock}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
 					<Menu HorizontalAlignment="Center" VerticalAlignment="Center">
 						<MenuItem Header="..." FontSize="20" FontWeight="ExtraBold" Foreground="DodgerBlue">
-							<MenuItem Header="Sign out" Click="SignOut_Click" FontSize="12" FontWeight="Normal" Foreground="Black"/>
-							<Separator Height="2" Background="Gray" BorderThickness="0 1 0 0"/>
+							<MenuItem Header="Open Dashboard" Click="OpenDashboard_Click" FontSize="12" FontWeight="Normal" Foreground="Black"/>
+							<Separator Height="2" Background="LightGray" BorderThickness="0 1 0 0"/>
+							<MenuItem Header="Add/Edit Time" Click="AddEditTime_Click" FontSize="12" FontWeight="Normal" Foreground="Black"/>
+							<Separator Height="2" Background="LightGray" BorderThickness="0 1 0 0"/>
+							<MenuItem Header="Report Error" Click="ReportError_Click" FontSize="12" FontWeight="Normal" Foreground="Black"/>
+							<Separator Height="2" Background="LightGray" BorderThickness="0 1 0 0"/>
+							<MenuItem Header="Help" Click="Help_Click" FontSize="12" FontWeight="Normal" Foreground="Black"/>
+							<Separator Height="2" Background="LightGray" BorderThickness="0 1 0 0"/>
+							<MenuItem Header="About Us" Click="AboutUs_Click" FontSize="12" FontWeight="Normal" Foreground="Black"/>
+							<Separator Height="2" Background="LightGray" BorderThickness="0 1 0 0"/>
 							<MenuItem Header="Quit" Click="Quit_Click" FontSize="12" FontWeight="Normal" Foreground="Black"/>
+							<Separator Height="2" Background="LightGray" BorderThickness="0 1 0 0"/>
+							<MenuItem Header="Logout" Click="SignOut_Click" FontSize="12" FontWeight="Normal" Foreground="Black"/>
 						</MenuItem>
 					</Menu>
 					<!--<ToggleButton Name="button1">
@@ -598,11 +643,32 @@
 						</DataTemplate>
 					</ListBox.ItemTemplate>
 				</ListBox>
+				<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8" TextAlignment="Center"
+				   FontStyle="Normal" FontSize="16" Foreground="Black"
+				   IsVisible="{Binding IsNoToDoList}"
+				   FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
+				   FontWeight="400" HorizontalAlignment="Center" VerticalAlignment="Center"
+				   Text="{Binding NoToDoAlert}"/>
+			<ProgressBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8"  x:Name="toDoProgressBar" IsIndeterminate="True" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Width="20"/>
 			</Grid>
 			<!-- End To-Do List -->
-
+<!-- No Network Message-->
+      <Grid Grid.Row="4" Width="680" Margin="-5,-10,0,0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+ 
+        <TextBlock Grid.Row="0" TextAlignment="Left"
+                FontStyle="Normal" TextWrapping="Wrap"
+                FontSize="14" Foreground="#FFFFFF" IsVisible="{Binding IsUserOffline}"
+                FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
+                FontWeight="400" Background="#808080"
+                Text="{Binding UserOfflineAlert}"/>
+      </Grid>
+      <!-- End No Network Message -->
 			<!-- Footer Start here-->
-			<Grid Grid.Row="4" Width="700" Margin="15,1,0,0"
+			<Grid Grid.Row="5" Width="700" Margin="15,1,0,0"
 			Background="#1665D8">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"></RowDefinition>

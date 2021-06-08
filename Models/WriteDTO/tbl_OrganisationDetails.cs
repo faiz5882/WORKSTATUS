@@ -17,6 +17,8 @@ namespace WorkStatus.Models.WriteDTO
         public string OrganizationName { get; set; }
         [DbColumn]
         public int IsOffline { get; set; }
+        [DbColumn]
+        public string WeeklyLimit { get; set; }
 
     }
 }

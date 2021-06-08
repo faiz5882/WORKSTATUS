@@ -10,6 +10,23 @@ namespace WorkStatus.Configuration
 {
     public static class Configurations
     {
+
+        #region ForceUpgardeApp
+        public static string ForceUpgardeAppApiConstant
+        {
+            get
+            {
+                return "check_version/1234tret1234";
+            }
+        }
+        #endregion
+        public static string BaseAppUrlConstant
+        {
+            get
+            {
+                return System.Configuration.ConfigurationSettings.AppSettings["ApiBaseLiveUrl"];
+            }
+        }
         public static string GetConnectionString(string id = "Default")
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
@@ -112,6 +129,24 @@ namespace WorkStatus.Configuration
         }
         #endregion
 
-        
+        #region TimeIntervelFromServer
+        public static string GetScreenshotIntervalApiConstant
+        {
+            get
+            {
+                return "user/screenshotInterval";
+            }
+        }
+        #endregion
+
+        #region RefreshToken
+        public static string RenewTokenApiConstant
+        {
+            get
+            {
+                return "refreshToken";
+            }
+        }
+        #endregion
     }
 }
