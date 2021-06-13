@@ -141,22 +141,17 @@ namespace WorkStatus.Utility
             }
             return tbl_ServerTodos;
         }
-        public void AddTimeIntervalToDB(string StartTime, string EndTime)
+        public void AddTimeIntervalToDB(string StartTime, string EndTime, string keyboardActivity, string MouseActivity, string AverageActivity)
         {
             try
             {
-
-
                 tbl_KeyMouseTrack_Slot keyMouseTrack_Slot;
                 DateTime oCurrentDate = DateTime.Now;
 
-                var keyboardActivity = Common.Storage.KeyBoradEventCount.ToStrVal();
-                var MouseActivity = Common.Storage.MouseEventCount.ToStrVal();
-                var AverageActivity = Common.Storage.AverageEventCount.ToStrVal();
+                LogFile.WriteMessageLog("1. Interval Start Time -" +StartTime + " Interval End Time -" + EndTime +
+                        "\n" + "keyboardActivity : " + keyboardActivity + ", MouseActivity : " + MouseActivity
+                    + ", AverageActivity : " + AverageActivity + "\n" + DateTime.Now.ToString("hh:mm:ss"));
 
-                Common.Storage.AverageEventCount = 0;
-                Common.Storage.KeyBoradEventCount = 0;
-                Common.Storage.MouseEventCount = 0;
 
                 keyMouseTrack_Slot = new tbl_KeyMouseTrack_Slot()
                 {

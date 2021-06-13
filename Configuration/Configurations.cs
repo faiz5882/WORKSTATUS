@@ -42,6 +42,7 @@ namespace WorkStatus.Configuration
                 return System.Configuration.ConfigurationSettings.AppSettings["ApiLiveUrl"];
             }
         }
+
         #region Accounts APIEndPoints
         public static string LoginApiConstant
         {

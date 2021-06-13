@@ -2,6 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ShowAllFiles>true</ShowAllFiles>
-    <_LastSelectedProfileId>C:\Project\Inhouse\WorkStatus_270421201\WorkStatus\WorkStatus\Properties\PublishProfiles\FolderProfile6.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\Work\vinove\WorkStatus11062021\WorkStatus08062021\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
 </Project>

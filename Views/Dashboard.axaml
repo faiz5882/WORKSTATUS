@@ -6,7 +6,7 @@
 				xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"
 				xmlns:user="clr-namespace:WorkStatus.Views;assembly=WorkStatus"
 				 xmlns:local="clr-namespace:WorkStatus.Utility"
-		
+		xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
         mc:Ignorable="d" Width="1000" Height="635"	
 		Icon="avares://WorkStatus/Assets/LogoSmall.ico"
 		x:Class="WorkStatus.Views.Dashboard" CanResize="False" Title="Dashboard">
@@ -319,8 +319,13 @@
 					</ListBox.ItemTemplate>
 
 				</ListBox>
-				<ProgressBar x:Name="projectpgr" IsIndeterminate="True"
-					 HorizontalAlignment="Center" VerticalAlignment="Center" Width="20"/>
+				<!--<ProgressBar x:Name="projectpgr" IsIndeterminate="True"
+					 HorizontalAlignment="Center" VerticalAlignment="Center" Width="20"/>-->
+        <progRing:ProgressRing Width="50"
+                       Height="50" x:Name="projectpgr"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="Gray"/>
 			</Grid>
 			<Grid Grid.Row="9" Margin="0,0,0,0" Background="#1665D8">
 				<Grid.RowDefinitions>
@@ -367,6 +372,7 @@
         <RowDefinition Height="70"></RowDefinition>
 				<RowDefinition Height="30"></RowDefinition>
 			</Grid.RowDefinitions>
+      
 			<!-- Organisation name and Option -->
 			<Grid Grid.Row="0">
 				<Grid.RowDefinitions>
@@ -448,8 +454,8 @@
 					</StackPanel>
 				</Border>
 				<ComboBox Grid.Row="1" Grid.Column="1" x:Name="ComboBoxList" Width="120" Height="30" SelectedIndex="0"
-				FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
-				HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,20,0,0">
+			          	FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
+			          	HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,20,0,0">
 					<ComboBoxItem IsSelected="True" Content="All Todo's"></ComboBoxItem>
 					<ComboBoxItem Content="Pending"></ComboBoxItem>
 					<ComboBoxItem Content="Completed"></ComboBoxItem>
@@ -649,11 +655,16 @@
 				   FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
 				   FontWeight="400" HorizontalAlignment="Center" VerticalAlignment="Center"
 				   Text="{Binding NoToDoAlert}"/>
-			<ProgressBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8"  x:Name="toDoProgressBar" IsIndeterminate="True" HorizontalAlignment="Center" VerticalAlignment="Center"
-                Width="20"/>
+			<!--<ProgressBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8"  x:Name="toDoProgressBar" IsIndeterminate="True" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Width="20"/>-->
+        <progRing:ProgressRing Width="50" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8"
+                       Height="50" x:Name="toDoProgressBar"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="Gray"/>
 			</Grid>
 			<!-- End To-Do List -->
-<!-- No Network Message-->
+			<!-- No Network Message-->
       <Grid Grid.Row="4" Width="680" Margin="-5,-10,0,0">
         <Grid.RowDefinitions>
           <RowDefinition Height="*"></RowDefinition>
@@ -667,6 +678,7 @@
                 Text="{Binding UserOfflineAlert}"/>
       </Grid>
       <!-- End No Network Message -->
+      
 			<!-- Footer Start here-->
 			<Grid Grid.Row="5" Width="700" Margin="15,1,0,0"
 			Background="#1665D8">

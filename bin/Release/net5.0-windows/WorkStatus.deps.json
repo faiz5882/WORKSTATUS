@@ -12,6 +12,7 @@
           "Avalonia.Desktop": "0.10.0",
           "Avalonia.Diagnostics": "0.10.0",
           "Avalonia.ReactiveUI": "0.10.0",
+          "Deadpikle.AvaloniaProgressRing": "0.9.0",
           "Indieteur.GlobalHooks": "1.0.0",
           "MaterialDesignThemes": "4.0.0",
           "MessageBox.Avalonia": "1.1.1",
@@ -263,6 +264,17 @@
           "lib/netstandard2.0/Avalonia.X11.dll": {
             "assemblyVersion": "0.10.0.0",
             "fileVersion": "0.10.0.0"
+          }
+        }
+      },
+      "Deadpikle.AvaloniaProgressRing/0.9.0": {
+        "dependencies": {
+          "Avalonia": "0.10.0"
+        },
+        "runtime": {
+          "lib/net5.0/AvaloniaProgressRing.dll": {
+            "assemblyVersion": "0.9.0.0",
+            "fileVersion": "0.9.0.0"
           }
         }
       },
@@ -1394,6 +1406,13 @@
       "sha512": "sha512-rhgOcdSWFaCBhRRh97NHqltSBaz2ddCu4sr6SDPj2iT7BRgUs9a3ri0r4+2bkpWBBU0wBqEAyUg9JngfUMls9g==",
       "path": "avalonia.x11/0.10.0",
       "hashPath": "avalonia.x11.0.10.0.nupkg.sha512"
+    },
+    "Deadpikle.AvaloniaProgressRing/0.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-a1pryBPuNlhU6VX44tyuvh+5FZu5cV+qtL9FrbNuxW2WptSWhhDvbd9kIQmbZK/y9Y7JdbJCiN1H3STKo+3x5g==",
+      "path": "deadpikle.avaloniaprogressring/0.9.0",
+      "hashPath": "deadpikle.avaloniaprogressring.0.9.0.nupkg.sha512"
     },
     "DynamicData/6.17.14": {
       "type": "package",

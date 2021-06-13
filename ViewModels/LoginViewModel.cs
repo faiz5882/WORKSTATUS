@@ -63,12 +63,22 @@ namespace WorkStatus.ViewModels
             TxtWelcomeColor = ThemeManager.TxtWelcomeColor;
             tt = _Window.FindControl<TextBlock>("errorStatus");
             //BuildConnectionString();
-           
-            //email = "vijayuser1@yopmail.com";
-            // password = "Tester#123";
 
+            //email = "vijayuser1@yopmail.com";
+            // password = "Tester#123
+            //email = "amit@yopmail.com";
+           // password = "Tester#123";
+           // email = "gauravpm@yopmail.com";
+           // password = "Tester#1234";
+            //email = "testsonam@yopmail.com";
+            //password = "Sonam@123";
             // email = "manik1@yopmail.com";
             //  password = "Tester#1234";
+
+            //email = "vishad.kaushik@pixelcrayons.com";
+            // password = "Vishad@123";
+
+
             isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
             isMac = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
 
@@ -152,23 +162,15 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-
-
                 if (string.IsNullOrEmpty(Email))
                 {
                     ValidateFormsAndError("Email is required!", 5);
                     return;
-                    // var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
-                    //.GetMessageBoxStandardWindow("Error", "Email is required!", MessageBoxAvaloniaEnums.ButtonEnum.Ok);
-                    // var r = await messageBoxStandardWindow.ShowDialog(_Window);
                 }
                 else if (string.IsNullOrEmpty(Password))
                 {
                     ValidateFormsAndError("Password is required!", 5);
                     return;
-                    //  var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
-                    //.GetMessageBoxStandardWindow("Error", "Password is required!", MessageBoxAvaloniaEnums.ButtonEnum.Ok);
-                    //  var r = await messageBoxStandardWindow.ShowDialog(_Window);
                 }
                 else
                 {

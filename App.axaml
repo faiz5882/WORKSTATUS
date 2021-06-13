@@ -12,6 +12,10 @@
 		<Style Selector="TextBlock.h1">
 			<Setter property="TextElement.FontFamily" Value="{StaticResource AirbnbCerealBold}"/>
 		</Style>-->
+
+      <FluentTheme Mode="Light"/>
+      <StyleInclude Source="avares://AvaloniaProgressRing/Styles/ProgressRing.xaml"/>
+    
     </Application.Styles>
 	
 </Application>

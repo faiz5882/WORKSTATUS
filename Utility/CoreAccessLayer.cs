@@ -634,6 +634,20 @@ namespace WorkStatus.Utility
         //        cmd.ExecuteNonQuery();
         //    }
         //}
+
+        public void CheckConnectionState(SqliteConnection conn)
+        {
+            if (conn.State.HasFlag(System.Data.ConnectionState.Open))
+            {
+                conn.Close();
+                conn.Open();
+            }
+            else
+            {
+                conn.Close();
+                conn.Open();
+            }
+        }
         private long Execute(string cmdText, bool returnIdentity = false)
         {
             //using (var connection = new SqliteConnection(GetConnectionString()))
@@ -650,8 +664,9 @@ namespace WorkStatus.Utility
             //}
             using (var connection = GetConnection())
             {
-                connection.Open();
-                SqliteCommand cmd = new SqliteCommand(cmdText, connection);
+                // connection.Open();
+                CheckConnectionState(connection);
+                 SqliteCommand cmd = new SqliteCommand(cmdText, connection);
 
                 if (returnIdentity)
                 {
@@ -674,8 +689,9 @@ namespace WorkStatus.Utility
            
             using (var connection = GetConnection())
             {
-                connection.Open();
-                
+               // connection.Open();
+                CheckConnectionState(connection);
+
                 SqliteCommand cmd = new SqliteCommand(cmdText, connection);
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -693,7 +709,9 @@ namespace WorkStatus.Utility
         {
             using (var connection = GetConnection())
             {
-                connection.Open();
+                // connection.Open();
+                CheckConnectionState(connection);
+
                 SqliteCommand cmd = new SqliteCommand(cmdText, connection);
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -712,7 +730,9 @@ namespace WorkStatus.Utility
         {
             using (var connection = GetConnection())
             {
-                connection.Open();
+                // connection.Open();
+                CheckConnectionState(connection);
+
                 SqliteCommand cmd = new SqliteCommand(filter.Query, connection);
                 using (var reader = cmd.ExecuteReader())
                 {

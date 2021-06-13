@@ -33,10 +33,9 @@ namespace WorkStatus.APIServices
             UserProjectlistByOrganizationIDResponse objFPResponse=new UserProjectlistByOrganizationIDResponse();
             try
             {
-
-
+                Uri myUri = new Uri(uri, UriKind.Absolute);
                 string strJson = JsonConvert.SerializeObject(_objRequest);
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(myUri);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "POST";
                 if (IsHeaderRequired)
@@ -91,8 +90,9 @@ namespace WorkStatus.APIServices
             ToDoListResponseModel objFPResponse = new ToDoListResponseModel();
             try
             {
+                Uri myUri = new Uri(uri, UriKind.Absolute);
                 string strJson = JsonConvert.SerializeObject(_objRequest);
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(myUri);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "POST";
                 request.UseDefaultCredentials = true;
@@ -149,8 +149,9 @@ namespace WorkStatus.APIServices
             ActivitySyncTimerResponseModel objFPResponse = new ActivitySyncTimerResponseModel();
             try
             {
+                Uri myUri = new Uri(uri, UriKind.Absolute);
                 string strJson = JsonConvert.SerializeObject(_objRequest);
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(myUri);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "POST";
                 request.UseDefaultCredentials = true;
@@ -182,16 +183,15 @@ namespace WorkStatus.APIServices
             }
             return objFPResponse;
         }
-
-        
         public async Task<CommonResponseModel> ActivityLogAsync(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, List<ActivityLogRequestEntity> _objRequest)
         {
             // System.Threading.Thread.Sleep(10000);
             CommonResponseModel objFPResponse = new CommonResponseModel();
             try
             {
+                Uri myUri = new Uri(uri, UriKind.Absolute);
                 string strJson = JsonConvert.SerializeObject(_objRequest);
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(myUri);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "POST";
                 request.UseDefaultCredentials = true;
@@ -244,14 +244,14 @@ namespace WorkStatus.APIServices
             //    }
             //}
         }
-
         public async Task<AddNotesResponseModel> AddNotesAPI(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, List<tbl_AddNotes> _objRequest)
         {
             AddNotesResponseModel objFPResponse = new AddNotesResponseModel();
             try
             {
+                Uri myUri = new Uri(uri, UriKind.Absolute);
                 string strJson = JsonConvert.SerializeObject(_objRequest);
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(myUri);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "POST";
                 request.UseDefaultCredentials = true;
@@ -296,17 +296,15 @@ namespace WorkStatus.APIServices
                 return objFPResponse;
             }
         }
-
         public ChangeOrganizationResponseModel ChangeOrganizationAPI(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, ChangeOrganizationRequestModel _objRequest)
         {
 
             ChangeOrganizationResponseModel objFPResponse = new ChangeOrganizationResponseModel();
             try
             {
-
-
+                Uri myUri = new Uri(uri, UriKind.Absolute);
                 string strJson = JsonConvert.SerializeObject(_objRequest);
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(myUri);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "POST";
                 if (IsHeaderRequired)
@@ -335,16 +333,14 @@ namespace WorkStatus.APIServices
             }
             return objFPResponse;
         }
-
         public ScreenshotInterval GetScreeshotIntervelFromServerAPI(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, ScreeshotIntervelFromServer _objRequest)
         {
             ScreenshotInterval objFPResponse = new ScreenshotInterval();
             try
             {
-
-
+                Uri myUri = new Uri(uri, UriKind.Absolute);
                 string strJson = JsonConvert.SerializeObject(_objRequest);
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(myUri);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "POST";
                 if (IsHeaderRequired)
@@ -363,6 +359,7 @@ namespace WorkStatus.APIServices
                 WebResponse response = request.GetResponse();
                 var streamReader = new StreamReader(response.GetResponseStream());
                 var result = streamReader.ReadToEnd();
+
                 objFPResponse = JsonConvert.DeserializeObject<ScreenshotInterval>(result);
             }
             catch (Exception ex)
@@ -373,7 +370,6 @@ namespace WorkStatus.APIServices
             }
             return objFPResponse;
         }
-
         public async Task<bool> RenewTokenAPI(bool IsHeaderRequired, HeaderModel objHeaderModel, RefreshTokenRequest _objRequest)
         {
             RefreshTokenResponseModel objFPResponse;
@@ -381,7 +377,8 @@ namespace WorkStatus.APIServices
             {
                 string strJson = JsonConvert.SerializeObject(_objRequest);
                 string uri = Configurations.UrlConstant + Configurations.RenewTokenApiConstant;
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                Uri myUri = new Uri(uri, UriKind.Absolute);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(myUri);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "POST";
                 if (IsHeaderRequired)
@@ -415,14 +412,14 @@ namespace WorkStatus.APIServices
             }
             return true;
         }
-
         public async Task<RenewAppResponseModel> ForceUpgardeAppAPI(string uri, RenewAppRequestModel _objRequest)
         {
             RenewAppResponseModel objFPResponse = new RenewAppResponseModel();
             try
             {
+                Uri myUri = new Uri(uri, UriKind.Absolute);
                 string strJson = JsonConvert.SerializeObject(_objRequest);
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(myUri);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "POST";
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))

@@ -2,6 +2,8 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
 using System;
+using Avalonia.Controls;
+
 
 namespace WorkStatus
 {
@@ -16,8 +18,8 @@ namespace WorkStatus
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
-                .UsePlatformDetect()
-                .LogToTrace()
+                .UsePlatformDetect()                
+                .LogToTrace()                 
                 .UseReactiveUI();
     }
 }

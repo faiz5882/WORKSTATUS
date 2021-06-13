@@ -10,6 +10,6 @@ namespace WorkStatus.Models.WriteDTO
     {
         public int project_id { get; set; }
         public int organization_id { get; set; }
-        public int userid { get; set; }
+        public List<int> memberIds { get; set; }
     }
 }

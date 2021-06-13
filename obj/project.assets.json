@@ -220,6 +220,18 @@
           "lib/netstandard2.0/Avalonia.X11.dll": {}
         }
       },
+      "Deadpikle.AvaloniaProgressRing/0.9.0": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "0.10.0"
+        },
+        "compile": {
+          "lib/net5.0/AvaloniaProgressRing.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/AvaloniaProgressRing.dll": {}
+        }
+      },
       "DynamicData/6.17.14": {
         "type": "package",
         "dependencies": {
@@ -1927,6 +1939,20 @@
         "avalonia.x11.nuspec",
         "lib/netstandard2.0/Avalonia.X11.dll",
         "lib/netstandard2.0/Avalonia.X11.xml"
+      ]
+    },
+    "Deadpikle.AvaloniaProgressRing/0.9.0": {
+      "sha512": "a1pryBPuNlhU6VX44tyuvh+5FZu5cV+qtL9FrbNuxW2WptSWhhDvbd9kIQmbZK/y9Y7JdbJCiN1H3STKo+3x5g==",
+      "type": "package",
+      "path": "deadpikle.avaloniaprogressring/0.9.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "deadpikle.avaloniaprogressring.0.9.0.nupkg.sha512",
+        "deadpikle.avaloniaprogressring.nuspec",
+        "lib/net5.0/AvaloniaProgressRing.dll",
+        "lib/netcoreapp3.1/AvaloniaProgressRing.dll"
       ]
     },
     "DynamicData/6.17.14": {
@@ -5388,6 +5414,7 @@
       "Avalonia.Desktop >= 0.10.0",
       "Avalonia.Diagnostics >= 0.10.0",
       "Avalonia.ReactiveUI >= 0.10.0",
+      "Deadpikle.AvaloniaProgressRing >= 0.9.0",
       "Indieteur.GlobalHooks >= 1.0.0",
       "MaterialDesignThemes >= 4.0.0",
       "MessageBox.Avalonia >= 1.1.1",
@@ -5400,24 +5427,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vinove\\.nuget\\packages\\": {},
+    "C:\\Users\\Rudra\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Project\\Inhouse\\WorkStatus_270421201\\WorkStatus\\WorkStatus\\WorkStatus.csproj",
+      "projectUniqueName": "D:\\Work\\vinove\\WorkStatus11062021\\WorkStatus08062021\\WorkStatus.csproj",
       "projectName": "WorkStatus",
-      "projectPath": "C:\\Project\\Inhouse\\WorkStatus_270421201\\WorkStatus\\WorkStatus\\WorkStatus.csproj",
-      "packagesPath": "C:\\Users\\Vinove\\.nuget\\packages\\",
-      "outputPath": "C:\\Project\\Inhouse\\WorkStatus_270421201\\WorkStatus\\WorkStatus\\obj\\",
+      "projectPath": "D:\\Work\\vinove\\WorkStatus11062021\\WorkStatus08062021\\WorkStatus.csproj",
+      "packagesPath": "C:\\Users\\Rudra\\.nuget\\packages\\",
+      "outputPath": "D:\\Work\\vinove\\WorkStatus11062021\\WorkStatus08062021\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Project\\Inhouse\\WorkStatus_270421201\\WorkStatus\\WorkStatus\\NuGet.Config",
-        "C:\\Users\\Vinove\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "D:\\Work\\vinove\\WorkStatus11062021\\WorkStatus08062021\\NuGet.Config",
+        "C:\\Users\\Rudra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -5459,6 +5489,10 @@
           "Avalonia.ReactiveUI": {
             "target": "Package",
             "version": "[0.10.0, )"
+          },
+          "Deadpikle.AvaloniaProgressRing": {
+            "target": "Package",
+            "version": "[0.9.0, )"
           },
           "Indieteur.GlobalHooks": {
             "target": "Package",
@@ -5515,7 +5549,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   },

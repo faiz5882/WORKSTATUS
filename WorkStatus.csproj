@@ -6,23 +6,29 @@
     <Nullable>enable</Nullable>
     <ApplicationIcon>LogoSmall.ico</ApplicationIcon>
   </PropertyGroup>
+  <ItemGroup>
+		<FrameworkReference Include="Microsoft.WindowsDesktop.App" />
+	</ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-	<ItemGroup>
-		<FrameworkReference Include="Microsoft.WindowsDesktop.App" />
-	</ItemGroup>
+	
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Remove="Controls\**" />
+    <AvaloniaXaml Remove="Controls\**" />
     <AvaloniaXaml Remove="Style\**" />
+    <Compile Remove="Controls\**" />
     <Compile Remove="Style\**" />
+    <EmbeddedResource Remove="Controls\**" />
     <EmbeddedResource Remove="Style\**" />
     <EntityDeploy Remove="Style\**" />
+    <None Remove="Controls\**" />
     <None Remove="Style\**" />
 	 
   </ItemGroup>
@@ -89,6 +95,7 @@
     <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
+    <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.9.0" />
     <PackageReference Include="Indieteur.GlobalHooks" Version="1.0.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
     <PackageReference Include="MessageBox.Avalonia" Version="1.1.1" />
