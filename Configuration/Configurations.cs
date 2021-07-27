@@ -27,6 +27,22 @@ namespace WorkStatus.Configuration
                 return System.Configuration.ConfigurationSettings.AppSettings["ApiBaseLiveUrl"];
             }
         }
+        public static string BaseAppMenuUrlConstant
+        {
+            get
+            {
+                return System.Configuration.ConfigurationSettings.AppSettings["ApiBaseMenuUrl"];
+            }
+        }
+
+        public static string SignUpUrl
+        {
+            get
+            {
+                return System.Configuration.ConfigurationSettings.AppSettings["SignUpUrl"];
+            }
+        }
+
         public static string GetConnectionString(string id = "Default")
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;
@@ -39,7 +55,7 @@ namespace WorkStatus.Configuration
         {
             get
             {
-                return System.Configuration.ConfigurationSettings.AppSettings["ApiLiveUrl"];
+                return System.Configuration.ConfigurationSettings.AppSettings["ApiLiveUrl"];//["DevelopmentServer"];//["ApiLiveUrl"];
             }
         }
 
@@ -146,6 +162,49 @@ namespace WorkStatus.Configuration
             get
             {
                 return "refreshToken";
+            }
+        }
+        #endregion
+        #region ToDoDetail
+        public static string ToDoDetailApiConstant
+        {
+            get
+            {
+                return "todos/edit";
+            }
+        }
+        #endregion
+        #region MarkCompleteToDo
+        public static string MarkCompleteApiConstant
+        {
+            get
+            {
+                return "todos/markComplete";
+            }
+        }
+        #endregion
+        #region ToDoDelete
+        public static string ToDoDeleteApiConstant
+        {
+            get
+            {
+                return "todos/delete";
+            }
+        }
+        #endregion
+        #region AddorEditTodo
+        public static string AddTodoApiConstant
+        {
+            get
+            {
+                return "todos/create";
+            }
+        }
+        public static string EditTodoApiConstant
+        {
+            get
+            {
+                return "todos/update";
             }
         }
         #endregion

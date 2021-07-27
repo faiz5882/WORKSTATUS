@@ -10,6 +10,7 @@ using Avalonia.Threading;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
@@ -25,11 +26,15 @@ using WorkStatus.Models;
 using WorkStatus.Models.WriteDTO;
 using WorkStatus.Utility;
 using WorkStatus.ViewModels;
+using Image = Avalonia.Controls.Image;
 
 namespace WorkStatus.Views
 {
+    
+
     public class Dashboard : Window
     {
+        private System.Windows.Forms.NotifyIcon m_notifyIcon;
 
         public DashboardViewModel _dashboardVM;
         public DispatcherTimer IsInternet = new DispatcherTimer();
@@ -37,20 +42,40 @@ namespace WorkStatus.Views
         public DispatcherTimer m_screen = new DispatcherTimer();
         public string screenShotTimeinMinutes;
         public static Stopwatch sw = new Stopwatch();
+        Image imgexpanderButton;
         Button btncancel;
         Button btnaddnote;
         ToggleButton tbtn;
         Button btnUpgardeApp;
+        ComboBox ComboToDoFilter;
+        Button MinimizeAppbtn;
+        Button QuitAppbtn;
+        Button CancelAppbtn;
+        ComboBox ProjectListCombobox;
+        ComboBox ToDoListCombobox;
         public Dashboard()
         {
+                       
+            this.HandleWindowStateChanged(WindowState);
+            this.MaxHeight = 630;
+            this.MaxWidth = 1000;
+            this.Position = new PixelPoint(3, 0);
+            this.SizeToContent = SizeToContent.Manual;
             InitializeComponent();
+
+
             _dashboardVM = new DashboardViewModel(this);
             this.DataContext = _dashboardVM;
             var asyncBox1 = this.FindControl<AutoCompleteBox>("projectlist");
             asyncBox1.AsyncPopulator = PopulateAsyncprojectlist;
             var asyncBox = this.FindControl<AutoCompleteBox>("SearchToDo");
             asyncBox.AsyncPopulator = PopulateAsync;
-
+            ComboToDoFilter = this.FindControl<ComboBox>("toDoFilter");
+            ComboToDoFilter.SelectionChanged += ComboToDoFilter_SelectionChanged;
+            ProjectListCombobox = this.FindControl<ComboBox>("projectdropdown");
+            ProjectListCombobox.SelectionChanged += ProjectListCombobox_SelectionChanged;
+            ToDoListCombobox = this.FindControl<ComboBox>("tododropdown");
+            ToDoListCombobox.SelectionChanged += ToDoListCombobox_SelectionChanged;
             btncancel = this.FindControl<Button>("btnCancel");
             btncancel.Click += Btn_Click;
             btnaddnote = this.FindControl<Button>("btnAddNote");
@@ -59,11 +84,33 @@ namespace WorkStatus.Views
             fullPath = ConfigurationManager.AppSettings["WindowsPath"].ToString();
             btnUpgardeApp = this.FindControl<Button>("upgardeapp");
             btnUpgardeApp.Click += BtnUpgardeApp_Click;
-            Closed += Dashboard_Closed;
+            Closing += Dashboard_Closing;
+            MinimizeAppbtn = this.FindControl<Button>("minimizeapp");
+            MinimizeAppbtn.Click += MinimizeAppbtn_Click;
+            QuitAppbtn = this.FindControl<Button>("quitapp");
+            QuitAppbtn.Click += QuitAppbtn_Click;
+            CancelAppbtn = this.FindControl<Button>("cancelapp");
+            CancelAppbtn.Click += CancelAppbtn_Click;
+            //IdleTimeCheckbox = this.FindControl<CheckBox>("IdleTimeCheckbox");
+            //IdleTimeCheckbox.Checked += IdleTimeCheckbox_Checked;
+            //IdleTimeCheckbox.Unchecked += IdleTimeCheckbox_Unchecked;
 
+            //ReassignBtn = this.FindControl<Button>("ReassignBtn");
+            //ReassignBtn.Click += ReassignBtn_Click;
+            //StopBtn = this.FindControl<Button>("StopBtn");
+            //StopBtn.Click += StopBtn_Click;
+            //ContinueBtn = this.FindControl<Button>("ContinueBtn");
+            //ContinueBtn.Click += ContinueBtn_Click;
+
+            //RemeberMeBox = this.FindControl<CheckBox>("remembermecheckbox");
+            //RemeberMeBox.Checked += RemeberMeBox_Checked;
+            //RemeberMeBox.Unchecked += RemeberMeBox_Unchecked;
+
+            //this.Width = 400;
             IsInternet.Interval = TimeSpan.FromMinutes(Convert.ToInt32(1));
             IsInternet.Tick += IsInternet_Tick;
             IsInternet.Start();
+           
             // ListBox lstbox = this.FindControl<ListBox>("LayoutRoot");
             //lstbox.SelectionChanged += Lstbox_SelectionChanged;
             //var themes = this.Find<TextBox>("textOutput");
@@ -83,6 +130,155 @@ namespace WorkStatus.Views
             this.AttachDevTools();
 #endif
         }
+
+        private void ProjectListCombobox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                _dashboardVM.IdleSelectedProject = (tbl_Organisation_Projects)e.AddedItems[0];
+                _dashboardVM.BindUseToDoListforComboBox(_dashboardVM.IdleSelectedProject.ProjectId);
+            }
+            catch (Exception ex)
+            {
+                LogFile.ErrorLog(ex);
+            }
+        }
+        private void ToDoListCombobox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                _dashboardVM.IdleSelectedProjectToDo = (tbl_ServerTodoDetails)e.AddedItems[0];
+                if (_dashboardVM.IdleSelectedProjectToDo == null)
+                    _dashboardVM.IdleSelectedProjectToDo.Id = 0;
+            }
+            catch (Exception ex)
+            {
+                LogFile.ErrorLog(ex);
+            }
+        }
+
+        #region Quit App PopUp Clicks
+        private void RemeberMeBox_Unchecked(object? sender, RoutedEventArgs e)
+        {
+            _dashboardVM.RemeberMe = false;
+        }
+
+        private void RemeberMeBox_Checked(object? sender, RoutedEventArgs e)
+        {
+            _dashboardVM.RemeberMe = true;
+        }
+
+        private void CancelAppbtn_Click(object? sender, RoutedEventArgs e)
+        {
+            _dashboardVM.IsCancelAppBtn = _dashboardVM.RemeberMe ? true : false;
+            _dashboardVM.IsDashBoardClose = false;
+            _dashboardVM.IsDashBoardQuitAlert = false;
+        }
+        private async void QuitAppbtn_Click(object? sender, RoutedEventArgs e)
+        {
+            _dashboardVM.IsQuitAppBtn = _dashboardVM.RemeberMe ? true : false;
+            _dashboardVM.IsDashBoardClose = true;
+            Close();
+
+        }
+        private void MinimizeAppbtn_Click(object? sender, RoutedEventArgs e)
+        {
+            _dashboardVM.IsMiniMizeAppBtn = _dashboardVM.RemeberMe ? true : false;
+            _dashboardVM.IsDashBoardClose = false;
+            _dashboardVM.IsDashBoardQuitAlert = false;
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Minimized;
+            }
+            else
+            {
+                WindowState = WindowState.Normal;
+                WindowState = WindowState.Minimized;
+            }
+
+        }
+        private async void Dashboard_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                if (!e.Cancel && !_dashboardVM.IsDashBoardClose)
+                {
+                    if (_dashboardVM.IsSignOut)
+                    {
+                        e.Cancel = false;
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                        _dashboardVM.IsDashBoardClose = true;
+                        _dashboardVM.IsDashBoardQuitAlert = true;
+                    }
+
+                }
+                else
+                {
+                    _dashboardVM.IsDashBoardClose = false;
+                    _dashboardVM.IsDashBoardQuitAlert = false;
+                    _dashboardVM.ClosedAllTimer();
+                    await _dashboardVM.SendIntervalToServer();
+                    if (_dashboardVM.IsMiniMizeAppBtn)
+                    {
+                        _dashboardVM.IsMiniMizeAppBtn = false;
+                    }
+                    if (_dashboardVM.IsQuitAppBtn)
+                    {
+                        _dashboardVM.IsQuitAppBtn = false;
+                    }
+                    if (_dashboardVM.IsCancelAppBtn)
+                    {
+                        _dashboardVM.IsCancelAppBtn = false;
+                    }
+                    e.Cancel = false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                LogFile.ErrorLog(ex);
+            }
+        }
+
+        #endregion
+        
+        private void ComboToDoFilter_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var value = ((Avalonia.Controls.ComboBoxItem)(e.AddedItems)[0]).Content;
+
+                if (value.ToString() == "Pending")
+                {
+                    List<tbl_ServerTodoDetails> GetToDoList = _dashboardVM.GetToDoListTemp;
+                    GetToDoList = GetToDoList.FindAll(i => i.IsCompleted == 0);
+                    _dashboardVM.ToDoListData = new ObservableCollection<tbl_ServerTodoDetails>(GetToDoList);
+
+                }
+                else if (value.ToString() == "Completed")
+                {
+                    List<tbl_ServerTodoDetails> GetToDoList = _dashboardVM.GetToDoListTemp;
+                    GetToDoList = GetToDoList.FindAll(i => i.IsCompleted == 1);
+                    _dashboardVM.ToDoListData = new ObservableCollection<tbl_ServerTodoDetails>(GetToDoList);
+
+                }
+                else if (value.ToString() == "All Todo's")
+                {
+                    List<tbl_ServerTodoDetails> GetToDoList = _dashboardVM.GetToDoListTemp;
+                    _dashboardVM.ToDoListData = new ObservableCollection<tbl_ServerTodoDetails>(GetToDoList);
+
+                }
+                _dashboardVM.AddZebraPatternToToDoList();
+            }
+            catch (Exception ex)
+            {
+                LogFile.ErrorLog(ex);
+            }
+        }
+
         private void BtnUpgardeApp_Click(object? sender, RoutedEventArgs e)
         {
             var url = Common.Storage.AppDownload_Link;
@@ -97,8 +293,8 @@ namespace WorkStatus.Views
         {
             try
             {
-
-
+                _dashboardVM.IsAddnoteStatus = false;
+                _dashboardVM.AddnoteStatus = "";
                 _dashboardVM.AddNotesAPICall();
                 tbtn.IsChecked = false;
                 _dashboardVM.Notes = "";
@@ -139,22 +335,23 @@ namespace WorkStatus.Views
             try
             {
                 PopupNotifier popup = new PopupNotifier();
-                popup.TitleText = "          WorkStatus";
-                popup.TitleColor = System.Drawing.Color.White;
-                popup.TitleFont = new System.Drawing.Font("Tahoma", 14F);
+                popup.TitleText = "WORKSTATUS";
+                popup.TitleColor = Color.White;
+                popup.TitleFont = new Font("Tahoma", 13F);
                 popup.BodyColor = Color.FromArgb(33, 26, 35);
                 popup.ContentColor = Color.White;
                 popup.ContentText = popupMessage;
                 popup.Image = LoadEmbeddedResources("/Assets/LogoSmall.ico");
-                popup.ImageSize = new System.Drawing.Size(42, 42);
-                popup.ContentFont = new System.Drawing.Font("Tahoma", 11F);
+                popup.ImageSize = new System.Drawing.Size(30, 25);
+                popup.ContentFont = new Font("Tahoma", 13F);
                 popup.Size = new System.Drawing.Size(350, 75);
                 popup.ShowGrip = false;
                 popup.HeaderHeight = 2;
-                popup.AnimationDuration = 2000;
+                popup.AnimationDuration = 5000;
                 popup.AnimationInterval = 1;
                 popup.HeaderColor = Color.FromArgb(33, 26, 35);
                 popup.ShowCloseButton = false;
+                System.Media.SystemSounds.Asterisk.Play();
                 popup.Popup();
             }
             catch (Exception ex)
@@ -162,7 +359,6 @@ namespace WorkStatus.Views
                 var msg = ex.Message;
             }
         }
-
         private void GetScreenShots(object? sender, EventArgs e)
         {
             if (!_dashboardVM.IsPlaying && _dashboardVM.IsStop && !Common.Storage.IsScreenShotCapture)
@@ -185,8 +381,6 @@ namespace WorkStatus.Views
                     ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
                     var jpegCodecInfo = codecs.Single(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
                     string orgPath = Common.Storage.CurrentOrganisationName + @"\" + _dashboardVM.HeaderProjectName + @"\";
-
-                    //C:\Projects\2021\CompanyProject\WorkStatus\Screenshots\\TestNewV3\\20210517070641.jpg
                     string directoryPath = fullPath + orgPath;
                     string updatedPath = directoryPath.Replace("|", "_");
                     updatedPath = directoryPath.Replace(" ", "");
@@ -214,26 +408,34 @@ namespace WorkStatus.Views
                     byte[] ImageData = System.IO.File.ReadAllBytes(filename);
                     ScreenShotRequestModel model = new ScreenShotRequestModel() { screenshot = filename };
                     _dashboardVM.SendScreenShotsToServer(filename, ImageData);
+                    if (Common.Storage.ScreenURl != null && Common.Storage.ScreenURl != "")
+                    {
+                        if (File.Exists(Path.Combine(directoryPath, filename)))
+                        {
+                            // If file found, delete it    
+                            File.Delete(Path.Combine(directoryPath, filename));
+                        }
+                    }
                     // api call
-                    GetNotification("     Screenshot taken");
+                    GetNotification("WorkStatus\nScreen Captured");
+                    //D:\Projects\Workstatus\WorkStatus24062021\WorkStatus\Screenshots\
                 }
                 catch (Exception ex)
                 {
                     var msg = ex.Message;
                     LogFile.ErrorLog(ex);
-                    //await MyMessageBox.Show(this, APIExceptionMessage, MessageBoxTitle, MyMessageBox.MessageBoxButtons.Ok);
                 }
                 finally
                 {
-                    // GetRelease();
                 }
             }
         }
-        private void Dashboard_Closed(object? sender, EventArgs e)
+        private async void Dashboard_Closed(object? sender, EventArgs e)
         {
             try
-            {
+            {                
                 _dashboardVM.ClosedAllTimer();
+                await _dashboardVM.SendIntervalToServer();
             }
             catch (Exception ex)
             {
@@ -255,32 +457,31 @@ namespace WorkStatus.Views
         }
         private async void ReportError_Click(object sender, RoutedEventArgs e)
         {
-            var url = Configuration.Configurations.BaseAppUrlConstant + "contact";
+            var url = Configuration.Configurations.BaseAppMenuUrlConstant + "contact";
             NavigateToBrowser(url);
         }
         private async void Help_Click(object sender, RoutedEventArgs e)
         {
-            var url = Configuration.Configurations.BaseAppUrlConstant + "faq";
+            var url = Configuration.Configurations.BaseAppMenuUrlConstant + "faq";
             NavigateToBrowser(url);
         }
         private async void AboutUs_Click(object sender, RoutedEventArgs e)
         {
-            var url = Configuration.Configurations.BaseAppUrlConstant + "about";
+            var url = Configuration.Configurations.BaseAppMenuUrlConstant + "about";
             NavigateToBrowser(url);
         }
-
         private async void SignOut_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-
-
                 _dashboardVM.ClosedAllTimer();
                 await _dashboardVM.SendIntervalToServer();
                 BaseService<tbl_Temp_SyncTimer> service2 = new BaseService<tbl_Temp_SyncTimer>();
                 service2.Delete(new tbl_Temp_SyncTimer());
                 BaseService<tbl_TempSyncTimerTodoDetails> service3 = new BaseService<tbl_TempSyncTimerTodoDetails>();
                 service3.Delete(new tbl_TempSyncTimerTodoDetails());
+                BaseService<tbl_UserDetails> service4 = new BaseService<tbl_UserDetails>();
+                service4.Delete(new tbl_UserDetails());
                 ChangeDashBoardWindow();
             }
             catch (Exception ex)
@@ -292,10 +493,7 @@ namespace WorkStatus.Views
         private async void Quit_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-
-                _dashboardVM.ClosedAllTimer();
-                await _dashboardVM.SendIntervalToServer();
+            {              
                 this.Close();
             }
             catch (Exception ex)
@@ -303,7 +501,6 @@ namespace WorkStatus.Views
                 LogFile.ErrorLog(ex);
             }
         }
-
         private void NavigateToBrowser(string url)
         {
             Process.Start(new ProcessStartInfo
@@ -325,6 +522,7 @@ namespace WorkStatus.Views
                     var window = new Login();
                     var prevwindow = desktop.MainWindow;
                     desktop.MainWindow = window;
+                    _dashboardVM.IsSignOut = true;
                     desktop.MainWindow.Show();
                     prevwindow.Close();
                     prevwindow = null;
@@ -470,6 +668,140 @@ namespace WorkStatus.Views
 
         }
 
+        #region MiniMize/Maximize App
+        protected override void HandleWindowStateChanged(WindowState state)
+        {
+            if (state == WindowState.Maximized)
+            {
+                if (this.FindControl<Button>("btntoggle").IsVisible == false)
+                {
+                    this.Width = 400;
+                    this.Height = 250;
+                }
+                else
+                {
+                    if (this.FindControl<Button>("btntoggle").Background == Avalonia.Media.Brushes.DodgerBlue || this.FindControl<Button>("btntoggle").Background == Avalonia.Media.Brushes.DarkBlue)
+                    {
+                        this.Width = 365;
+                        this.Height = 630;
+                    }
+                    else
+                    {
+                        this.Width = 1000;
+                        this.Height = 630;
+                    }
+
+                }
+            }
+            if (state == WindowState.Normal)
+            {
+                this.SizeToContent = SizeToContent.Manual;
+                this.Width = 358;
+                this.Height = 630;
+            }
+        }
+        private async void MinimizeItem_click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (((Avalonia.Controls.Primitives.ToggleButton)sender).IsChecked == true)
+                {
+                    this.Height = 250;
+                    this.Width = 355;
+
+                    this.FindControl<Grid>("TopLeftGrid").IsVisible = true;
+                    this.FindControl<Grid>("MidLeftGrid").IsVisible = false; ;
+                    this.FindControl<Grid>("BottomLeftGrid").IsVisible = true;
+                    this.FindControl<Grid>("grdCenter").IsVisible = false;
+                    this.FindControl<Grid>("grdRight").IsVisible = false;
+                    this.FindControl<Button>("btntoggle").IsVisible = false;
+                    this.FindControl<Button>("btntoggle1").IsVisible = true;
+                    this.FindControl<Grid>("gridLeft").RowDefinitions[0].Height = new GridLength(220, GridUnitType.Pixel);
+                    this.FindControl<Grid>("gridLeft").RowDefinitions[1].Height = new GridLength(0, GridUnitType.Pixel);
+                    this.FindControl<Grid>("gridLeft").RowDefinitions[2].Height = new GridLength(30, GridUnitType.Pixel);
+                }
+                else
+                {
+                    this.Height = 630;
+                    this.Width = 358;
+                    this.FindControl<Grid>("TopLeftGrid").IsVisible = true;
+                    this.FindControl<Grid>("MidLeftGrid").IsVisible = true;
+                    this.FindControl<Grid>("BottomLeftGrid").IsVisible = true;
+                    this.FindControl<Grid>("grdCenter").IsVisible = true;
+                    this.FindControl<Grid>("grdRight").IsVisible = true;
+                    this.FindControl<ToggleButton>("btntoggle").IsVisible = true;
+                    this.FindControl<ToggleButton>("btntoggle1").IsVisible = true;
+                    this.FindControl<Grid>("gridLeft").RowDefinitions[0].Height = new GridLength(200, GridUnitType.Pixel);
+                    this.FindControl<Grid>("gridLeft").RowDefinitions[1].Height = new GridLength(400, GridUnitType.Pixel);
+                    this.FindControl<Grid>("gridLeft").RowDefinitions[2].Height = new GridLength(30, GridUnitType.Pixel);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+
+
+        }
+        private async void ExpanderItem_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (((Avalonia.Controls.Primitives.ToggleButton)sender).IsChecked == true)
+                {
+                    Avalonia.Media.Imaging.Bitmap AvIrBitmap;
+                    var LeftArrowImage = LoadEmbeddedResources("/Assets/arrowhead-right.png");
+                    Bitmap PlayPauseToDoButton;
+                    PlayPauseToDoButton = LeftArrowImage;
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        PlayPauseToDoButton.Save(memory, ImageFormat.Png);
+                        memory.Position = 0;
+
+                        //AvIrBitmap is our new Avalonia compatible image. You can pass this to your view
+                        AvIrBitmap = new Avalonia.Media.Imaging.Bitmap(memory);
+                    }
+
+                    imgexpanderButton = (Image)((Avalonia.Controls.ContentControl)sender).Content;
+                    imgexpanderButton.Source = AvIrBitmap;
+                    // this.FindControl<Button>("btntoggle").Background = Avalonia.Media.Brushes.Pink;
+                    this.Height = 630;
+                    this.Width = 1000;
+                }
+                else
+                {
+
+                    Avalonia.Media.Imaging.Bitmap AvIrBitmap;
+                    var RightArrowImage = LoadEmbeddedResources("/Assets/arrowhead-right-white.png");
+                    Bitmap PlayPauseToDoButton;
+                    PlayPauseToDoButton = RightArrowImage;
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        PlayPauseToDoButton.Save(memory, ImageFormat.Png);
+                        memory.Position = 0;
+
+                        //AvIrBitmap is our new Avalonia compatible image. You can pass this to your view
+                        AvIrBitmap = new Avalonia.Media.Imaging.Bitmap(memory);
+                    }
+
+                    imgexpanderButton = (Image)((Avalonia.Controls.ContentControl)sender).Content;
+                    imgexpanderButton.Source = AvIrBitmap;
+                    // this.FindControl<Button>("btntoggle").Background = Avalonia.Media.Brushes.Darklue;
+                    this.Height = 630;
+                    this.Width = 358;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                //await MyMessageBox.Show(this, APIExceptionMessage, MessageBoxTitle, MyMessageBox.MessageBoxButtons.Ok);
+            }
+
+        }
+
+        #endregion
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);

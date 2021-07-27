@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Avalonia.Controls;
+using Avalonia.Threading;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using WorkStatus.Models.ReadDTO;
 
 namespace WorkStatus.Common
 {
@@ -39,7 +42,6 @@ namespace WorkStatus.Common
         public static string CurrentProjectName { get; set; }
         public static int CurrentProjectId { get; set; }
         public static bool IsActivityCall { get; set; }
-
         public static string GetAppVersion()
         {
             string version = null;
@@ -47,7 +49,7 @@ namespace WorkStatus.Common
             {
                 string v = Assembly.GetEntryAssembly().GetName().Version.ToString();
                 string[] s = v.Split(".");
-                version = "Version " + s[0] + "." + s[1] + " (901)";
+                version = "Version " + s[0] + "." + s[1] + " (907)";
             }
             catch (Exception ex)
             {
@@ -60,14 +62,24 @@ namespace WorkStatus.Common
         public static string ScreenURl { get; set; }
         public static string LoginId { get; set; }
         public static string LoginUserID { get; set; }
-
-
         public static int ActivityIntervel { get; set; }
-
         public static int KeyBoradEventCount { get; set; }
         public static int MouseEventCount { get; set; }
         public static int AverageEventCount { get; set; }
-
+        public static string LastProjectEventCountTime { get; set; }
+        public static string LastToDoEventCountTime { get; set; }
+        public static int ContinueProjectEventCountTime { get; set; }
+        public static string ContinueToDoEventCountTime { get; set; }
+        public static string IdleProjectTime { get; set; }
+        public static string IdleToDoTime { get; set; }
         public static bool IsScreenShotCapture { get; set; }
+        public static int Entry { get; set; }
+        public static string StopTimeForDB { get; set; }
+        public static string LastStopTimeForDB { get; set; }
+        public static int EditToDoId { get; set; }
+        public static string AddOrEditToDoProjectName { get; set; }
+        public static int AddOrEditToDoProjectId { get; set; }
+
+        public static ToDoDetailsData EdittodoData;
     }
 }

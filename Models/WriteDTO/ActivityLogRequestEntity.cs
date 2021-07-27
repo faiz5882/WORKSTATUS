@@ -30,6 +30,7 @@ namespace WorkStatus.Models.WriteDTO
         public Location location { get; set; }
         public string screenUrl { get; set; }
         public string from { get; set; }
+        public int Entry { get; set; }
 
     }
     public class AppAndUrl

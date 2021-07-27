@@ -1,19 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-	  
+    <TargetFramework>net5.0-windows</TargetFramework>	  
     <Nullable>enable</Nullable>
     <ApplicationIcon>LogoSmall.ico</ApplicationIcon>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>   
   </PropertyGroup>
   <ItemGroup>
 		<FrameworkReference Include="Microsoft.WindowsDesktop.App" />
 	</ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 	
   <ItemGroup>
@@ -43,8 +44,14 @@
   </ItemGroup>
   
   <ItemGroup>
+    <None Remove="Assets\animation200.gif" />
+    <None Remove="Assets\arrowhead-right-white.png" />
     <None Remove="Assets\arrowhead-right.png" />
+    <None Remove="Assets\attachment.png" />
     <None Remove="Assets\button_blue_play.png" />
+    <None Remove="Assets\calender.png" />
+    <None Remove="Assets\close.png" />
+    <None Remove="Assets\Done.png" />
     <None Remove="Assets\eyehide.png" />    
     <None Remove="Assets\Group_8.png" />
     <None Remove="Assets\Group_9.png" />
@@ -57,7 +64,7 @@
     <None Remove="Assets\Pause.png" />
     <None Remove="Assets\refresh.png" />
     <None Remove="Assets\search.png" />
-    <None Remove="Assets\WorkStatus logo_Minimal-1.png" />
+    <None Remove="Assets\WorkStatuslogo_Minimal_1.png" />
     <None Remove="Assets\WorkStatus_logo.png" />
     <None Remove="Assets\WorkStatus_logo_Minimal.ico" />
     <None Remove="WorkStatusDB.db" />
@@ -97,7 +104,7 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
     <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.9.0" />
     <PackageReference Include="Indieteur.GlobalHooks" Version="1.0.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
     <PackageReference Include="MessageBox.Avalonia" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4" />

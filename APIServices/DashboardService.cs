@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WorkStatus.Configuration;
@@ -182,6 +183,46 @@ namespace WorkStatus.APIServices
                 //MyMessageBox.Show(new Avalonia.Controls.Window(), ex.Message, "Error", MyMessageBox.MessageBoxButtons.Ok);
             }
             return objFPResponse;
+        }
+        public CommonResponseModel ActivityLogAsyncForIdle(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, List<ActivityLogRequestEntity> _objRequest)
+        {
+            // System.Threading.Thread.Sleep(10000);
+            CommonResponseModel objFPResponse = new CommonResponseModel();
+            try
+            {
+                Uri myUri = new Uri(uri, UriKind.Absolute);
+                string strJson = JsonConvert.SerializeObject(_objRequest);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(myUri);
+                request.ContentType = "application/json; charset=utf-8";
+                request.Method = "POST";
+                request.UseDefaultCredentials = true;
+                request.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                if (IsHeaderRequired)
+                {
+                    request.PreAuthenticate = true;
+                    request.Headers.Add("Authorization", "Bearer " + objHeaderModel.SessionID);
+                    request.Headers.Add("OrgID", Common.Storage.ServerOrg_Id);
+                    request.Headers.Add("SDToken", Common.Storage.ServerSd_Token);
+                }
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(strJson);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+                WebResponse response1 = request.GetResponse();
+                var streamReader = new StreamReader(response1.GetResponseStream());
+                var result = streamReader.ReadToEnd();
+                objFPResponse = JsonConvert.DeserializeObject<CommonResponseModel>(result);
+                return objFPResponse;
+            }
+            catch (Exception ex)
+            {
+                LogFile.ErrorLog(ex);
+                //MyMessageBox.Show(new Avalonia.Controls.Window(), ex.Message, "Error", MyMessageBox.MessageBoxButtons.Ok);
+            }
+            return objFPResponse;
+           
         }
         public async Task<CommonResponseModel> ActivityLogAsync(string uri, bool IsHeaderRequired, HeaderModel objHeaderModel, List<ActivityLogRequestEntity> _objRequest)
         {
@@ -447,6 +488,70 @@ namespace WorkStatus.APIServices
                 return objFPResponse = null;
             }
             return objFPResponse;
+        }
+        public async Task<AddorEditToDoResponseModel> AddorEditToDoApiCall(string uri, HeaderModel objHeaderModel, AddOrEditRequestModel ar)
+        {
+            AddorEditToDoResponseModel addToDoResponse = new AddorEditToDoResponseModel();
+            try
+            {
+                if (ar != null)
+                {
+                    if (Common.CommonServices.IsConnectedToInternet())
+                    {
+                        string responseContent = "";
+                        using var form = new MultipartFormDataContent();
+                        HttpClient _httpClient = new HttpClient();
+                        _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", objHeaderModel.SessionID);
+                        _httpClient.DefaultRequestHeaders.Add("OrgID", Common.Storage.ServerOrg_Id);
+                        _httpClient.DefaultRequestHeaders.Add("SDToken", Common.Storage.ServerSd_Token);
+
+                        if (ar.attachments.Count > 0)
+                        {
+                            foreach (HttpContent ht in ar.attachments)
+                            {
+                                form.Add(ht);
+                            }
+                        }
+                        for (int i = 0; i < ar.memberIds.Count; i++)
+                        {
+                            form.Add(new StringContent(ar.memberIds[i]), "memberIds");
+                        }
+                        form.Add(new StringContent(ar.name), "name");
+                        form.Add(new StringContent(ar.description), "description");
+                        DateTime dtStart;
+                        bool isconverted = DateTime.TryParse(ar.startDate, out dtStart);
+                        if (isconverted)
+                        {
+                            form.Add(new StringContent(dtStart.ToString("yyyy-MM-dd")), "startDate");
+                        }
+                        DateTime dtEnd;
+                        bool isconverted1 = DateTime.TryParse(ar.endDate, out dtEnd);
+                        if (isconverted)
+                        {
+                            form.Add(new StringContent(dtEnd.ToString("yyyy-MM-dd")), "endDate");
+                        }
+                        form.Add(new StringContent(ar.privacy), "privacy");
+                        form.Add(new StringContent(ar.site), "site");
+                        form.Add(new StringContent(ar.organization_id), "organization_id");
+                        form.Add(new StringContent(ar.project_id), "project_id");
+                        var response = await _httpClient.PostAsync(uri, form);
+                        response.EnsureSuccessStatusCode();
+                        responseContent = response.Content.ReadAsStringAsync().Result;
+                        addToDoResponse = JsonConvert.DeserializeObject<AddorEditToDoResponseModel>(responseContent);
+                        if (addToDoResponse.response.code == "200")
+                        {
+                            return addToDoResponse;
+                        }
+                    }
+                    return addToDoResponse;
+                }
+                return addToDoResponse;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+                return addToDoResponse;
+            }
         }
     }
 }

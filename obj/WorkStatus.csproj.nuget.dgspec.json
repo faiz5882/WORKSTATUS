@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Work\\vinove\\WorkStatus11062021\\WorkStatus08062021\\WorkStatus.csproj": {}
+    "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\WorkStatus.csproj": {}
   },
   "projects": {
-    "D:\\Work\\vinove\\WorkStatus11062021\\WorkStatus08062021\\WorkStatus.csproj": {
+    "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\WorkStatus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Work\\vinove\\WorkStatus11062021\\WorkStatus08062021\\WorkStatus.csproj",
+        "projectUniqueName": "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\WorkStatus.csproj",
         "projectName": "WorkStatus",
-        "projectPath": "D:\\Work\\vinove\\WorkStatus11062021\\WorkStatus08062021\\WorkStatus.csproj",
+        "projectPath": "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\WorkStatus.csproj",
         "packagesPath": "C:\\Users\\Rudra\\.nuget\\packages\\",
-        "outputPath": "D:\\Work\\vinove\\WorkStatus11062021\\WorkStatus08062021\\obj\\",
+        "outputPath": "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "D:\\Work\\vinove\\WorkStatus11062021\\WorkStatus08062021\\NuGet.Config",
+          "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\NuGet.Config",
           "C:\\Users\\Rudra\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
@@ -73,7 +73,7 @@
             },
             "MaterialDesignThemes": {
               "target": "Package",
-              "version": "[4.0.0, )"
+              "version": "[4.1.0, )"
             },
             "MessageBox.Avalonia": {
               "target": "Package",

@@ -27,6 +27,8 @@ namespace WorkStatus.Models
         [DbColumn]
         public string IsRemember { get; set; }
         [DbColumn]
-        public int OrganisationId { get; set; }        
+        public int OrganisationId { get; set; }
+        [DbColumn]
+        public string ServerToken { get; set; }
     }
 }

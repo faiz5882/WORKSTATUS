@@ -7,7 +7,7 @@ using WorkStatus.Utility;
 
 namespace WorkStatus.Models.WriteDTO
 {
-   public class tbl_KeyMouseTrack_Slot
+   public class tbl_KeyMouseTrack_Slot_Idle
     {
         [DbColumn(IsIdentity = true, IsPrimary = true)]
         public int Id { get; set; }

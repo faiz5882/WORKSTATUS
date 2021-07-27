@@ -1,0 +1,197 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Width="400" Height="560"
+        xmlns:progRings="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+        x:Class="WorkStatus.Views.AddOrEditToDo"
+        Icon="avares://WorkStatus/Assets/LogoSmall.ico"
+        Title="{Binding Title}" HorizontalContentAlignment="Center" CanResize="False">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="30"/>
+      <RowDefinition Height="35"/>
+      <RowDefinition Height="100"/>
+      <RowDefinition Height="50"/>
+      <RowDefinition Height="50"/>
+      <RowDefinition Height="50"/>
+      <RowDefinition Height="70"/>
+      <RowDefinition Height="50"/>
+      <RowDefinition Height="50"/>
+      <RowDefinition Height="10"/>
+    </Grid.RowDefinitions>
+    <TextBlock Grid.Row="0" Text="{Binding HeaderProjectName}" Margin="5,10,0,10" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontWeight="Bold" FontStyle="Normal" FontSize="14"/>
+    
+    <Grid Grid.Row="1" VerticalAlignment="Center" Margin="0,10,0,0">
+      <StackPanel Width="350" Height="35" Background="#FFFFFF">
+        <Border BoxShadow="0 0 1 gray" BorderBrush="Gray" BorderThickness="0" CornerRadius="6" Height="35" Width="345" Background="#FFFFFF">
+          <TextBox Text="{Binding NameAddOrEditTodo}" Watermark="Task" Height="35" Width="345" FontSize="14" BorderBrush="Transparent" BorderThickness="0" VerticalAlignment="Bottom" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" />
+        </Border>
+      </StackPanel>
+    </Grid>
+
+    <Grid Grid.Row="2" VerticalAlignment="Center" Margin="0,30,0,0">
+      <StackPanel Width="350" Height="100" Background="#FFFFFF">  
+        <Border BoxShadow="0 0 1 gray" BorderBrush="Gray" BorderThickness="0" CornerRadius="6" Height="100" Width="345" Background="#FFFFFF">
+          <TextBox  Watermark="Description" Text="{Binding DescriptionAddOrEditTodo}" Height="100" Width="345"  FontSize="14" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" AcceptsReturn="True" TextWrapping="NoWrap" BorderBrush="Transparent" BorderThickness="0" VerticalAlignment="Bottom"/>
+        </Border>
+      </StackPanel>
+    </Grid>
+
+    <Grid Grid.Row="3" Margin="0,30,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="1*"/>
+      </Grid.ColumnDefinitions>
+      <Grid Grid.Column="0">
+        <Border Width="170" Height="35" BoxShadow="0 0 1 gray" BorderBrush="Black" Margin="0,20,0,0" CornerRadius="5"
+                BorderThickness="0" Background="White">
+          <StackPanel Margin="1" Orientation="Horizontal">
+            <CalendarDatePicker x:Name="cdpStartdate" Text="{Binding StartDateAddOrEditTodo,Mode=TwoWay}" Watermark="Start Date" IsTodayHighlighted="True" VerticalContentAlignment="Center" Width="170" Height="35" FontSize="14" BorderThickness="0" BorderBrush="Gray" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
+          </StackPanel>
+        </Border>
+      </Grid>
+      <Grid Grid.Column="1">
+        <Border Width="170" Height="35" BoxShadow="0 0 1 gray" BorderBrush="Gray" Margin="0,20,0,0" CornerRadius="5"
+               BorderThickness="0" Background="White">
+          <StackPanel Margin="1" Orientation="Horizontal">
+            <CalendarDatePicker x:Name="cdpEnddate" Text="{Binding EndDateAddOrEditTodo,Mode=TwoWay}" SelectedDateFormat="Custom" Watermark="End Date" VerticalContentAlignment="Center" Width="170" Height="35" FontSize="14" BorderThickness="0" BorderBrush="Gray" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
+          </StackPanel>
+        </Border>
+      </Grid>
+    </Grid>
+
+    <Grid Grid.Row="4" Margin="0,25,0,0" VerticalAlignment="Center">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="2*"/>
+      </Grid.ColumnDefinitions>
+      <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,0,5">
+        <TextBlock Text="Privacy :" VerticalAlignment="Center" FontSize="14" Foreground="Black" FontWeight="SemiBold"/>
+      </Grid>
+      <Grid Grid.Row="0" Grid.Column="1">
+        <RadioButton GroupName="Privacy" Content="Public" VerticalContentAlignment="Center" 
+                     IsChecked="{Binding IsPublicCheck,Mode=TwoWay}" 
+                     FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" 
+                     Height="30" FontSize="14" FontWeight="Normal" Foreground="Black"/>
+      </Grid>
+      <Grid Grid.Row="0" Grid.Column="2">
+        <RadioButton GroupName="Privacy" Content="Private" VerticalContentAlignment="Center" 
+                     IsChecked="{Binding IsPrivateCheck,Mode=TwoWay}" 
+                     FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" 
+                     Height="30" FontSize="14" FontWeight="Normal" Foreground="Black" />
+      </Grid>
+    </Grid>
+
+    <Grid Grid.Row="5" Margin="0,0,0,0" VerticalAlignment="Center">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="2*"/>
+      </Grid.ColumnDefinitions>
+      <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,0,5">
+        <TextBlock Text="Site :" VerticalAlignment="Center" FontSize="14"  Foreground="Black" FontWeight="SemiBold"/>
+      </Grid>
+      <Grid Grid.Row="0" Grid.Column="1">
+        <RadioButton GroupName="Site" Content="On-Site" VerticalContentAlignment="Center" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" IsChecked="{Binding IsOnSiteCheck,Mode=TwoWay}" Height="27" FontSize="14" FontWeight="Normal" Foreground="Black"/>
+      </Grid>
+      <Grid Grid.Row="0" Grid.Column="2">
+        <RadioButton GroupName="Site" VerticalContentAlignment="Center" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Content="Off-Site" IsChecked="{Binding IsOffSiteCheck,Mode=TwoWay}" Height="27" FontSize="14" FontWeight="Normal" Foreground="Black" />
+      </Grid>
+    </Grid>
+
+    <Grid Grid.Row="6" Margin="0,0,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="3*"/>
+      </Grid.ColumnDefinitions>
+      <Grid Grid.Column="0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="2*"/>
+          <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+          <Button Background="White" BorderBrush="Gray" BorderThickness="1" 
+                  Content="Upload Files" Width="150" Height="35"
+                  Command="{Binding UploadAttachments}"
+                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                  VerticalAlignment="Center" FontStyle="Normal" FontSize="14" Foreground="Black" 
+                  FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
+        </Grid>
+        <Grid Grid.Row="1" VerticalAlignment="Top">
+          <TextBlock x:Name="lblInfo" Text="(Image and PDF only)" Margin="100,0,0,0" Width="150"
+                     FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" 
+                     FontWeight="SemiBold"  FontSize="10" Foreground="Black" HorizontalAlignment="Center"/>
+        </Grid>
+      </Grid>
+    </Grid>
+    
+    <Grid Grid.Row="7" Margin="0,0,0,0">
+      <ItemsControl Items="{Binding ToDoAttachmentListData}" Background="White" Margin="5,0,0,0">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Orientation="Horizontal" Height="50" Width="50" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,5,0,5">
+              <Grid>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="10"/>
+                  <RowDefinition Height="15"/>
+                  <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Command="{Binding $parent[ItemsControl].DataContext.CommandDeleteAttachment}" CommandParameter="{Binding ImageName}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="10" Width="30" Margin="-7,0,0,0" Cursor="Hand" Background="Transparent" Foreground="Transparent">
+                  <Image Source="/Assets/close.png" Height="10" />
+                </Button>
+                <Image Grid.Row="1" Source="/Assets/attachment.png" Height="15" Margin="5,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBlock Grid.Row="2" Text="{Binding ImageName}" FontSize="7" Height="23" Width="45" FontWeight="Bold" Foreground="White" Margin="2,0,2,0" TextWrapping="Wrap" TextAlignment="Center" TextTrimming="CharacterEllipsis"/>
+              </Grid>
+          </StackPanel>
+        </DataTemplate>
+        </ItemsControl.ItemTemplate>
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+      </Grid>
+
+    <Grid Grid.Row="8" Margin="0,0,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="1*"/>
+      </Grid.ColumnDefinitions>
+      <Grid Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,35,0">
+        <Button Classes="toolbar1" x:Name="btnSave" Content="Save ToDo" 
+                Command="{Binding SaveToDo}" IsEnabled="{Binding IsButtonClick}"
+                FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" 
+                Background="#1665D8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                Width="140" Height="35" FontSize="15" Foreground="White" FontWeight="SemiBold" BorderBrush="#1665D8"
+                Margin="0,0,0,0"/>
+      </Grid>
+      <Grid Grid.Column="1" HorizontalAlignment="Left">
+        <Button Classes="toolbar" x:Name="btnCancel" Content="Cancel"
+                Command="{Binding CancelToDo}" IsEnabled="{Binding IsButtonClick}"
+                FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" 
+                Background="White" Width="140" Height="35" FontSize="15" Foreground="Black" FontWeight="SemiBold" 
+                BorderBrush="#1665D8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+      </Grid>
+    </Grid>
+
+    <Grid Grid.Row="9" Margin="0,-8,0,0">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="50"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <!--<progRings:ProgressRing x:Name="addoredittodopgr" Grid.Column="0" Width="30" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+        <TextBlock x:Name="errorStatus" Grid.Column="1" Text="{Binding TextStatusAddOrEditToDo}" FontSize="15" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" FontStyle="Normal" FontWeight="Bold" Foreground="{Binding InfoColor,Mode=TwoWay}" Opacity="0.8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+      </Grid>
+    </Grid>
+  </Grid>
+</Window>

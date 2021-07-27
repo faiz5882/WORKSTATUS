@@ -40,16 +40,17 @@ namespace WorkStatus.Models.WriteDTO
         public string Privacy { get; set; }
         [DbColumn]
         public string Site { get; set; }
-       
         public string Member_Id { get; set; }
         public SolidColorBrush SiteColor { get; set; }
 
         public bool ToDoPlayIcon { get; set; }
         public bool ToDoStopIcon { get; set; }
+        public bool ToDoCompleteIcon { get; set; }
         public bool ToDoStopIsEnabled { get; set; }
         public bool ToDoPlayIsEnabled { get; set; }
-
-
+		public List<string> AttachmentImage { get; set; }
+        public bool IsMarkComplete { get; set; }
+        public bool IsOnlyDeleteVisible { get; set; }
 
     }
 }

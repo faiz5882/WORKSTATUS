@@ -49,6 +49,18 @@ namespace WorkStatus.Configuration
         }
         #endregion
 
+        #region ToDoEdit/MarkComplete/Delete
+        public string ToDoDetails(string BaseUrl, int taskid)
+        {
+            return string.Format("{0}/{1}?organization_id={2}", BaseUrl, taskid,Common.Storage.CurrentOrganisationId);
+        }
+
+        public string GetToDoMarkCompleteorDeleteURL(string BaseUrl, int todoID, int orgId)
+        {
+            return string.Format("{0}/{1}?org_id={2}", BaseUrl, todoID, orgId);
+        }
+        #endregion
+
         #region Screenshot
         public string ScreenshotApi(string BaseUrl)
         {

@@ -98,7 +98,43 @@ namespace WorkStatus.Utility
             string qry = "DELETE FROM tbl_Timer where Sno=" + Sno;
             ExecuteGet(qry.ToString());
         }
-       
+        public void DeleteToDoAttachments()
+        {
+            try
+            {
+                string qry = "DELETE FROM tbl_ToDoAttachments";
+                Execute(qry.ToString());
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        public void UpdateToDoListTable(int todoId)
+        {
+            try
+            {
+
+                string qry = "update tbl_ServerTodoDetails set  IsCompleted = 1  where Id =" + "" + todoId;
+                Execute(qry.ToString());
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        public void DeleteSelectedToDoData(int todoId)
+        {
+            try
+            {
+                string qry = "DELETE FROM tbl_ServerTodoDetails where Id =" + "" + todoId;
+                Execute(qry.ToString());
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
         public void UpdateNotes(long Id)
         {
             try
@@ -320,6 +356,33 @@ namespace WorkStatus.Utility
                 //string qry = "update tbl_Timer set  Stop=" + "'" + StopTime + "'" +" where Sno=" + "'" + ProjectId + "'" + " and OrgId=" + "'" + OrgId + "'" + " and Start=" + "'" + oldTime + "'" + "";
                 string qry = "update tbl_Timer set  Stop=" + "'" + StopTime + "'" + " where Sno=" + "" + sno + "";
 
+                Execute(qry.ToString());
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void UpdateProjectIdandToDoIdToDB(string StartTime, string IdleProjectId, int IdleToDoId, long sno)
+        {
+            try
+            {
+                string qry = "update tbl_Timer set Start=" + "'" + StartTime + "'" + ", ProjectId =" + "'" + IdleProjectId + "'" + ", ToDoId=" + "'" + IdleToDoId + "'" + " where Sno=" + "" + sno + "";
+                Execute(qry.ToString());
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        public void UpdateSlot_IdleStartTimeToDB(string StartTime, int sno)
+        {
+            try
+            {
+                string qry = "update tbl_KeyMouseTrack_Slot_Idle set Start=" + "'" + StartTime + "'" + " where Id=" + "" + sno + "";
                 Execute(qry.ToString());
             }
             catch (Exception ex)

@@ -27,6 +27,9 @@ using Avalonia;
 using Avalonia.Threading;
 using Window = Avalonia.Controls.Window;
 using Application = Avalonia.Application;
+using AvaloniaProgressRing;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace WorkStatus.ViewModels
 {
@@ -44,11 +47,13 @@ namespace WorkStatus.ViewModels
         private readonly IAccounts _services;
         bool isWindows = false;
         bool isMac = false;
+        public ProgressRing LoginLoder;
         public LoginDTOEntity _loginEntity { get; set; }
         private tbl_UserDetails user;
         #region All ReactiveCommand
         public ReactiveCommand<Unit, Unit> CommandLogin { get; }
         public ReactiveCommand<Unit, Unit> CommandForgotPassword { get; }
+        public ReactiveCommand<Unit, Unit> CommandSignUp { get; }
         #endregion
         #region constructor       
         public LoginViewModel(Window window)
@@ -57,28 +62,22 @@ namespace WorkStatus.ViewModels
             ThemeManager = new ThemeManager();
             _services = new AccountService();
             CommandLogin = ReactiveCommand.Create(Login);
+            CommandSignUp = ReactiveCommand.Create(SignUp);
             CommandForgotPassword = ReactiveCommand.Create(NavigateToForgotPasswordScreen);
             _loginResponse = new LoginResponse();
             StackPanelLogo = ThemeManager.StackPanelLogoColor;
             TxtWelcomeColor = ThemeManager.TxtWelcomeColor;
             tt = _Window.FindControl<TextBlock>("errorStatus");
+            LoginLoder = _Window.FindControl<ProgressRing>("loginloder");
+
+            LoginLoder.IsVisible = false;
+            IsLoginEnable = true;
             //BuildConnectionString();
 
-            //email = "vijayuser1@yopmail.com";
-            // password = "Tester#123
-            //email = "amit@yopmail.com";
-           // password = "Tester#123";
-           // email = "gauravpm@yopmail.com";
-           // password = "Tester#1234";
-            //email = "testsonam@yopmail.com";
-            //password = "Sonam@123";
-            // email = "manik1@yopmail.com";
-            //  password = "Tester#1234";
-
-            //email = "vishad.kaushik@pixelcrayons.com";
-            // password = "Vishad@123";
-
-
+            //email = "sonamsoftdev@yopmail.com";
+           // password = "sonam@123";
+            //email = "ownerdevy@yopmail.com";
+            //password = "Test@12345";
             isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
             isMac = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
 
@@ -87,6 +86,20 @@ namespace WorkStatus.ViewModels
 
         #endregion
         #region Methods  
+        public void SignUp()
+        {
+            var url = Configuration.Configurations.SignUpUrl;
+            NavigateToBrowser(url);
+        }
+        private void NavigateToBrowser(string url)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? url : "open",
+                CreateNoWindow = true,
+                UseShellExecute = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            });
+        }
         public void ValidateFormsAndError(string strMessage, int timeOut)
         {
             DateTime oCurrentDate2 = DateTime.Now;
@@ -162,9 +175,12 @@ namespace WorkStatus.ViewModels
         {
             try
             {
+               
+
                 if (string.IsNullOrEmpty(Email))
                 {
-                    ValidateFormsAndError("Email is required!", 5);
+                    ValidateFormsAndError("Email is required!", 5);                   
+
                     return;
                 }
                 else if (string.IsNullOrEmpty(Password))
@@ -174,6 +190,8 @@ namespace WorkStatus.ViewModels
                 }
                 else
                 {
+                    LoginLoder.IsVisible = true;
+                    IsLoginEnable = false;
                     string deviceType = "";
 
                     loginRequestDTO = new LoginRequestDTOEntity()
@@ -189,15 +207,18 @@ namespace WorkStatus.ViewModels
                     {
                         if (_loginResponse.Response.Code == "200")
                         {
+                           
+                            
                             BaseService<tbl_UserDetails> dbService = new BaseService<tbl_UserDetails>();
                             dbService.Delete(new tbl_UserDetails());
+                           // BaseService<tbl_IdleTimeDetails> dbService2= new BaseService<tbl_IdleTimeDetails>();
+                           // dbService2.Delete(new tbl_IdleTimeDetails());
+                            
                             Common.Storage.TokenId = _loginResponse.Response.Data.Token;
                             Common.Storage.ServerOrg_Id = _loginResponse.Response.Data.Org_Id;
                             Common.Storage.ServerSd_Token = _loginResponse.Response.Data.Sd_Token;
                             Common.Storage.LoginId = _loginResponse.Response.Data.Email;
                             Common.Storage.LoginUserID = _loginResponse.Response.Data.Id.ToStrVal();
-
-
                             user = new tbl_UserDetails()
                             {
                                 UserId = _loginResponse.Response.Data.Id,
@@ -206,46 +227,61 @@ namespace WorkStatus.ViewModels
                                 Token = _loginResponse.Response.Data.Token,
                                 CreatedOn = Convert.ToString(DateTime.Now),
                                 UpdatedOn = Convert.ToString(DateTime.Now),
-                                IsRemember = "true"
+                                IsRemember = "true",
+                                ServerToken = _loginResponse.Response.Data.Sd_Token,
+                                OrganisationId = _loginResponse.Response.Data.Org_Id.ToInt32()
                             };
+
+                            //tbl_IdleTimeDetails tbl_Idle = new tbl_IdleTimeDetails() {
+                            //    Sno = 0,
+                            //    IsActive = 0,
+                            //    ProjectId = 2,
+                            //    UserId = 19,
+                            //    CreatedOn =Convert.ToString(DateTime.Now),
+                            //    ProjectIdleTime=""
+                            //};
+
+                            //   BaseService<tbl_IdleTimeDetails> dbService4 = new BaseService<tbl_IdleTimeDetails>();
+                            // dbService4.Add(tbl_Idle);
+
+
                             long userID = new UserLoginSqliteService().InsertUser(user);
                             if (userID > 0)
                             {
-                                BaseService<tbl_Temp_SyncTimer> service2 = new BaseService<tbl_Temp_SyncTimer>();
-                                service2.Delete(new tbl_Temp_SyncTimer());
-                                BaseService<tbl_TempSyncTimerTodoDetails> service3 = new BaseService<tbl_TempSyncTimerTodoDetails>();
-                                service3.Delete(new tbl_TempSyncTimerTodoDetails());
+                                LoginLoder.IsVisible = false;
+                                IsLoginEnable = true;
 
-                                ChangeDashBoardWindow();
-                                //var dialog = new Dashboard();
-                                //var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-                                //await dialog.ShowDialog(mainWindow);
+                                // BaseService<tbl_Temp_SyncTimer> service2 = new BaseService<tbl_Temp_SyncTimer>();
+                                //service2.Delete(new tbl_Temp_SyncTimer());
+                                //BaseService<tbl_TempSyncTimerTodoDetails> service3 = new BaseService<tbl_TempSyncTimerTodoDetails>();
+                                //service3.Delete(new tbl_TempSyncTimerTodoDetails());
+
+                                ChangeDashBoardWindow();                              
                             }
                         }
                         else
                         {
-
+                            LoginLoder.IsVisible = false;
+                            IsLoginEnable = true;
                             ValidateFormsAndError(_loginResponse.Response.Message, 5);
                             return;
-
-                            //var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager                                
-                            //.GetMessageBoxStandardWindow("Error", _loginResponse.Response.Message, MessageBoxAvaloniaEnums.ButtonEnum.Ok);
-                            //var r = await messageBoxStandardWindow.ShowDialog(_Window);
                         }
                     }
                     else
                     {
+                        LoginLoder.IsVisible = false;
+                        IsLoginEnable = true;
                         ValidateFormsAndError("Something went wrong!. Please try again.", 5);
-                        return;
-                        //var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager
-                        //                           .GetMessageBoxStandardWindow("Error", "Something went wrong.", MessageBoxAvaloniaEnums.ButtonEnum.Ok);
-                        //var r = await messageBoxStandardWindow.ShowDialog(_Window);
+                        return;                       
                     }
                 }
             }
             catch (Exception ex)
             {
                 LogFile.ErrorLog(ex);
+                LoginLoder.IsVisible = false;
+                IsLoginEnable = true;
+                ValidateFormsAndError("Something went wrong!. Please try again.", 5);
             }
         }
 
@@ -256,6 +292,16 @@ namespace WorkStatus.ViewModels
         #endregion
 
         #region DataBinding Members
+        private bool _isLoginEnable;
+        public bool IsLoginEnable
+        {
+            get => _isLoginEnable;
+            set
+            {
+                _isLoginEnable = value;
+                RaisePropertyChanged("IsLoginEnable");
+            }
+        }
         private string errorMes;
         public string ErrorMes
         {

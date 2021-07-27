@@ -1,0 +1,67 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="420" d:DesignHeight="160"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        x:Class="WorkStatus.Views.CMessageBox"
+        Height="160" Width="420"
+       Background="{x:Null}"
+      
+        WindowStartupLocation="CenterScreen"
+        Title="CMessageBox">
+  <Border BoxShadow="0 0 1 gray" BorderThickness="0"  Height="160" Width="420" Background="WhiteSmoke" CornerRadius="8,8,8,8" Padding="5">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="1*"/>
+      </Grid.ColumnDefinitions>
+      
+      <Grid Grid.Row="0" Grid.Column="0" Margin="-5" Grid.ColumnSpan="2">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock TextWrapping="Wrap"
+                   TextAlignment="Left" Text="WorkStatus" Background="Gray"
+                   FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
+                   Foreground="Black" FontStyle="Normal" FontSize="14"/>
+        </Grid>
+      <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Row="0" Grid.Column="0" Margin="10,10,10,10" Source="/Assets/WorkStatuslogo_Minimal_1.png" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="70"/>
+        <Grid Grid.Row="0" Grid.Column="1">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
+          <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="Do you want to Quit Workstatus?"
+                     Foreground="#212529" FontStyle="Normal" TextAlignment="Left" FontSize="14"  Margin="5,20,0,0"
+                     FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
+          <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Remember my Choice" IsChecked="{Binding RemeberMe}" Margin="5,10,0,0" FontSize="14" FontStyle="Normal"/>
+          <Button  x:Name="minimizeapp" Click="minimizeapp_Click" Grid.Row="2" Grid.Column="0" Content="Minimize" Margin="20,10,0,0"
+                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center"
+          HorizontalAlignment="Center" FontSize="14" FontWeight="SemiLight" Background="#155fcc" Foreground="White"
+          Width="80" Height="30"/>
+          <Button  x:Name="quitapp" Click="quitapp_Click" Grid.Row="2" Grid.Column="1" Content="Quit" Margin="0,10,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="SemiLight" Background="#155fcc" Foreground="White" Width="80" Height="30"/>
+          <Button  x:Name="cancelapp" Click="cancelapp_Click" Grid.Row="2" Grid.Column="2" Content="Cancel" Margin="5,10,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="SemiLight" Background="#155fcc" Foreground="White" Width="80" Height="30"/>
+        </Grid>
+      </Grid>
+    </Grid>
+  </Border>
+</Window>

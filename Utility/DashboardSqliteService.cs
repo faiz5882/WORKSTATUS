@@ -146,31 +146,73 @@ namespace WorkStatus.Utility
             try
             {
                 tbl_KeyMouseTrack_Slot keyMouseTrack_Slot;
+                tbl_KeyMouseTrack_Slot_Idle Slot_Idle;
+                Storage.Entry++;
                 DateTime oCurrentDate = DateTime.Now;
 
-                LogFile.WriteMessageLog("1. Interval Start Time -" +StartTime + " Interval End Time -" + EndTime +
-                        "\n" + "keyboardActivity : " + keyboardActivity + ", MouseActivity : " + MouseActivity
-                    + ", AverageActivity : " + AverageActivity + "\n" + DateTime.Now.ToString("hh:mm:ss"));
+                //LogFile.WriteMessageLog("1. Interval Start Time -" +StartTime + " Interval End Time -" + EndTime +
+                //        "\n" + "keyboardActivity : " + keyboardActivity + ", MouseActivity : " + MouseActivity
+                //    + ", AverageActivity : " + AverageActivity + "\n" + DateTime.Now.ToString("hh:mm:ss"));
 
 
-                keyMouseTrack_Slot = new tbl_KeyMouseTrack_Slot()
+                if(keyboardActivity=="0" && MouseActivity=="0")
                 {
-                    IntervalStratTime = StartTime,
-                    IntervalEndTime = EndTime,
-                    Start = Common.Storage.SlotTimerStartTime,
-                    End = "",
-                    Hour = 0,
-                    keyboardActivity = keyboardActivity,
-                    MouseActivity = MouseActivity,
-                    AverageActivity = AverageActivity,
-                    Id = 0,
-                    Latitude = null,
-                    Longitude = null,
-                    ScreenActivity = Common.Storage.ScreenURl,
-                    CreatedDate = oCurrentDate.ToString("dd/MM/yyyy")
-                };
-                BaseService<tbl_KeyMouseTrack_Slot> gg = new BaseService<tbl_KeyMouseTrack_Slot>();
-                Common.Storage.SlotID = gg.Add(keyMouseTrack_Slot);
+                    Slot_Idle = new tbl_KeyMouseTrack_Slot_Idle()
+                    {
+                        IntervalStratTime = StartTime,
+                        IntervalEndTime = EndTime,
+                        Start = Common.Storage.SlotTimerStartTime,
+                        End = "",
+                        Hour = 0,
+                        keyboardActivity = keyboardActivity,
+                        MouseActivity = MouseActivity,
+                        AverageActivity = AverageActivity,
+                        Id = 0,
+                        Latitude = null,
+                        Longitude = null,
+                        ScreenActivity = Common.Storage.ScreenURl,
+                        CreatedDate = oCurrentDate.ToString("dd/MM/yyyy"),
+                        Entry = Storage.Entry
+                    };
+                    BaseService<tbl_KeyMouseTrack_Slot_Idle> dbService4 = new BaseService<tbl_KeyMouseTrack_Slot_Idle>();
+                    Common.Storage.SlotID = dbService4.Add(Slot_Idle);
+                    //string[] time = StartTime.Split("-");
+                    tbl_IdleTimeDetails tbl_Idle = new tbl_IdleTimeDetails()
+                    {
+                        Sno = 0,
+                        IsActive = 0,
+                        ProjectId = Common.Storage.CurrentProjectId,
+                        UserId = Common.Storage.CurrentUserId,
+                        CreatedOn = Common.Storage.SlotTimerStartTime,
+                        ProjectIdleStartTime = StartTime,
+                        ProjectIdleEndTime = EndTime
+                    };
+                    BaseService<tbl_IdleTimeDetails> dbService5 = new BaseService<tbl_IdleTimeDetails>();
+                    dbService5.Add(tbl_Idle);
+                }
+                else
+                {
+                    keyMouseTrack_Slot = new tbl_KeyMouseTrack_Slot()
+                    {
+                        IntervalStratTime = StartTime,
+                        IntervalEndTime = EndTime,
+                        Start = Common.Storage.SlotTimerStartTime,
+                        End = "",
+                        Hour = 0,
+                        keyboardActivity = keyboardActivity,
+                        MouseActivity = MouseActivity,
+                        AverageActivity = AverageActivity,
+                        Id = 0,
+                        Latitude = null,
+                        Longitude = null,
+                        ScreenActivity = Common.Storage.ScreenURl,
+                        CreatedDate = oCurrentDate.ToString("dd/MM/yyyy"),
+                        Entry = Storage.Entry
+                    };
+                    BaseService<tbl_KeyMouseTrack_Slot> gg = new BaseService<tbl_KeyMouseTrack_Slot>();
+                    Common.Storage.SlotID = gg.Add(keyMouseTrack_Slot);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -373,6 +415,46 @@ namespace WorkStatus.Utility
                 LogFile.ErrorLog(ex);
             }
         }
+        public void SaveProjectIdandToDoIdInLocalDB(tbl_Timer objtblTimer, bool boolVal)
+        {
+            try
+            {
+
+                BaseService<tbl_Timer> service = new BaseService<tbl_Timer>();
+                if (boolVal)
+                {
+
+                    Common.Storage.tblTimerSno = service.Add(objtblTimer);
+                }
+                else
+                {
+                    //BaseService<tbl_Timer> gg = new BaseService<tbl_Timer>();
+                    //gg.Add(objtblTimer);
+                    service.UpdateProjectIdandToDoIdToDB(objtblTimer.Start, objtblTimer.ProjectId , objtblTimer.ToDoId , Common.Storage.tblTimerSno);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                LogFile.ErrorLog(ex);
+            }
+        }
+
+        public void UpdateSlot_IdleStartTimeInLocalDB(string intervalTime, int Id)
+        {
+            try
+            {
+
+                BaseService<tbl_KeyMouseTrack_Slot_Idle> service = new BaseService<tbl_KeyMouseTrack_Slot_Idle>();
+                service.UpdateSlot_IdleStartTimeToDB(intervalTime, Id);
+            }
+            catch (Exception ex)
+            {
+
+                LogFile.ErrorLog(ex);
+            }
+        }
 
         public void AddUpdateProjectTimeINLocalDBByToDoID(tbl_Timer objtblTimer, bool boolVal)
         {
@@ -446,6 +528,107 @@ namespace WorkStatus.Utility
             }
             return listnote;
         }
+
+        //attachment
+        public List<tbl_ToDoAttachments> GetToDoAttachmentListData(int CurrentProjectId)
+        {
+            List<tbl_ToDoAttachments> tbl_ServerTodosAttachment = new List<tbl_ToDoAttachments>();
+            try
+            {
+                BaseService<tbl_ToDoAttachments> service = new BaseService<tbl_ToDoAttachments>();
+                tbl_ServerTodosAttachment = new List<tbl_ToDoAttachments>(service.GetAllById(CurrentProjectId, "ProjectId"));
+                return tbl_ServerTodosAttachment;
+            }
+            catch (Exception ex)
+            {
+                LogFile.ErrorLog(ex);
+            }
+            return tbl_ServerTodosAttachment;
+        }
+        public List<tbl_ToDoAttachments> GetToDoAttachmentsData(int todoId)
+        {
+            List<tbl_ToDoAttachments> tbl_ServerTodosAttachment = new List<tbl_ToDoAttachments>();
+            try
+            {
+                BaseService<tbl_ToDoAttachments> service = new BaseService<tbl_ToDoAttachments>();
+                tbl_ServerTodosAttachment = new List<tbl_ToDoAttachments>(service.GetAllById(todoId, "ToDoId"));
+                return tbl_ServerTodosAttachment;
+            }
+            catch (Exception ex)
+            {
+                LogFile.ErrorLog(ex);
+            }
+            return tbl_ServerTodosAttachment;
+        }
+        public List<tbl_ServerTodoDetails> GetToDoData(int todoId)
+        {
+            List<tbl_ServerTodoDetails> data = new List<tbl_ServerTodoDetails>();
+            try
+            {
+                BaseService<tbl_ServerTodoDetails> service = new BaseService<tbl_ServerTodoDetails>();
+                data = new List<tbl_ServerTodoDetails>(service.GetAllById(todoId, "Id"));
+                return data;
+            }
+            catch (Exception ex)
+            {
+                LogFile.ErrorLog(ex);
+            }
+            return data;
+        }
+        public void DeleteToDoAttachment()
+        {
+            try
+            {
+                BaseService<tbl_ToDoAttachments> gg = new BaseService<tbl_ToDoAttachments>();
+                gg.DeleteToDoAttachments();
+            }
+            catch (Exception ex)
+            {
+
+                LogFile.ErrorLog(ex);
+            }
+        }
+        public void InsertUserToDoAttachmentList(tbl_ToDoAttachments tbl_attachment)
+        {
+            try
+            {
+
+                BaseService<tbl_ToDoAttachments> gg = new BaseService<tbl_ToDoAttachments>();
+                gg.Add(tbl_attachment);
+            }
+            catch (Exception ex)
+            {
+
+                LogFile.ErrorLog(ex);
+            }
+        }
+        public void DeleteSelectedToDo(int TodoId)
+        {
+            try
+            {
+                BaseService<tbl_ServerTodoDetails> gg = new BaseService<tbl_ServerTodoDetails>();
+                gg.DeleteSelectedToDoData(TodoId);
+            }
+            catch (Exception ex)
+            {
+
+                LogFile.ErrorLog(ex);
+            }
+        }
+        public void UpdateToDoList(int TodoId)
+        {
+            try
+            {
+                BaseService<tbl_ServerTodoDetails> gg = new BaseService<tbl_ServerTodoDetails>();
+                gg.UpdateToDoListTable(TodoId);
+            }
+            catch (Exception ex)
+            {
+
+                LogFile.ErrorLog(ex);
+            }
+        }
+        //
     }
 
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkStatus.Utility;
+using WorkStatus.ViewModels;
 
 namespace WorkStatus.Common
 {
@@ -57,6 +59,11 @@ namespace WorkStatus.Common
                         break;
                 }
                 Storage.AverageEventCount += Keycount;
+                Storage.LastProjectEventCountTime = Storage.IdleProjectTime;
+                Storage.LastToDoEventCountTime = Storage.IdleToDoTime;
+                DateTime oCurrentDate = DateTime.Now;
+                Storage.StopTimeForDB = oCurrentDate.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+               // LogFile.WriteaActivityLog( DateTime.Now +"\n" + "IdleProjectTime : " + Storage.IdleProjectTime + "\n" + "IdleToDoTime : " + Storage.IdleToDoTime + "\n" + Storage.StopTimeForDB);
                 // }
             }
             return Storage.KeyBoradEventCount;
@@ -97,6 +104,11 @@ namespace WorkStatus.Common
                         break;
                 }
                 Storage.AverageEventCount += Mousecount;
+                Storage.LastProjectEventCountTime = Storage.IdleProjectTime;
+                Storage.LastToDoEventCountTime = Storage.IdleToDoTime;
+                DateTime oCurrentDate = DateTime.Now;
+                Storage.StopTimeForDB = oCurrentDate.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+               // LogFile.WriteaActivityLog(DateTime.Now + "\n" + "IdleProjectTime : " + Storage.IdleProjectTime + "\n" + "IdleToDoTime : " + Storage.IdleToDoTime + "\n" + Storage.StopTimeForDB);
                 // }
             }
             return Storage.MouseEventCount;

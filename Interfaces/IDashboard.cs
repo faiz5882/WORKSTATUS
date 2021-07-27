@@ -12,14 +12,15 @@ namespace WorkStatus.Interfaces
 {
    public interface IDashboard:IGetRequest
     {
-         UserProjectlistByOrganizationIDResponse GetUserProjectlistByOrganizationIDAsync(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, OrganizationDTOEntity _objRequest);
+        UserProjectlistByOrganizationIDResponse GetUserProjectlistByOrganizationIDAsync(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, OrganizationDTOEntity _objRequest);
         ToDoListResponseModel GetUserToDoListAsync(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, ToDoListRequestModel _objRequest);
         Task<ActivitySyncTimerResponseModel> GetActivitysynTimerDataAsync(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, ActivitySyncTimerRequestModel _objRequest);
         Task<CommonResponseModel> ActivityLogAsync(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List<ActivityLogRequestEntity> _objRequest);
-
+        CommonResponseModel ActivityLogAsyncForIdle(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List<ActivityLogRequestEntity> _objRequest);
         Task<AddNotesResponseModel> AddNotesAPI(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List<tbl_AddNotes> _objRequest);
         ChangeOrganizationResponseModel ChangeOrganizationAPI(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, ChangeOrganizationRequestModel _objRequest);
         ScreenshotInterval GetScreeshotIntervelFromServerAPI(string uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, ScreeshotIntervelFromServer _objRequest);
+        Task<AddorEditToDoResponseModel> AddorEditToDoApiCall(string uri, HeaderModel objHeaderModel, AddOrEditRequestModel _objRequest);
         #region TokenExpire
         Task<bool> RenewTokenAPI(bool IsHeaderRequired, HeaderModel objHeaderModel, RefreshTokenRequest _objRequest);
         Task<RenewAppResponseModel> ForceUpgardeAppAPI(string uri, RenewAppRequestModel _objRequest);
