@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reactive;
+using System.Threading.Tasks;
 using WorkStatus.APIServices;
 using WorkStatus.Configuration;
 using WorkStatus.Interfaces;
@@ -245,8 +246,8 @@ namespace WorkStatus.ViewModels
             CommandSaveToDo = ReactiveCommand.Create(SaveToDo);
             CommandCancelToDo = ReactiveCommand.Create(CancelToDo);
             CommandDeleteAttachment = ReactiveCommand.Create<string>(DeleteAttachment);
-            //Pgrforsavetodo = _window.FindControl<ProgressRing>("addoredittodopgr");
-            //Pgrforsavetodo.IsVisible = true;
+            Pgrforsavetodo = _window.FindControl<ProgressRing>("addoredittodopgr");
+            Pgrforsavetodo.IsVisible = false;
             StartDateAddOrEditTodo = "Start Date";
             EndDateAddOrEditTodo = "End Date";
             tt = _window.FindControl<TextBlock>("errorStatus"); 
@@ -323,8 +324,7 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-                ToDoAttachmentListData = new ObservableCollection<AddOrEditToDoAttachments>();
-                ToDoAttachmentListData.Clear();
+
                 ListData = new ObservableCollection<AddOrEditToDoAttachments>();
                 ListData.Clear();
                 OpenFileDialog OFD = new OpenFileDialog();
@@ -343,7 +343,7 @@ namespace WorkStatus.ViewModels
                             if (!filename.Contains(".jpeg") && !filename.Contains(".png") && !filename.Contains(".pdf") && !filename.Contains(".jpg") && !filename.Contains(".PNG") && !filename.Contains(".PDF") && !filename.Contains(".JPEG") && !filename.Contains(".JPG"))
                             {
                                 InfoColor = "Red";
-                                ValidateFormsAndError("Please select image", 5);
+                                ValidateFormsAndError("Please select only image and pdf file.", 5);
                                 return;
                             }
                             string[] image = filename.Split("\\");
@@ -372,7 +372,8 @@ namespace WorkStatus.ViewModels
                         }
 
                         fileCount = 0;
-
+                        ToDoAttachmentListData = new ObservableCollection<AddOrEditToDoAttachments>();
+                        ToDoAttachmentListData.Clear();
                         foreach (var a in Imagelist)
                         {
                             attachments = new AddOrEditToDoAttachments()
@@ -440,6 +441,7 @@ namespace WorkStatus.ViewModels
                 {
                     ValidateFormsAndError("Todo name is required!", 5);
                     InfoColor = "Red";
+                    IsButtonClick = true;
                     return;
                 }
                 if ((StartDateAddOrEditTodo != "Start Date") && (EndDateAddOrEditTodo != "End Date"))
@@ -448,10 +450,11 @@ namespace WorkStatus.ViewModels
                     {
                         ValidateFormsAndError("The End Date must be greater than Start Date!", 5);
                         InfoColor = "Red";
+                        IsButtonClick = true;
                         return;
                     }
                 }
-                //Pgrforsavetodo.IsVisible = true;
+                Pgrforsavetodo.IsVisible = true;
                 _baseURL = Common.Storage.EditToDoId == 0 ? Configurations.UrlConstant + Configurations.AddTodoApiConstant :
                            Configurations.UrlConstant + Configurations.EditTodoApiConstant + "/" + Common.Storage.EditToDoId;
                 addoreditTodoResponse = new AddorEditToDoResponseModel();
@@ -491,8 +494,9 @@ namespace WorkStatus.ViewModels
                     if (addoreditTodoResponse.response.code == "200")
                     {
                         InfoColor = "Green";
-                        ValidateFormsAndError(addoreditTodoResponse.response.message, 5);
-                        //Pgrforsavetodo.IsVisible = false;
+                        string successMsg = addoreditTodoResponse.response.message;
+                        ValidateFormsAndError(successMsg, 5);
+                        Pgrforsavetodo.IsVisible = false;
                         if (addoreditTodoResponse.response.message.Contains("successfully"))
                         {
                             Title = Common.Storage.EditToDoId == 0 ? "AddTodo" : "EditTodo";
@@ -510,6 +514,7 @@ namespace WorkStatus.ViewModels
                             ListData.Clear();
                             Imagelist = new List<string>();
                             Imagelist.Clear();
+                            await Task.Delay(800);
                             _window.Close();
                         }
                     }
@@ -524,7 +529,7 @@ namespace WorkStatus.ViewModels
                 {
 
                     InfoColor = "Red";
-                    ValidateFormsAndError("No response",5);
+                    ValidateFormsAndError("No response", 5);
                 }
                 IsButtonClick = true;
             }
