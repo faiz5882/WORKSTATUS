@@ -25,6 +25,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reactive;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -95,6 +96,26 @@ namespace WorkStatus.ViewModels
         string currentTime = string.Empty;
         int h1, m1, s1, h2, m2, s2, h3, m3, s3;
         int TotalSecound, TotalSMinute, Totalhour;
+
+        public DispatcherTimer AppandUrlTracking = new DispatcherTimer();
+        DateTime? timerStartTime = null;
+        DateTime? timerStopTime = null;
+        static Process currentProcess = null;
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+        [DllImport("user32.dll")]
+        private static extern Int32 GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+        string prevBrowserTitle = null;
+        Stopwatch stopWatchAppUrl = new Stopwatch();
+        Stopwatch stopWatchForUrl = new Stopwatch();
+        DateTime? currentProsessStartTime = null;
+        DateTime? currentURLProsessStartTime = null;
+        string URLConsumedTime = string.Empty;
+        string idleAppConsumedTime = string.Empty;
+        private List<tbl_AppAndUrl> appAndUrl_Tracking;
+        private List<tbl_Apptracking> app_Tracking;
+        private List<tbl_URLTracking> url_Tracking;
+
 
         #endregion
 
@@ -1022,8 +1043,181 @@ namespace WorkStatus.ViewModels
 
         #region Methods  
 
+        #region App and Url Tracking
+
+        private void AppandUrlTracking_Tick(object? sender, EventArgs e)
+        {
+            try
+            {
+                if (Common.Storage.IsProjectRuning || Common.Storage.IsToDoRuning)
+                {
+                    TrackAndSaveAppandURLActivity();
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+        }
+        private static Process GetActiveProcess()
+        {
+            try
+            {
+                IntPtr hwnd = GetForegroundWindow();
+                return hwnd != null ? GetProcessByHandle(hwnd) : null;
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+            return null;
+        }
+        private static Process GetProcessByHandle(IntPtr hwnd)
+        {
+            try
+            {
+                uint processID;
+                GetWindowThreadProcessId(hwnd, out processID);
+                return Process.GetProcessById((int)processID);
+            }
+            catch { return null; }
+        }
+        public void TrackAndSaveAppandURLActivity()
+        {
+            timerStartTime = timerStartTime == null ? DateTime.Now : timerStartTime;
+            string url = string.Empty;
+            var prevProcessName = currentProcess != null ? currentProcess.ProcessName : null;
+            currentProcess = GetActiveProcess();
+            if (currentProcess != null && (currentProcess.ProcessName == "chrome" || currentProcess.ProcessName == "firefox" ||
+                                            currentProcess.ProcessName == "iexplore" || currentProcess.ProcessName == "msedge"))
+            {
+                if (prevBrowserTitle == null)
+                {
+                    stopWatchForUrl.Start();
+                    prevBrowserTitle = currentProcess != null ? currentProcess.MainWindowTitle : null;
+                    currentURLProsessStartTime = currentURLProsessStartTime == null ? DateTime.Now
+                                                                    : currentURLProsessStartTime;
+                }
+                TimeSpan timeSpanStopWatchUrl = stopWatchForUrl.Elapsed;
+                URLConsumedTime = String.Format("{0:00}:{1:00}:{2:00}",
+                    timeSpanStopWatchUrl.Hours, timeSpanStopWatchUrl.Minutes, timeSpanStopWatchUrl.Seconds);
+                if (prevBrowserTitle != null)
+                {
+                    if (currentProcess.MainWindowTitle != prevBrowserTitle)
+                    {
+                        stopWatchForUrl.Stop();
+                        var currentURLProsessEndTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        SaveURLTrackingData(currentURLProsessStartTime.Value.ToString("yyyy-MM-dd HH:mm:ss"), currentURLProsessEndTime, URLConsumedTime, prevBrowserTitle, "", URLConsumedTime);
+                        prevBrowserTitle = null;
+                        currentURLProsessStartTime = Convert.ToDateTime(currentURLProsessEndTime);
+                        stopWatchForUrl.Reset();
+                    }
+                    else
+                        idleAppConsumedTime = URLConsumedTime;
+                }
+            }
+            if (currentProcess != null)
+            {
+                currentProsessStartTime = currentProsessStartTime == null ? DateTime.Now
+                                                                        : currentProsessStartTime;
+                TimeSpan timeSpanStopWatchAppUrl = stopWatchAppUrl.Elapsed;
+                var appConsumedTime = String.Format("{0:00}:{1:00}:{2:00}",
+                    timeSpanStopWatchAppUrl.Hours, timeSpanStopWatchAppUrl.Minutes, timeSpanStopWatchAppUrl.Seconds);
+                if (prevProcessName != null)
+                {
+                    if (currentProcess.ProcessName != prevProcessName.ToString())
+                    {
+                        var currentProsessEndTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        stopWatchAppUrl.Stop();
+                        stopWatchAppUrl.Reset();
+                        SaveAppTrackingData(currentProsessStartTime.Value.ToString("yyyy-MM-dd HH:mm:ss"), currentProsessEndTime, appConsumedTime, prevProcessName, appConsumedTime);  //Ritesh DB save	
+                        stopWatchAppUrl.Start();
+                        currentProsessStartTime = Convert.ToDateTime(currentProsessEndTime);
+                        timeSpanStopWatchAppUrl = stopWatchAppUrl.Elapsed;
+                        appConsumedTime = String.Format("{0:00}:{1:00}:{2:00}",
+                            timeSpanStopWatchAppUrl.Hours, timeSpanStopWatchAppUrl.Minutes, timeSpanStopWatchAppUrl.Seconds);
+                    }
+                    else
+                        idleAppConsumedTime = appConsumedTime;
+                }
+            }
+
+        }
+        private void SaveURLTrackingData(string startDate, string endDate, string timeFrame, string UrlName, string urlPath, string totalTime)
+        {
+            int TotalTimeinSecond = 0;
+            string[] arryTlogTime = totalTime.Split(':');
+            int h, m, s;
+            h = arryTlogTime[0].ToInt32();
+            m = arryTlogTime[1].ToInt32();
+            s = arryTlogTime[2].ToInt32();
+            if (h != 00)
+            {
+                h = h * 60* 60;
+            }
+            if (m != 00)
+            {
+                m = m * 60;
+            }
+            TotalTimeinSecond = h + m + s;
+
+            var urldata = new tbl_URLTracking()
+            {
+                Start = Common.Storage.ProjectStartTime,
+                URLStartDateTime = startDate,
+                URLEndDateTime = endDate,
+                URLConsumedTime = timeFrame,
+                UrlName = UrlName,
+                urlPath = urlPath,
+                TotalTimeSpent = TotalTimeinSecond.ToStrVal(),
+                IsOffline = 1
+
+            };
+
+            LogFile.WriteMessageLog("1. URL Start Time -" + startDate + "\n" + "2. End Time -" + endDate +
+                        "\n" + "3. UrlName : " + UrlName + "\n" + "4. TotalTimeSpent : " + TotalTimeinSecond.ToStrVal()
+                    + "\n" + "5." + DateTime.Now.ToString("hh:mm:ss"));
+
+            new DashboardSqliteService().InsertURLTrackingData(urldata);
+        }
+        private void SaveAppTrackingData(string startDate, string endDate, string timeFrame, string activityName, string totalTime)
+        {
+            int TotalTimeinSecond = 0;
+            string[] arryTlogTime = totalTime.Split(':');
+            int h, m, s;
+            h = arryTlogTime[0].ToInt32();
+            m = arryTlogTime[1].ToInt32();
+            s = arryTlogTime[2].ToInt32();
+            //00:01:10
+            if (h != 00)
+            {
+                h = h*60*60;
+            }
+            if (m != 00)
+            {
+                m = m * 60;
+            }
+            TotalTimeinSecond = h + m + s;
+            var appdata = new tbl_Apptracking()
+            {
+                Start = Common.Storage.ProjectStartTime,
+                AppStartDateTime = startDate,
+                AppEndDateTime = endDate,
+                AppConsumedTime = timeFrame,
+                Activity_Name = activityName,
+                Activity_TotalRun = TotalTimeinSecond.ToStrVal(),
+                IsOffline = 1
+
+            };
+            LogFile.WriteMessageLog("1.Start Time -" + startDate + "\n" + "End Time -" + endDate +
+                        "\n" + "3. activityName : " + activityName + "\n" + "4. Activity_TotalRun : " + TotalTimeinSecond.ToStrVal()
+                    + "\n" + "5." + DateTime.Now.ToString("hh:mm:ss"));
+
+            new DashboardSqliteService().InsertAppTrackingData(appdata);
+        }
+        #endregion
         #region hibernate
-       
+
         private async void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
             if (e.Mode == PowerModes.Suspend)
@@ -1825,6 +2019,15 @@ namespace WorkStatus.ViewModels
                                                 service.Delete(new tbl_KeyMouseTrack_Slot_Idle());
                                                 BaseService<tbl_IdleTimeDetails> service1 = new BaseService<tbl_IdleTimeDetails>();
                                                 service1.Delete(new tbl_IdleTimeDetails());
+
+                                                // App & Url
+                                                BaseService<tbl_AppAndUrl> dbService4 = new BaseService<tbl_AppAndUrl>();
+                                                appAndUrl_Tracking = new List<tbl_AppAndUrl>(dbService4.GetAllById(item2.Start, "Start"));
+                                                foreach (var item3 in appAndUrl_Tracking)
+                                                {
+                                                    dbService2.DeleteAppAndURL(item3.Id);
+                                                }
+                                                //
                                             }
                                         }
                                         result = true;
@@ -2068,7 +2271,27 @@ namespace WorkStatus.ViewModels
 
                 Intervals intervals;
                 List<Intervals> listofIntervals = new List<Intervals>();
-
+                //App & Url
+                AppAndUrl appAndUrls;
+                BaseService<tbl_AppAndUrl> dbService = new BaseService<tbl_AppAndUrl>();
+                appAndUrl_Tracking = new List<tbl_AppAndUrl>(dbService.GetAllById(startTime, "Start"));
+                if (appAndUrl_Tracking != null)
+                {
+                    if (appAndUrl_Tracking.Count > 0)
+                    {
+                        foreach (var appAndUrlData in appAndUrl_Tracking)
+                        {
+                            appAndUrls = new AppAndUrl()
+                            {
+                                isApp = appAndUrlData.IsApp,
+                                spendTime = appAndUrlData.SpendTime,
+                                name = appAndUrlData.Name
+                            };
+                            _appAndUrls.Add(appAndUrls);
+                        }
+                    }
+                }
+                //
                 BaseService<tbl_KeyMouseTrack_Slot_Idle> dbService2 = new BaseService<tbl_KeyMouseTrack_Slot_Idle>();
                 track_Slots_Idle = new List<tbl_KeyMouseTrack_Slot_Idle>(dbService2.GetAllById(startTime, "Start"));
                 if (track_Slots_Idle != null)
@@ -2453,6 +2676,8 @@ namespace WorkStatus.ViewModels
         {
             try
             {
+               
+
                 var keyboardActivity = Common.Storage.KeyBoradEventCount.ToStrVal();
                 var MouseActivity = Common.Storage.MouseEventCount.ToStrVal();
                 var AverageActivity = Common.Storage.AverageEventCount.ToStrVal();
@@ -2460,6 +2685,89 @@ namespace WorkStatus.ViewModels
                 Common.Storage.AverageEventCount = 0;
                 Common.Storage.KeyBoradEventCount = 0;
                 Common.Storage.MouseEventCount = 0;
+
+
+                // App & Url
+                List<tbl_AppAndUrl> _appAndUrls = new List<tbl_AppAndUrl>();
+                tbl_AppAndUrl appAndUrls;
+                //app data
+                BaseService<tbl_Apptracking> dbService = new BaseService<tbl_Apptracking>();
+                app_Tracking = new List<tbl_Apptracking>(dbService.GetAll());
+                if (app_Tracking != null && app_Tracking.Count > 0)
+                {
+                    var groupApp_TrackingList = app_Tracking.GroupBy(z => z.Activity_Name).ToList();
+                    string logtime;
+                    string AppOrUrl_Name = "";
+                    string startTime = "";
+                    foreach (var groupApp_Tracking in groupApp_TrackingList)
+                    {
+                        foreach (var b in groupApp_Tracking)
+                        {
+                            AppOrUrl_Name = b.Activity_Name;
+                            startTime = b.Start;
+                            continue;
+                        }
+                        //00:00:00
+                        int sum_AppUrl = groupApp_Tracking.Sum(a => Convert.ToInt32(a.Activity_TotalRun));
+                        TimeSpan _time2 = TimeSpan.FromSeconds(sum_AppUrl);
+                        logtime = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                        _time2.Hours,
+                        _time2.Minutes,
+                        _time2.Seconds);
+                        appAndUrls = new tbl_AppAndUrl()
+                        {
+                            Start = startTime,
+                            IsApp = "true",
+                            SpendTime = sum_AppUrl.ToStrVal(),
+                            Name = AppOrUrl_Name
+                        };
+                        _appAndUrls.Add(appAndUrls);
+                    }
+                }
+                //url data
+                BaseService<tbl_URLTracking> dbService1 = new BaseService<tbl_URLTracking>();
+                url_Tracking = new List<tbl_URLTracking>(dbService1.GetAll());
+                if (url_Tracking != null && url_Tracking.Count > 0)
+                {
+                    var groupURL_TrackingList = url_Tracking.GroupBy(z => z.UrlName).ToList();
+                    string urlLogtime;
+                    string Url_Name = "";
+                    string startTime = "";
+                    foreach (var groupUrl_Tracking in groupURL_TrackingList)
+                    {
+                        foreach (var b in groupUrl_Tracking)
+                        {
+                            Url_Name = b.UrlName;
+                            startTime = b.Start;
+                            continue;
+                        }
+                        int sum_Url = groupUrl_Tracking.Sum(a => Convert.ToInt32(a.TotalTimeSpent));
+                        TimeSpan _time2 = TimeSpan.FromSeconds(sum_Url);
+                        urlLogtime = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                        _time2.Hours,
+                        _time2.Minutes,
+                        _time2.Seconds);
+                        appAndUrls = new tbl_AppAndUrl()
+                        {
+                            Start = startTime,
+                            IsApp = "false",
+                            SpendTime = sum_Url.ToStrVal(),
+                            Name = Url_Name
+                        };
+                        _appAndUrls.Add(appAndUrls);
+                    }
+                }
+                BaseService<tbl_AppAndUrl> addAppAndUrl = new BaseService<tbl_AppAndUrl>();
+                addAppAndUrl.AddRange(_appAndUrls);
+
+                BaseService<tbl_Apptracking> service2 = new BaseService<tbl_Apptracking>();
+                service2.Delete(new tbl_Apptracking());
+                BaseService<tbl_URLTracking> service3 = new BaseService<tbl_URLTracking>();
+                service3.Delete(new tbl_URLTracking());
+
+                LogFile.WriteMessageLog("New app and url" + DateTime.Now);
+                //
+
                 if (Common.Storage.SlotRunning)
                 {
                     DateTime a = Convert.ToDateTime(Common.Storage.SlotTimerStartTime.ToString());
@@ -2492,8 +2800,8 @@ namespace WorkStatus.ViewModels
                 else
                 {
                     List<tbl_KeyMouseTrack_Slot_Idle> userIdleTimeList = new List<tbl_KeyMouseTrack_Slot_Idle>();
-                    BaseService<tbl_KeyMouseTrack_Slot_Idle> dbService = new BaseService<tbl_KeyMouseTrack_Slot_Idle>();
-                    userIdleTimeList = new List<tbl_KeyMouseTrack_Slot_Idle>(dbService.GetAll());
+                    BaseService<tbl_KeyMouseTrack_Slot_Idle> dbServiceT = new BaseService<tbl_KeyMouseTrack_Slot_Idle>();
+                    userIdleTimeList = new List<tbl_KeyMouseTrack_Slot_Idle>(dbServiceT.GetAll());
                     if (userIdleTimeList.Count > 0)
                     {
                         foreach (var idletime in userIdleTimeList)
@@ -2522,6 +2830,7 @@ namespace WorkStatus.ViewModels
                         service.Delete(new tbl_KeyMouseTrack_Slot_Idle());
                         BaseService<tbl_IdleTimeDetails> service1 = new BaseService<tbl_IdleTimeDetails>();
                         service1.Delete(new tbl_IdleTimeDetails());
+
                     }
                 }
             }
@@ -2647,6 +2956,88 @@ namespace WorkStatus.ViewModels
 
             try
             {
+
+                // App & Url
+                List<tbl_AppAndUrl> _appAndUrls = new List<tbl_AppAndUrl>();
+                tbl_AppAndUrl appAndUrls;
+                //app data
+                BaseService<tbl_Apptracking> dbService = new BaseService<tbl_Apptracking>();
+                app_Tracking = new List<tbl_Apptracking>(dbService.GetAll());
+                if (app_Tracking != null && app_Tracking.Count > 0)
+                {
+                    var groupApp_TrackingList = app_Tracking.GroupBy(z => z.Activity_Name).ToList();
+                    string logtime;
+                    string AppOrUrl_Name = "";
+                    string startTime = "";
+                    foreach (var groupApp_Tracking in groupApp_TrackingList)
+                    {
+                        foreach (var b in groupApp_Tracking)
+                        {
+                            AppOrUrl_Name = b.Activity_Name;
+                            startTime = b.Start;
+                            continue;
+                        }
+                        //00:00:00
+                        int sum_AppUrl = groupApp_Tracking.Sum(a => Convert.ToInt32(a.Activity_TotalRun));
+                        TimeSpan _time2 = TimeSpan.FromSeconds(sum_AppUrl);
+                        logtime = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                        _time2.Hours,
+                        _time2.Minutes,
+                        _time2.Seconds);
+                        appAndUrls = new tbl_AppAndUrl()
+                        {
+                            Start = startTime,
+                            IsApp = "true",
+                            SpendTime = sum_AppUrl.ToStrVal(),
+                            Name = AppOrUrl_Name
+                        };
+                        _appAndUrls.Add(appAndUrls);
+                    }
+                }
+                //url data
+                BaseService<tbl_URLTracking> dbService1 = new BaseService<tbl_URLTracking>();
+                url_Tracking = new List<tbl_URLTracking>(dbService1.GetAll());
+                if (url_Tracking != null && url_Tracking.Count > 0)
+                {
+                    var groupURL_TrackingList = url_Tracking.GroupBy(z => z.UrlName).ToList();
+                    string urlLogtime;
+                    string Url_Name = "";
+                    string startTime = "";
+                    foreach (var groupUrl_Tracking in groupURL_TrackingList)
+                    {
+                        foreach (var b in groupUrl_Tracking)
+                        {
+                            Url_Name = b.UrlName;
+                            startTime = b.Start;
+                            continue;
+                        }
+                        int sum_Url = groupUrl_Tracking.Sum(a => Convert.ToInt32(a.TotalTimeSpent));
+                        TimeSpan _time2 = TimeSpan.FromSeconds(sum_Url);
+                        urlLogtime = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                        _time2.Hours,
+                        _time2.Minutes,
+                        _time2.Seconds);
+                        appAndUrls = new tbl_AppAndUrl()
+                        {
+                            Start = startTime,
+                            IsApp = "false",
+                            SpendTime = sum_Url.ToStrVal(),
+                            Name = Url_Name
+                        };
+                        _appAndUrls.Add(appAndUrls);
+                    }
+                }
+                BaseService<tbl_AppAndUrl> addAppAndUrl = new BaseService<tbl_AppAndUrl>();
+                addAppAndUrl.AddRange(_appAndUrls);
+
+                BaseService<tbl_Apptracking> service2 = new BaseService<tbl_Apptracking>();
+                service2.Delete(new tbl_Apptracking());
+                BaseService<tbl_URLTracking> service3 = new BaseService<tbl_URLTracking>();
+                service3.Delete(new tbl_URLTracking());
+
+                LogFile.WriteMessageLog("from Add Slot New app and url" + DateTime.Now);
+                //
+
                 tbl_KeyMouseTrack_Slot keyMouseTrack_Slot;
                 DateTime oCurrentDate = DateTime.Now;
                 if (string.IsNullOrEmpty(Common.Storage.SlotTimerPreviousEndTime))
@@ -2911,7 +3302,27 @@ namespace WorkStatus.ViewModels
 
                 Intervals intervals;
                 List<Intervals> listofIntervals = new List<Intervals>();
-
+                //App & Url
+                AppAndUrl appAndUrls;
+                BaseService<tbl_AppAndUrl> dbService = new BaseService<tbl_AppAndUrl>();
+                appAndUrl_Tracking = new List<tbl_AppAndUrl>(dbService.GetAllById(startTime, "Start"));
+                if (appAndUrl_Tracking != null)
+                {
+                    if (appAndUrl_Tracking.Count > 0)
+                    {
+                        foreach (var appAndUrlData in appAndUrl_Tracking)
+                        {
+                            appAndUrls = new AppAndUrl()
+                            {
+                                isApp = appAndUrlData.IsApp,
+                                spendTime = appAndUrlData.SpendTime,
+                                name = appAndUrlData.Name
+                            };
+                            _appAndUrls.Add(appAndUrls);
+                        }
+                    }
+                }
+                //
                 BaseService<tbl_KeyMouseTrack_Slot> dbService2 = new BaseService<tbl_KeyMouseTrack_Slot>();
                 track_Slots = new List<tbl_KeyMouseTrack_Slot>(dbService2.GetAllById(startTime, "Start"));
                 if (track_Slots != null)
@@ -3054,7 +3465,17 @@ namespace WorkStatus.ViewModels
                                                     dbService2.DeleteSlot(item3.Id);
                                                 }
 
+                                                // App & Url
+                                                BaseService<tbl_AppAndUrl> dbService4 = new BaseService<tbl_AppAndUrl>();
+                                                appAndUrl_Tracking = new List<tbl_AppAndUrl>(dbService4.GetAllById(item2.Start, "Start"));
+                                                foreach (var item3 in appAndUrl_Tracking)
+                                                {
+                                                    dbService2.DeleteAppAndURL(item3.Id);
+                                                }
+                                                //
                                             }
+
+
                                         }
                                         result = true;
                                     }
@@ -3272,6 +3693,15 @@ namespace WorkStatus.ViewModels
                     activityTracker.KeyBoardActivity(true);
                     activityTracker.MouseActivity(true);
                     LogFile.WriteaActivityLog("HeaderPlay Success");
+
+                    //App & Url
+                    AppandUrlTracking.Interval = TimeSpan.FromSeconds(Convert.ToInt32(10));
+                    AppandUrlTracking.Tick += AppandUrlTracking_Tick;
+                    AppandUrlTracking.Start();
+                    timerStartTime = DateTime.Now;
+                    stopWatchAppUrl.Start();
+                    stopWatchForUrl.Start();
+                    //
                 }
                 IsAddNoteButtonEnabled = Storage.IsProjectRuning && Storage.IsToDoRuning ? false : true;
                 AddNoteButtonOpacity = IsAddNoteButtonEnabled ? 1 : 0.5;
@@ -3350,7 +3780,11 @@ namespace WorkStatus.ViewModels
 
             try
             {
-
+                //App & Url
+                timerStartTime = null;
+                stopWatchAppUrl.Stop();
+                stopWatchForUrl.Stop();
+                //
 
                 //try
                 //{
@@ -3440,6 +3874,15 @@ namespace WorkStatus.ViewModels
                             activityTracker.MouseActivity(true);
                             LogFile.WriteaActivityLog("ProjectPlay success");
                         }
+
+                        //App & Url
+                        AppandUrlTracking.Interval = TimeSpan.FromSeconds(Convert.ToInt32(10));
+                        AppandUrlTracking.Tick += AppandUrlTracking_Tick;
+                        AppandUrlTracking.Start();
+                        timerStartTime = DateTime.Now;
+                        stopWatchAppUrl.Start();
+                        stopWatchForUrl.Start();
+                        //
                     }
                     catch (Exception ex)
                     {
@@ -3527,7 +3970,10 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-
+                //App & Url
+                timerStartTime = null;
+                stopWatchAppUrl.Stop();
+                stopWatchForUrl.Stop();
                 // StopTimeIntervalUpdateToDB();
                 IsAddNoteButtonEnabled = false;
                 AddNoteButtonOpacity = 0.5;
@@ -4124,7 +4570,14 @@ namespace WorkStatus.ViewModels
                             LogFile.WriteaActivityLog("ToDoPlay success");
 
                         }
-
+                        //App & Url
+                        AppandUrlTracking.Interval = TimeSpan.FromSeconds(Convert.ToInt32(10));
+                        AppandUrlTracking.Tick += AppandUrlTracking_Tick;
+                        AppandUrlTracking.Start();
+                        timerStartTime = DateTime.Now;
+                        stopWatchAppUrl.Start();
+                        stopWatchForUrl.Start();
+                        //
                     }
                     catch (Exception ex)
                     {
@@ -4269,6 +4722,11 @@ namespace WorkStatus.ViewModels
         {
             try
             {
+                //App & Url
+                timerStartTime = null;
+                stopWatchAppUrl.Stop();
+                stopWatchForUrl.Stop();
+
                 IsAddNoteButtonEnabled =  false;
                 AddNoteButtonOpacity = 0.5;
                 SlotTimerObject.Stop();

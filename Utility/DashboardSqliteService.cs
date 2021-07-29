@@ -628,7 +628,34 @@ namespace WorkStatus.Utility
                 LogFile.ErrorLog(ex);
             }
         }
-        //
+
+
+        public void InsertAppTrackingData(tbl_Apptracking tbl_apptracking)
+        {
+            try
+            {
+                BaseService<tbl_Apptracking> gg = new BaseService<tbl_Apptracking>();
+                gg.Add(tbl_apptracking);
+            }
+            catch (Exception ex)
+            {
+
+                LogFile.ErrorLog(ex);
+            }
+        }
+        public void InsertURLTrackingData(tbl_URLTracking tbl_urltracking)
+        {
+            try
+            {
+                BaseService<tbl_URLTracking> gg = new BaseService<tbl_URLTracking>();
+                gg.Add(tbl_urltracking);
+            }
+            catch (Exception ex)
+            {
+
+                LogFile.ErrorLog(ex);
+            }
+        }
     }
 
 }

@@ -27,6 +27,8 @@ namespace WorkStatus
 
             //    desktop.MainWindow = new CMessageBox();
             //}
+          
+
             CheckSingleton();
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {

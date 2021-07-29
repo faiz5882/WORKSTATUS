@@ -472,6 +472,12 @@ namespace WorkStatus.Utility
                 throw new Exception(ex.Message);
             }
         }
+
+        public void DeleteAppAndURL(long id)
+        {
+            string qry = "DELETE FROM tbl_AppAndUrl where Id=" + id;
+            ExecuteGet(qry.ToString());
+        }
         /// <summary>
         /// Updates mutiple entities in single query
         /// </summary>
