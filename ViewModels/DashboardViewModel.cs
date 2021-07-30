@@ -1072,11 +1072,11 @@ namespace WorkStatus.ViewModels
                     break;
 
                 case PowerModes.Resume:
-                    if (IsSuspend)
-                    {
+                    //if (IsSuspend)
+                  //  {
                         await MessageBox.Avalonia.MessageBoxManager.GetMessageBoxCustomWindow(customMsgBox).ShowDialog(_window);
-                        IsSuspend = !IsSuspend;
-                    }
+                     //   IsSuspend = !IsSuspend;
+                  //  }
                     LogFile.WriteaActivityLog("e.Mode : " + e.Mode + DateTime.Now);
                     break;
 
