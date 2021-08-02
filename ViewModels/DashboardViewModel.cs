@@ -53,9 +53,10 @@ namespace WorkStatus.ViewModels
         Window _window;
         DispatcherTimer SlotTimerObject;
         bool SlotTimerRuning = false;
+        bool IsSuspend = false;
         int SlotInterval;
         Task[] tasks;
-      
+
         private RenewAppResponseModel renewAppResponseModel;
         private RefreshTokenResponseModel tokenResponseModel;
         private AddNotesResponseModel addNotesResponse;
@@ -79,7 +80,7 @@ namespace WorkStatus.ViewModels
         private string orgdSelectedID;
 
         private int ToDoSelectedID;
-
+        public MessageBoxCustomParamsWithImage customMsgBox;
         public ListBox listtodo;
         public ListBox listproject;
         public ListBox listOrg;
@@ -342,7 +343,7 @@ namespace WorkStatus.ViewModels
         }
         //
         private tbl_ServerTodoDetails tbl_ServerAddTodoDetails;
-        
+
         //attachments
         private tbl_ToDoAttachments tbl_todoattachment;
         //
@@ -591,7 +592,7 @@ namespace WorkStatus.ViewModels
                 RaisePropertyChanged("IsQuitAppBtn");
             }
         }
-        
+
 
         private bool _isDashBoardClose;
         public bool IsDashBoardClose
@@ -657,7 +658,7 @@ namespace WorkStatus.ViewModels
                 RaisePropertyChanged("InfoColor");
             }
         }
-        
+
         private bool _isAddnoteStatus;
         public bool IsAddnoteStatus
         {
@@ -889,7 +890,7 @@ namespace WorkStatus.ViewModels
                 RaisePropertyChanged("SelectedIndex");
             }
         }
-        
+
         private string _currentVersion;
         public string CurrentVersion
         {
@@ -970,6 +971,7 @@ namespace WorkStatus.ViewModels
         public DashboardViewModel(Window window)
         {
             _window = window;
+            customMsgBox = new MessageBoxCustomParamsWithImage();
             themeManager = new ThemeManager();
             SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
             _services = new DashboardService();
@@ -981,7 +983,7 @@ namespace WorkStatus.ViewModels
             changeorgbtn = _window.FindControl<ToggleButton>("changeOrgbutton");
             pgrToDO = _window.FindControl<ProgressRing>("toDoProgressBar");
             pgrProject = _window.FindControl<ProgressRing>("projectpgr");
-            
+
             //pgrProject.IsVisible = false;
             //pgrToDO.IsVisible = false;
             IsAppBlock = true;
@@ -1001,7 +1003,7 @@ namespace WorkStatus.ViewModels
             AddOrEditToDo = ReactiveCommand.Create<int>(AddOrEditPageOpen);
             MarkCompeletToDo = ReactiveCommand.Create<int>(MarkCompleteToDoAPICall);
             DeletToDo = ReactiveCommand.Create<int>(DeleteToDoAPICall);
-            CommandToDoDetail= ReactiveCommand.Create<int>(ToDoDetailCall);
+            CommandToDoDetail = ReactiveCommand.Create<int>(ToDoDetailCall);
             CommandReassignIdleTime = ReactiveCommand.Create(ReassignIdleTimeCall);
             CommandStopIdleTime = ReactiveCommand.Create(StopIdleTimeCall);
             CommandContinueIdleTime = ReactiveCommand.Create(ContinueIdleTimeCall);
@@ -1021,21 +1023,21 @@ namespace WorkStatus.ViewModels
             //{
 
             ActivityTimerObject.Tick += new EventHandler(ActivityTimerObject_Tick);
-                NoToDoAlert = "You have no todo's assigned";
-                UserOfflineAlert = " Your Internet connection seems to be lost so all features of application will not work. You can still" + "\n" + " continue with the timer only on loaded Project & ToDo’s." +
-                   "\n" + " Don’t worry -your data is safe with us and it will be synced back to server automatically once your" + "\n" + " internet connection is restored.";
-                IsUserOffline = Common.CommonServices.IsConnectedToInternet() ? false : true;               
-                GetScreeshotIntervelFromServer();
-                Dispatcher.UIThread.InvokeAsync(new Action(() => BindUserOrganisationListFromApi()));
-                timerproject = new System.Timers.Timer();               
-                timerToDo = new System.Timers.Timer();
-                timerproject.Interval = 1000;
-                timerToDo.Interval = 1000;                
-                timerproject.Elapsed += Timerproject_Elapsed;
-                timerToDo.Elapsed += TimerToDo_Elapsed;             
-                SlotTimerObject.Tick += new EventHandler(SlotTimerObject_Elapsed);
-                SyncDataToServer();
-           
+            NoToDoAlert = "You have no todo's assigned";
+            UserOfflineAlert = " Your Internet connection seems to be lost so all features of application will not work. You can still" + "\n" + " continue with the timer only on loaded Project & ToDo’s." +
+               "\n" + " Don’t worry -your data is safe with us and it will be synced back to server automatically once your" + "\n" + " internet connection is restored.";
+            IsUserOffline = Common.CommonServices.IsConnectedToInternet() ? false : true;
+            GetScreeshotIntervelFromServer();
+            Dispatcher.UIThread.InvokeAsync(new Action(() => BindUserOrganisationListFromApi()));
+            timerproject = new System.Timers.Timer();
+            timerToDo = new System.Timers.Timer();
+            timerproject.Interval = 1000;
+            timerToDo.Interval = 1000;
+            timerproject.Elapsed += Timerproject_Elapsed;
+            timerToDo.Elapsed += TimerToDo_Elapsed;
+            SlotTimerObject.Tick += new EventHandler(SlotTimerObject_Elapsed);
+            SyncDataToServer();
+
             //}
         }
 
@@ -1217,61 +1219,66 @@ namespace WorkStatus.ViewModels
         }
         #endregion
         #region hibernate
-
+       
         private async void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
-            if (e.Mode == PowerModes.Suspend)
+            switch (e.Mode)
             {
-                LogFile.WriteaActivityLog("sleep mode and hibernate mode call: " + DateTime.Now);
-                //timerproject.Dispose();
-                timerproject.Stop();
-                SlotTimerObject.Stop();
-                AddUpdateProjectTimeToDB(false);
-                bool checkslot = CheckSlotExistNot();
-                if (!checkslot)
-                {
-                    AddSlot();
-                }
-                IsStop = false;
-                IsPlaying = true;
-                Common.Storage.IsProjectRuning = false;
-                ProjectStopUpdate(projectIdSelected);
-                string _time = GetTimeFromProject(projectIdSelected);
-                HeaderTime = _time;
-                string strmess = "WorkStatus noticed that your system was on sleep\n mode. Please, Start the Timer again!";
-                //HibernateMessage = strmess;
-
-                Manualsync();
-
-
-                // System.Windows.Forms.Application.Restart();
-                // System.Windows.Application.Current.Shutdown();
-                // IshibernateClose = true;
-                // IshibernateQuitAlert = true;
-
-
-               
-                var messageBoxCustomWindow = MessageBox.Avalonia.MessageBoxManager
-                .GetMessageBoxCustomWindow(new MessageBoxCustomParamsWithImage
-                {
-
-
-                    ContentMessage = strmess,
-                    Icon = LoadEmbeddedResources("/Assets/LogoSmall.ico"),
-                    ButtonDefinitions = new[]
+                case PowerModes.Suspend:
+                    LogFile.WriteaActivityLog("sleep mode and hibernate mode call: " + DateTime.Now);
+                    //timerproject.Dispose();
+                    timerproject.Stop();
+                    SlotTimerObject.Stop();
+                    AddUpdateProjectTimeToDB(false);
+                    bool checkslot = CheckSlotExistNot();
+                    if (!checkslot)
                     {
+                        AddSlot();
+                    }
+                    IsStop = false;
+                    IsPlaying = true;
+                    IsSuspend = true;
+                    Common.Storage.IsProjectRuning = false;
+                    ProjectStopUpdate(projectIdSelected);
+                    string _time = GetTimeFromProject(projectIdSelected);
+                    HeaderTime = _time;
+                    string strmess = "WorkStatus noticed that your system was on sleep\n mode. Please, Start the Timer again!";
+                    //HibernateMessage = strmess;
+
+                    Manualsync();
+
+
+                    // System.Windows.Forms.Application.Restart();
+                    // System.Windows.Application.Current.Shutdown();
+                    // IshibernateClose = true;
+                    // IshibernateQuitAlert = true;
+                    customMsgBox = new MessageBoxCustomParamsWithImage
+                    {
+                        ContentMessage = strmess,
+                        Icon = LoadEmbeddedResources("/Assets/LogoSmall.ico"),
+                        ButtonDefinitions = new[]
+                        {
                         new ButtonDefinition {Name = "Ok", Type = ButtonType.Colored},
 
                     },
-                    WindowStartupLocation = Avalonia.Controls.WindowStartupLocation.CenterOwner
-                });
-                messageBoxCustomWindow.ShowDialog(_window);
+                        WindowStartupLocation = Avalonia.Controls.WindowStartupLocation.CenterOwner
+                    };
+                    break;
 
-            }
-            else
-            {
-                LogFile.WriteaActivityLog("e.Mode : " + e.Mode + DateTime.Now);
+                case PowerModes.Resume:
+                    LogFile.WriteaActivityLog("e.Mode : " + e.Mode + DateTime.Now);
+                    Task.Delay(500);
+                    //if (IsSuspend)
+                    //  {
+                     MessageBox.Avalonia.MessageBoxManager.GetMessageBoxCustomWindow(customMsgBox).ShowDialog(_window);
+                     //   IsSuspend = !IsSuspend;
+                  //  }
+                  
+                    break;
 
+                default:
+                    LogFile.WriteaActivityLog("e.Mode : " + e.Mode + DateTime.Now);
+                    break;
             }
         }
         public Avalonia.Media.Imaging.Bitmap LoadEmbeddedResources(string localFilePath)
@@ -1299,63 +1306,63 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-            List<tbl_IdleTimeDetails> userIdleTimeList = new List<tbl_IdleTimeDetails>();
-            BaseService<tbl_IdleTimeDetails> dbService = new BaseService<tbl_IdleTimeDetails>();
-            userIdleTimeList = new List<tbl_IdleTimeDetails>(dbService.GetAll());
-            if(userIdleTimeList!=null)
-            {
-                if(userIdleTimeList.Count > 0)
+                List<tbl_IdleTimeDetails> userIdleTimeList = new List<tbl_IdleTimeDetails>();
+                BaseService<tbl_IdleTimeDetails> dbService = new BaseService<tbl_IdleTimeDetails>();
+                userIdleTimeList = new List<tbl_IdleTimeDetails>(dbService.GetAll());
+                if (userIdleTimeList != null)
                 {
-                    if (userIdleTimeList.Count >= 2) //>=2
+                    if (userIdleTimeList.Count > 0)
                     {
-                        IsIdleTimeClose = true;
-                        IsIdleTimeQuitAlert = true;
-                        string aa;
-                        DateTime dt = Convert.ToDateTime(userIdleTimeList[0].ProjectIdleStartTime);
-                        DateTime dt2 = Convert.ToDateTime(userIdleTimeList[userIdleTimeList.Count - 1].ProjectIdleEndTime);
-                        TimeSpan ts = (dt2 - dt);
-                        if(ts.Hours == 0)
+                        if (userIdleTimeList.Count >= 2) //>=2
                         {
+                            IsIdleTimeClose = true;
+                            IsIdleTimeQuitAlert = true;
+                            string aa;
+                            DateTime dt = Convert.ToDateTime(userIdleTimeList[0].ProjectIdleStartTime);
+                            DateTime dt2 = Convert.ToDateTime(userIdleTimeList[userIdleTimeList.Count - 1].ProjectIdleEndTime);
+                            TimeSpan ts = (dt2 - dt);
+                            if (ts.Hours == 0)
+                            {
                                 Storage.ContinueProjectEventCountTime = ts.Minutes;
                                 aa = String.Format("{0} Minute", ts.Minutes);
-                        }
-                        else
-                        {
+                            }
+                            else
+                            {
                                 Storage.ContinueProjectEventCountTime = ts.Hours + ts.Minutes;
                                 aa = String.Format("{0}hour {1}Minute", ts.Hours, ts.Minutes);
-                        }
-                        
-                        IdleTimeMessage = "You are idle from last " + aa + "";
-                        try
-                        {
-                            if (activityTracker.globalKeyHook != null && activityTracker.globalMouseHook != null)
+                            }
+
+                            IdleTimeMessage = "You are idle from last " + aa + "";
+                            try
                             {
-                                activityTracker.globalKeyHook.Dispose();
-                                activityTracker.globalMouseHook.Dispose();
-                                activityTracker.globalKeyHook = null;
-                                activityTracker.globalMouseHook = null;
-                                LogFile.WriteMessageLog("Dispose");
+                                if (activityTracker.globalKeyHook != null && activityTracker.globalMouseHook != null)
+                                {
+                                    activityTracker.globalKeyHook.Dispose();
+                                    activityTracker.globalMouseHook.Dispose();
+                                    activityTracker.globalKeyHook = null;
+                                    activityTracker.globalMouseHook = null;
+                                    LogFile.WriteMessageLog("Dispose");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+
+                                LogFile.ErrorLog(ex);
                             }
                         }
-                        catch (Exception ex)
-                        {
-
-                            LogFile.ErrorLog(ex);
-                        }
                     }
+                    else
+                    {
+                        IsIdleTimeClose = false;
+                        IsIdleTimeQuitAlert = false;
+                    }
+
                 }
                 else
                 {
                     IsIdleTimeClose = false;
                     IsIdleTimeQuitAlert = false;
                 }
-
-            }
-            else
-            {
-                IsIdleTimeClose = false;
-                IsIdleTimeQuitAlert = false;
-            }
             }
             catch (Exception ex)
             {
@@ -1373,7 +1380,7 @@ namespace WorkStatus.ViewModels
                 result = s + timeOut;
             }
             counter = result;
-                      
+
             dispatcherTimerNotes.Tick += new EventHandler(dispatcherTimerNotes_Tick);
             dispatcherTimerNotes.Start();
         }
@@ -1384,7 +1391,7 @@ namespace WorkStatus.ViewModels
 
             if (counter == s)
             {
-               
+
                 IsAddnoteStatus = false;
                 dispatcherTimerNotes.Stop();
             }
@@ -1414,7 +1421,7 @@ namespace WorkStatus.ViewModels
             else
             {
                 //============ Don’t keep idle time Stop and remove idle intervals
-                if(Storage.IsProjectRuning && !Storage.IsToDoRuning)
+                if (Storage.IsProjectRuning && !Storage.IsToDoRuning)
                 {
                     ProjectTime = Storage.LastProjectEventCountTime;
                     ProjectStopUpdate(projectIdSelected);
@@ -1422,7 +1429,7 @@ namespace WorkStatus.ViewModels
                     BindTotalWorkTime();
                     Storage.IdleProjectTime = ProjectTime;
                 }
-                if(Storage.IsToDoRuning)
+                if (Storage.IsToDoRuning)
                 {
                     TODOProjectTime = Storage.LastToDoEventCountTime;
                     ProjectTime = Storage.LastProjectEventCountTime;
@@ -1506,7 +1513,7 @@ namespace WorkStatus.ViewModels
                     service2.Delete(new tbl_Timer());
                     ToDoPlay(ToDoSelectedID);
                 }
-                
+
             }
             if (activityTracker.globalKeyHook == null && activityTracker.globalMouseHook == null)
             {
@@ -1551,7 +1558,7 @@ namespace WorkStatus.ViewModels
                     }
                     else
                     {
-                        UpdateProjectIdandToDoIdinTimerTable(false,  IdleSelectedProject.ProjectId, 0);
+                        UpdateProjectIdandToDoIdinTimerTable(false, IdleSelectedProject.ProjectId, 0);
                     }
                     List<tbl_KeyMouseTrack_Slot_Idle> Idle = new List<tbl_KeyMouseTrack_Slot_Idle>();
                     BaseService<tbl_KeyMouseTrack_Slot_Idle> dbService = new BaseService<tbl_KeyMouseTrack_Slot_Idle>();
@@ -1588,10 +1595,10 @@ namespace WorkStatus.ViewModels
                     var v = dt.ToString("00:mm:ss");
                     IdleSelectedProject.ProjectTimeConsumed = v;
                     ProjectTime = IdleSelectedProject.ProjectTimeConsumed;
-                    
+
                     // change Current Project Id with selected ID from assign popup.
                     Common.Storage.CurrentProjectId = IdleSelectedProject.ProjectId.ToInt32();
-                    
+
                     //retrieve assign popup selected project data from list and save it as selected project.
                     // project list update
                     ProjectPlayUpdate(IdleSelectedProject.ProjectId);
@@ -1629,7 +1636,7 @@ namespace WorkStatus.ViewModels
                         HeaderTime = _time;
                     }), DispatcherPriority.Background);
                     DateTime oCurrentDate = DateTime.Now;
-                    Storage.StopTimeForDB= oCurrentDate.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+                    Storage.StopTimeForDB = oCurrentDate.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
                     AddUpdateProjectTimeToDBinContinueIdle(false);
                     ManualSyncIdleTimeAssign();
                     BindTotalWorkTime();
@@ -1664,7 +1671,7 @@ namespace WorkStatus.ViewModels
                     // 4. run timer on it.
                     // 5. delete idle slot.
                     //
-                    
+
                     //update project time of running project to last active time and old time set to project
                     ProjectTime = Storage.LastProjectEventCountTime == null ? ProjectTime : Storage.LastProjectEventCountTime;
                     ProjectPlayUpdate(Selectedproject.ProjectId);
@@ -1725,7 +1732,7 @@ namespace WorkStatus.ViewModels
                         BindUseToDoListFromLocalDB(Common.Storage.CurrentProjectId);
 
                         // ToDo list update
-                       // UpdateToDoListAfterIdlePopUp(ToDoSelectedID);
+                        // UpdateToDoListAfterIdlePopUp(ToDoSelectedID);
 
                         var data1 = ToDoListData.FirstOrDefault(x => x.Id == IdleSelectedProjectToDo.Id);
                         if (data1 != null)
@@ -1761,11 +1768,11 @@ namespace WorkStatus.ViewModels
                     }
                 }
             }
-            
+
         }
         public void CancelAssignIdleTimeCall(int Id)
         {
-            
+
             IsReassignBtnClick = false;
             IsReassignPopUpOpen = false;
             IsIdleTimeClose = true;
@@ -2102,10 +2109,10 @@ namespace WorkStatus.ViewModels
                 string currentDate = DateTime.Now.ToString();
                 LastUpdateText = "Last updated at: " + currentDate;
                 bool rtnResult = SendIdleTimeSlotIntervalToServerAssign();
-                    if (rtnResult)
-                    {
-                        ActivitySyncTimerFromApi();
-                    }
+                if (rtnResult)
+                {
+                    ActivitySyncTimerFromApi();
+                }
 
                 // GetNotesFromLocalDB();
 
@@ -2571,12 +2578,12 @@ namespace WorkStatus.ViewModels
                 LogFile.ErrorLog(ex);
             }
         }
-        public void UpdateProjectIdandToDoIdinTimerTable(bool boolVal, string ProjectId , int TodoId)
+        public void UpdateProjectIdandToDoIdinTimerTable(bool boolVal, string ProjectId, int TodoId)
         {
             try
             {
                 string t;
-                string IdleProjectId ="";
+                string IdleProjectId = "";
                 int IdleToDoId = 0;
                 DateTime oCurrentDate = DateTime.Now;
                 if (boolVal)
@@ -2621,7 +2628,7 @@ namespace WorkStatus.ViewModels
 
                 new DashboardSqliteService().SaveProjectIdandToDoIdInLocalDB(tblTimer, boolVal);
 
-                
+
             }
             catch (Exception ex)
             {
@@ -2775,7 +2782,7 @@ namespace WorkStatus.ViewModels
                     Common.Storage.SlotTimerPreviousEndTime = a.AddMinutes(b).ToString("yyyy'-'MM'-'dd' 'HH':'mm':'00");
                     new DashboardSqliteService().AddTimeIntervalToDB(a.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'00"),
                             a.AddMinutes(b).ToString("yyyy'-'MM'-'dd' 'HH':'mm':'00"), keyboardActivity, MouseActivity, AverageActivity);
-                   
+
                 }
                 else
                 {
@@ -2821,7 +2828,7 @@ namespace WorkStatus.ViewModels
                                 Longitude = idletime.Longitude,
                                 ScreenActivity = idletime.ScreenActivity,
                                 CreatedDate = idletime.CreatedDate,
-                                Entry=idletime.Entry
+                                Entry = idletime.Entry
                             };
                             BaseService<tbl_KeyMouseTrack_Slot> gg = new BaseService<tbl_KeyMouseTrack_Slot>();
                             Common.Storage.SlotID = gg.Add(keyMouseTrack_Slot);
@@ -3345,7 +3352,7 @@ namespace WorkStatus.ViewModels
                             };
                             intervals = new Intervals()
                             {
-                                Entry= slot.Entry,
+                                Entry = slot.Entry,
                                 appAndUrls = _appAndUrls,
                                 location = _location,
                                 screenUrl = slot.ScreenActivity.ToStrVal(),
@@ -3419,7 +3426,7 @@ namespace WorkStatus.ViewModels
                             ActivityLogRequestEntity aa = new ActivityLogRequestEntity();
                             aa = item;
                             finallist2.Add(aa);
-                           // finallist2 = finallist2.OrderByDescending(x => x.intervals.).ToList();
+                            // finallist2 = finallist2.OrderByDescending(x => x.intervals.).ToList();
                             //if (activityLogRequestEntity.intervals.Count > 0)
                             //{
                             string strJson = JsonConvert.SerializeObject(finallist2);
@@ -4722,11 +4729,6 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-                //App & Url
-                timerStartTime = null;
-                stopWatchAppUrl.Stop();
-                stopWatchForUrl.Stop();
-
                 IsAddNoteButtonEnabled =  false;
                 AddNoteButtonOpacity = 0.5;
                 SlotTimerObject.Stop();
@@ -4898,7 +4900,7 @@ namespace WorkStatus.ViewModels
         {
             pgrProject.IsVisible = true;
             pgrToDO.IsVisible = true;
-        }  
+        }
         void BindUserOrganisationListFromLocalDB()
         {
             try
@@ -5064,7 +5066,7 @@ namespace WorkStatus.ViewModels
                 {
                     //idle time
                     GetProjectsNameList.Add(item.ProjectName);
-                   
+
                     //
                     bool IconProjectPlay = false;
                     bool IconProjectStop = false;
@@ -5300,7 +5302,7 @@ namespace WorkStatus.ViewModels
                     ToDoAttachmentListData.Add(a);
                 }
                 RaisePropertyChanged("ToDoAttachmentListData");
-                
+
                 foreach (var item in FindUserToDoListFinal)
                 {
                     if (Common.Storage.IsToDoRuning)
@@ -5429,10 +5431,10 @@ namespace WorkStatus.ViewModels
                 {
                     IsNoToDoList = true;
                 }
-              
+
                 pgrProject.IsVisible = false;
                 pgrToDO.IsVisible = false;
-               // CheckIdleTimeFromDb();
+                // CheckIdleTimeFromDb();
             }
             catch (Exception ex)
             {
@@ -5792,7 +5794,7 @@ namespace WorkStatus.ViewModels
             {
                 LogFile.ErrorLog(ex);
             }
-        }  
+        }
         public void ClosedAllTimer()
         {
             try
@@ -5808,7 +5810,7 @@ namespace WorkStatus.ViewModels
                     AddUpdateProjectTimeToDB(false);
                     bool checkslot = CheckSlotExistNot();
                     if (!checkslot)
-                    {                        
+                    {
                         AddSlot();
                     }
                     else
@@ -5841,7 +5843,7 @@ namespace WorkStatus.ViewModels
             {
                 LogFile.ErrorLog(ex);
             }
-        } 
+        }
         public void SyncDataToServer()
         {
             try
@@ -5857,7 +5859,7 @@ namespace WorkStatus.ViewModels
 
                 LogFile.ErrorLog(ex);
             }
-        }   
+        }
         public void updateTotalwork(int secound, int minute, int hour)
         {
             try
@@ -6408,8 +6410,8 @@ namespace WorkStatus.ViewModels
             try
             {
 
-               
-                
+
+
                 _baseURL = Configurations.UrlConstant + Configurations.UserOrganisationListApiConstant;
                 organisationListResponse = new UserOrganisationListResponse();
                 objHeaderModel = new HeaderModel();
@@ -6450,7 +6452,7 @@ namespace WorkStatus.ViewModels
                         }
                         else
                         {
-                           
+
                             pgrProject.IsVisible = false;
                             pgrToDO.IsVisible = false;
                         }
@@ -6483,8 +6485,8 @@ namespace WorkStatus.ViewModels
             try
             {
                 Selectedproject = null;
-               
-                
+
+
                 userProjectlistResponse = new UserProjectlistByOrganizationIDResponse();
                 objHeaderModel = new HeaderModel();
                 OrganizationDTOEntity entity = new OrganizationDTOEntity() { organization_id = OrganizationID, unarchived = "0" };
@@ -6539,7 +6541,7 @@ namespace WorkStatus.ViewModels
                         }
                         else
                         {
-                           
+
                             pgrProject.IsVisible = false;
                             pgrToDO.IsVisible = false;
                         }
@@ -6572,7 +6574,7 @@ namespace WorkStatus.ViewModels
                 Common.Storage.CurrentOrganisationId = organizationId;
                 Common.Storage.CurrentProjectId = projectId;
                 Common.Storage.CurrentUserId = userId;
-                
+
                 _baseURL = Configurations.UrlConstant + Configurations.UserToDoListApiConstant;
                 toDoListResponseModel = new ToDoListResponseModel();
                 objHeaderModel = new HeaderModel();
@@ -6581,7 +6583,7 @@ namespace WorkStatus.ViewModels
                 {
                     project_id = projectId,
                     organization_id = organizationId,
-                    memberIds = new List<int>() { Common.Storage.LoginUserID.ToInt32()}
+                    memberIds = new List<int>() { Common.Storage.LoginUserID.ToInt32() }
                 };
                 toDoListResponseModel = _services.GetUserToDoListAsync(new Get_API_Url().UserToDoList(_baseURL), true, objHeaderModel, _toDoList);
                 if (toDoListResponseModel.Response != null)
@@ -6603,7 +6605,7 @@ namespace WorkStatus.ViewModels
 
                         //BaseService<tbl_ServerTodoDetails> dbService = new BaseService<tbl_ServerTodoDetails>();
                         //dbService.Delete(new tbl_ServerTodoDetails());
-                        
+
                         foreach (var item in toDoListResponseModel.Response.Data)
                         {
                             tbl_ServerAddTodoDetails = new tbl_ServerTodoDetails()
@@ -6663,7 +6665,7 @@ namespace WorkStatus.ViewModels
                 objHeaderModel.SessionID = Common.Storage.TokenId;
                 var org_id = Storage.CurrentOrganisationId;
                 var taskId = taskid;
-                getToDoDetailsResponseModel = await  _services.GetAsyncData_GetApi(new Get_API_Url().ToDoDetails(_baseURL, taskid), true, objHeaderModel, getToDoDetailsResponseModel);
+                getToDoDetailsResponseModel = await _services.GetAsyncData_GetApi(new Get_API_Url().ToDoDetails(_baseURL, taskid), true, objHeaderModel, getToDoDetailsResponseModel);
                 if (getToDoDetailsResponseModel.response != null)
                 {
                     if (getToDoDetailsResponseModel.response.code == "1001")
@@ -6673,12 +6675,12 @@ namespace WorkStatus.ViewModels
                         if (renewtoken)
                         {
                             objHeaderModel.SessionID = Common.Storage.TokenId;
-                            getToDoDetailsResponseModel = await  _services.GetAsyncData_GetApi(new Get_API_Url().ToDoDetails(_baseURL, taskid), true, objHeaderModel, getToDoDetailsResponseModel);
+                            getToDoDetailsResponseModel = await _services.GetAsyncData_GetApi(new Get_API_Url().ToDoDetails(_baseURL, taskid), true, objHeaderModel, getToDoDetailsResponseModel);
                         }
                     }
                     if (getToDoDetailsResponseModel.response.code == "200")
                     {
-                       Common.Storage.EdittodoData = getToDoDetailsResponseModel.response.data;
+                        Common.Storage.EdittodoData = getToDoDetailsResponseModel.response.data;
                     }
                 }
             }
@@ -6690,7 +6692,7 @@ namespace WorkStatus.ViewModels
         }
         public async void AddOrEditPageOpen(int selectedEditToDoId)
         {
-           
+
             IsToDoDetailsPopUp = false;
             IsStaysOpenToDoDetails = false;
             Common.Storage.EditToDoId = selectedEditToDoId == 0 ? 0 : selectedEditToDoId;
@@ -6702,7 +6704,7 @@ namespace WorkStatus.ViewModels
             pgrToDO.IsVisible = true;
             //Dispatcher.UIThread.InvokeAsync(new Action(() =>
             //{
-                
+
             //}), DispatcherPriority.Background);
             BindUserProjectlistByOrganizationID(Common.Storage.CurrentOrganisationId.ToStrVal());
             BindUseToDoListFromLocalDB(Common.Storage.AddOrEditToDoProjectId);
@@ -6805,11 +6807,11 @@ namespace WorkStatus.ViewModels
             {
                 foreach (var m in ToDoDetailData)
                 {
-                   if(m.IsCompleted == 1)
-                   {
+                    if (m.IsCompleted == 1)
+                    {
                         m.IsMarkComplete = false;
                         m.IsOnlyDeleteVisible = true;
-                   }
+                    }
                     else
                     {
                         m.IsMarkComplete = true;
@@ -7210,7 +7212,7 @@ namespace WorkStatus.ViewModels
                         }
                         if (addNotesResponse.response.code == "200")
                         {
-                            new DashboardSqliteService().UpdateNotetoDB(data);                           
+                            new DashboardSqliteService().UpdateNotetoDB(data);
                             InfoColor = "Green";
                             AddnoteStatus = "Note added successfully!";
                             Notes = "";
@@ -7219,7 +7221,7 @@ namespace WorkStatus.ViewModels
                         }
                         else
                         {
-                           
+
                             InfoColor = "Red";
                             AddnoteStatus = "Unable to add a Note!";
                             IsAddnoteStatus = true;
@@ -7229,7 +7231,7 @@ namespace WorkStatus.ViewModels
                 }
                 else
                 {
-                   
+
                     InfoColor = "Red";
                     AddnoteStatus = "Please add a Note!";
                     IsAddnoteStatus = true;

@@ -193,5 +193,6 @@
         <TextBlock x:Name="errorStatus" Grid.Column="1" Text="{Binding TextStatusAddOrEditToDo}" FontSize="15" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" FontStyle="Normal" FontWeight="Bold" Foreground="{Binding InfoColor,Mode=TwoWay}" Opacity="0.8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
       </Grid>
     </Grid>
+	  <progRings:ProgressRing Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="10" x:Name="addoredittodopgr" Width="50" Height="50" Foreground="Blue" HorizontalAlignment="Center" VerticalAlignment="Center"/>
   </Grid>
 </Window>
