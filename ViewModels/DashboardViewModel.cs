@@ -1026,7 +1026,7 @@ namespace WorkStatus.ViewModels
 
         #region hibernate
 
-        private async void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
+        private void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
             switch (e.Mode)
             {
@@ -1072,12 +1072,14 @@ namespace WorkStatus.ViewModels
                     break;
 
                 case PowerModes.Resume:
+                    LogFile.WriteaActivityLog("e.Mode : " + e.Mode + DateTime.Now);
+                    Task.Delay(500);
                     //if (IsSuspend)
-                  //  {
-                        await MessageBox.Avalonia.MessageBoxManager.GetMessageBoxCustomWindow(customMsgBox).ShowDialog(_window);
+                    //  {
+                     MessageBox.Avalonia.MessageBoxManager.GetMessageBoxCustomWindow(customMsgBox).ShowDialog(_window);
                      //   IsSuspend = !IsSuspend;
                   //  }
-                    LogFile.WriteaActivityLog("e.Mode : " + e.Mode + DateTime.Now);
+                  
                     break;
 
                 default:
