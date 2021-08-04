@@ -178,7 +178,28 @@ namespace WorkStatus.Views
         {
             _dashboardVM.IsQuitAppBtn = _dashboardVM.RemeberMe ? true : false;
             _dashboardVM.IsDashBoardClose = true;
-            Close();
+            // Close();
+
+            /////////////===========new
+
+            _dashboardVM.IsDashBoardClose = false;
+            _dashboardVM.IsDashBoardQuitAlert = false;
+            _dashboardVM.ClosedAllTimer();
+            await _dashboardVM.SendIntervalToServer();
+            if (_dashboardVM.IsMiniMizeAppBtn)
+            {
+                _dashboardVM.IsMiniMizeAppBtn = false;
+            }
+            if (_dashboardVM.IsQuitAppBtn)
+            {
+                _dashboardVM.IsQuitAppBtn = false;
+            }
+            if (_dashboardVM.IsCancelAppBtn)
+            {
+                _dashboardVM.IsCancelAppBtn = false;
+            }
+
+            Environment.Exit(0);
 
         }
         private void MinimizeAppbtn_Click(object? sender, RoutedEventArgs e)
@@ -201,7 +222,8 @@ namespace WorkStatus.Views
         {
             try
             {
-                if (!e.Cancel && !_dashboardVM.IsDashBoardClose)
+
+                if (!e.Cancel)//&& !_dashboardVM.IsDashBoardClose
                 {
                     if (_dashboardVM.IsSignOut)
                     {
@@ -217,6 +239,7 @@ namespace WorkStatus.Views
                 }
                 else
                 {
+
                     _dashboardVM.IsDashBoardClose = false;
                     _dashboardVM.IsDashBoardQuitAlert = false;
                     _dashboardVM.ClosedAllTimer();

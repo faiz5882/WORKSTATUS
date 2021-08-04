@@ -248,7 +248,7 @@ namespace WorkStatus.Utility
             catch (Exception ex)
             {
 
-                throw ex;
+                LogFile.ErrorLog(ex);
             }
 
         }
@@ -736,6 +736,9 @@ namespace WorkStatus.Utility
                 // connection.Open();
                 CheckConnectionState(connection);
                  SqliteCommand cmd = new SqliteCommand(cmdText, connection);
+                
+               
+
 
                 if (returnIdentity)
                 {

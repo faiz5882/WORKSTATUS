@@ -2764,9 +2764,12 @@ namespace WorkStatus.ViewModels
                         _appAndUrls.Add(appAndUrls);
                     }
                 }
-                BaseService<tbl_AppAndUrl> addAppAndUrl = new BaseService<tbl_AppAndUrl>();
-                addAppAndUrl.AddRange(_appAndUrls);
 
+                if (_appAndUrls.Count > 0)
+                {
+                    BaseService<tbl_AppAndUrl> addAppAndUrl = new BaseService<tbl_AppAndUrl>();
+                    addAppAndUrl.AddRange(_appAndUrls);
+                }
                 BaseService<tbl_Apptracking> service2 = new BaseService<tbl_Apptracking>();
                 service2.Delete(new tbl_Apptracking());
                 BaseService<tbl_URLTracking> service3 = new BaseService<tbl_URLTracking>();
@@ -3034,8 +3037,11 @@ namespace WorkStatus.ViewModels
                         _appAndUrls.Add(appAndUrls);
                     }
                 }
-                BaseService<tbl_AppAndUrl> addAppAndUrl = new BaseService<tbl_AppAndUrl>();
-                addAppAndUrl.AddRange(_appAndUrls);
+                if (_appAndUrls.Count > 0)
+                {
+                    BaseService<tbl_AppAndUrl> addAppAndUrl = new BaseService<tbl_AppAndUrl>();
+                    addAppAndUrl.AddRange(_appAndUrls);
+                }
 
                 BaseService<tbl_Apptracking> service2 = new BaseService<tbl_Apptracking>();
                 service2.Delete(new tbl_Apptracking());
