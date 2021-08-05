@@ -65,7 +65,7 @@ namespace WorkStatus.ViewModels
             CommandSignUp = ReactiveCommand.Create(SignUp);
             CommandForgotPassword = ReactiveCommand.Create(NavigateToForgotPasswordScreen);
             _loginResponse = new LoginResponse();
-            StackPanelLogo = ThemeManager.StackPanelLogoColor;
+            StackPanelLogo = ThemeManager.NewStackPanelLogoColor;
             TxtWelcomeColor = ThemeManager.TxtWelcomeColor;
             tt = _Window.FindControl<TextBlock>("errorStatus");
             LoginLoder = _Window.FindControl<ProgressRing>("loginloder");

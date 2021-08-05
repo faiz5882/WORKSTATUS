@@ -81,5 +81,7 @@ namespace WorkStatus.Common
         public static int AddOrEditToDoProjectId { get; set; }
 
         public static ToDoDetailsData EdittodoData;
+        public static double CurrentWindowHeight { get; set; }
+        public static double CurrentWindowWidth { get; set; }
     }
 }

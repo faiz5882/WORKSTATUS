@@ -3,6 +3,7 @@ using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
+using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Threading;
 using AvaloniaProgressRing;
@@ -30,8 +31,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+//using System.Windows.Media;
+//using System.Windows.Media.Imaging;
 using WorkStatus.APIServices;
 using WorkStatus.Common;
 using WorkStatus.Configuration;
@@ -93,7 +94,7 @@ namespace WorkStatus.ViewModels
         DispatcherTimer dispatcherTimerNotes = new DispatcherTimer();
         public System.Timers.Timer timerproject;
         System.Timers.Timer timerToDo;
-        ThemeManager themeManager;
+        ThemeManager themeManager = null;
         string currentTime = string.Empty;
         int h1, m1, s1, h2, m2, s2, h3, m3, s3;
         int TotalSecound, TotalSMinute, Totalhour;
@@ -426,6 +427,51 @@ namespace WorkStatus.ViewModels
         #endregion
 
         #region Local properties
+
+        private SolidColorBrush _newTextColor;
+        public SolidColorBrush NewTextColor
+        {
+            get => _newTextColor;
+            set
+            {
+                _newTextColor = value;
+                RaisePropertyChanged("NewTextColor");
+            }
+        }
+
+        private SolidColorBrush _newBlueTextColor;
+        public SolidColorBrush NewBlueTextColor
+        {
+            get => _newBlueTextColor;
+            set
+            {
+                _newBlueTextColor = value;
+                RaisePropertyChanged("NewBlueTextColor");
+            }
+        }
+
+        private SolidColorBrush _newStackPanelLogoColor;
+        public SolidColorBrush NewStackPanelLogoColor
+        {
+            get => _newStackPanelLogoColor;
+            set
+            {
+                _newStackPanelLogoColor = value;
+                RaisePropertyChanged("NewStackPanelLogoColor");
+            }
+        }
+        private SolidColorBrush _txtWelcomeColor;
+        public SolidColorBrush TxtWelcomeColor
+        {
+            get => _txtWelcomeColor;
+            set
+            {
+                _txtWelcomeColor = value;
+                RaisePropertyChanged("TxtWelcomeColor");
+            }
+        }
+
+
 
         private bool _isToDoDetailsPopUp;
         public bool IsToDoDetailsPopUp
@@ -973,6 +1019,10 @@ namespace WorkStatus.ViewModels
             _window = window;
             customMsgBox = new MessageBoxCustomParamsWithImage();
             themeManager = new ThemeManager();
+            NewTextColor = themeManager.NewTextColor;// themeManager.NewTextColor;
+            NewBlueTextColor = themeManager.NewBlueTextColor;
+            NewStackPanelLogoColor = themeManager.NewStackPanelLogoColor;
+            TxtWelcomeColor = themeManager.TxtWelcomeColor;
             SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
             _services = new DashboardService();
             ActivityTimerObject = new DispatcherTimer();

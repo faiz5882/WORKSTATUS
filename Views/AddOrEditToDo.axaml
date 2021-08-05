@@ -170,7 +170,7 @@
         <Button Classes="toolbar1" x:Name="btnSave" Content="Save ToDo" 
                 Command="{Binding SaveToDo}" IsEnabled="{Binding IsButtonClick}"
                 FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" 
-                Background="#1665D8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                Background="#3E436E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                 Width="140" Height="35" FontSize="15" Foreground="White" FontWeight="SemiBold" BorderBrush="#1665D8"
                 Margin="0,0,0,0"/>
       </Grid>

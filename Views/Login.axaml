@@ -1,17 +1,17 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"      
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"     
+		xmlns:styles="clr-namespace:Material.Styles;assembly=Material.Styles"
         xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
-        mc:Ignorable="d" Width="653" Height="500"
+        mc:Ignorable="d" Width="1000" Height="500"
 		 xmlns:local="clr-namespace:WorkStatus.Utility"
         x:Class="WorkStatus.Views.Login"
 		WindowStartupLocation="CenterScreen"
-		CanResize="False"		
-		Icon="/Assets/LogoSmall.ico"
-        Title="Login">	
-	<Window.Styles>		
+		Icon="avares://WorkStatus/Assets/StatusBar_Logo.png"
+		Title="Login"
+		CanResize="False">
+	<Window.Styles>
 		<Style Selector="Button.LinkButton">
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="BorderThickness" Value="0"/>
@@ -24,19 +24,20 @@
 	</Window.Styles>
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="*"></RowDefinition>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="300"></ColumnDefinition>
+			<ColumnDefinition Width="50"></ColumnDefinition>
 			<ColumnDefinition Width="*"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
-		<StackPanel>
-			<Image Height="250" Stretch="Fill"
-				   Source="/Assets/office.jpg"></Image>
+		<StackPanel Grid.Column="2" Orientation="Horizontal"  VerticalAlignment="Center" Background="#F5F5F5" Margin="20,0,0,0">
+			<Image  Stretch="Fill" HorizontalAlignment="Center"
+				   Source="/Assets/OfficeImageRight.png"></Image>
 		</StackPanel>
-		<Grid Margin="0,100,0,0"
-			  HorizontalAlignment="Center">
-			<Border BoxShadow="0 0 1 gray"  Width="400" Height="320"
+		<Grid Grid.Column="0" Margin="50,0,0,20"
+			  HorizontalAlignment="Left"  VerticalAlignment="Center">
+			<Border BoxShadow="0 0 0 gray"  Width="300" Height="350"
 					Background="White"
               CornerRadius="8"
               Padding="16">
@@ -47,16 +48,27 @@
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="Auto"></RowDefinition>
-						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="*"></RowDefinition>
 					</Grid.RowDefinitions>
 
-					<StackPanel Grid.Row="0"  x:Name="StackPanelHeader" >
+					<Grid  Grid.Row="0" HorizontalAlignment="Center" Width="225" Margin="10,0,0,10">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="50"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="50"/>
+						</Grid.ColumnDefinitions>
+						<Image Grid.Row="0" Grid.Column="0" Source="/Assets/workstatuslogo.png" Height="40" VerticalAlignment="Bottom"/>
+						<Image Grid.Row="0" Grid.Column="1" Source="/Assets/DotsIcon.png" Height="8" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="5,0,0,0"/>
+					</Grid>
+
+					<!--<StackPanel Grid.Row="0"  x:Name="StackPanelHeader" >
 						<Image Source="/Assets/WorkStatus_logo.png"
 								Height="50"></Image>
-					</StackPanel>
+					</StackPanel>-->
 					<!--Email Address-->
-					<Grid Grid.Row="3" HorizontalAlignment="Center"
+					<Grid Grid.Row="3" HorizontalAlignment="Left"
 						  Margin="0,30,0,0">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto"></RowDefinition>
@@ -74,15 +86,12 @@
 					</Grid>
 
 					<!--Password-->
-					<Grid Grid.Row="4" HorizontalAlignment="Center"
+					<Grid Grid.Row="4" HorizontalAlignment="Left"
 						  Margin="0,10,0,0">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto"></RowDefinition>
 							<RowDefinition Height="Auto"></RowDefinition>
 							<RowDefinition Height="Auto"></RowDefinition>
-							<RowDefinition Height="Auto"></RowDefinition>
-							<RowDefinition Height="Auto"></RowDefinition>
-							<RowDefinition Height="*"></RowDefinition>
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*"></ColumnDefinition>
@@ -92,7 +101,7 @@
 								   Grid.Row="1" Grid.Column="0"></TextBlock>
 						<StackPanel Grid.Row="1" Grid.Column="1"
 									VerticalAlignment="Center"
-									HorizontalAlignment="Center">
+									HorizontalAlignment="Left">
 							<TextBox Text="{Binding Password,Mode=TwoWay}"
 									 Watermark="Password" PasswordChar="*" Classes="Filled revealPasswordButton"
 									   Width="300" Height="30">
@@ -111,77 +120,77 @@
                       HorizontalContentAlignment="Right" HorizontalAlignment="Right"
                       Grid.Row="0" Grid.Column="2" Command="{Binding CommandForgotPassword}"
                       FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
-                      FontSize="12" Foreground="#212529"
+                      FontSize="12" Foreground="#3E436E"
                       Margin="0,2,0,0">Forgot password?</Button>
-              <progRing:ProgressRing Width="30" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                     Height="30" x:Name="loginloder"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"
-                     Foreground="Blue"/>
-							
+							<progRing:ProgressRing Width="30" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+								   Height="30" x:Name="loginloder"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Center"
+								   Foreground="Blue"/>
+
 						</Grid>
-						<StackPanel Grid.Row="3"  Grid.Column="1" Margin="0,20,0,0" >
-							<Button Width="300" Height="40" Command="{Binding CommandLogin}"
-									Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-								Background="{Binding StackPanelLogo,Mode=TwoWay}">Login</Button>							
+					</Grid>
+					<Grid Grid.Row="5" HorizontalAlignment="Left"
+						  Margin="0,20,0,10">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"></RowDefinition>
+							<RowDefinition Height="10"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<StackPanel Grid.Row="0" Grid.Column="0">
+							<Button Height="40" Width="180" Command="{Binding CommandLogin}"
+									Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+								Background="{Binding StackPanelLogo,Mode=TwoWay}">Login</Button>
 						</StackPanel>
 
-						<Grid Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center"
+						<Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Width="150"
 							  Margin="0,10,0,0">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="*"></RowDefinition>
 								<RowDefinition Height="*"></RowDefinition>
-							
+
 							</Grid.RowDefinitions>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="Auto"></ColumnDefinition>
 								<ColumnDefinition Width="Auto"></ColumnDefinition>
 							</Grid.ColumnDefinitions>
 							<TextBlock Grid.Row="0"  Grid.Column="0"
-									   FontWeight="400" Foreground="#212529"
-									   FontStyle="Normal"									  
+									   FontWeight="300" Foreground="#212529"
+									   FontStyle="Normal"
 									   FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
-									   HorizontalAlignment="Center" FontSize="14"
+									   HorizontalAlignment="Center" FontSize="12"
 									   Text="Don’t have an account? "></TextBlock>
 
-							<!--<TextBlock
+							<TextBlock
 								   Grid.Row="0"  Grid.Column="1"
-								   HorizontalAlignment="Center" 
-								  FontSize="14"
+								   HorizontalAlignment="Left"
+								  FontSize="12"
 								   FontStyle="Normal"
-								   FontWeight="700"
+								   FontWeight="500"
 								   FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
-								   Foreground="#1665D8"
+								   Foreground="#3E436E"
 							   Text=" Sign Up">
-							</TextBlock>-->
-              <Button Classes="LinkButtonSignUp" x:Name="btnSignUp"
-                      Cursor="Hand"
-                      HorizontalAlignment="Center"
-                      Grid.Row="0"  Grid.Column="1"
-                      Command="{Binding CommandSignUp}"
-                       FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
-										FontSize="14"
-								   FontStyle="Normal"
-								   FontWeight="700"
-                      Background="Transparent"
-                       Foreground="#1665D8"
-                      Margin="0,-6,0,0">Sign Up</Button>
-							<TextBlock x:Name="errorStatus" Margin="10"  Grid.Row="1"  Grid.Column="0"													 
-								   HorizontalAlignment="Center" 
-								  FontSize="12"								   
+							</TextBlock>
+							<TextBlock x:Name="errorStatus" Margin="10"  Grid.Row="1"  Grid.Column="0"
+								   HorizontalAlignment="Center"
+								  FontSize="12"
 								   FontStyle="Normal"
 								   FontWeight="700"
 								   FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
 								   Foreground="Red"
 							   Text="{Binding ErrorMes}">
 							</TextBlock>
-              
+
 						</Grid>
 					</Grid>
-				</Grid>				
+				</Grid>
 			</Border>
-			
+
 		</Grid>
 	</Grid>
-	
+
 </Window>

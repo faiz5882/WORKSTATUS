@@ -774,7 +774,7 @@ namespace WorkStatus.Views
                 if (((Avalonia.Controls.Primitives.ToggleButton)sender).IsChecked == true)
                 {
                     Avalonia.Media.Imaging.Bitmap AvIrBitmap;
-                    var LeftArrowImage = LoadEmbeddedResources("/Assets/arrowhead-right.png");
+                    var LeftArrowImage = LoadEmbeddedResources("/Assets/arrowhead-left.png");
                     Bitmap PlayPauseToDoButton;
                     PlayPauseToDoButton = LeftArrowImage;
                     using (MemoryStream memory = new MemoryStream())

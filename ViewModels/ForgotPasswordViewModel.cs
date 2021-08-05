@@ -54,7 +54,7 @@ namespace WorkStatus.ViewModels
             tt = _window.FindControl<TextBlock>("errorStatus");
 
             _forgotPasswordResponse = new ForgetPasswordResponseModel();
-            StackPanelLogo = ThemeManager.StackPanelLogoColor;
+            StackPanelLogo = ThemeManager.NewStackPanelLogoColor;
             TxtWelcomeColor = ThemeManager.TxtWelcomeColor;
         }
 

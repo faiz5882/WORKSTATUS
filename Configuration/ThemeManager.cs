@@ -118,5 +118,29 @@ namespace WorkStatus.Configuration
                 _fontLargeSize = value;
             }
         }
+
+    ///// New Design
+    ///
+    private SolidColorBrush _newStackPanelLogoColor = "#3E436E".ToSolidColorBrush();
+    public SolidColorBrush NewStackPanelLogoColor
+    {
+        get { return _newStackPanelLogoColor; }
+        set { _newStackPanelLogoColor = value; }
     }
+
+    private SolidColorBrush _newTextColor = "#4A4C55".ToSolidColorBrush();
+    public SolidColorBrush NewTextColor
+    {
+        get { return _newTextColor; }
+        set { _newTextColor = value; }
+    }
+
+    private SolidColorBrush _newBlueTextColor = "#4461D7".ToSolidColorBrush();
+    public SolidColorBrush NewBlueTextColor
+    {
+        get { return _newBlueTextColor; }
+        set { _newBlueTextColor = value; }
+    }
+
+}
 }
