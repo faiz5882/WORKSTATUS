@@ -179,13 +179,17 @@ namespace WorkStatus.ViewModels
 
                 if (string.IsNullOrEmpty(Email))
                 {
-                    ValidateFormsAndError("Email is required!", 5);                   
+                    LoginLoder.IsVisible = false;
+                    IsLoginEnable = true;
+                    ValidateFormsAndError("Email is required", 5);                   
 
                     return;
                 }
                 else if (string.IsNullOrEmpty(Password))
                 {
-                    ValidateFormsAndError("Password is required!", 5);
+                    LoginLoder.IsVisible = false;
+                    IsLoginEnable = true;
+                    ValidateFormsAndError("Password is required", 5);
                     return;
                 }
                 else
@@ -207,13 +211,13 @@ namespace WorkStatus.ViewModels
                     {
                         if (_loginResponse.Response.Code == "200")
                         {
-                           
-                            
+
+
                             BaseService<tbl_UserDetails> dbService = new BaseService<tbl_UserDetails>();
                             dbService.Delete(new tbl_UserDetails());
-                           // BaseService<tbl_IdleTimeDetails> dbService2= new BaseService<tbl_IdleTimeDetails>();
-                           // dbService2.Delete(new tbl_IdleTimeDetails());
-                            
+                            // BaseService<tbl_IdleTimeDetails> dbService2= new BaseService<tbl_IdleTimeDetails>();
+                            // dbService2.Delete(new tbl_IdleTimeDetails());
+
                             Common.Storage.TokenId = _loginResponse.Response.Data.Token;
                             Common.Storage.ServerOrg_Id = _loginResponse.Response.Data.Org_Id;
                             Common.Storage.ServerSd_Token = _loginResponse.Response.Data.Sd_Token;
@@ -256,13 +260,14 @@ namespace WorkStatus.ViewModels
                                 //BaseService<tbl_TempSyncTimerTodoDetails> service3 = new BaseService<tbl_TempSyncTimerTodoDetails>();
                                 //service3.Delete(new tbl_TempSyncTimerTodoDetails());
 
-                                ChangeDashBoardWindow();                              
+                                ChangeDashBoardWindow();
                             }
                         }
                         else
                         {
                             LoginLoder.IsVisible = false;
                             IsLoginEnable = true;
+                            _loginResponse.Response.Message = _loginResponse.Response.Message.Contains("Must be a valid email.") ? _loginResponse.Response.Message.Replace("Must be a valid email.", "Please enter valid email.") : _loginResponse.Response.Message;
                             ValidateFormsAndError(_loginResponse.Response.Message, 5);
                             return;
                         }

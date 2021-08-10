@@ -42,10 +42,12 @@ namespace WorkStatus.Views
         public DispatcherTimer m_screen = new DispatcherTimer();
         public string screenShotTimeinMinutes;
         public static Stopwatch sw = new Stopwatch();
+        public static bool IsChecked = true;
+        public static bool IsMiniChecked = true;
         Image imgexpanderButton;
         Button btncancel;
         Button btnaddnote;
-        ToggleButton tbtn;
+        ToggleButton tbtn;                                                    
         Button btnUpgardeApp;
         ComboBox ComboToDoFilter;
         Button MinimizeAppbtn;
@@ -700,6 +702,7 @@ namespace WorkStatus.Views
                 {
                     this.Width = 400;
                     this.Height = 250;
+                    this.FindControl<Button>("btntoggle").Background = Avalonia.Media.Brushes.Transparent;
                 }
                 else
                 {
@@ -727,8 +730,10 @@ namespace WorkStatus.Views
         {
             try
             {
-                if (((Avalonia.Controls.Primitives.ToggleButton)sender).IsChecked == true)
+                ((Avalonia.Controls.Primitives.ToggleButton)sender).IsChecked = false;
+                if (IsMiniChecked == true)
                 {
+                    IsMiniChecked = false;
                     this.Height = 250;
                     this.Width = 355;
 
@@ -747,6 +752,7 @@ namespace WorkStatus.Views
                 {
                     this.Height = 630;
                     this.Width = 358;
+                    IsMiniChecked = true;
                     this.FindControl<Grid>("TopLeftGrid").IsVisible = true;
                     this.FindControl<Grid>("MidLeftGrid").IsVisible = true;
                     this.FindControl<Grid>("BottomLeftGrid").IsVisible = true;
@@ -771,8 +777,12 @@ namespace WorkStatus.Views
         {
             try
             {
-                if (((Avalonia.Controls.Primitives.ToggleButton)sender).IsChecked == true)
-                {
+                this.FindControl<Button>("btntoggle").Background = Avalonia.Media.Brushes.Transparent;
+                ((Avalonia.Controls.Primitives.ToggleButton)sender).IsChecked = false;
+                // if (((Avalonia.Controls.Primitives.ToggleButton)sender).IsChecked == true)
+                if (IsChecked == true)
+                    {
+                    IsChecked = false;
                     Avalonia.Media.Imaging.Bitmap AvIrBitmap;
                     var LeftArrowImage = LoadEmbeddedResources("/Assets/arrowhead-left.png");
                     Bitmap PlayPauseToDoButton;
@@ -796,7 +806,8 @@ namespace WorkStatus.Views
                 {
 
                     Avalonia.Media.Imaging.Bitmap AvIrBitmap;
-                    var RightArrowImage = LoadEmbeddedResources("/Assets/arrowhead-right-white.png");
+                    IsChecked = true;
+                    var RightArrowImage = LoadEmbeddedResources("/Assets/arrowhead-right.png");
                     Bitmap PlayPauseToDoButton;
                     PlayPauseToDoButton = RightArrowImage;
                     using (MemoryStream memory = new MemoryStream())
