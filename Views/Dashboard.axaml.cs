@@ -366,8 +366,8 @@ namespace WorkStatus.Views
                 popup.BodyColor = Color.FromArgb(33, 26, 35);
                 popup.ContentColor = Color.White;
                 popup.ContentText = popupMessage;
-                popup.Image = LoadEmbeddedResources("/Assets/LogoSmall.ico");
-                popup.ImageSize = new System.Drawing.Size(30, 25);
+                popup.Image = LoadEmbeddedResources("/Assets/DotsIcon.png");
+                popup.ImageSize = new System.Drawing.Size(25, 10);
                 popup.ContentFont = new Font("Tahoma", 13F);
                 popup.Size = new System.Drawing.Size(350, 75);
                 popup.ShowGrip = false;
