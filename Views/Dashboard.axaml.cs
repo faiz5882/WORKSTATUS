@@ -53,6 +53,7 @@ namespace WorkStatus.Views
         Button MinimizeAppbtn;
         Button QuitAppbtn;
         Button CancelAppbtn;
+        Button OkConfirmbtn;
         ComboBox ProjectListCombobox;
         ComboBox ToDoListCombobox;
         public Dashboard()
@@ -93,6 +94,10 @@ namespace WorkStatus.Views
             QuitAppbtn.Click += QuitAppbtn_Click;
             CancelAppbtn = this.FindControl<Button>("cancelapp");
             CancelAppbtn.Click += CancelAppbtn_Click;
+            CancelAppbtn = this.FindControl<Button>("cancelapp");
+            CancelAppbtn.Click += CancelAppbtn_Click;
+            OkConfirmbtn = this.FindControl<Button>("okConfirmApp");
+            OkConfirmbtn.Click += OkConfirmbtn_Click; ;
             //IdleTimeCheckbox = this.FindControl<CheckBox>("IdleTimeCheckbox");
             //IdleTimeCheckbox.Checked += IdleTimeCheckbox_Checked;
             //IdleTimeCheckbox.Unchecked += IdleTimeCheckbox_Unchecked;
@@ -131,6 +136,12 @@ namespace WorkStatus.Views
 #if DEBUG
             this.AttachDevTools();
 #endif
+        }
+
+        private void OkConfirmbtn_Click(object? sender, RoutedEventArgs e)
+        {
+            _dashboardVM.IsSleepMode = false;
+            _dashboardVM.IsSleepModeQuitAlert = false;
         }
 
         private void ProjectListCombobox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -613,6 +624,33 @@ namespace WorkStatus.Views
                 }
             }
         }
+
+        private void LstBoxToDo_SelectionChanged1(object? sender, SelectionChangedEventArgs e)
+        {
+            Avalonia.Controls.ListBox lstboxTodo = sender as Avalonia.Controls.ListBox;
+            int indexID = lstboxTodo.SelectedIndex;
+            if (indexID == -1)
+            {
+                lstboxTodo.SelectedItem = _dashboardVM.SelectedprojectToDo;
+             
+                //lstboxTodo.LayoutUpdated();
+            }
+            if (lstboxTodo.SelectedItem != null)
+            {
+                if (e.AddedItems != null && e.AddedItems.Count > 0)
+                {
+                    var data = (tbl_ServerTodoDetails)e.AddedItems[0];
+
+                    _dashboardVM.SelectedprojectToDo = data;
+                }
+                else
+                {
+                    var data = (tbl_ServerTodoDetails)_dashboardVM.SelectedprojectToDo;
+                    _dashboardVM.SelectedprojectToDo = data;
+                }
+            }
+        }
+
         //private void LstBoxOrganisation_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         //{
         //    Avalonia.Controls.ListBox lstboxTodo = sender as Avalonia.Controls.ListBox;
