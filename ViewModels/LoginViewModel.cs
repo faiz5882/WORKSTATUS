@@ -270,8 +270,13 @@ namespace WorkStatus.ViewModels
                             LoginLoder.IsVisible = false;
                             IsLoginEnable = true;
                             if (!string.IsNullOrEmpty(_loginResponse.Response.Message))
+<<<<<<< HEAD
                                 _loginResponse.Response.Message = _loginResponse.Response.Message.Contains("Must be a valid email.") ? _loginResponse.Response.Message.Replace("Must be a valid email.", "Please enter valid email.") : _loginResponse.Response.Message;
 
+=======
+                            _loginResponse.Response.Message = _loginResponse.Response.Message.Contains("Must be a valid email.") ? _loginResponse.Response.Message.Replace("Must be a valid email.", "Please enter valid email.") : _loginResponse.Response.Message;
+                           
+>>>>>>> 75008553fb3ad248d3928bf647931f253c74d455
                             ValidateFormsAndError(_loginResponse.Response.Message, 5);
                             return;
                         }

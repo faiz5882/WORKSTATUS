@@ -766,7 +766,11 @@ namespace WorkStatus.Views
             if (indexID == -1)
             {
                 lstboxTodo.SelectedItem = _dashboardVM.SelectedprojectToDo;
+<<<<<<< HEAD
 
+=======
+             
+>>>>>>> 75008553fb3ad248d3928bf647931f253c74d455
                 //lstboxTodo.LayoutUpdated();
             }
             if (lstboxTodo.SelectedItem != null)

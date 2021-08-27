@@ -495,6 +495,20 @@ namespace WorkStatus.ViewModels
             }
         }
 
+<<<<<<< HEAD
+=======
+        private bool _isMarkComplete;
+        public bool IsMarkComplete
+        {
+            get => _isMarkComplete;
+            set
+            {
+                _isMarkComplete = value;
+                RaisePropertyChanged("IsMarkComplete");
+            }
+        }
+
+>>>>>>> 75008553fb3ad248d3928bf647931f253c74d455
         private bool _isOnlyDeleteVisible;
         public bool IsOnlyDeleteVisible
         {
@@ -525,8 +539,13 @@ namespace WorkStatus.ViewModels
                 RaisePropertyChanged("IsStaysOpenToDoDetails");
             }
         }
+<<<<<<< HEAD
 
         private string _hibernateMessage;
+=======
+        
+             private string _hibernateMessage;
+>>>>>>> 75008553fb3ad248d3928bf647931f253c74d455
         public string HibernateMessage
         {
             get => _hibernateMessage;
@@ -1399,7 +1418,11 @@ namespace WorkStatus.ViewModels
                     //  {
                     IsSleepMode = true;
                     IsSleepModeQuitAlert = true;
+<<<<<<< HEAD
                     MessageBox.Avalonia.MessageBoxManager.GetMessageBoxCustomWindow(customMsgBox).ShowDialog(_window);
+=======
+                   // MessageBox.Avalonia.MessageBoxManager.GetMessageBoxCustomWindow(customMsgBox).ShowDialog(_window);
+>>>>>>> 75008553fb3ad248d3928bf647931f253c74d455
                     //   IsSuspend = !IsSuspend;
                     //  }
 
