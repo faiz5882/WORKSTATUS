@@ -495,20 +495,6 @@ namespace WorkStatus.ViewModels
             }
         }
 
-<<<<<<< HEAD
-=======
-        private bool _isMarkComplete;
-        public bool IsMarkComplete
-        {
-            get => _isMarkComplete;
-            set
-            {
-                _isMarkComplete = value;
-                RaisePropertyChanged("IsMarkComplete");
-            }
-        }
-
->>>>>>> 75008553fb3ad248d3928bf647931f253c74d455
         private bool _isOnlyDeleteVisible;
         public bool IsOnlyDeleteVisible
         {
@@ -539,13 +525,8 @@ namespace WorkStatus.ViewModels
                 RaisePropertyChanged("IsStaysOpenToDoDetails");
             }
         }
-<<<<<<< HEAD
 
         private string _hibernateMessage;
-=======
-        
-             private string _hibernateMessage;
->>>>>>> 75008553fb3ad248d3928bf647931f253c74d455
         public string HibernateMessage
         {
             get => _hibernateMessage;
@@ -1389,7 +1370,7 @@ namespace WorkStatus.ViewModels
                     string _time = GetTimeFromProject(projectIdSelected);
                     HeaderTime = _time;
                     string strmess = "WorkStatus noticed that your system was on sleep\n mode. Please, Start the Timer again!";
-                    HibernateMessage = strmess;
+                    //HibernateMessage = strmess;
 
                     Manualsync();
 
@@ -1401,7 +1382,7 @@ namespace WorkStatus.ViewModels
                     customMsgBox = new MessageBoxCustomParamsWithImage
                     {
                         ContentMessage = strmess,
-                        Icon = LoadEmbeddedResources("/Assets/DotsIcon.png"),
+                        Icon = LoadEmbeddedResources("/Assets/LogoSmall.ico"),
                         ButtonDefinitions = new[]
                         {
                         new ButtonDefinition {Name = "Ok", Type = ButtonType.Colored},
@@ -1418,11 +1399,7 @@ namespace WorkStatus.ViewModels
                     //  {
                     IsSleepMode = true;
                     IsSleepModeQuitAlert = true;
-<<<<<<< HEAD
                     MessageBox.Avalonia.MessageBoxManager.GetMessageBoxCustomWindow(customMsgBox).ShowDialog(_window);
-=======
-                   // MessageBox.Avalonia.MessageBoxManager.GetMessageBoxCustomWindow(customMsgBox).ShowDialog(_window);
->>>>>>> 75008553fb3ad248d3928bf647931f253c74d455
                     //   IsSuspend = !IsSuspend;
                     //  }
 
@@ -2423,7 +2400,7 @@ namespace WorkStatus.ViewModels
                             string strJson = JsonConvert.SerializeObject(finallist2);
                             LogFile.WriteLog(strJson);
                             //call api
-                            responseModel = _services.ActivityLogAsyncForIdle(new Get_API_Url().ActivityLogApi(_baseURL), true, objHeaderModel, finallist2);
+                            responseModel =  _services.ActivityLogAsyncForIdle(new Get_API_Url().ActivityLogApi(_baseURL), true, objHeaderModel, finallist2);
                             if (responseModel.Response != null)
                             {
                                 if (responseModel.Response != null)
@@ -2435,7 +2412,7 @@ namespace WorkStatus.ViewModels
                                         if (renewtoken)
                                         {
                                             objHeaderModel.SessionID = Common.Storage.TokenId;
-                                            responseModel = _services.ActivityLogAsyncForIdle(new Get_API_Url().ActivityLogApi(_baseURL), true, objHeaderModel, finallist);
+                                            responseModel =  _services.ActivityLogAsyncForIdle(new Get_API_Url().ActivityLogApi(_baseURL), true, objHeaderModel, finallist);
                                         }
 
                                     }
@@ -7088,7 +7065,6 @@ namespace WorkStatus.ViewModels
         }
         public async void ToDoDetailCall(int toDoId)
         {
-            SelectedToDoItem = toDoId;
             ToDoDetailData = new ObservableCollection<tbl_ServerTodoDetails>(new DashboardSqliteService().GetToDoData(toDoId));
             if (ToDoDetailData != null)
             {
@@ -7096,13 +7072,13 @@ namespace WorkStatus.ViewModels
                 {
                     if (m.IsCompleted == 1)
                     {
-                        IsMarkComplete = m.IsMarkComplete = false;
-                        IsOnlyDeleteVisible = m.IsOnlyDeleteVisible = true;
+                        m.IsMarkComplete = false;
+                        m.IsOnlyDeleteVisible = true;
                     }
                     else
                     {
-                        IsMarkComplete = m.IsMarkComplete = true;
-                        IsOnlyDeleteVisible = m.IsOnlyDeleteVisible = false;
+                        m.IsMarkComplete = true;
+                        m.IsOnlyDeleteVisible = false;
                     }
                 }
             }
