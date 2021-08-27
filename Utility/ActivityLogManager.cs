@@ -54,12 +54,12 @@ namespace WorkStatus.Utility
             tasks[0] = Task.Factory.StartNew(() => GetActivityLogFromDB());
         }
 
-        public void CallActivityLog()
-        {
-            SendIntervalToServer();
-            ActivityTimerObject.Interval = new TimeSpan(0, 5, 0);
-            ActivityTimerObject.Start();
-        }
+        //public void CallActivityLog()
+        //{
+        //    SendIntervalToServer();
+        //    ActivityTimerObject.Interval = new TimeSpan(0, 5, 0);
+        //    ActivityTimerObject.Start();
+        //}
 
         public List<Intervals> GetIntervalsList(string startTime)
         {

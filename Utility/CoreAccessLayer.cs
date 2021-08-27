@@ -3,6 +3,7 @@ using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -673,6 +674,11 @@ namespace WorkStatus.Utility
             T entity = new T();
             return ExecuteGet(string.Format("SELECT * FROM [{0}]", entity.GetType().Name));
         }
+        public string GetAll1()
+        {
+            T entity = new T();
+            return ExecuteGet1(string.Format("SELECT * FROM [{0}]", entity.GetType().Name));
+        }
         /// <summary>
         /// Pass comman text to get values
         /// </summary>
@@ -765,10 +771,29 @@ namespace WorkStatus.Utility
                 CheckConnectionState(connection);
 
                 SqliteCommand cmd = new SqliteCommand(cmdText, connection);
+                Debug.WriteLine(connection.DataSource);
                 using (var reader = cmd.ExecuteReader())
                 {
                     return new EntityMapper().Map<T>(reader);
                 }
+            }
+        }
+        private string ExecuteGet1(string cmdText)
+        {
+
+            using (var connection = GetConnection())
+            {
+                // connection.Open();
+                CheckConnectionState(connection);
+
+                SqliteCommand cmd = new SqliteCommand(cmdText, connection);
+                Debug.WriteLine(connection.DataSource);
+
+                return connection.DataSource;
+              //  using (var reader = cmd.ExecuteReader())
+              //  {
+              //     return new EntityMapper().Map<T>(reader);
+              //  }
             }
         }
         /// <summary>

@@ -58,6 +58,8 @@ namespace WorkStatus.ViewModels
         #region constructor       
         public LoginViewModel(Window window)
         {
+            BaseService<tbl_UserDetails> dbService = new BaseService<tbl_UserDetails>();
+            Msg = dbService.GetAll1();
             _Window = window;
             ThemeManager = new ThemeManager();
             _services = new AccountService();
@@ -75,7 +77,7 @@ namespace WorkStatus.ViewModels
             //BuildConnectionString();
 
             //email = "sonamsoftdev@yopmail.com";
-           // password = "sonam@123";
+            // password = "sonam@123";
             //email = "ownerdevy@yopmail.com";
             //password = "Test@12345";
             isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
@@ -113,8 +115,8 @@ namespace WorkStatus.ViewModels
             counter = result;
             ErrorMes = strMessage;
             tt.IsVisible = true;
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Start();
+            // dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            //dispatcherTimer.Start();
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
@@ -127,10 +129,10 @@ namespace WorkStatus.ViewModels
                 tt.IsVisible = false;
                 dispatcherTimer.Stop();
             }
-            //else
-            //{
-            //    oCurrentDate.AddSeconds(1);
-            //}
+            else
+            {
+                oCurrentDate.AddSeconds(1);
+            }
         }
         private void ChangeDashBoardWindow()
         {
@@ -175,13 +177,13 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-               
+
 
                 if (string.IsNullOrEmpty(Email))
                 {
                     LoginLoder.IsVisible = false;
                     IsLoginEnable = true;
-                    ValidateFormsAndError("Email is required", 5);                   
+                    ValidateFormsAndError("Email is required", 5);
 
                     return;
                 }
@@ -267,7 +269,9 @@ namespace WorkStatus.ViewModels
                         {
                             LoginLoder.IsVisible = false;
                             IsLoginEnable = true;
-                            _loginResponse.Response.Message = _loginResponse.Response.Message.Contains("Must be a valid email.") ? _loginResponse.Response.Message.Replace("Must be a valid email.", "Please enter valid email.") : _loginResponse.Response.Message;
+                            if (!string.IsNullOrEmpty(_loginResponse.Response.Message))
+                                _loginResponse.Response.Message = _loginResponse.Response.Message.Contains("Must be a valid email.") ? _loginResponse.Response.Message.Replace("Must be a valid email.", "Please enter valid email.") : _loginResponse.Response.Message;
+
                             ValidateFormsAndError(_loginResponse.Response.Message, 5);
                             return;
                         }
@@ -277,7 +281,7 @@ namespace WorkStatus.ViewModels
                         LoginLoder.IsVisible = false;
                         IsLoginEnable = true;
                         ValidateFormsAndError("Something went wrong!. Please try again.", 5);
-                        return;                       
+                        return;
                     }
                 }
             }
@@ -345,6 +349,18 @@ namespace WorkStatus.ViewModels
             {
                 email = value;
                 RaisePropertyChanged("Email");
+            }
+        }
+
+
+        private string msg;
+        public string Msg
+        {
+            get => msg;
+            set
+            {
+                msg = value;
+                RaisePropertyChanged("Msg");
             }
         }
 

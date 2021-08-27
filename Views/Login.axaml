@@ -50,7 +50,57 @@
 						<RowDefinition Height="Auto"></RowDefinition>
 						<RowDefinition Height="*"></RowDefinition>
 					</Grid.RowDefinitions>
+					
+					<!-- DashBoard Close Alert PopUp  Height="160"-->
+					<!--<Popup IsOpen="true" Grid.Row="0" Grid.RowSpan="6" StaysOpen="True" Margin="30" Height="120" Width="420" HorizontalOffset="360" VerticalOffset="400">
+						<Border BoxShadow="0 0 0 gray" BorderThickness="0"  Height="120" Width="420" Background="WhiteSmoke" CornerRadius="5,5,5,5" Padding="5">
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="20"/>
+									<RowDefinition Height="Auto"/>
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="1*"/>
+									<ColumnDefinition Width="1*"/>
+								</Grid.ColumnDefinitions>
+								<Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BoxShadow="0 0 0 gray" BorderThickness="0"  Height="20" Width="420" Background="#A3A3A3" CornerRadius="5,5,0,0" Margin="0,-10,0,0" Padding="0">
+									<StackPanel Orientation="Horizontal" Margin="0,0,0,0"  Width="420">
+										<Image Margin="10,0,10,0" Source="/Assets/DotsIcon.png" VerticalAlignment="Center" HorizontalAlignment="Left"  Height="8"/>
+										<TextBlock TextWrapping="Wrap" Margin="100,0,0,0"
+										   TextAlignment="Center" Text="WorkStatus" Background="Transparent" HorizontalAlignment="Center"
+										   FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
+										   Foreground="{Binding NewTextColor,Mode=TwoWay}" FontStyle="Normal" FontSize="14"/>
+									</StackPanel>
+								</Border>
+								<Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto"/>
+									</Grid.RowDefinitions>
+									--><!--<Image Grid.Row="0" Grid.Column="0" Margin="10,10,10,10" Source="/Assets/WorkStatuslogo_Minimal_1.png" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="70"/>--><!--
+									<Grid Grid.Row="0" Margin="10,0,10,10" HorizontalAlignment="Center">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto"/>
+											<ColumnDefinition Width="Auto"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="{Binding Msg}" Foreground="Black"   FontStyle="Normal" TextAlignment="Center" FontSize="14"  HorizontalAlignment="Center"  Margin="5,20,0,0" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
+										<CheckBox x:Name="remembermecheckbox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" IsVisible="False" Content="Remember my Choice" IsChecked="{Binding RemeberMe}" Margin="5,10,0,0" FontSize="14" FontStyle="Normal"/>
+										<Button  x:Name="minimizeapp" Grid.Row="2" Grid.Column="0" Content="Minimize" Margin="0,10,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="SemiLight" Background="Blue" Foreground="White" Width="80" Height="30"/>
+										<Button  x:Name="quitapp" Grid.Row="2" Grid.Column="1" Content="Quit" Margin="10,10,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="SemiLight" Background="Blue" Foreground="White" Width="80" Height="30"/>
+										<Button  x:Name="cancelapp" Grid.Row="2" Grid.Column="2" Content="Cancel" Margin="10,10,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="SemiLight" Background="Blue" Foreground="White" Width="80" Height="30"/>
+									</Grid>
+								</Grid>
+							</Grid>
+						</Border>
+					</Popup>-->
 
+					
+					
 					<Grid  Grid.Row="0" HorizontalAlignment="Center" Width="225" Margin="10,0,0,10">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="50"/>

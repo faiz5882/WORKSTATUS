@@ -63,7 +63,7 @@ namespace WorkStatus.Common
                 Storage.LastToDoEventCountTime = Storage.IdleToDoTime;
                 DateTime oCurrentDate = DateTime.Now;
                 Storage.StopTimeForDB = oCurrentDate.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
-               // LogFile.WriteaActivityLog( DateTime.Now +"\n" + "IdleProjectTime : " + Storage.IdleProjectTime + "\n" + "IdleToDoTime : " + Storage.IdleToDoTime + "\n" + Storage.StopTimeForDB);
+                // LogFile.WriteaActivityLog( DateTime.Now +"\n" + "IdleProjectTime : " + Storage.IdleProjectTime + "\n" + "IdleToDoTime : " + Storage.IdleToDoTime + "\n" + Storage.StopTimeForDB);
                 // }
             }
             return Storage.KeyBoradEventCount;
@@ -108,7 +108,7 @@ namespace WorkStatus.Common
                 Storage.LastToDoEventCountTime = Storage.IdleToDoTime;
                 DateTime oCurrentDate = DateTime.Now;
                 Storage.StopTimeForDB = oCurrentDate.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
-               // LogFile.WriteaActivityLog(DateTime.Now + "\n" + "IdleProjectTime : " + Storage.IdleProjectTime + "\n" + "IdleToDoTime : " + Storage.IdleToDoTime + "\n" + Storage.StopTimeForDB);
+                // LogFile.WriteaActivityLog(DateTime.Now + "\n" + "IdleProjectTime : " + Storage.IdleProjectTime + "\n" + "IdleToDoTime : " + Storage.IdleToDoTime + "\n" + Storage.StopTimeForDB);
                 // }
             }
             return Storage.MouseEventCount;

@@ -22,6 +22,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Tulpep.NotificationWindow;
+//using Tulpep.NotificationWindow;
 using WorkStatus.Models;
 using WorkStatus.Models.WriteDTO;
 using WorkStatus.Utility;
@@ -30,13 +31,14 @@ using Image = Avalonia.Controls.Image;
 
 namespace WorkStatus.Views
 {
-    
+
 
     public class Dashboard : Window
     {
-        private System.Windows.Forms.NotifyIcon m_notifyIcon;
+        // private System.Windows.Forms.NotifyIcon m_notifyIcon;
 
         public DashboardViewModel _dashboardVM;
+        public static Stopwatch ProjectStopWatch = new Stopwatch();
         public DispatcherTimer IsInternet = new DispatcherTimer();
         string fullPath = "";
         public DispatcherTimer m_screen = new DispatcherTimer();
@@ -47,17 +49,20 @@ namespace WorkStatus.Views
         Image imgexpanderButton;
         Button btncancel;
         Button btnaddnote;
-        ToggleButton tbtn;                                                    
+        ToggleButton tbtn;
         Button btnUpgardeApp;
         ComboBox ComboToDoFilter;
         Button MinimizeAppbtn;
         Button QuitAppbtn;
         Button CancelAppbtn;
+        Button OkConfirmbtn;
         ComboBox ProjectListCombobox;
         ComboBox ToDoListCombobox;
+        bool isWindows = false;
+        bool isLinux = false;
         public Dashboard()
         {
-                       
+
             this.HandleWindowStateChanged(WindowState);
             this.MaxHeight = 630;
             this.MaxWidth = 1000;
@@ -83,7 +88,22 @@ namespace WorkStatus.Views
             btnaddnote = this.FindControl<Button>("btnAddNote");
             btnaddnote.Click += Btnaddnote_Click;
             tbtn = this.FindControl<ToggleButton>("addnotebtn");
-            fullPath = ConfigurationManager.AppSettings["WindowsPath"].ToString();
+            isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+            isLinux = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
+            if (isWindows)
+            {
+                fullPath = ConfigurationManager.AppSettings["WindowsPath"].ToString();
+                //OS = "WIN";
+            }
+
+            if (isLinux)
+            {
+                fullPath = ConfigurationManager.AppSettings["LinuxOSPath"].ToString();
+                _dashboardVM.BashNoWait("python keyboardlogger.py");
+                _dashboardVM.BashNoWait("python mouselogger.py");
+                //OS = "LINUX";
+            }
+
             btnUpgardeApp = this.FindControl<Button>("upgardeapp");
             btnUpgardeApp.Click += BtnUpgardeApp_Click;
             Closing += Dashboard_Closing;
@@ -93,6 +113,10 @@ namespace WorkStatus.Views
             QuitAppbtn.Click += QuitAppbtn_Click;
             CancelAppbtn = this.FindControl<Button>("cancelapp");
             CancelAppbtn.Click += CancelAppbtn_Click;
+            CancelAppbtn = this.FindControl<Button>("cancelapp");
+            CancelAppbtn.Click += CancelAppbtn_Click;
+            OkConfirmbtn = this.FindControl<Button>("okConfirmApp");
+            OkConfirmbtn.Click += OkConfirmbtn_Click; ;
             //IdleTimeCheckbox = this.FindControl<CheckBox>("IdleTimeCheckbox");
             //IdleTimeCheckbox.Checked += IdleTimeCheckbox_Checked;
             //IdleTimeCheckbox.Unchecked += IdleTimeCheckbox_Unchecked;
@@ -112,7 +136,7 @@ namespace WorkStatus.Views
             IsInternet.Interval = TimeSpan.FromMinutes(Convert.ToInt32(1));
             IsInternet.Tick += IsInternet_Tick;
             IsInternet.Start();
-           
+
             // ListBox lstbox = this.FindControl<ListBox>("LayoutRoot");
             //lstbox.SelectionChanged += Lstbox_SelectionChanged;
             //var themes = this.Find<TextBox>("textOutput");
@@ -131,6 +155,12 @@ namespace WorkStatus.Views
 #if DEBUG
             this.AttachDevTools();
 #endif
+        }
+
+        private void OkConfirmbtn_Click(object? sender, RoutedEventArgs e)
+        {
+            _dashboardVM.IsSleepMode = false;
+            _dashboardVM.IsSleepModeQuitAlert = false;
         }
 
         private void ProjectListCombobox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -269,7 +299,7 @@ namespace WorkStatus.Views
         }
 
         #endregion
-        
+
         private void ComboToDoFilter_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
             try
@@ -384,6 +414,95 @@ namespace WorkStatus.Views
                 var msg = ex.Message;
             }
         }
+
+        //private async void GetScreenShots(object sender, EventArgs e)
+        //{
+        //    if (!_dashboardVM.IsPlaying && _dashboardVM.IsStop && !Common.Storage.IsScreenShotCapture)
+        //    {
+        //        try
+        //        {
+        //            Screen sc = Screens.Primary;
+        //            PixelRect _pr = sc.WorkingArea;
+        //            int width = _pr.Width;
+        //            int height = _pr.Height;
+        //            string serverScreenShotImageName = string.Empty;
+
+        //            Bitmap bmpScreenshot = new Bitmap(width, height);
+        //            Graphics gfxScreenshot = Graphics.FromImage(bmpScreenshot);
+        //            gfxScreenshot.CopyFromScreen(0, 0, 0, 0, new System.Drawing.Size(width, height), CopyPixelOperation.SourceCopy);
+        //            var qualityEncoder = Encoder.Quality;
+        //            var quality = 15;
+        //            var ratio = new EncoderParameter(qualityEncoder, quality);
+        //            var codecParams = new EncoderParameters(1);
+        //            codecParams.Param[0] = ratio;
+
+        //            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+        //            var jpegCodecInfo = codecs.Single(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
+        //            string filename = string.Empty;
+        //            if (isWindows)
+        //            {
+        //                var orgPath = Common.Storage.CurrentOrganisationName + @"\" + _dashboardVM.HeaderProjectName + @"\";
+
+        //                var directoryPath = fullPath + orgPath;
+
+        //                if (!Directory.Exists(directoryPath))
+        //                {
+        //                    Directory.CreateDirectory(directoryPath);
+        //                }
+
+        //                filename = directoryPath + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
+        //                bmpScreenshot.Save(filename, jpegCodecInfo, codecParams);
+
+        //                bmpScreenshot.Save(filename, jpegCodecInfo, codecParams);
+        //            }
+
+        //            else
+        //            {
+        //                filename = fullPath + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
+        //                bmpScreenshot.Save(filename, jpegCodecInfo, codecParams);
+        //            }
+
+
+        //            var isInternetConnected = true;
+        //            if (isInternetConnected)
+        //            {
+
+        //                serverScreenShotImageName = filename;
+        //            }
+        //            else
+        //            {
+
+        //                serverScreenShotImageName = filename;
+        //            }
+        //            gfxScreenshot.Dispose();
+        //            bmpScreenshot.Dispose();
+        //            byte[] ImageData = System.IO.File.ReadAllBytes(filename);
+        //            ScreenShotRequestModel model = new ScreenShotRequestModel() { screenshot = filename };
+        //            _dashboardVM.SendScreenShotsToServer(filename, ImageData);
+        //            //if (Common.Storage.ScreenURl != null && Common.Storage.ScreenURl != "")
+        //            //{
+        //            //    if (File.Exists(Path.Combine(directoryPath, filename)))
+        //            //    {
+        //            //        // If file found, delete it    
+        //            //        File.Delete(Path.Combine(directoryPath, filename));
+        //            //    }
+        //            //}
+        //            // api call
+        //            if (isWindows)
+        //            {
+        //                GetNotification("WorkStatus\nScreen Captured");
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            var msg = ex.Message;
+        //        }
+        //        finally
+        //        {
+
+        //        }
+        //    }
+        //}
         private void GetScreenShots(object? sender, EventArgs e)
         {
             if (!_dashboardVM.IsPlaying && _dashboardVM.IsStop && !Common.Storage.IsScreenShotCapture)
@@ -405,16 +524,39 @@ namespace WorkStatus.Views
                     codecParams.Param[0] = ratio;
                     ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
                     var jpegCodecInfo = codecs.Single(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
-                    string orgPath = Common.Storage.CurrentOrganisationName + @"\" + _dashboardVM.HeaderProjectName + @"\";
-                    string directoryPath = fullPath + orgPath;
-                    string updatedPath = directoryPath.Replace("|", "_");
-                    updatedPath = directoryPath.Replace(" ", "");
-                    if (!Directory.Exists(updatedPath))
+                    string orgPath = "";// Common.Storage.CurrentOrganisationName + @"\" + _dashboardVM.HeaderProjectName + @"\";
+                    string directoryPath = string.Empty;
+                    string updatedPath = string.Empty;
+                    string filename = string.Empty;
+                    if (isWindows)
                     {
-                        Directory.CreateDirectory(updatedPath);
+                        orgPath = Common.Storage.CurrentOrganisationName + @"\" + _dashboardVM.HeaderProjectName + @"\";
+                        directoryPath = fullPath + orgPath;
+                        updatedPath = directoryPath.Replace("|", "_");
+                        updatedPath = directoryPath.Replace(" ", "");
+                        if (!Directory.Exists(updatedPath))
+                        {
+                            Directory.CreateDirectory(updatedPath);
+                        }
+
+                        filename = updatedPath + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
+                    }
+                    if (isLinux)
+                    {
+                        orgPath = Common.Storage.CurrentOrganisationName +"/"+_dashboardVM.HeaderProjectName;
+                        fullPath = ConfigurationManager.AppSettings["LinuxOSPath"].ToString();
+                        directoryPath = fullPath+"/"+orgPath;
+                        updatedPath = directoryPath.Replace("|", "_");
+                        updatedPath = directoryPath.Replace(" ", "");
+                        if (!Directory.Exists(updatedPath))
+                        {
+                            Directory.CreateDirectory(updatedPath);
+                        }
+
+                        filename = updatedPath+"/"+DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
+                        //OS = "LINUX";	
                     }
 
-                    string filename = updatedPath + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
                     bmpScreenshot.Save(filename, jpegCodecInfo, codecParams);
 
                     var isInternetConnected = true;
@@ -442,7 +584,10 @@ namespace WorkStatus.Views
                         }
                     }
                     // api call
-                    GetNotification("WorkStatus\nScreen Captured");
+                    if (isWindows)
+                    {
+                        GetNotification("WorkStatus\nScreen Captured");
+                    }
                     //D:\Projects\Workstatus\WorkStatus24062021\WorkStatus\Screenshots\
                 }
                 catch (Exception ex)
@@ -458,7 +603,7 @@ namespace WorkStatus.Views
         private async void Dashboard_Closed(object? sender, EventArgs e)
         {
             try
-            {                
+            {
                 _dashboardVM.ClosedAllTimer();
                 await _dashboardVM.SendIntervalToServer();
             }
@@ -518,7 +663,7 @@ namespace WorkStatus.Views
         private async void Quit_Click(object sender, RoutedEventArgs e)
         {
             try
-            {              
+            {
                 this.Close();
             }
             catch (Exception ex)
@@ -613,6 +758,33 @@ namespace WorkStatus.Views
                 }
             }
         }
+
+        private void LstBoxToDo_SelectionChanged1(object? sender, SelectionChangedEventArgs e)
+        {
+            Avalonia.Controls.ListBox lstboxTodo = sender as Avalonia.Controls.ListBox;
+            int indexID = lstboxTodo.SelectedIndex;
+            if (indexID == -1)
+            {
+                lstboxTodo.SelectedItem = _dashboardVM.SelectedprojectToDo;
+
+                //lstboxTodo.LayoutUpdated();
+            }
+            if (lstboxTodo.SelectedItem != null)
+            {
+                if (e.AddedItems != null && e.AddedItems.Count > 0)
+                {
+                    var data = (tbl_ServerTodoDetails)e.AddedItems[0];
+
+                    _dashboardVM.SelectedprojectToDo = data;
+                }
+                else
+                {
+                    var data = (tbl_ServerTodoDetails)_dashboardVM.SelectedprojectToDo;
+                    _dashboardVM.SelectedprojectToDo = data;
+                }
+            }
+        }
+
         //private void LstBoxOrganisation_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         //{
         //    Avalonia.Controls.ListBox lstboxTodo = sender as Avalonia.Controls.ListBox;
@@ -640,56 +812,57 @@ namespace WorkStatus.Views
 
 
             Avalonia.Controls.ListBox lstbox = sender as Avalonia.Controls.ListBox;
-
-            int selectedIndex = lstbox.SelectedIndex;
-            int a = _dashboardVM.listproject.SelectedIndex;
-
-            if (selectedIndex == -1)
+            if (lstbox != null)
             {
+                int selectedIndex = lstbox.SelectedIndex;
+                int a = _dashboardVM.listproject.SelectedIndex;
 
-                if (_dashboardVM.projectIdSelected != null)
+                if (selectedIndex == -1)
                 {
-                    int index = _dashboardVM.GetProjectsList.FindIndex(x => x.ProjectId == _dashboardVM.projectIdSelected);
-                    lstbox.SelectedIndex = index;
-                }
-                else
-                {
-                    //lstbox.SelectedIndex = 0;
-                }
-                (sender as ListBox).ScrollIntoView(_dashboardVM.Selectedproject);
-            }
-            else
-            {
 
-
-                if (lstbox.SelectedItem != null)
-                {
-                    if (e.AddedItems != null && e.AddedItems.Count > 0)
+                    if (_dashboardVM.projectIdSelected != null)
                     {
-
-                        var data = (Organisation_Projects)e.AddedItems[0];
-                        _dashboardVM.Selectedproject = data;
-                        //if (_dashboardVM.projectIdSelected != null)
-                        //{
-                        //    _dashboardVM.BindUseToDoListFromLocalDB(_dashboardVM.Selectedproject.ProjectId.ToInt32());
-                        //}
-                        //else
-                        //{
-                        //     _dashboardVM.Selectedproject = data;
-                        //}
-
+                        int index = _dashboardVM.GetProjectsList.FindIndex(x => x.ProjectId == _dashboardVM.projectIdSelected);
+                        lstbox.SelectedIndex = index;
                     }
                     else
                     {
+                        //lstbox.SelectedIndex = 0;
+                    }
+                    (sender as ListBox).ScrollIntoView(_dashboardVM.Selectedproject);
+                }
+                else
+                {
 
+
+                    if (lstbox.SelectedItem != null)
+                    {
+                        if (e.AddedItems != null && e.AddedItems.Count > 0)
+                        {
+
+                            var data = (Organisation_Projects)e.AddedItems[0];
+                            _dashboardVM.Selectedproject = data;
+                            //if (_dashboardVM.projectIdSelected != null)
+                            //{
+                            //    _dashboardVM.BindUseToDoListFromLocalDB(_dashboardVM.Selectedproject.ProjectId.ToInt32());
+                            //}
+                            //else
+                            //{
+                            //     _dashboardVM.Selectedproject = data;
+                            //}
+
+                        }
+                        else
+                        {
+
+
+                        }
 
                     }
 
                 }
 
             }
-
-
 
         }
 
@@ -781,7 +954,7 @@ namespace WorkStatus.Views
                 ((Avalonia.Controls.Primitives.ToggleButton)sender).IsChecked = false;
                 // if (((Avalonia.Controls.Primitives.ToggleButton)sender).IsChecked == true)
                 if (IsChecked == true)
-                    {
+                {
                     IsChecked = false;
                     Avalonia.Media.Imaging.Bitmap AvIrBitmap;
                     var LeftArrowImage = LoadEmbeddedResources("/Assets/arrowhead-left.png");

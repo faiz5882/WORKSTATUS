@@ -35,6 +35,7 @@ namespace WorkStatus
 
                 List<tbl_UserDetails> userList = new List<tbl_UserDetails>();
                 BaseService<tbl_UserDetails> dbService = new BaseService<tbl_UserDetails>();
+                string msg = dbService.GetAll1();
                 userList = new List<tbl_UserDetails>(dbService.GetAll());
                 if (userList != null && userList.Count > 0)
                 {

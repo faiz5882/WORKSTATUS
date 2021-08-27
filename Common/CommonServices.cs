@@ -16,7 +16,7 @@ namespace WorkStatus.Common
         public static bool IsConnectedToInternet()
         {
             int Desc;
-            return InternetGetConnectedState(out Desc, 0);
+            return true;  // InternetGetConnectedState(out Desc, 0);
         }
 
       

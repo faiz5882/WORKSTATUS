@@ -20,14 +20,14 @@ using MessageBoxAvaloniaEnums = MessageBox.Avalonia.Enums;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia;
 using WorkStatus.Utility;
-using System.Windows.Threading;
+//using System.Windows.Threading;
 
 namespace WorkStatus.ViewModels
 {
     public class ForgotPasswordViewModel : ReactiveObject, INotifyPropertyChanged//ReactiveObject
     {
         private Window _window;
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
+    //  DispatcherTimer dispatcherTimer = new DispatcherTimer();
         int counter = 0;
         TextBlock tt;
 
@@ -120,8 +120,8 @@ namespace WorkStatus.ViewModels
             counter = result;
             ErrorMes = strMessage;
             tt.IsVisible = true;
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Start();
+           // dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+           // dispatcherTimer.Start();
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
@@ -132,7 +132,7 @@ namespace WorkStatus.ViewModels
             {
 
                 tt.IsVisible = false;
-                dispatcherTimer.Stop();
+               // dispatcherTimer.Stop();
             }
             //else
             //{

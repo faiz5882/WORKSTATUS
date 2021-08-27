@@ -20,10 +20,10 @@ namespace WorkStatus.Common
         public GlobalMouseHook globalMouseHook;
         public static Stopwatch sw = new Stopwatch();
         int timeInSeconds = 1;
-        
+
         public KeyBoardMouseActivityTracker()
         {
-            
+
             sw.Start();
             if (sw.Elapsed.Seconds == timeInSeconds)
             {
@@ -31,7 +31,7 @@ namespace WorkStatus.Common
             }
         }
 
-        
+
 
         #region KeyBoardActivity
 
@@ -40,18 +40,25 @@ namespace WorkStatus.Common
             try
             {
 
-            
-            if (PlayStop)
-            {
-                //We check if globalKeyHook is instantiated or not.
-                if (globalKeyHook == null)
-                {
-                    //If the globalKeyhook isn't created, we instantiate it and subscribe to the available events.
-                    globalKeyHook = new GlobalKeyHook();
-                    globalKeyHook.OnKeyDown += GlobalKeyHook_OnKeyDown;
-                    globalKeyHook.OnKeyPressed += GlobalKeyHook_OnKeyPressed;
-                    globalKeyHook.OnKeyUp += GlobalKeyHook_OnKeyUp;
 
+                if (PlayStop)
+                {
+                    //We check if globalKeyHook is instantiated or not.
+                    if (globalKeyHook == null)
+                    {
+                        //If the globalKeyhook isn't created, we instantiate it and subscribe to the available events.
+                        globalKeyHook = new GlobalKeyHook();
+                        globalKeyHook.OnKeyDown += GlobalKeyHook_OnKeyDown;
+                        globalKeyHook.OnKeyPressed += GlobalKeyHook_OnKeyPressed;
+                        globalKeyHook.OnKeyUp += GlobalKeyHook_OnKeyUp;
+
+                    }
+                    else
+                    {
+                        //If the globablKeyHook is already created, we dispose the instance.
+                        globalKeyHook.Dispose();
+                        globalKeyHook = null; //Probably not needed but just to be sure.
+                    }
                 }
                 else
                 {
@@ -60,21 +67,14 @@ namespace WorkStatus.Common
                     globalKeyHook = null; //Probably not needed but just to be sure.
                 }
             }
-            else
-            {
-                //If the globablKeyHook is already created, we dispose the instance.
-                globalKeyHook.Dispose();
-                globalKeyHook = null; //Probably not needed but just to be sure.
-            }
-            }
             catch (Exception ex)
             {
 
                 //throw;
             }
         }
-      
-      
+
+
         private void GlobalKeyHook_OnKeyUp(object sender, GlobalKeyEventArgs e)
         {
 

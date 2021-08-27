@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -55,9 +56,10 @@ namespace WorkStatus.ViewModels
         DispatcherTimer SlotTimerObject;
         bool SlotTimerRuning = false;
         bool IsSuspend = false;
+        bool isWindows = false;
         int SlotInterval;
         Task[] tasks;
-
+        DispatcherTimer keyTimer = new DispatcherTimer();
         private RenewAppResponseModel renewAppResponseModel;
         private RefreshTokenResponseModel tokenResponseModel;
         private AddNotesResponseModel addNotesResponse;
@@ -137,6 +139,7 @@ namespace WorkStatus.ViewModels
         #endregion
 
         #region All ReactiveCommand
+        public int SelectedToDoItem = 0;
         public ReactiveCommand<Unit, Unit> CommandPlay { get; }
         public ReactiveCommand<Unit, Unit> CommandStop { get; }
         public ReactiveCommand<string, Unit> CommandProjectPlay { get; set; }
@@ -145,8 +148,9 @@ namespace WorkStatus.ViewModels
         public ReactiveCommand<int, Unit> CommandToDoStop { get; set; }
         public ReactiveCommand<Unit, Unit> CommandSync { get; set; }
         public ReactiveCommand<int, Unit> AddOrEditToDo { get; set; }
-        public ReactiveCommand<int, Unit> MarkCompeletToDo { get; set; }
-        public ReactiveCommand<int, Unit> DeletToDo { get; set; }
+        public ReactiveCommand<Unit, Unit> AddOrEditToDoView { get; set; }
+        public ReactiveCommand<Unit, Unit> MarkCompeletToDo { get; set; }
+        public ReactiveCommand<Unit, Unit> DeletToDo { get; set; }
         public ReactiveCommand<int, Unit> CommandToDoDetail { get; set; }
         public ReactiveCommand<Unit, Unit> CommandReassignIdleTime { get; set; }
         public ReactiveCommand<Unit, Unit> CommandStopIdleTime { get; set; }
@@ -156,7 +160,7 @@ namespace WorkStatus.ViewModels
 
         #endregion
 
-        #region List collection Properties
+        #region List collection Properties  
 
         //attachment
         private ObservableCollection<tbl_ToDoAttachments> _toDoAttachmentListData;
@@ -470,9 +474,37 @@ namespace WorkStatus.ViewModels
                 RaisePropertyChanged("TxtWelcomeColor");
             }
         }
+        private string msg;
+        public string Msg
+        {
+            get => msg;
+            set
+            {
+                msg = value;
+                RaisePropertyChanged("Msg");
+            }
+        }
+        private bool _isMarkComplete;
+        public bool IsMarkComplete
+        {
+            get => _isMarkComplete;
+            set
+            {
+                _isMarkComplete = value;
+                RaisePropertyChanged("IsMarkComplete");
+            }
+        }
 
-
-
+        private bool _isOnlyDeleteVisible;
+        public bool IsOnlyDeleteVisible
+        {
+            get => _isOnlyDeleteVisible;
+            set
+            {
+                _isOnlyDeleteVisible = value;
+                RaisePropertyChanged("IsOnlyDeleteVisible");
+            }
+        }
         private bool _isToDoDetailsPopUp;
         public bool IsToDoDetailsPopUp
         {
@@ -491,6 +523,17 @@ namespace WorkStatus.ViewModels
             {
                 _isStaysOpenToDoDetails = value;
                 RaisePropertyChanged("IsStaysOpenToDoDetails");
+            }
+        }
+
+        private string _hibernateMessage;
+        public string HibernateMessage
+        {
+            get => _hibernateMessage;
+            set
+            {
+                _hibernateMessage = value;
+                RaisePropertyChanged("HibernateMessage");
             }
         }
         private string _idleSelectedProjectId;
@@ -662,6 +705,28 @@ namespace WorkStatus.ViewModels
             }
         }
 
+
+        private bool _isSleepMode;
+        public bool IsSleepMode
+        {
+            get => _isSleepMode;
+            set
+            {
+                _isSleepMode = value;
+                RaisePropertyChanged("IsSleepMode");
+            }
+        }
+
+        private bool _isSleepModeQuitAlert;
+        public bool IsSleepModeQuitAlert
+        {
+            get => _isSleepModeQuitAlert;
+            set
+            {
+                _isSleepModeQuitAlert = value;
+                RaisePropertyChanged("IsSleepModeQuitAlert");
+            }
+        }
         private bool _remeberMe;
         public bool RemeberMe
         {
@@ -1017,18 +1082,28 @@ namespace WorkStatus.ViewModels
         public DashboardViewModel(Window window)
         {
             _window = window;
+            isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
             customMsgBox = new MessageBoxCustomParamsWithImage();
             themeManager = new ThemeManager();
             NewTextColor = themeManager.NewTextColor;// themeManager.NewTextColor;
             NewBlueTextColor = themeManager.NewBlueTextColor;
             NewStackPanelLogoColor = themeManager.NewStackPanelLogoColor;
             TxtWelcomeColor = themeManager.TxtWelcomeColor;
-            SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
             _services = new DashboardService();
             ActivityTimerObject = new DispatcherTimer();
             objHeaderModel = new HeaderModel();
             responseModel = new CommonResponseModel();
-            activityTracker = new KeyBoardMouseActivityTracker();
+            if (isWindows)
+            {
+                SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
+                activityTracker = new KeyBoardMouseActivityTracker();
+            }
+            else
+            {
+                keyTimer.Tick += new EventHandler(keyTimer_Tick);
+                keyTimer.Interval = new TimeSpan(0, 1, 0);
+                keyTimer.Start();
+            }
             FindOrganisationDetails = new ObservableCollection<tbl_OrganisationDetails>();
             changeorgbtn = _window.FindControl<ToggleButton>("changeOrgbutton");
             pgrToDO = _window.FindControl<ProgressRing>("toDoProgressBar");
@@ -1051,8 +1126,9 @@ namespace WorkStatus.ViewModels
             CommandToDoStop = ReactiveCommand.Create<int>(ToDoStop);
             CommandSync = ReactiveCommand.Create(Manualsync); //SyncDataToServer
             AddOrEditToDo = ReactiveCommand.Create<int>(AddOrEditPageOpen);
-            MarkCompeletToDo = ReactiveCommand.Create<int>(MarkCompleteToDoAPICall);
-            DeletToDo = ReactiveCommand.Create<int>(DeleteToDoAPICall);
+            AddOrEditToDoView = ReactiveCommand.Create(AddOrEditPageOpen_ToDoView);
+            MarkCompeletToDo = ReactiveCommand.Create(MarkCompleteToDoAPICall);
+            DeletToDo = ReactiveCommand.Create(DeleteToDoAPICall);
             CommandToDoDetail = ReactiveCommand.Create<int>(ToDoDetailCall);
             CommandReassignIdleTime = ReactiveCommand.Create(ReassignIdleTimeCall);
             CommandStopIdleTime = ReactiveCommand.Create(StopIdleTimeCall);
@@ -1086,6 +1162,7 @@ namespace WorkStatus.ViewModels
             timerproject.Elapsed += Timerproject_Elapsed;
             timerToDo.Elapsed += TimerToDo_Elapsed;
             SlotTimerObject.Tick += new EventHandler(SlotTimerObject_Elapsed);
+
             SyncDataToServer();
 
             //}
@@ -1205,7 +1282,7 @@ namespace WorkStatus.ViewModels
             s = arryTlogTime[2].ToInt32();
             if (h != 00)
             {
-                h = h * 60* 60;
+                h = h * 60 * 60;
             }
             if (m != 00)
             {
@@ -1243,7 +1320,7 @@ namespace WorkStatus.ViewModels
             //00:01:10
             if (h != 00)
             {
-                h = h*60*60;
+                h = h * 60 * 60;
             }
             if (m != 00)
             {
@@ -1269,7 +1346,7 @@ namespace WorkStatus.ViewModels
         }
         #endregion
         #region hibernate
-       
+        public ReactiveCommand<object, Unit> ShowMsgBoxCommand { get; }
         private async void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
             switch (e.Mode)
@@ -1293,7 +1370,7 @@ namespace WorkStatus.ViewModels
                     string _time = GetTimeFromProject(projectIdSelected);
                     HeaderTime = _time;
                     string strmess = "WorkStatus noticed that your system was on sleep\n mode. Please, Start the Timer again!";
-                    //HibernateMessage = strmess;
+                    HibernateMessage = strmess;
 
                     Manualsync();
 
@@ -1305,7 +1382,7 @@ namespace WorkStatus.ViewModels
                     customMsgBox = new MessageBoxCustomParamsWithImage
                     {
                         ContentMessage = strmess,
-                        Icon = LoadEmbeddedResources("/Assets/LogoSmall.ico"),
+                        Icon = LoadEmbeddedResources("/Assets/DotsIcon.png"),
                         ButtonDefinitions = new[]
                         {
                         new ButtonDefinition {Name = "Ok", Type = ButtonType.Colored},
@@ -1320,10 +1397,12 @@ namespace WorkStatus.ViewModels
                     Task.Delay(500);
                     //if (IsSuspend)
                     //  {
-                     MessageBox.Avalonia.MessageBoxManager.GetMessageBoxCustomWindow(customMsgBox).ShowDialog(_window);
-                     //   IsSuspend = !IsSuspend;
-                  //  }
-                  
+                    IsSleepMode = true;
+                    IsSleepModeQuitAlert = true;
+                    MessageBox.Avalonia.MessageBoxManager.GetMessageBoxCustomWindow(customMsgBox).ShowDialog(_window);
+                    //   IsSuspend = !IsSuspend;
+                    //  }
+
                     break;
 
                 default:
@@ -1383,22 +1462,27 @@ namespace WorkStatus.ViewModels
                             }
 
                             IdleTimeMessage = "You are idle from last " + aa + "";
-                            try
+                            if (isWindows)
                             {
-                                if (activityTracker.globalKeyHook != null && activityTracker.globalMouseHook != null)
+                                try
                                 {
-                                    activityTracker.globalKeyHook.Dispose();
-                                    activityTracker.globalMouseHook.Dispose();
-                                    activityTracker.globalKeyHook = null;
-                                    activityTracker.globalMouseHook = null;
-                                    LogFile.WriteMessageLog("Dispose");
+                                    if (activityTracker.globalKeyHook != null && activityTracker.globalMouseHook != null)
+                                    {
+                                        activityTracker.globalKeyHook.Dispose();
+                                        activityTracker.globalMouseHook.Dispose();
+                                        activityTracker.globalKeyHook = null;
+                                        activityTracker.globalMouseHook = null;
+                                        LogFile.WriteMessageLog("Dispose");
+                                    }
+                                  
+                                }
+                                catch (Exception ex)
+                                {
+
+                                    LogFile.ErrorLog(ex);
                                 }
                             }
-                            catch (Exception ex)
-                            {
-
-                                LogFile.ErrorLog(ex);
-                            }
+                           
                         }
                     }
                     else
@@ -1458,6 +1542,29 @@ namespace WorkStatus.ViewModels
             IsReassignPopUpOpen = true;
 
             BindUserProjectListforComboBox(HeaderOrgId);
+        }
+        public void BashNoWait(string cmd)
+        {
+            Task t = new Task(() =>
+            {
+                var escapedArgs = cmd.Replace("\"", "\\\"");
+                var process = new Process()
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "/bin/bash",
+                        Arguments = $"-c \"{escapedArgs}\"",
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                    }
+                };
+                process.Start();
+                // Msg = process.StartInfo.Arguments + "/" + process.StartInfo.FileName;
+                // IsDashBoardClose = true;
+                // IsDashBoardQuitAlert = true;
+            });
+            t.Start();
         }
         public void StopIdleTimeCall()
         {
@@ -1565,13 +1672,17 @@ namespace WorkStatus.ViewModels
                 }
 
             }
-            if (activityTracker.globalKeyHook == null && activityTracker.globalMouseHook == null)
+            if (isWindows)
             {
-                activityTracker.KeyBoardActivity(true);
-                activityTracker.MouseActivity(true);
-                LogFile.WriteaActivityLog("Continue success");
 
+                if (activityTracker.globalKeyHook == null && activityTracker.globalMouseHook == null)
+                {
+                    activityTracker.KeyBoardActivity(true);
+                    activityTracker.MouseActivity(true);
+                    LogFile.WriteaActivityLog("Continue success");
+                }
             }
+           
         }
         public void AssignIdleTimeCall(int Id)
         {
@@ -1703,12 +1814,11 @@ namespace WorkStatus.ViewModels
                         ProjectPlay(projectIdSelected);
                     }
                 }
-                if (activityTracker.globalKeyHook == null && activityTracker.globalMouseHook == null)
+                if (isWindows && activityTracker.globalKeyHook == null && activityTracker.globalMouseHook == null)
                 {
                     activityTracker.KeyBoardActivity(true);
                     activityTracker.MouseActivity(true);
                     LogFile.WriteaActivityLog("Continue success");
-
                 }
             }
             else
@@ -1982,6 +2092,63 @@ namespace WorkStatus.ViewModels
                 LogFile.ErrorLog(ex);
             }
         }
+
+        private void keyTimer_Tick(object sender, EventArgs e)
+        {
+            if (!IsPlaying && IsStop)
+            {
+                DateTime mdatTime = DateTime.Now;
+                mdatTime = mdatTime.AddMinutes(-1);
+                string datetimestr = mdatTime.ToString("yyyy-MM-dd HH:mm");
+                Console.WriteLine(datetimestr);
+                string textFile = "keyboardlogger.txt";
+                int Keycount = 0;
+                if (File.Exists(textFile))
+                {
+                    string[] lines = File.ReadAllLines(textFile);
+                    foreach (var ln in lines)
+                    {
+                        if (ln.StartsWith(datetimestr))
+                        {
+                            Keycount++;
+                        }
+                    }
+                    Console.WriteLine("KeyPad Activity Updated");
+                    File.WriteAllText("keyboardlogger.txt", String.Empty);
+                }
+                Storage.KeyBoradEventCount += Keycount;
+                Storage.AverageEventCount += Keycount;
+                Storage.LastProjectEventCountTime = Storage.IdleProjectTime;
+                Storage.LastToDoEventCountTime = Storage.IdleToDoTime;
+                DateTime oCurrentDate = DateTime.Now;
+                Storage.StopTimeForDB = oCurrentDate.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+
+                textFile = "mouse_log0.txt";
+                //string textFile = @"C:\Users\Anuriti sharma\Documents\mouse_log0.txt"; 
+                int Mousecount = 1;
+                if (File.Exists(textFile))
+                {
+                    // Read a text file line by line.  
+                    string[] lines = File.ReadAllLines(textFile);
+                    foreach (var ln in lines)
+                    {
+                        if (ln.StartsWith(datetimestr))
+                        {
+                            Mousecount++;
+                        }
+                    }
+                    Console.WriteLine("Mouse Activity Updated");
+                    File.WriteAllText(textFile, String.Empty);
+                }
+                Storage.MouseEventCount += Mousecount;
+                Storage.AverageEventCount += Mousecount;
+                Storage.LastProjectEventCountTime = Storage.IdleProjectTime;
+                Storage.LastToDoEventCountTime = Storage.IdleToDoTime;
+                DateTime oCurrentDate1 = DateTime.Now;
+                Storage.StopTimeForDB = oCurrentDate1.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
+            }
+        }
+
         public async Task<bool> SendIdleTimeSlotIntervalToServer()
         {
             bool result = false;
@@ -2215,7 +2382,6 @@ namespace WorkStatus.ViewModels
                     }
                 }
 
-
                 objHeaderModel = new HeaderModel();
                 _baseURL = Configurations.UrlConstant + Configurations.ActivityLogApiConstant;
                 objHeaderModel.SessionID = Common.Storage.TokenId;
@@ -2234,7 +2400,7 @@ namespace WorkStatus.ViewModels
                             string strJson = JsonConvert.SerializeObject(finallist2);
                             LogFile.WriteLog(strJson);
                             //call api
-                            responseModel =  _services.ActivityLogAsyncForIdle(new Get_API_Url().ActivityLogApi(_baseURL), true, objHeaderModel, finallist2);
+                            responseModel = _services.ActivityLogAsyncForIdle(new Get_API_Url().ActivityLogApi(_baseURL), true, objHeaderModel, finallist2);
                             if (responseModel.Response != null)
                             {
                                 if (responseModel.Response != null)
@@ -2246,7 +2412,7 @@ namespace WorkStatus.ViewModels
                                         if (renewtoken)
                                         {
                                             objHeaderModel.SessionID = Common.Storage.TokenId;
-                                            responseModel =  _services.ActivityLogAsyncForIdle(new Get_API_Url().ActivityLogApi(_baseURL), true, objHeaderModel, finallist);
+                                            responseModel = _services.ActivityLogAsyncForIdle(new Get_API_Url().ActivityLogApi(_baseURL), true, objHeaderModel, finallist);
                                         }
 
                                     }
@@ -2733,7 +2899,7 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-               
+
 
                 var keyboardActivity = Common.Storage.KeyBoradEventCount.ToStrVal();
                 var MouseActivity = Common.Storage.MouseEventCount.ToStrVal();
@@ -3190,6 +3356,8 @@ namespace WorkStatus.ViewModels
             }
 
         }
+
+
         public async void CallActivityLog()
         {
             try
@@ -3753,10 +3921,14 @@ namespace WorkStatus.ViewModels
             {
                 if (Storage.IsProjectRuning == false)
                 {
-                    activityTracker.KeyBoardActivity(true);
-                    activityTracker.MouseActivity(true);
-                    LogFile.WriteaActivityLog("HeaderPlay Success");
+                    if (isWindows)
+                    {
 
+                        activityTracker.KeyBoardActivity(true);
+                        activityTracker.MouseActivity(true);
+                        LogFile.WriteaActivityLog("HeaderPlay Success");
+                    }
+                  
                     //App & Url
                     AppandUrlTracking.Interval = TimeSpan.FromSeconds(Convert.ToInt32(10));
                     AppandUrlTracking.Tick += AppandUrlTracking_Tick;
@@ -3931,7 +4103,7 @@ namespace WorkStatus.ViewModels
                     try
                     {
 
-                        if (activityTracker.globalKeyHook == null && activityTracker.globalMouseHook == null)
+                        if (isWindows && activityTracker.globalKeyHook == null && activityTracker.globalMouseHook == null)
                         {
                             activityTracker.KeyBoardActivity(true);
                             activityTracker.MouseActivity(true);
@@ -4626,13 +4798,13 @@ namespace WorkStatus.ViewModels
                 {
                     try
                     {
-                        if (activityTracker.globalKeyHook == null && activityTracker.globalMouseHook == null)
-                        {
-                            activityTracker.KeyBoardActivity(true);
-                            activityTracker.MouseActivity(true);
-                            LogFile.WriteaActivityLog("ToDoPlay success");
+                        //if (activityTracker.globalKeyHook == null && activityTracker.globalMouseHook == null)
+                        //{
+                        //    activityTracker.KeyBoardActivity(true);
+                        //    activityTracker.MouseActivity(true);
+                        //    LogFile.WriteaActivityLog("ToDoPlay success");
 
-                        }
+                        //}
                         //App & Url
                         AppandUrlTracking.Interval = TimeSpan.FromSeconds(Convert.ToInt32(10));
                         AppandUrlTracking.Tick += AppandUrlTracking_Tick;
@@ -4785,7 +4957,7 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-                IsAddNoteButtonEnabled =  false;
+                IsAddNoteButtonEnabled = false;
                 AddNoteButtonOpacity = 0.5;
                 SlotTimerObject.Stop();
                 timerToDo.Stop();
@@ -6748,7 +6920,6 @@ namespace WorkStatus.ViewModels
         }
         public async void AddOrEditPageOpen(int selectedEditToDoId)
         {
-
             IsToDoDetailsPopUp = false;
             IsStaysOpenToDoDetails = false;
             Common.Storage.EditToDoId = selectedEditToDoId == 0 ? 0 : selectedEditToDoId;
@@ -6782,7 +6953,43 @@ namespace WorkStatus.ViewModels
             pgrToDO.IsVisible = false;
 
         }
-        public async void DeleteToDoAPICall(int toDoId)
+
+        public async void AddOrEditPageOpen_ToDoView()
+        {
+            IsToDoDetailsPopUp = false;
+            IsStaysOpenToDoDetails = false;
+            Common.Storage.EditToDoId = SelectedToDoItem == 0 ? 0 : SelectedToDoItem;
+            var dialog = new AddOrEditToDo();
+            var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+            await dialog.ShowDialog(mainWindow);
+            BaseService<tbl_ServerTodoDetails> service = new BaseService<tbl_ServerTodoDetails>();
+            service.Delete(new tbl_ServerTodoDetails());
+            pgrToDO.IsVisible = true;
+            //Dispatcher.UIThread.InvokeAsync(new Action(() =>
+            //{
+
+            //}), DispatcherPriority.Background);
+            BindUserProjectlistByOrganizationID(Common.Storage.CurrentOrganisationId.ToStrVal());
+            BindUseToDoListFromLocalDB(Common.Storage.AddOrEditToDoProjectId);
+            pgrToDO.IsVisible = true;
+
+            var data = GetProjectsList.FirstOrDefault(x => x.ProjectId == Common.Storage.AddOrEditToDoProjectId.ToStrVal());
+            if (data != null)
+            {
+                Selectedproject = data;
+            }
+
+            int indexT = 0;
+            if (!string.IsNullOrEmpty(Common.Storage.AddOrEditToDoProjectId.ToStrVal()))
+            {
+                indexT = GetProjectsList.FindIndex(x => x.ProjectId == Common.Storage.AddOrEditToDoProjectId.ToStrVal());
+            }
+
+            listproject.SelectedIndex = indexT;
+            pgrToDO.IsVisible = false;
+
+        }
+        public async void DeleteToDoAPICall()
         {
             try
             {
@@ -6792,7 +6999,7 @@ namespace WorkStatus.ViewModels
                 objHeaderModel.SessionID = Common.Storage.TokenId;
                 var org_id = Storage.CurrentOrganisationId;
                 var project_id = Storage.AddOrEditToDoProjectId;
-                getResponseModel = await _services.GetAsyncData_GetApi(new Get_API_Url().GetToDoMarkCompleteorDeleteURL(_baseURL, toDoId, org_id), true, objHeaderModel, getResponseModel);
+                getResponseModel = await _services.GetAsyncData_GetApi(new Get_API_Url().GetToDoMarkCompleteorDeleteURL(_baseURL, SelectedToDoItem, org_id), true, objHeaderModel, getResponseModel);
                 if (getResponseModel.response != null)
                 {
                     if (getResponseModel.response.code == "1001")
@@ -6802,14 +7009,14 @@ namespace WorkStatus.ViewModels
                         if (renewtoken)
                         {
                             objHeaderModel.SessionID = Common.Storage.TokenId;
-                            getResponseModel = await _services.GetAsyncData_GetApi(new Get_API_Url().GetToDoMarkCompleteorDeleteURL(_baseURL, toDoId, org_id), true, objHeaderModel, getResponseModel);
+                            getResponseModel = await _services.GetAsyncData_GetApi(new Get_API_Url().GetToDoMarkCompleteorDeleteURL(_baseURL, SelectedToDoItem, org_id), true, objHeaderModel, getResponseModel);
                         }
                     }
                     if (getResponseModel.response.code == "200")
                     {
                         IsToDoDetailsPopUp = false;
                         IsStaysOpenToDoDetails = false;
-                        new DashboardSqliteService().DeleteSelectedToDo(toDoId);
+                        new DashboardSqliteService().DeleteSelectedToDo(SelectedToDoItem);
                         BindUseToDoListFromLocalDB(project_id);
                     }
                 }
@@ -6819,7 +7026,7 @@ namespace WorkStatus.ViewModels
                 LogFile.ErrorLog(ex);
             }
         }
-        public async void MarkCompleteToDoAPICall(int toDoId)
+        public async void MarkCompleteToDoAPICall()
         {
             try
             {
@@ -6829,7 +7036,7 @@ namespace WorkStatus.ViewModels
                 objHeaderModel.SessionID = Common.Storage.TokenId;
                 var org_id = Storage.CurrentOrganisationId;
                 var project_id = Storage.AddOrEditToDoProjectId;
-                getResponseModel = await _services.GetAsyncData_GetApi(new Get_API_Url().GetToDoMarkCompleteorDeleteURL(_baseURL, toDoId, org_id), true, objHeaderModel, getResponseModel);
+                getResponseModel = await _services.GetAsyncData_GetApi(new Get_API_Url().GetToDoMarkCompleteorDeleteURL(_baseURL, SelectedToDoItem, org_id), true, objHeaderModel, getResponseModel);
                 if (getResponseModel.response != null)
                 {
                     if (getResponseModel.response.code == "1001")
@@ -6839,12 +7046,12 @@ namespace WorkStatus.ViewModels
                         if (renewtoken)
                         {
                             objHeaderModel.SessionID = Common.Storage.TokenId;
-                            getResponseModel = await _services.GetAsyncData_GetApi(new Get_API_Url().GetToDoMarkCompleteorDeleteURL(_baseURL, toDoId, org_id), true, objHeaderModel, getResponseModel);
+                            getResponseModel = await _services.GetAsyncData_GetApi(new Get_API_Url().GetToDoMarkCompleteorDeleteURL(_baseURL, SelectedToDoItem, org_id), true, objHeaderModel, getResponseModel);
                         }
                     }
                     if (getResponseModel.response.code == "200")
                     {
-                        new DashboardSqliteService().UpdateToDoList(toDoId);
+                        new DashboardSqliteService().UpdateToDoList(SelectedToDoItem);
                         BindUseToDoListFromLocalDB(project_id);
                         IsToDoDetailsPopUp = false;
                         IsStaysOpenToDoDetails = false;
@@ -6858,6 +7065,7 @@ namespace WorkStatus.ViewModels
         }
         public async void ToDoDetailCall(int toDoId)
         {
+            SelectedToDoItem = toDoId;
             ToDoDetailData = new ObservableCollection<tbl_ServerTodoDetails>(new DashboardSqliteService().GetToDoData(toDoId));
             if (ToDoDetailData != null)
             {
@@ -6865,13 +7073,13 @@ namespace WorkStatus.ViewModels
                 {
                     if (m.IsCompleted == 1)
                     {
-                        m.IsMarkComplete = false;
-                        m.IsOnlyDeleteVisible = true;
+                        IsMarkComplete = m.IsMarkComplete = false;
+                        IsOnlyDeleteVisible = m.IsOnlyDeleteVisible = true;
                     }
                     else
                     {
-                        m.IsMarkComplete = true;
-                        m.IsOnlyDeleteVisible = false;
+                        IsMarkComplete = m.IsMarkComplete = true;
+                        IsOnlyDeleteVisible = m.IsOnlyDeleteVisible = false;
                     }
                 }
             }

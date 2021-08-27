@@ -10,12 +10,20 @@ namespace WorkStatus.Utility
 {
    public class LogFile
     {
-        
+        static bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+        static bool isLinux = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
+          
         public static bool WriteLog(string strMessage)
         {
             try
             {
-                string fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                string fullPath = string.Empty;
+                if (isLinux)
+                { fullPath = "LogWorkStatus"; }
+                else
+                {
+                    fullPath =  ConfigurationManager.AppSettings["LogPath"].ToString();
+                }
                 string directoryPath = fullPath;
                 string updatedPath = directoryPath.Replace("|", "_");
                 updatedPath = directoryPath.Replace(" ", "");
@@ -24,7 +32,7 @@ namespace WorkStatus.Utility
                     Directory.CreateDirectory(updatedPath);
                 }
                 string strFileName = DateTime.Now.ToString("yyyyMMdd")+".txt";
-                FileStream objFilestream = new FileStream(string.Format("{0}\\{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
+                FileStream objFilestream = new FileStream(string.Format("{0}/{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
                 StreamWriter objStreamWriter = new StreamWriter((Stream)objFilestream);
                 objStreamWriter.WriteLine(strMessage);
                 objStreamWriter.Close();
@@ -40,7 +48,13 @@ namespace WorkStatus.Utility
         {
             try
             {
-                string fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                string fullPath = string.Empty;
+                if (isLinux)
+                { fullPath = "LogWorkStatus"; }
+                else
+                {
+                    fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                }
                 string directoryPath = fullPath;
                 string updatedPath = directoryPath.Replace("|", "_");
                 updatedPath = directoryPath.Replace(" ", "");
@@ -49,7 +63,7 @@ namespace WorkStatus.Utility
                     Directory.CreateDirectory(updatedPath);
                 }
                 string strFileName = DateTime.Now.ToString("yyyyMMdd") + "ErrorLog.txt";
-                FileStream objFilestream = new FileStream(string.Format("{0}\\{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
+                FileStream objFilestream = new FileStream(string.Format("{0}/{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
                 StreamWriter objStreamWriter = new StreamWriter((Stream)objFilestream);
 
                 objStreamWriter.WriteLine("-------------------START-------------" + DateTime.Now);
@@ -69,7 +83,13 @@ namespace WorkStatus.Utility
         {
             try
             {
-                string fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                string fullPath = string.Empty;
+                if (isLinux)
+                { fullPath = "LogWorkStatus"; }
+                else
+                {
+                    fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                }
                 string directoryPath = fullPath;
                 string updatedPath = directoryPath.Replace("|", "_");
                 updatedPath = directoryPath.Replace(" ", "");
@@ -78,7 +98,7 @@ namespace WorkStatus.Utility
                     Directory.CreateDirectory(updatedPath);
                 }
                 string strFileName = DateTime.Now.ToString("yyyyMMdd") + "ErrorLog.txt";
-                FileStream objFilestream = new FileStream(string.Format("{0}\\{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
+                FileStream objFilestream = new FileStream(string.Format("{0}/{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
                 StreamWriter objStreamWriter = new StreamWriter((Stream)objFilestream);
 
                 objStreamWriter.WriteLine("-------------------START-------------" + DateTime.Now);
@@ -97,7 +117,13 @@ namespace WorkStatus.Utility
         {
             try
             {
-                string fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                string fullPath = string.Empty;
+                if (isLinux)
+                { fullPath = "LogWorkStatus"; }
+                else
+                {
+                    fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                }
                 string directoryPath = fullPath;
                 string updatedPath = directoryPath.Replace("|", "_");
                 updatedPath = directoryPath.Replace(" ", "");
@@ -106,7 +132,7 @@ namespace WorkStatus.Utility
                     Directory.CreateDirectory(updatedPath);
                 }
                 string strFileName = DateTime.Now.ToString("yyyyMMdd") + "Timelog.txt";
-                FileStream objFilestream = new FileStream(string.Format("{0}\\{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
+                FileStream objFilestream = new FileStream(string.Format("{0}/{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
                 StreamWriter objStreamWriter = new StreamWriter((Stream)objFilestream);
                 objStreamWriter.WriteLine(strMessage);
                 objStreamWriter.Close();
@@ -122,7 +148,13 @@ namespace WorkStatus.Utility
         {
             try
             {
-                string fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                string fullPath = string.Empty;
+                if (isLinux)
+                { fullPath = "LogWorkStatus"; }
+                else
+                {
+                    fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                }
                 string directoryPath = fullPath;
                 string updatedPath = directoryPath.Replace("|", "_");
                 updatedPath = directoryPath.Replace(" ", "");
@@ -131,7 +163,7 @@ namespace WorkStatus.Utility
                     Directory.CreateDirectory(updatedPath);
                 }
                 string strFileName = DateTime.Now.ToString("yyyyMMdd") + "Activity" + ".txt";
-                FileStream objFilestream = new FileStream(string.Format("{0}\\{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
+                FileStream objFilestream = new FileStream(string.Format("{0}/{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
                 StreamWriter objStreamWriter = new StreamWriter((Stream)objFilestream);
                 objStreamWriter.WriteLine(strMessage);
                 objStreamWriter.Close();
