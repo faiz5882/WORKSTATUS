@@ -8,7 +8,7 @@
 		 xmlns:local="clr-namespace:WorkStatus.Utility"
         x:Class="WorkStatus.Views.Login"
 		WindowStartupLocation="CenterScreen"
-		Icon="avares://WorkStatus/Assets/StatusBar_Logo.png"
+		Icon="avares://WorkStatus/Assets/header_Logo.png"
 		Title="Login"
 		CanResize="False">
 	<Window.Styles>

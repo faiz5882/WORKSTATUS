@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:WorkStatus.Utility"
 		    xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
         mc:Ignorable="d"
-		    Icon="avares://WorkStatus/Assets/StatusBar_Logo.png"
+		    Icon="avares://WorkStatus/Assets/header_Logo.png"
 		    x:Class="WorkStatus.Views.Dashboard"  Title="Dashboard">
 	<Window.Resources>
 		<local:SubstringConverter x:Key="valueconverter"></local:SubstringConverter>
