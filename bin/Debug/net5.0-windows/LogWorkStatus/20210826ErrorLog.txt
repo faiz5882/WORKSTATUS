@@ -1,0 +1,72 @@
+-------------------START-------------8/26/2021 9:15:01 AM
+System.IO.FileNotFoundException: Could not load file or assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified.
+File name: 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+-------------------END-------------8/26/2021 9:15:02 AM
+-------------------START-------------8/26/2021 9:37:41 AM
+System.IO.FileNotFoundException: Could not load file or assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified.
+File name: 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+-------------------END-------------8/26/2021 9:37:41 AM
+-------------------START-------------8/26/2021 9:41:41 AM
+System.IO.FileNotFoundException: Could not load file or assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified.
+File name: 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+-------------------END-------------8/26/2021 9:41:41 AM
+-------------------START-------------8/26/2021 9:49:22 AM
+System.IO.FileNotFoundException: Could not load file or assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified.
+File name: 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+-------------------END-------------8/26/2021 9:49:23 AM
+-------------------START-------------8/26/2021 1:01:59 PM
+System.IO.FileNotFoundException: Could not load file or assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified.
+File name: 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+-------------------END-------------8/26/2021 1:01:59 PM
+-------------------START-------------8/26/2021 1:08:39 PM
+System.IO.FileNotFoundException: Could not load file or assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified.
+File name: 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+-------------------END-------------8/26/2021 1:08:39 PM
+-------------------START-------------8/26/2021 1:08:39 PM
+System.IO.FileNotFoundException: Could not load file or assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified.
+File name: 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+-------------------END-------------8/26/2021 1:08:39 PM
+-------------------START-------------8/26/2021 1:16:39 PM
+System.IO.FileNotFoundException: Could not load file or assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified.
+File name: 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+-------------------END-------------8/26/2021 1:16:39 PM
+-------------------START-------------8/26/2021 1:33:13 PM
+System.IO.FileNotFoundException: Could not load file or assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified.
+File name: 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+   at WorkStatus.Views.Dashboard.GetNotification(String popupMessage)
+   at WorkStatus.Views.Dashboard.GetScreenShots(Object sender, EventArgs e) in C:\Projects\NewWorkStatus1\New folder\Views\Dashboard.axaml.cs:line 593
+-------------------END-------------8/26/2021 1:33:13 PM

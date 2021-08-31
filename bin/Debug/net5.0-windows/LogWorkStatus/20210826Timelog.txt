@@ -1,0 +1,245 @@
+1.Start Time -2021-08-26 09:13:13
+End Time -2021-08-26 09:14:33
+3. activityName : WorkStatus
+4. Activity_TotalRun : 90
+5.09:14:33
+1.Start Time -2021-08-26 09:14:33
+End Time -2021-08-26 09:15:03
+3. activityName : devenv
+4. Activity_TotalRun : 29
+5.09:15:03
+1.Start Time -2021-08-26 09:15:03
+End Time -2021-08-26 09:15:13
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.09:15:13
+New app and url8/26/2021 9:20:04 AM
+1.Start Time -2021-08-26 09:15:13
+End Time -2021-08-26 09:23:13
+3. activityName : devenv
+4. Activity_TotalRun : 480
+5.09:23:13
+1. URL Start Time -2021-08-26 09:23:13
+2. End Time -2021-08-26 09:23:23
+3. UrlName : Me | Helpdesk | Ticketsfollowing - Google Chrome
+4. TotalTimeSpent : 620
+5.09:23:23
+1.Start Time -2021-08-26 09:23:13
+End Time -2021-08-26 09:24:13
+3. activityName : chrome
+4. Activity_TotalRun : 59
+5.09:24:13
+1.Start Time -2021-08-26 09:24:13
+End Time -2021-08-26 09:24:53
+3. activityName : Skype
+4. Activity_TotalRun : 39
+5.09:24:53
+1.Start Time -2021-08-26 09:24:53
+End Time -2021-08-26 09:25:03
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.09:25:03
+1.Start Time -2021-08-26 09:25:03
+End Time -2021-08-26 09:25:23
+3. activityName : Skype
+4. Activity_TotalRun : 19
+5.09:25:23
+1. URL Start Time -2021-08-26 09:23:23
+2. End Time -2021-08-26 09:25:34
+3. UrlName : Me | Helpdesk | Ticket | 91663 | Details - Google Chrome
+4. TotalTimeSpent : 120
+5.09:25:34
+1. URL Start Time -2021-08-26 09:25:34
+2. End Time -2021-08-26 09:25:54
+3. UrlName : Roundcube Webmail :: Ticket Number 2713 | Comment Added - Google Chrome
+4. TotalTimeSpent : 10
+5.09:25:54
+1.Start Time -2021-08-26 09:25:23
+End Time -2021-08-26 09:28:04
+3. activityName : chrome
+4. Activity_TotalRun : 160
+5.09:28:04
+1.Start Time -2021-08-26 09:30:20
+End Time -2021-08-26 09:30:30
+3. activityName : devenv
+4. Activity_TotalRun : 20
+5.09:30:30
+from Add Slot New app and url8/26/2021 9:30:34 AM
+1.Start Time -2021-08-26 09:33:59
+End Time -2021-08-26 09:34:29
+3. activityName : WorkStatus
+4. Activity_TotalRun : 40
+5.09:34:29
+1.Start Time -2021-08-26 09:36:29
+End Time -2021-08-26 09:36:59
+3. activityName : devenv
+4. Activity_TotalRun : 40
+5.09:36:59
+1.Start Time -2021-08-26 09:36:59
+End Time -2021-08-26 09:37:19
+3. activityName : WorkStatus
+4. Activity_TotalRun : 19
+5.09:37:19
+1.Start Time -2021-08-26 09:37:19
+End Time -2021-08-26 09:37:39
+3. activityName : devenv
+4. Activity_TotalRun : 19
+5.09:37:39
+1.Start Time -2021-08-26 09:37:39
+End Time -2021-08-26 09:38:09
+3. activityName : explorer
+4. Activity_TotalRun : 29
+5.09:38:09
+New app and url8/26/2021 9:40:19 AM
+1.Start Time -2021-08-26 09:47:40
+End Time -2021-08-26 09:48:30
+3. activityName : devenv
+4. Activity_TotalRun : 60
+5.09:48:30
+1.Start Time -2021-08-26 09:48:30
+End Time -2021-08-26 09:48:40
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.09:48:40
+1.Start Time -2021-08-26 13:01:24
+End Time -2021-08-26 13:01:34
+3. activityName : devenv
+4. Activity_TotalRun : 20
+5.01:01:34
+1.Start Time -2021-08-26 13:01:34
+End Time -2021-08-26 13:01:44
+3. activityName : Skype
+4. Activity_TotalRun : 9
+5.01:01:44
+1.Start Time -2021-08-26 13:01:44
+End Time -2021-08-26 13:01:59
+3. activityName : WorkStatus
+4. Activity_TotalRun : 14
+5.01:01:59
+1.Start Time -2021-08-26 13:01:59
+End Time -2021-08-26 13:02:24
+3. activityName : devenv
+4. Activity_TotalRun : 25
+5.01:02:24
+1.Start Time -2021-08-26 13:02:24
+End Time -2021-08-26 13:02:44
+3. activityName : explorer
+4. Activity_TotalRun : 19
+5.01:02:44
+1.Start Time -2021-08-26 13:02:44
+End Time -2021-08-26 13:03:04
+3. activityName : devenv
+4. Activity_TotalRun : 19
+5.01:03:04
+1.Start Time -2021-08-26 13:03:04
+End Time -2021-08-26 13:03:14
+3. activityName : explorer
+4. Activity_TotalRun : 9
+5.01:03:14
+1.Start Time -2021-08-26 13:03:14
+End Time -2021-08-26 13:03:24
+3. activityName : devenv
+4. Activity_TotalRun : 9
+5.01:03:24
+from Add Slot New app and url8/26/2021 1:06:08 PM
+1.Start Time -2021-08-26 13:06:00
+End Time -2021-08-26 13:06:10
+3. activityName : Skype
+4. Activity_TotalRun : 20
+5.01:06:10
+1.Start Time -2021-08-26 13:06:10
+End Time -2021-08-26 13:06:30
+3. activityName : WorkStatus
+4. Activity_TotalRun : 20
+5.01:06:30
+1.Start Time -2021-08-26 13:06:30
+End Time -2021-08-26 13:08:39
+3. activityName : Skype
+4. Activity_TotalRun : 129
+5.01:08:39
+1.Start Time -2021-08-26 13:08:39
+End Time -2021-08-26 13:08:40
+3. activityName : devenv
+4. Activity_TotalRun : 0
+5.01:08:40
+1.Start Time -2021-08-26 13:08:40
+End Time -2021-08-26 13:08:50
+3. activityName : WorkStatus
+4. Activity_TotalRun : 10
+5.01:08:50
+1.Start Time -2021-08-26 13:08:50
+End Time -2021-08-26 13:10:00
+3. activityName : Skype
+4. Activity_TotalRun : 70
+5.01:10:00
+New app and url8/26/2021 1:10:09 PM
+1.Start Time -2021-08-26 13:10:00
+End Time -2021-08-26 13:10:20
+3. activityName : devenv
+4. Activity_TotalRun : 20
+5.01:10:20
+1.Start Time -2021-08-26 13:10:20
+End Time -2021-08-26 13:13:30
+3. activityName : Skype
+4. Activity_TotalRun : 190
+5.01:13:30
+1. URL Start Time -2021-08-26 13:13:30
+2. End Time -2021-08-26 13:13:40
+3. UrlName : New Tab - Google Chrome
+4. TotalTimeSpent : 470
+5.01:13:40
+1. URL Start Time -2021-08-26 13:13:40
+2. End Time -2021-08-26 13:14:00
+3. UrlName : Connecting Atlassian SourceTree With Your Azure DevOps GIT Repo | by Edwin Klesman | Medium - Google Chrome
+4. TotalTimeSpent : 9
+5.01:14:00
+1.Start Time -2021-08-26 13:13:30
+End Time -2021-08-26 13:15:40
+3. activityName : chrome
+4. Activity_TotalRun : 130
+5.01:15:40
+1.Start Time -2021-08-26 13:15:40
+End Time -2021-08-26 13:15:50
+3. activityName : explorer
+4. Activity_TotalRun : 9
+5.01:15:50
+1.Start Time -2021-08-26 13:15:50
+End Time -2021-08-26 13:16:20
+3. activityName : Skype
+4. Activity_TotalRun : 29
+5.01:16:20
+1.Start Time -2021-08-26 13:20:00
+End Time -2021-08-26 13:20:30
+3. activityName : devenv
+4. Activity_TotalRun : 40
+5.01:20:30
+1.Start Time -2021-08-26 13:30:32
+End Time -2021-08-26 13:33:22
+3. activityName : devenv
+4. Activity_TotalRun : 180
+5.01:33:22
+1.Start Time -2021-08-26 13:33:22
+End Time -2021-08-26 13:33:32
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.01:33:32
+1.Start Time -2021-08-26 13:33:32
+End Time -2021-08-26 13:34:19
+3. activityName : explorer
+4. Activity_TotalRun : 46
+5.01:34:19
+1.Start Time -2021-08-26 13:34:19
+End Time -2021-08-26 13:34:32
+3. activityName : devenv
+4. Activity_TotalRun : 13
+5.01:34:32
+1.Start Time -2021-08-26 13:34:32
+End Time -2021-08-26 13:36:22
+3. activityName : WorkStatus
+4. Activity_TotalRun : 110
+5.01:36:22
+1.Start Time -2021-08-26 13:36:22
+End Time -2021-08-26 13:36:52
+3. activityName : explorer
+4. Activity_TotalRun : 29
+5.01:36:52

@@ -1,0 +1,4 @@
+C:\Projects\NewWorkStatus1\New folder\obj\Debug\net5.0\WorkStatus.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\NewWorkStatus1\New folder\obj\Debug\net5.0\WorkStatus.AssemblyInfoInputs.cache
+C:\Projects\NewWorkStatus1\New folder\obj\Debug\net5.0\WorkStatus.AssemblyInfo.cs
+C:\Projects\NewWorkStatus1\New folder\obj\Debug\net5.0\WorkStatus.csproj.CoreCompileInputs.cache

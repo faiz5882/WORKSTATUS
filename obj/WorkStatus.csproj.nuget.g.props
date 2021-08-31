@@ -5,13 +5,12 @@
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Rudra\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages;C:\Program Files (x86)\Microsoft\Xamarin\NuGet\</NuGetPackageFolders>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Anuriti sharma\.nuget\packages\;C:\Program Files (x86)\Microsoft\Xamarin\NuGet\</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
     <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.10.0</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="C:\Users\Rudra\.nuget\packages\" />
-    <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
+    <SourceRoot Include="C:\Users\Anuriti sharma\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft\Xamarin\NuGet\" />
   </ItemGroup>
   <PropertyGroup>
@@ -21,8 +20,9 @@
     <Import Project="$(NuGetPackageRoot)avalonia\0.10.0\buildTransitive\Avalonia.props" Condition="Exists('$(NuGetPackageRoot)avalonia\0.10.0\buildTransitive\Avalonia.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\Rudra\.nuget\packages\microsoft.codeanalysis.analyzers\2.9.6</PkgMicrosoft_CodeAnalysis_Analyzers>
-    <PkgAvalonia Condition=" '$(PkgAvalonia)' == '' ">C:\Users\Rudra\.nuget\packages\avalonia\0.10.0</PkgAvalonia>
-    <PkgMaterialDesignThemes Condition=" '$(PkgMaterialDesignThemes)' == '' ">C:\Users\Rudra\.nuget\packages\materialdesignthemes\4.1.0</PkgMaterialDesignThemes>
+    <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\Anuriti sharma\.nuget\packages\microsoft.codeanalysis.analyzers\2.9.6</PkgMicrosoft_CodeAnalysis_Analyzers>
+    <PkgAvalonia Condition=" '$(PkgAvalonia)' == '' ">C:\Users\Anuriti sharma\.nuget\packages\avalonia\0.10.0</PkgAvalonia>
+    <PkgMaterialDesignThemes Condition=" '$(PkgMaterialDesignThemes)' == '' ">C:\Users\Anuriti sharma\.nuget\packages\materialdesignthemes\4.1.0</PkgMaterialDesignThemes>
+    <PkgInterop_UIAutomationClient Condition=" '$(PkgInterop_UIAutomationClient)' == '' ">C:\Users\Anuriti sharma\.nuget\packages\interop.uiautomationclient\10.19041.0</PkgInterop_UIAutomationClient>
   </PropertyGroup>
 </Project>

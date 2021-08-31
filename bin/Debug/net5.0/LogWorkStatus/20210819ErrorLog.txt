@@ -1,0 +1,168 @@
+-------------------START-------------8/19/2021 6:46:27 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 6:46:27 AM
+-------------------START-------------8/19/2021 6:46:33 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 6:46:33 AM
+-------------------START-------------8/19/2021 6:54:23 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 6:54:23 AM
+-------------------START-------------8/19/2021 6:54:26 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 6:54:26 AM
+-------------------START-------------8/19/2021 7:24:17 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 7:24:18 AM
+-------------------START-------------8/19/2021 7:24:32 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 7:24:32 AM
+-------------------START-------------8/19/2021 7:30:14 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 7:30:14 AM
+-------------------START-------------8/19/2021 7:30:18 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 7:30:18 AM
+-------------------START-------------8/19/2021 7:38:31 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 7:38:31 AM
+-------------------START-------------8/19/2021 7:38:33 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 7:38:33 AM
+-------------------START-------------8/19/2021 7:53:34 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 7:53:34 AM
+-------------------START-------------8/19/2021 7:53:43 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 7:53:43 AM
+-------------------START-------------8/19/2021 8:07:24 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 8:07:24 AM
+-------------------START-------------8/19/2021 8:07:28 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 8:07:28 AM
+-------------------START-------------8/19/2021 8:10:27 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 8:10:27 AM
+-------------------START-------------8/19/2021 8:10:30 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 8:10:30 AM
+-------------------START-------------8/19/2021 8:12:30 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 8:12:31 AM
+-------------------START-------------8/19/2021 8:12:34 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 8:12:34 AM
+-------------------START-------------8/19/2021 8:16:44 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 8:16:44 AM
+-------------------START-------------8/19/2021 8:16:49 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 8:16:49 AM
+-------------------START-------------8/19/2021 8:38:21 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 8:38:21 AM
+-------------------START-------------8/19/2021 8:38:24 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 8:38:24 AM
+-------------------START-------------8/19/2021 8:57:52 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 8:57:52 AM
+-------------------START-------------8/19/2021 8:58:20 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 8:58:20 AM
+-------------------START-------------8/19/2021 9:05:05 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 9:05:05 AM
+-------------------START-------------8/19/2021 9:05:09 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 9:05:09 AM
+-------------------START-------------8/19/2021 9:14:49 AM
+System.Net.WebException: The remote server returned an error: (405) Method Not Allowed.
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.ActivityLogAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, List`1 _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 253
+-------------------END-------------8/19/2021 9:14:49 AM
+-------------------START-------------8/19/2021 9:15:17 AM
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+   at WorkStatus.ViewModels.DashboardViewModel.SendIntervalToServer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3522
+-------------------END-------------8/19/2021 9:15:17 AM

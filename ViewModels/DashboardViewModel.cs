@@ -1370,7 +1370,7 @@ namespace WorkStatus.ViewModels
                     string _time = GetTimeFromProject(projectIdSelected);
                     HeaderTime = _time;
                     string strmess = "WorkStatus noticed that your system was on sleep\n mode. Please, Start the Timer again!";
-                    //HibernateMessage = strmess;
+                    HibernateMessage = strmess;
 
                     Manualsync();
 
@@ -1382,7 +1382,7 @@ namespace WorkStatus.ViewModels
                     customMsgBox = new MessageBoxCustomParamsWithImage
                     {
                         ContentMessage = strmess,
-                        Icon = LoadEmbeddedResources("/Assets/LogoSmall.ico"),
+                        Icon = LoadEmbeddedResources("/Assets/DotsIcon.png"),
                         ButtonDefinitions = new[]
                         {
                         new ButtonDefinition {Name = "Ok", Type = ButtonType.Colored},
@@ -2400,7 +2400,7 @@ namespace WorkStatus.ViewModels
                             string strJson = JsonConvert.SerializeObject(finallist2);
                             LogFile.WriteLog(strJson);
                             //call api
-                            responseModel =  _services.ActivityLogAsyncForIdle(new Get_API_Url().ActivityLogApi(_baseURL), true, objHeaderModel, finallist2);
+                            responseModel = _services.ActivityLogAsyncForIdle(new Get_API_Url().ActivityLogApi(_baseURL), true, objHeaderModel, finallist2);
                             if (responseModel.Response != null)
                             {
                                 if (responseModel.Response != null)
@@ -2412,7 +2412,7 @@ namespace WorkStatus.ViewModels
                                         if (renewtoken)
                                         {
                                             objHeaderModel.SessionID = Common.Storage.TokenId;
-                                            responseModel =  _services.ActivityLogAsyncForIdle(new Get_API_Url().ActivityLogApi(_baseURL), true, objHeaderModel, finallist);
+                                            responseModel = _services.ActivityLogAsyncForIdle(new Get_API_Url().ActivityLogApi(_baseURL), true, objHeaderModel, finallist);
                                         }
 
                                     }
@@ -7065,6 +7065,7 @@ namespace WorkStatus.ViewModels
         }
         public async void ToDoDetailCall(int toDoId)
         {
+            SelectedToDoItem = toDoId;
             ToDoDetailData = new ObservableCollection<tbl_ServerTodoDetails>(new DashboardSqliteService().GetToDoData(toDoId));
             if (ToDoDetailData != null)
             {
@@ -7072,13 +7073,13 @@ namespace WorkStatus.ViewModels
                 {
                     if (m.IsCompleted == 1)
                     {
-                        m.IsMarkComplete = false;
-                        m.IsOnlyDeleteVisible = true;
+                        IsMarkComplete = m.IsMarkComplete = false;
+                        IsOnlyDeleteVisible = m.IsOnlyDeleteVisible = true;
                     }
                     else
                     {
-                        m.IsMarkComplete = true;
-                        m.IsOnlyDeleteVisible = false;
+                        IsMarkComplete = m.IsMarkComplete = true;
+                        IsOnlyDeleteVisible = m.IsOnlyDeleteVisible = false;
                     }
                 }
             }

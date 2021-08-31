@@ -1,26 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\WorkStatus.csproj": {}
+    "C:\\Projects\\Linux_3108\\WorkStatus.csproj": {}
   },
   "projects": {
-    "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\WorkStatus.csproj": {
+    "C:\\Projects\\Linux_3108\\WorkStatus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\WorkStatus.csproj",
+        "projectUniqueName": "C:\\Projects\\Linux_3108\\WorkStatus.csproj",
         "projectName": "WorkStatus",
-        "projectPath": "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\WorkStatus.csproj",
-        "packagesPath": "C:\\Users\\Rudra\\.nuget\\packages\\",
-        "outputPath": "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\obj\\",
+        "projectPath": "C:\\Projects\\Linux_3108\\WorkStatus.csproj",
+        "packagesPath": "C:\\Users\\Anuriti sharma\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\Linux_3108\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\NuGet.Config",
-          "C:\\Users\\Rudra\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Projects\\Linux_3108\\NuGet.Config",
+          "C:\\Users\\Anuriti sharma\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -59,6 +57,10 @@
               "target": "Package",
               "version": "[0.10.0, )"
             },
+            "Avalonia.LinuxFramebuffer": {
+              "target": "Package",
+              "version": "[0.10.0, )"
+            },
             "Avalonia.ReactiveUI": {
               "target": "Package",
               "version": "[0.10.0, )"
@@ -70,6 +72,14 @@
             "Indieteur.GlobalHooks": {
               "target": "Package",
               "version": "[1.0.0, )"
+            },
+            "Interop.UIAutomationClient": {
+              "target": "Package",
+              "version": "[10.19041.0, )"
+            },
+            "IronPython": {
+              "target": "Package",
+              "version": "[2.7.11, )"
             },
             "MaterialDesignThemes": {
               "target": "Package",
@@ -87,6 +97,10 @@
               "target": "Package",
               "version": "[5.0.4, )"
             },
+            "Microsoft.Win32.SystemEvents": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[12.0.3, )"
@@ -94,10 +108,6 @@
             "System.Configuration.ConfigurationManager": {
               "target": "Package",
               "version": "[5.0.0, )"
-            },
-            "System.Windows.Interactivity.WPF": {
-              "target": "Package",
-              "version": "[2.0.20525, )"
             },
             "Tulpep.NotificationWindow": {
               "target": "Package",
@@ -117,12 +127,9 @@
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
-            },
-            "Microsoft.WindowsDesktop.App": {
-              "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

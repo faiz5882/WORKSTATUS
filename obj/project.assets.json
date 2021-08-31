@@ -134,6 +134,19 @@
           "lib/netstandard2.0/Avalonia.FreeDesktop.dll": {}
         }
       },
+      "Avalonia.LinuxFramebuffer/0.10.0": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "0.10.0",
+          "Avalonia.Skia": "0.10.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Avalonia.LinuxFramebuffer.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Avalonia.LinuxFramebuffer.dll": {}
+        }
+      },
       "Avalonia.Native/0.10.0": {
         "type": "package",
         "dependencies": {
@@ -244,6 +257,23 @@
           "lib/netstandard2.0/DynamicData.dll": {}
         }
       },
+      "DynamicLanguageRuntime/1.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.CodeDom": "4.7.0",
+          "System.Configuration.ConfigurationManager": "4.7.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.Dynamic.dll": {},
+          "lib/netcoreapp3.1/Microsoft.Scripting.Metadata.dll": {},
+          "lib/netcoreapp3.1/Microsoft.Scripting.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.Dynamic.dll": {},
+          "lib/netcoreapp3.1/Microsoft.Scripting.Metadata.dll": {},
+          "lib/netcoreapp3.1/Microsoft.Scripting.dll": {}
+        }
+      },
       "HarfBuzzSharp/2.6.1.7": {
         "type": "package",
         "dependencies": {
@@ -311,6 +341,37 @@
         },
         "runtime": {
           "lib/Indieteur.GlobalHooks.dll": {}
+        }
+      },
+      "Interop.UIAutomationClient/10.19041.0": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.0/Interop.UIAutomationClient.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Interop.UIAutomationClient.dll": {}
+        },
+        "build": {
+          "build/Interop.UIAutomationClient.targets": {}
+        }
+      },
+      "IronPython/2.7.11": {
+        "type": "package",
+        "dependencies": {
+          "DynamicLanguageRuntime": "1.3.0",
+          "Microsoft.Win32.Registry": "4.7.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/IronPython.Modules.dll": {},
+          "lib/netcoreapp3.1/IronPython.SQLite.dll": {},
+          "lib/netcoreapp3.1/IronPython.Wpf.dll": {},
+          "lib/netcoreapp3.1/IronPython.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/IronPython.Modules.dll": {},
+          "lib/netcoreapp3.1/IronPython.SQLite.dll": {},
+          "lib/netcoreapp3.1/IronPython.Wpf.dll": {},
+          "lib/netcoreapp3.1/IronPython.dll": {}
         }
       },
       "JetBrains.Annotations/10.3.0": {
@@ -848,13 +909,36 @@
           "lib/netstandard1.0/_._": {}
         }
       },
+      "Microsoft.Win32.Registry/4.7.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Security.AccessControl": "4.7.0",
+          "System.Security.Principal.Windows": "4.7.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/Microsoft.Win32.Registry.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Win32.Registry.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
+          "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "Microsoft.Win32.SystemEvents/5.0.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "5.0.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {}
+          "ref/netstandard2.0/Microsoft.Win32.SystemEvents.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll": {}
@@ -1060,6 +1144,15 @@
         },
         "runtime": {
           "lib/netstandard2.0/SQLitePCLRaw.provider.dynamic_cdecl.dll": {}
+        }
+      },
+      "System.CodeDom/4.7.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/System.CodeDom.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.CodeDom.dll": {}
         }
       },
       "System.Collections/4.3.0": {
@@ -1618,17 +1711,6 @@
           }
         }
       },
-      "System.Windows.Interactivity.WPF/2.0.20525": {
-        "type": "package",
-        "compile": {
-          "lib/net40/Microsoft.Expression.Interactions.dll": {},
-          "lib/net40/System.Windows.Interactivity.dll": {}
-        },
-        "runtime": {
-          "lib/net40/Microsoft.Expression.Interactions.dll": {},
-          "lib/net40/System.Windows.Interactivity.dll": {}
-        }
-      },
       "Tmds.DBus/0.9.0": {
         "type": "package",
         "dependencies": {
@@ -1856,6 +1938,20 @@
         "lib/netstandard2.0/Avalonia.FreeDesktop.xml"
       ]
     },
+    "Avalonia.LinuxFramebuffer/0.10.0": {
+      "sha512": "d4sOAUn3dPqgS3N5jrkGctpwCR05laNX4sh/HkHtyH1W9r7udKJDF2j+mX8PC+4+dlLWhQFlQ7prFOxrPRMqBg==",
+      "type": "package",
+      "path": "avalonia.linuxframebuffer/0.10.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "avalonia.linuxframebuffer.0.10.0.nupkg.sha512",
+        "avalonia.linuxframebuffer.nuspec",
+        "lib/netstandard2.0/Avalonia.LinuxFramebuffer.dll",
+        "lib/netstandard2.0/Avalonia.LinuxFramebuffer.xml"
+      ]
+    },
     "Avalonia.Native/0.10.0": {
       "sha512": "M/X7DU6woPbGPLrXLxoKJbR/CifXWzj9JT+otnf15pDE/39ji2hWg8rJWYHxPxijHskla840lSMxPc0GltUJGg==",
       "type": "package",
@@ -1974,6 +2070,43 @@
         "lib/uap10.0.16299/DynamicData.xml"
       ]
     },
+    "DynamicLanguageRuntime/1.3.0": {
+      "sha512": "a3ATP2CAiAQdcnj5mBgyhqyjoAiCXjuiLY8x3yAmo2Uacs7ecKvre8sc30dcgfN9YGAM9s9dvBIlyqisJLg1ew==",
+      "type": "package",
+      "path": "dynamiclanguageruntime/1.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "dynamiclanguageruntime.1.3.0.nupkg.sha512",
+        "dynamiclanguageruntime.nuspec",
+        "lib/net45/Microsoft.Dynamic.dll",
+        "lib/net45/Microsoft.Dynamic.xml",
+        "lib/net45/Microsoft.Scripting.Metadata.dll",
+        "lib/net45/Microsoft.Scripting.Metadata.xml",
+        "lib/net45/Microsoft.Scripting.dll",
+        "lib/net45/Microsoft.Scripting.xml",
+        "lib/netcoreapp2.1/Microsoft.Dynamic.dll",
+        "lib/netcoreapp2.1/Microsoft.Dynamic.xml",
+        "lib/netcoreapp2.1/Microsoft.Scripting.Metadata.dll",
+        "lib/netcoreapp2.1/Microsoft.Scripting.Metadata.xml",
+        "lib/netcoreapp2.1/Microsoft.Scripting.dll",
+        "lib/netcoreapp2.1/Microsoft.Scripting.xml",
+        "lib/netcoreapp3.1/Microsoft.Dynamic.dll",
+        "lib/netcoreapp3.1/Microsoft.Dynamic.xml",
+        "lib/netcoreapp3.1/Microsoft.Scripting.Metadata.dll",
+        "lib/netcoreapp3.1/Microsoft.Scripting.Metadata.xml",
+        "lib/netcoreapp3.1/Microsoft.Scripting.dll",
+        "lib/netcoreapp3.1/Microsoft.Scripting.xml",
+        "lib/netstandard2.0/Microsoft.Dynamic.dll",
+        "lib/netstandard2.0/Microsoft.Dynamic.xml",
+        "lib/netstandard2.0/Microsoft.Scripting.Metadata.dll",
+        "lib/netstandard2.0/Microsoft.Scripting.Metadata.xml",
+        "lib/netstandard2.0/Microsoft.Scripting.dll",
+        "lib/netstandard2.0/Microsoft.Scripting.xml"
+      ]
+    },
     "HarfBuzzSharp/2.6.1.7": {
       "sha512": "/ZDcKBMxStEjQs9MpSP3abSBJsdoWzkCQFZ8zRpDFAvblDysHazEhUTRyUYD/fVczlH6jX5V1EYCiITtdPz00w==",
       "type": "package",
@@ -2072,6 +2205,67 @@
         "indieteur.globalhooks.nuspec",
         "lib/Indieteur.GlobalHooks.dll",
         "readme.txt"
+      ]
+    },
+    "Interop.UIAutomationClient/10.19041.0": {
+      "sha512": "Me5vKNZ1JSg6txTsPQXaWx7fVNh+fmcUPPwtDKJtqvbMM0N8aoa/l/QPolkJIRnasCabCNt4v2zG4p1Q9HU98A==",
+      "type": "package",
+      "path": "interop.uiautomationclient/10.19041.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "build/Interop.UIAutomationClient.targets",
+        "interop.uiautomationclient.10.19041.0.nupkg.sha512",
+        "interop.uiautomationclient.nuspec",
+        "lib/net35/Interop.UIAutomationClient.dll",
+        "lib/net40/Interop.UIAutomationClient.dll",
+        "lib/net45/Interop.UIAutomationClient.dll",
+        "lib/netcoreapp3.0/Interop.UIAutomationClient.dll",
+        "lib/netstandard2.0/Interop.UIAutomationClient.dll",
+        "tools/install.ps1"
+      ]
+    },
+    "IronPython/2.7.11": {
+      "sha512": "uKHcJ9N+bEpngWMBsz30oP4a6jnkmcUX9E73B3mcj0eddC5bdpxD0ojTVIQWvBSYMQaUAq69U6twHGVocOaDhg==",
+      "type": "package",
+      "path": "ironpython/2.7.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "ironpython.2.7.11.nupkg.sha512",
+        "ironpython.nuspec",
+        "lib/net45/IronPython.Modules.dll",
+        "lib/net45/IronPython.Modules.xml",
+        "lib/net45/IronPython.SQLite.dll",
+        "lib/net45/IronPython.SQLite.xml",
+        "lib/net45/IronPython.Wpf.dll",
+        "lib/net45/IronPython.Wpf.xml",
+        "lib/net45/IronPython.dll",
+        "lib/net45/IronPython.xml",
+        "lib/netcoreapp2.1/IronPython.Modules.dll",
+        "lib/netcoreapp2.1/IronPython.Modules.xml",
+        "lib/netcoreapp2.1/IronPython.SQLite.dll",
+        "lib/netcoreapp2.1/IronPython.SQLite.xml",
+        "lib/netcoreapp2.1/IronPython.dll",
+        "lib/netcoreapp2.1/IronPython.xml",
+        "lib/netcoreapp3.1/IronPython.Modules.dll",
+        "lib/netcoreapp3.1/IronPython.Modules.xml",
+        "lib/netcoreapp3.1/IronPython.SQLite.dll",
+        "lib/netcoreapp3.1/IronPython.SQLite.xml",
+        "lib/netcoreapp3.1/IronPython.Wpf.dll",
+        "lib/netcoreapp3.1/IronPython.Wpf.xml",
+        "lib/netcoreapp3.1/IronPython.dll",
+        "lib/netcoreapp3.1/IronPython.xml",
+        "lib/netstandard2.0/IronPython.Modules.dll",
+        "lib/netstandard2.0/IronPython.Modules.xml",
+        "lib/netstandard2.0/IronPython.SQLite.dll",
+        "lib/netstandard2.0/IronPython.SQLite.xml",
+        "lib/netstandard2.0/IronPython.dll",
+        "lib/netstandard2.0/IronPython.xml"
       ]
     },
     "JetBrains.Annotations/10.3.0": {
@@ -2793,6 +2987,53 @@
         "runtime.json"
       ]
     },
+    "Microsoft.Win32.Registry/4.7.0": {
+      "sha512": "KSrRMb5vNi0CWSGG1++id2ZOs/1QhRqROt+qgbEAdQuGjGrFcl4AOl4/exGPUYz2wUnU42nvJqon1T3U0kPXLA==",
+      "type": "package",
+      "path": "microsoft.win32.registry/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/Microsoft.Win32.Registry.dll",
+        "lib/net461/Microsoft.Win32.Registry.dll",
+        "lib/net461/Microsoft.Win32.Registry.xml",
+        "lib/netstandard1.3/Microsoft.Win32.Registry.dll",
+        "lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "lib/netstandard2.0/Microsoft.Win32.Registry.xml",
+        "microsoft.win32.registry.4.7.0.nupkg.sha512",
+        "microsoft.win32.registry.nuspec",
+        "ref/net46/Microsoft.Win32.Registry.dll",
+        "ref/net461/Microsoft.Win32.Registry.dll",
+        "ref/net461/Microsoft.Win32.Registry.xml",
+        "ref/net472/Microsoft.Win32.Registry.dll",
+        "ref/net472/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/Microsoft.Win32.Registry.dll",
+        "ref/netstandard1.3/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/de/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/es/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/fr/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/it/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/ja/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/ko/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/ru/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/zh-hans/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/zh-hant/Microsoft.Win32.Registry.xml",
+        "ref/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "ref/netstandard2.0/Microsoft.Win32.Registry.xml",
+        "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.xml",
+        "runtimes/win/lib/net46/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/net461/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/net461/Microsoft.Win32.Registry.xml",
+        "runtimes/win/lib/netstandard1.3/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.xml",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "Microsoft.Win32.SystemEvents/5.0.0": {
       "sha512": "Bh6blKG8VAKvXiLe2L+sEsn62nc1Ij34MrNxepD2OCrS5cpCwQa9MeLyhVQPQ/R4Wlzwuy6wMK8hLb11QPDRsQ==",
       "type": "package",
@@ -3080,6 +3321,29 @@
         "lib/netstandard2.0/SQLitePCLRaw.provider.dynamic_cdecl.dll",
         "sqlitepclraw.provider.dynamic_cdecl.2.0.4.nupkg.sha512",
         "sqlitepclraw.provider.dynamic_cdecl.nuspec"
+      ]
+    },
+    "System.CodeDom/4.7.0": {
+      "sha512": "Hs9pw/kmvH3lXaZ1LFKj3pLQsiGfj2xo3sxSzwiLlRL6UcMZUTeCfoJ9Udalvn3yq5dLlPEZzYegrTQ1/LhPOQ==",
+      "type": "package",
+      "path": "system.codedom/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.CodeDom.dll",
+        "lib/net461/System.CodeDom.xml",
+        "lib/netstandard2.0/System.CodeDom.dll",
+        "lib/netstandard2.0/System.CodeDom.xml",
+        "ref/net461/System.CodeDom.dll",
+        "ref/net461/System.CodeDom.xml",
+        "ref/netstandard2.0/System.CodeDom.dll",
+        "ref/netstandard2.0/System.CodeDom.xml",
+        "system.codedom.4.7.0.nupkg.sha512",
+        "system.codedom.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Collections/4.3.0": {
@@ -5367,21 +5631,6 @@
         "version.txt"
       ]
     },
-    "System.Windows.Interactivity.WPF/2.0.20525": {
-      "sha512": "0r+Le4E7hCm4zToUvBzjSUyTcuU3rFeoPa7JyTdWIzR/F7wH6+O/pWkjHIG40hIA0z1wvRdZayvoizA4wcK1dg==",
-      "type": "package",
-      "path": "system.windows.interactivity.wpf/2.0.20525",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net40/Microsoft.Expression.Interactions.dll",
-        "lib/net40/Microsoft.Expression.Interactions.xml",
-        "lib/net40/System.Windows.Interactivity.dll",
-        "lib/net40/System.Windows.Interactivity.xml",
-        "system.windows.interactivity.wpf.2.0.20525.nupkg.sha512",
-        "system.windows.interactivity.wpf.nuspec"
-      ]
-    },
     "Tmds.DBus/0.9.0": {
       "sha512": "KcTWL9aKuob9Qo2sOTTKFePs1rKGTwZrcBvMFuGVIVR5RojX3oIFj5UBLYfSGjYgrcImC7LjQI3DdCFwUnhNXw==",
       "type": "package",
@@ -5413,41 +5662,41 @@
       "Avalonia >= 0.10.0",
       "Avalonia.Desktop >= 0.10.0",
       "Avalonia.Diagnostics >= 0.10.0",
+      "Avalonia.LinuxFramebuffer >= 0.10.0",
       "Avalonia.ReactiveUI >= 0.10.0",
       "Deadpikle.AvaloniaProgressRing >= 0.9.0",
       "Indieteur.GlobalHooks >= 1.0.0",
+      "Interop.UIAutomationClient >= 10.19041.0",
+      "IronPython >= 2.7.11",
       "MaterialDesignThemes >= 4.1.0",
       "MessageBox.Avalonia >= 1.1.1",
       "Microsoft.EntityFrameworkCore >= 5.0.4",
       "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.4",
+      "Microsoft.Win32.SystemEvents >= 5.0.0",
       "Newtonsoft.Json >= 12.0.3",
       "System.Configuration.ConfigurationManager >= 5.0.0",
-      "System.Windows.Interactivity.WPF >= 2.0.20525",
       "Tulpep.NotificationWindow >= 1.1.38"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Rudra\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Users\\Anuriti sharma\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\WorkStatus.csproj",
+      "projectUniqueName": "C:\\Projects\\Linux_3108\\WorkStatus.csproj",
       "projectName": "WorkStatus",
-      "projectPath": "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\WorkStatus.csproj",
-      "packagesPath": "C:\\Users\\Rudra\\.nuget\\packages\\",
-      "outputPath": "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\obj\\",
+      "projectPath": "C:\\Projects\\Linux_3108\\WorkStatus.csproj",
+      "packagesPath": "C:\\Users\\Anuriti sharma\\.nuget\\packages\\",
+      "outputPath": "C:\\Projects\\Linux_3108\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "D:\\Work\\vinove\\Sonam\\WorkStatus23072021\\WorkStatus\\NuGet.Config",
-        "C:\\Users\\Rudra\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Projects\\Linux_3108\\NuGet.Config",
+        "C:\\Users\\Anuriti sharma\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -5486,6 +5735,10 @@
             "target": "Package",
             "version": "[0.10.0, )"
           },
+          "Avalonia.LinuxFramebuffer": {
+            "target": "Package",
+            "version": "[0.10.0, )"
+          },
           "Avalonia.ReactiveUI": {
             "target": "Package",
             "version": "[0.10.0, )"
@@ -5497,6 +5750,14 @@
           "Indieteur.GlobalHooks": {
             "target": "Package",
             "version": "[1.0.0, )"
+          },
+          "Interop.UIAutomationClient": {
+            "target": "Package",
+            "version": "[10.19041.0, )"
+          },
+          "IronPython": {
+            "target": "Package",
+            "version": "[2.7.11, )"
           },
           "MaterialDesignThemes": {
             "target": "Package",
@@ -5514,6 +5775,10 @@
             "target": "Package",
             "version": "[5.0.4, )"
           },
+          "Microsoft.Win32.SystemEvents": {
+            "target": "Package",
+            "version": "[5.0.0, )"
+          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[12.0.3, )"
@@ -5521,10 +5786,6 @@
           "System.Configuration.ConfigurationManager": {
             "target": "Package",
             "version": "[5.0.0, )"
-          },
-          "System.Windows.Interactivity.WPF": {
-            "target": "Package",
-            "version": "[2.0.20525, )"
           },
           "Tulpep.NotificationWindow": {
             "target": "Package",
@@ -5544,12 +5805,9 @@
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
-          },
-          "Microsoft.WindowsDesktop.App": {
-            "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -5560,16 +5818,6 @@
       "warningLevel": 1,
       "message": "Package 'Indieteur.GlobalHooks 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "Indieteur.GlobalHooks",
-      "targetGraphs": [
-        "net5.0-windows7.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'System.Windows.Interactivity.WPF 2.0.20525' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0-windows7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "System.Windows.Interactivity.WPF",
       "targetGraphs": [
         "net5.0-windows7.0"
       ]

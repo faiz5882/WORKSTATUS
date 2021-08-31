@@ -1,0 +1,148 @@
+1.Start Time -2021-08-18 10:08:48
+End Time -2021-08-18 10:09:58
+3. activityName : WorkStatus
+4. Activity_TotalRun : 80
+5.10:09:58
+New app and url8/18/2021 10:10:38 AM
+1.Start Time -2021-08-18 10:09:58
+End Time -2021-08-18 10:10:58
+3. activityName : devenv
+4. Activity_TotalRun : 59
+5.10:10:58
+1. URL Start Time -2021-08-18 10:10:58
+2. End Time -2021-08-18 10:17:28
+3. UrlName : AvaloniaUI/Avalonia - Gitter - Google Chrome
+4. TotalTimeSpent : 530
+5.10:17:28
+1.Start Time -2021-08-18 10:10:58
+End Time -2021-08-18 10:17:28
+3. activityName : chrome
+4. Activity_TotalRun : 390
+5.10:17:28
+New app and url8/18/2021 10:20:38 AM
+1.Start Time -2021-08-18 10:17:28
+End Time -2021-08-18 10:22:38
+3. activityName : msedge
+4. Activity_TotalRun : 310
+5.10:22:38
+1.Start Time -2021-08-18 10:22:38
+End Time -2021-08-18 10:22:48
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.10:22:48
+1.Start Time -2021-08-18 10:22:48
+End Time -2021-08-18 10:23:08
+3. activityName : devenv
+4. Activity_TotalRun : 19
+5.10:23:08
+1.Start Time -2021-08-18 10:23:08
+End Time -2021-08-18 10:29:38
+3. activityName : msedge
+4. Activity_TotalRun : 390
+5.10:29:38
+New app and url8/18/2021 10:30:38 AM
+from Add Slot New app and url8/18/2021 10:38:09 AM
+from Add Slot New app and url8/18/2021 10:38:09 AM
+from Add Slot New app and url8/18/2021 10:38:13 AM
+from Add Slot New app and url8/18/2021 10:38:35 AM
+New app and url8/18/2021 10:40:35 AM
+1.Start Time -2021-08-18 10:38:10
+End Time -2021-08-18 10:42:19
+3. activityName : WorkStatus
+4. Activity_TotalRun : 258
+5.10:42:19
+1.Start Time -2021-08-18 10:42:19
+End Time -2021-08-18 10:42:25
+3. activityName : devenv
+4. Activity_TotalRun : 6
+5.10:42:25
+1.Start Time -2021-08-18 10:42:25
+End Time -2021-08-18 10:42:35
+3. activityName : WorkStatus
+4. Activity_TotalRun : 10
+5.10:42:35
+from Add Slot New app and url8/18/2021 1:01:40 PM
+from Add Slot New app and url8/18/2021 1:01:41 PM
+1.Start Time -2021-08-18 14:10:21
+End Time -2021-08-18 14:10:22
+3. activityName : devenv
+4. Activity_TotalRun : 20
+5.02:10:22
+from Add Slot New app and url8/18/2021 2:10:27 PM
+1.Start Time -2021-08-18 14:10:22
+End Time -2021-08-18 14:11:56
+3. activityName : WorkStatus
+4. Activity_TotalRun : 94
+5.02:11:56
+1.Start Time -2021-08-18 14:11:56
+End Time -2021-08-18 14:13:06
+3. activityName : devenv
+4. Activity_TotalRun : 69
+5.02:13:06
+from Add Slot New app and url8/18/2021 2:14:42 PM
+from Add Slot New app and url8/18/2021 2:14:42 PM
+from Add Slot New app and url8/18/2021 2:14:49 PM
+from Add Slot New app and url8/18/2021 2:15:04 PM
+from Add Slot New app and url8/18/2021 2:15:07 PM
+from Add Slot New app and url8/18/2021 2:15:07 PM
+from Add Slot New app and url8/18/2021 2:15:15 PM
+1.Start Time -2021-08-18 14:13:06
+End Time -2021-08-18 14:15:25
+3. activityName : WorkStatus
+4. Activity_TotalRun : 132
+5.02:15:25
+1.Start Time -2021-08-18 14:15:25
+End Time -2021-08-18 14:17:45
+3. activityName : devenv
+4. Activity_TotalRun : 139
+5.02:17:45
+1.Start Time -2021-08-18 14:17:45
+End Time -2021-08-18 14:19:35
+3. activityName : WorkStatus
+4. Activity_TotalRun : 109
+5.02:19:35
+New app and url8/18/2021 2:20:53 PM
+1.Start Time -2021-08-18 14:19:35
+End Time -2021-08-18 14:20:55
+3. activityName : devenv
+4. Activity_TotalRun : 79
+5.02:20:55
+from Add Slot New app and url8/18/2021 2:20:57 PM
+from Add Slot New app and url8/18/2021 2:21:05 PM
+from Add Slot New app and url8/18/2021 3:01:53 PM
+from Add Slot New app and url8/18/2021 3:06:10 PM
+from Add Slot New app and url8/18/2021 3:06:10 PM
+from Add Slot New app and url8/18/2021 3:06:15 PM
+from Add Slot New app and url8/18/2021 3:06:15 PM
+from Add Slot New app and url8/18/2021 3:07:32 PM
+from Add Slot New app and url8/18/2021 3:07:37 PM
+from Add Slot New app and url8/18/2021 3:48:44 PM
+New app and url8/18/2021 3:52:03 PM
+from Add Slot New app and url8/18/2021 3:52:22 PM
+from Add Slot New app and url8/18/2021 3:52:22 PM
+from Add Slot New app and url8/18/2021 3:52:27 PM
+from Add Slot New app and url8/18/2021 3:52:30 PM
+from Add Slot New app and url8/18/2021 3:53:45 PM
+New app and url8/18/2021 6:20:48 PM
+1.Start Time -2021-08-18 19:10:19
+End Time -2021-08-18 19:11:09
+3. activityName : devenv
+4. Activity_TotalRun : 59
+5.07:11:09
+from Add Slot New app and url8/18/2021 7:11:10 PM
+1.Start Time -2021-08-18 19:11:09
+End Time -2021-08-18 19:11:33
+3. activityName : WorkStatus
+4. Activity_TotalRun : 10
+5.07:11:33
+1.Start Time -2021-08-18 19:11:33
+End Time -2021-08-18 19:11:43
+3. activityName : devenv
+4. Activity_TotalRun : 9
+5.07:11:43
+1.Start Time -2021-08-18 19:21:44
+End Time -2021-08-18 19:22:23
+3. activityName : devenv
+4. Activity_TotalRun : 90
+5.07:22:23
+from Add Slot New app and url8/18/2021 7:22:33 PM

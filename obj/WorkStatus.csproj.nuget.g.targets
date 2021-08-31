@@ -6,5 +6,6 @@
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)avalonia\0.10.0\buildTransitive\Avalonia.targets" Condition="Exists('$(NuGetPackageRoot)avalonia\0.10.0\buildTransitive\Avalonia.targets')" />
     <Import Project="$(NuGetPackageRoot)materialdesignthemes\4.1.0\build\MaterialDesignThemes.targets" Condition="Exists('$(NuGetPackageRoot)materialdesignthemes\4.1.0\build\MaterialDesignThemes.targets')" />
+    <Import Project="$(NuGetPackageRoot)interop.uiautomationclient\10.19041.0\build\Interop.UIAutomationClient.targets" Condition="Exists('$(NuGetPackageRoot)interop.uiautomationclient\10.19041.0\build\Interop.UIAutomationClient.targets')" />
   </ImportGroup>
 </Project>

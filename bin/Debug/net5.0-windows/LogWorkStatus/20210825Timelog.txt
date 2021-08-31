@@ -1,0 +1,97 @@
+1.Start Time -2021-08-25 11:05:58
+End Time -2021-08-25 11:06:55
+3. activityName : WorkStatus
+4. Activity_TotalRun : 66
+5.11:06:55
+1.Start Time -2021-08-25 11:06:55
+End Time -2021-08-25 11:06:58
+3. activityName : devenv
+4. Activity_TotalRun : 3
+5.11:06:58
+1.Start Time -2021-08-25 11:06:58
+End Time -2021-08-25 11:07:08
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.11:07:08
+1.Start Time -2021-08-25 11:07:08
+End Time -2021-08-25 11:08:18
+3. activityName : devenv
+4. Activity_TotalRun : 69
+5.11:08:18
+1.Start Time -2021-08-25 11:08:18
+End Time -2021-08-25 11:08:33
+3. activityName : WorkStatus
+4. Activity_TotalRun : 15
+5.11:08:33
+1.Start Time -2021-08-25 11:08:33
+End Time -2021-08-25 11:08:38
+3. activityName : devenv
+4. Activity_TotalRun : 4
+5.11:08:38
+1.Start Time -2021-08-25 11:08:38
+End Time -2021-08-25 11:08:48
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.11:08:48
+from Add Slot New app and url8/25/2021 11:52:41 AM
+1.Start Time -2021-08-25 11:52:51
+End Time -2021-08-25 11:54:06
+3. activityName : WorkStatus
+4. Activity_TotalRun : 92
+5.11:54:06
+1.Start Time -2021-08-25 11:54:06
+End Time -2021-08-25 11:54:11
+3. activityName : devenv
+4. Activity_TotalRun : 4
+5.11:54:11
+1.Start Time -2021-08-25 11:54:11
+End Time -2021-08-25 11:54:21
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.11:54:21
+1.Start Time -2021-08-25 11:54:21
+End Time -2021-08-25 11:54:41
+3. activityName : devenv
+4. Activity_TotalRun : 19
+5.11:54:41
+1.Start Time -2021-08-25 11:54:41
+End Time -2021-08-25 11:56:19
+3. activityName : WorkStatus
+4. Activity_TotalRun : 97
+5.11:56:19
+1.Start Time -2021-08-25 11:56:19
+End Time -2021-08-25 11:56:31
+3. activityName : devenv
+4. Activity_TotalRun : 11
+5.11:56:31
+1.Start Time -2021-08-25 11:56:31
+End Time -2021-08-25 11:56:41
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.11:56:41
+New app and url8/25/2021 11:58:41 AM
+1.Start Time -2021-08-25 11:56:41
+End Time -2021-08-25 11:59:01
+3. activityName : explorer
+4. Activity_TotalRun : 139
+5.11:59:01
+1.Start Time -2021-08-25 11:59:01
+End Time -2021-08-25 11:59:21
+3. activityName : RtkNGUI64
+4. Activity_TotalRun : 19
+5.11:59:21
+1.Start Time -2021-08-25 11:59:21
+End Time -2021-08-25 12:01:01
+3. activityName : WorkStatus
+4. Activity_TotalRun : 99
+5.12:01:01
+1.Start Time -2021-08-25 12:01:01
+End Time -2021-08-25 12:01:21
+3. activityName : explorer
+4. Activity_TotalRun : 19
+5.12:01:21
+1.Start Time -2021-08-25 12:01:21
+End Time -2021-08-25 12:01:31
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.12:01:31

@@ -79,11 +79,7 @@
 								<RowDefinition Height="Auto"/>
 								<RowDefinition Height="Auto"/>
 							</Grid.RowDefinitions>
-<<<<<<< HEAD
 
-=======
-							
->>>>>>> 75008553fb3ad248d3928bf647931f253c74d455
 							<TextBlock Grid.Row="0" TextWrapping="Wrap" Text="WorkStatus noticed that your system was on sleep mode. Please, Start the Timer again!" Foreground="{Binding NewTextColor,Mode=TwoWay}"   FontStyle="Normal" TextAlignment="Center" FontSize="14"  HorizontalAlignment="Center"  Margin="5,20,0,0" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
 							<Button  x:Name="okConfirmApp" Grid.Row="2" Content="OK" Margin="10,10,15,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14" FontWeight="SemiLight" Background="{Binding NewStackPanelLogoColor,Mode=TwoWay}" Foreground="White" Width="80" Height="30"/>
 						</Grid>
@@ -750,7 +746,6 @@
 				<Popup IsOpen="{Binding IsToDoDetailsPopUp}" StaysOpen="False"  Margin="30" HorizontalOffset="550" PlacementMode="Right" Height="380" Width="450">
 					<Border BoxShadow="0 0 1 gray" BorderThickness="2" Height="380" Width="450" Background="White" CornerRadius="8,8,8,8" Padding="5">
 						<StackPanel Orientation="Vertical">
-<<<<<<< HEAD
 							<ListBox Items="{Binding ToDoDetailData,Mode=TwoWay}" IsEnabled="False" SelectionChanged="LstBoxToDo_SelectionChanged" Background="Transparent" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionMode="Single">
 								<ListBox.ItemTemplate>
 									<DataTemplate>
@@ -831,88 +826,6 @@
 								<Button Grid.Row="0" Grid.Column="4" Content="Delete" Command="{Binding DeletToDo}" IsVisible="{Binding IsMarkComplete}" Margin="5,10,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="SemiLight" Background="{Binding NewStackPanelLogoColor,Mode=TwoWay}" Foreground="White" Width="80" Height="30"/>
 								<Button Grid.Row="0" Grid.Column="2" Content="Delete" Command="{Binding DeletToDo}" IsVisible="{Binding IsOnlyDeleteVisible}" Margin="10,10,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="SemiLight" Background="{Binding NewStackPanelLogoColor,Mode=TwoWay}" Foreground="White" Width="80" Height="30"/>
 							</Grid>
-=======
-						<ListBox Items="{Binding ToDoDetailData,Mode=TwoWay}" IsEnabled="False" SelectionChanged="LstBoxToDo_SelectionChanged" Background="Transparent" Margin="5,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionMode="Single">
-							<ListBox.ItemTemplate>
-								<DataTemplate>
-									<StackPanel Orientation="Horizontal">
-										<Grid>
-											<Grid.RowDefinitions>
-												<RowDefinition Height="1*"/>
-												<RowDefinition Height="1*"/>
-												<RowDefinition Height="1*"/>
-												<RowDefinition Height="1*"/>
-												<RowDefinition Height="1*"/>
-												<RowDefinition Height="1*"/>
-												<RowDefinition Height="1*"/>
-												<RowDefinition Height="1*"/>
-												<RowDefinition Height="1*"/>
-												<RowDefinition Height="1*"/>
-											</Grid.RowDefinitions>
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="150"/>
-												<ColumnDefinition Width="1*"/>
-											</Grid.ColumnDefinitions>
-											<!--Project Name:-->
-											<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding $parent[ListBox].DataContext.HeaderProjectName}" Margin="20,10,0,10" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontWeight="Bold" FontStyle="Normal" FontSize="14"/>
-											<!--1 Task:-->
-											<TextBlock Grid.Row="1" Grid.Column="0" Text="Task:" Margin="20,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontWeight="Bold" FontStyle="Normal" FontSize="14"/>
-											<TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ToDoName}" Margin="0,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontStyle="Normal" FontSize="14"/>
-											<!--2 Privacy:-->
-											<TextBlock Grid.Row="2" Grid.Column="0" Text="Privacy:" Margin="20,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontWeight="Bold" FontStyle="Normal" FontSize="14"/>
-											<TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Privacy}" Margin="0,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontStyle="Normal" FontSize="14"/>
-											<!--3 Site:-->
-											<TextBlock Grid.Row="3" Grid.Column="0" Text="Site:" Margin="20,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontWeight="Bold" FontStyle="Normal" FontSize="14"/>
-											<TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Site}" Margin="0,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontStyle="Normal" FontSize="14"/>
-											<!--4 Description:-->
-											<TextBlock Grid.Row="4" Grid.Column="0" Text="Description:" Margin="20,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontWeight="Bold" FontStyle="Normal" FontSize="14"/>
-											<TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Description}" Margin="0,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontStyle="Normal" FontSize="14"/>
-											<!--5 Assign Date:-->
-											<TextBlock Grid.Row="5" Grid.Column="0" Text="Assign Date:" Margin="20,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontWeight="Bold" FontStyle="Normal" FontSize="14"/>
-											<TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding StartDate}" Margin="0,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontStyle="Normal" FontSize="14"/>
-											<!--6 End Date:-->
-											<TextBlock Grid.Row="6" Grid.Column="0" Text="End Date:" Margin="20,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontWeight="Bold" FontStyle="Normal" FontSize="14" />
-											<TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding EndDate}" Margin="0,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontStyle="Normal" FontSize="14"/>
-											<!--7 Attachment:-->
-											<TextBlock Grid.Row="7" Grid.Column="0" Text="Attachment:" Margin="20,10,0,5" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" Foreground="#212529" FontWeight="Bold" FontStyle="Normal" FontSize="14" />
-											<ItemsControl Grid.Row="7" Grid.Column="1" Items="{Binding $parent[ListBox].DataContext.ToDoAttachmentListData}" Background="White" Margin="5,0,0,0">
-												<ItemsControl.ItemTemplate>
-													<DataTemplate>
-														<StackPanel Orientation="Horizontal" Height="35" Width="35" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,5">
-															<Image Source="/Assets/attachment.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Margin="5,5,0,0"/>
-														</StackPanel>
-													</DataTemplate>
-												</ItemsControl.ItemTemplate>
-												<ItemsControl.ItemsPanel>
-													<ItemsPanelTemplate>
-														<StackPanel Orientation="Horizontal"/>
-													</ItemsPanelTemplate>
-												</ItemsControl.ItemsPanel>
-											</ItemsControl>
-											<!--8 Edit/MarkComplete/Delete Button:-->
-										
-										</Grid>
-									</StackPanel>
-								</DataTemplate>
-							</ListBox.ItemTemplate>
-						</ListBox>
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="Auto"/>
-							</Grid.RowDefinitions>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition Width="5"/>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition Width="5"/>
-								<ColumnDefinition Width="Auto"/>
-							</Grid.ColumnDefinitions>
-							<Button Grid.Row="0" Grid.Column="0" Content="Edit" Margin="20,10,0,0" Command="{Binding AddOrEditToDoView}" CommandParameter="{Binding Id}" IsVisible="{Binding IsMarkComplete}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="SemiLight" Background="{Binding NewStackPanelLogoColor,Mode=TwoWay}" Foreground="White" Width="80" Height="30"/>
-							<Button Grid.Row="0" Grid.Column="2" Content="Mark Complete" Command="{Binding MarkCompeletToDo}" IsVisible="{Binding IsMarkComplete}" Margin="5,10,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="SemiLight" Background="{Binding NewStackPanelLogoColor,Mode=TwoWay}" Foreground="White" Width="150" Height="30"/>
-							<Button Grid.Row="0" Grid.Column="4" Content="Delete" Command="{Binding DeletToDo}" IsVisible="{Binding IsMarkComplete}" Margin="5,10,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="SemiLight" Background="{Binding NewStackPanelLogoColor,Mode=TwoWay}" Foreground="White" Width="80" Height="30"/>
-							<Button Grid.Row="0" Grid.Column="2" Content="Delete" Command="{Binding DeletToDo}" IsVisible="{Binding IsOnlyDeleteVisible}" Margin="10,10,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="SemiLight" Background="{Binding NewStackPanelLogoColor,Mode=TwoWay}" Foreground="White" Width="80" Height="30"/>
-						</Grid>
->>>>>>> 75008553fb3ad248d3928bf647931f253c74d455
 						</StackPanel>
 					</Border>
 				</Popup>

@@ -1,0 +1,101 @@
+1.Start Time -2021-08-19 19:41:47
+End Time -2021-08-19 19:41:50
+3. activityName : devenv
+4. Activity_TotalRun : 19
+5.07:41:50
+1.Start Time -2021-08-19 19:41:50
+End Time -2021-08-19 19:42:20
+3. activityName : WorkStatus
+4. Activity_TotalRun : 29
+5.07:42:20
+1.Start Time -2021-08-19 19:42:20
+End Time -2021-08-19 19:42:30
+3. activityName : devenv
+4. Activity_TotalRun : 9
+5.07:42:30
+1.Start Time -2021-08-19 19:42:30
+End Time -2021-08-19 19:42:40
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.07:42:40
+1.Start Time -2021-08-19 19:42:40
+End Time -2021-08-19 19:42:50
+3. activityName : SearchApp
+4. Activity_TotalRun : 10
+5.07:42:50
+1.Start Time -2021-08-19 19:42:50
+End Time -2021-08-19 19:43:00
+3. activityName : notepad
+4. Activity_TotalRun : 9
+5.07:43:00
+1. URL Start Time -2021-08-19 19:43:00
+2. End Time -2021-08-19 19:43:10
+3. UrlName : Daily Synopsis Report (DSR) - Google Chrome
+4. TotalTimeSpent : 100
+5.07:43:10
+1.Start Time -2021-08-19 19:43:00
+End Time -2021-08-19 19:44:20
+3. activityName : chrome
+4. Activity_TotalRun : 80
+5.07:44:20
+1. URL Start Time -2021-08-19 19:43:10
+2. End Time -2021-08-19 19:44:30
+3. UrlName : Hubstaff - Dashboard - Google Chrome
+4. TotalTimeSpent : 70
+5.07:44:30
+1.Start Time -2021-08-19 19:44:20
+End Time -2021-08-19 19:44:30
+3. activityName : notepad
+4. Activity_TotalRun : 10
+5.07:44:30
+1.Start Time -2021-08-19 19:44:30
+End Time -2021-08-19 19:46:00
+3. activityName : chrome
+4. Activity_TotalRun : 90
+5.07:46:00
+1.Start Time -2021-08-19 19:46:00
+End Time -2021-08-19 19:46:10
+3. activityName : HubstaffClient
+4. Activity_TotalRun : 9
+5.07:46:10
+1.Start Time -2021-08-19 19:46:10
+End Time -2021-08-19 19:47:30
+3. activityName : chrome
+4. Activity_TotalRun : 80
+5.07:47:30
+1.Start Time -2021-08-19 19:47:30
+End Time -2021-08-19 19:47:40
+3. activityName : devenv
+4. Activity_TotalRun : 9
+5.07:47:40
+1.Start Time -2021-08-19 19:47:40
+End Time -2021-08-19 19:48:20
+3. activityName : WorkStatus
+4. Activity_TotalRun : 39
+5.07:48:20
+New app and url8/19/2021 7:50:41 PM
+1.Start Time -2021-08-19 19:48:20
+End Time -2021-08-19 19:50:50
+3. activityName : devenv
+4. Activity_TotalRun : 150
+5.07:50:50
+1.Start Time -2021-08-19 19:50:50
+End Time -2021-08-19 19:51:00
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.07:51:00
+1.Start Time -2021-08-19 20:46:38
+End Time -2021-08-19 20:46:48
+3. activityName : WorkStatus
+4. Activity_TotalRun : 20
+5.08:46:48
+1.Start Time -2021-08-19 20:46:48
+End Time -2021-08-19 20:48:28
+3. activityName : devenv
+4. Activity_TotalRun : 100
+5.08:48:28
+1.Start Time -2021-08-19 20:48:28
+End Time -2021-08-19 20:48:38
+3. activityName : WorkStatus
+4. Activity_TotalRun : 9
+5.08:48:38

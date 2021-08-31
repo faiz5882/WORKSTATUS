@@ -1,0 +1,530 @@
+-------------------START-------------8/18/2021 10:23:41 AM
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.set_Item(Int32 index, T value)
+   at WorkStatus.ViewModels.DashboardViewModel.UpdateProjectList(String selectedItem, String commandType) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4225
+   at System.Collections.Generic.List`1.set_Item(Int32 index, T value)
+   at WorkStatus.ViewModels.DashboardViewModel.UpdateProjectList(String selectedItem, String commandType) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4225
+-------------------END-------------8/18/2021 10:23:41 AM
+-------------------START-------------8/18/2021 10:24:41 AM
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.set_Item(Int32 index, T value)
+   at WorkStatus.ViewModels.DashboardViewModel.UpdateProjectList(String selectedItem, String commandType) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4225
+   at System.Collections.Generic.List`1.set_Item(Int32 index, T value)
+   at WorkStatus.ViewModels.DashboardViewModel.UpdateProjectList(String selectedItem, String commandType) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4225
+-------------------END-------------8/18/2021 10:24:41 AM
+-------------------START-------------8/18/2021 10:25:41 AM
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.set_Item(Int32 index, T value)
+   at WorkStatus.ViewModels.DashboardViewModel.UpdateProjectList(String selectedItem, String commandType) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4225
+   at System.Collections.Generic.List`1.set_Item(Int32 index, T value)
+   at WorkStatus.ViewModels.DashboardViewModel.UpdateProjectList(String selectedItem, String commandType) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4225
+-------------------END-------------8/18/2021 10:25:41 AM
+-------------------START-------------8/18/2021 10:26:34 AM
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.set_Item(Int32 index, T value)
+   at WorkStatus.ViewModels.DashboardViewModel.CallActivityLog() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3234
+   at System.Collections.Generic.List`1.set_Item(Int32 index, T value)
+   at WorkStatus.ViewModels.DashboardViewModel.CallActivityLog() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3234
+-------------------END-------------8/18/2021 10:26:34 AM
+-------------------START-------------8/18/2021 10:31:34 AM
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.set_Item(Int32 index, T value)
+   at WorkStatus.ViewModels.DashboardViewModel.CallActivityLog() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3234
+   at System.Collections.Generic.List`1.set_Item(Int32 index, T value)
+   at WorkStatus.ViewModels.DashboardViewModel.CallActivityLog() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3234
+-------------------END-------------8/18/2021 10:31:34 AM
+-------------------START-------------8/18/2021 12:55:48 PM
+System.BadImageFormatException: Could not load file or assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at EventHook.Helpers.SyncFactory..ctor()
+   at EventHook.EventHookFactory..ctor()
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop) in C:\Projects\NewWorkStatus1\New folder\Common\KeyBoardMouseActivityTracker.cs:line 46
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4644
+   at EventHook.Helpers.SyncFactory..ctor()
+   at EventHook.EventHookFactory..ctor()
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop) in C:\Projects\NewWorkStatus1\New folder\Common\KeyBoardMouseActivityTracker.cs:line 46
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4644
+-------------------END-------------8/18/2021 12:55:48 PM
+-------------------START-------------8/18/2021 1:01:27 PM
+System.BadImageFormatException: Could not load file or assembly 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at EventHook.Helpers.SyncFactory..ctor()
+   at EventHook.EventHookFactory..ctor()
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop) in C:\Projects\NewWorkStatus1\New folder\Common\KeyBoardMouseActivityTracker.cs:line 46
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4644
+   at EventHook.Helpers.SyncFactory..ctor()
+   at EventHook.EventHookFactory..ctor()
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop) in C:\Projects\NewWorkStatus1\New folder\Common\KeyBoardMouseActivityTracker.cs:line 46
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4644
+-------------------END-------------8/18/2021 1:01:27 PM
+-------------------START-------------8/18/2021 3:01:24 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4647
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4647
+-------------------END-------------8/18/2021 3:01:24 PM
+-------------------START-------------8/18/2021 3:01:56 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:01:56 PM
+-------------------START-------------8/18/2021 3:01:56 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:01:56 PM
+-------------------START-------------8/18/2021 3:01:59 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4647
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4647
+-------------------END-------------8/18/2021 3:01:59 PM
+-------------------START-------------8/18/2021 3:07:22 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:07:22 PM
+-------------------START-------------8/18/2021 3:07:25 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:07:25 PM
+-------------------START-------------8/18/2021 3:07:26 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:07:26 PM
+-------------------START-------------8/18/2021 3:07:31 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ProjectPlay(String obj) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3952
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ProjectPlay(String obj) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3952
+-------------------END-------------8/18/2021 3:07:31 PM
+-------------------START-------------8/18/2021 3:07:35 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4647
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4647
+-------------------END-------------8/18/2021 3:07:35 PM
+-------------------START-------------8/18/2021 3:07:39 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4647
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4647
+-------------------END-------------8/18/2021 3:07:39 PM
+-------------------START-------------8/18/2021 3:48:33 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:48:33 PM
+-------------------START-------------8/18/2021 3:48:39 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:48:39 PM
+-------------------START-------------8/18/2021 3:48:41 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ProjectPlay(String obj) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3952
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ProjectPlay(String obj) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3952
+-------------------END-------------8/18/2021 3:48:41 PM
+-------------------START-------------8/18/2021 3:48:44 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4647
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4647
+-------------------END-------------8/18/2021 3:48:44 PM
+-------------------START-------------8/18/2021 3:52:22 PM
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.set_Item(Int32 index, T value)
+   at WorkStatus.ViewModels.DashboardViewModel.TODoStopUpdate(Int32 CurrentToDoId) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4958
+   at System.Collections.Generic.List`1.set_Item(Int32 index, T value)
+   at WorkStatus.ViewModels.DashboardViewModel.TODoStopUpdate(Int32 CurrentToDoId) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4958
+-------------------END-------------8/18/2021 3:52:22 PM
+-------------------START-------------8/18/2021 3:52:30 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4647
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.ToDoPlay(Int32 TodoID) in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 4647
+-------------------END-------------8/18/2021 3:52:30 PM
+-------------------START-------------8/18/2021 3:55:53 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:53 PM
+-------------------START-------------8/18/2021 3:55:55 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:55 PM
+-------------------START-------------8/18/2021 3:55:56 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:56 PM
+-------------------START-------------8/18/2021 3:55:56 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:56 PM
+-------------------START-------------8/18/2021 3:55:56 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:56 PM
+-------------------START-------------8/18/2021 3:55:56 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:56 PM
+-------------------START-------------8/18/2021 3:55:57 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:57 PM
+-------------------START-------------8/18/2021 3:55:57 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:57 PM
+-------------------START-------------8/18/2021 3:55:58 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:58 PM
+-------------------START-------------8/18/2021 3:55:58 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:58 PM
+-------------------START-------------8/18/2021 3:55:59 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:59 PM
+-------------------START-------------8/18/2021 3:55:59 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:59 PM
+-------------------START-------------8/18/2021 3:55:59 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:55:59 PM
+-------------------START-------------8/18/2021 3:56:00 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:00 PM
+-------------------START-------------8/18/2021 3:56:00 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:00 PM
+-------------------START-------------8/18/2021 3:56:00 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:00 PM
+-------------------START-------------8/18/2021 3:56:01 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:01 PM
+-------------------START-------------8/18/2021 3:56:01 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:01 PM
+-------------------START-------------8/18/2021 3:56:02 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:02 PM
+-------------------START-------------8/18/2021 3:56:02 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:02 PM
+-------------------START-------------8/18/2021 3:56:02 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:02 PM
+-------------------START-------------8/18/2021 3:56:03 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:03 PM
+-------------------START-------------8/18/2021 3:56:03 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:03 PM
+-------------------START-------------8/18/2021 3:56:03 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:03 PM
+-------------------START-------------8/18/2021 3:56:03 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:03 PM
+-------------------START-------------8/18/2021 3:56:04 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:04 PM
+-------------------START-------------8/18/2021 3:56:04 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:04 PM
+-------------------START-------------8/18/2021 3:56:04 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:04 PM
+-------------------START-------------8/18/2021 3:56:05 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:05 PM
+-------------------START-------------8/18/2021 3:56:05 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:05 PM
+-------------------START-------------8/18/2021 3:56:05 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:05 PM
+-------------------START-------------8/18/2021 3:56:06 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:06 PM
+-------------------START-------------8/18/2021 3:56:06 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:06 PM
+-------------------START-------------8/18/2021 3:56:06 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:06 PM
+-------------------START-------------8/18/2021 3:56:07 PM
+System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop)
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 3:56:07 PM
+-------------------START-------------8/18/2021 4:02:50 PM
+System.TypeInitializationException: The type initializer for 'WorkStatus.MouseHook' threw an exception.
+ ---> System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.MouseHook..cctor()
+   --- End of inner exception stack trace ---
+   at WorkStatus.MouseHook.Start() in C:\Projects\NewWorkStatus1\New folder\MouseHook.cs:line 22
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop) in C:\Projects\NewWorkStatus1\New folder\Common\KeyBoardMouseActivityTracker.cs:line 47
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.MouseHook.Start() in C:\Projects\NewWorkStatus1\New folder\MouseHook.cs:line 22
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop) in C:\Projects\NewWorkStatus1\New folder\Common\KeyBoardMouseActivityTracker.cs:line 47
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 4:02:50 PM
+-------------------START-------------8/18/2021 4:03:47 PM
+System.TypeInitializationException: The type initializer for 'WorkStatus.MouseHook' threw an exception.
+ ---> System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.MouseHook..cctor()
+   --- End of inner exception stack trace ---
+   at WorkStatus.MouseHook.Start() in C:\Projects\NewWorkStatus1\New folder\MouseHook.cs:line 22
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop) in C:\Projects\NewWorkStatus1\New folder\Common\KeyBoardMouseActivityTracker.cs:line 47
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.MouseHook.Start() in C:\Projects\NewWorkStatus1\New folder\MouseHook.cs:line 22
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop) in C:\Projects\NewWorkStatus1\New folder\Common\KeyBoardMouseActivityTracker.cs:line 47
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 4:03:47 PM
+-------------------START-------------8/18/2021 4:05:03 PM
+System.TypeInitializationException: The type initializer for 'WorkStatus.MouseHook' threw an exception.
+ ---> System.BadImageFormatException: Could not load file or assembly 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. Reference assemblies should not be loaded for execution.  They can only be loaded in the Reflection-only loader context. (0x80131058)
+File name: 'PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ---> System.BadImageFormatException: Cannot load a reference assembly for execution.
+   at WorkStatus.MouseHook..cctor()
+   --- End of inner exception stack trace ---
+   at WorkStatus.MouseHook.add_MouseAction(EventHandler value)
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop) in C:\Projects\NewWorkStatus1\New folder\Common\KeyBoardMouseActivityTracker.cs:line 48
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+   at WorkStatus.MouseHook.add_MouseAction(EventHandler value)
+   at WorkStatus.Common.KeyBoardMouseActivityTracker.MouseActivity(Boolean PlayStop) in C:\Projects\NewWorkStatus1\New folder\Common\KeyBoardMouseActivityTracker.cs:line 48
+   at WorkStatus.ViewModels.DashboardViewModel.PlayTimer() in C:\Projects\NewWorkStatus1\New folder\ViewModels\DashboardViewModel.cs:line 3772
+-------------------END-------------8/18/2021 4:05:03 PM
+-------------------START-------------8/18/2021 6:16:40 PM
+System.Net.WebException: An error occurred while sending the request.
+ ---> System.Net.Http.HttpRequestException: An error occurred while sending the request.
+ ---> System.IO.IOException: The response ended prematurely.
+   at System.Net.Http.HttpConnection.FillAsync(Boolean async)
+   at System.Net.Http.HttpConnection.ReadNextResponseHeaderLineAsync(Boolean async, Boolean foldedHeadersAllowed)
+   at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClientHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageInvoker.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.SendAsyncCore(HttpRequestMessage request, HttpCompletionOption completionOption, Boolean async, Boolean emitTelemetryStartStop, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.GetUserProjectlistByOrganizationIDAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, OrganizationDTOEntity _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 55
+   at System.Net.HttpWebRequest.GetResponse()
+   at WorkStatus.APIServices.DashboardService.GetUserProjectlistByOrganizationIDAsync(String uri, Boolean IsHeaderRequired, HeaderModel objHeaderModel, OrganizationDTOEntity _objRequest) in C:\Projects\NewWorkStatus1\New folder\APIServices\DashboardService.cs:line 55
+-------------------END-------------8/18/2021 6:16:40 PM
