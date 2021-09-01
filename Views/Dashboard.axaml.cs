@@ -7,6 +7,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
 using Avalonia.Threading;
+using Notify;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,12 +23,15 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Tulpep.NotificationWindow;
-//using Tulpep.NotificationWindow;
 using WorkStatus.Models;
 using WorkStatus.Models.WriteDTO;
 using WorkStatus.Utility;
 using WorkStatus.ViewModels;
 using Image = Avalonia.Controls.Image;
+using Button = Avalonia.Controls.Button;
+using ComboBox = Avalonia.Controls.ComboBox;
+using Application = Avalonia.Application;
+using ListBox = Avalonia.Controls.ListBox;
 
 namespace WorkStatus.Views
 {
@@ -35,8 +39,6 @@ namespace WorkStatus.Views
 
     public class Dashboard : Window
     {
-        // private System.Windows.Forms.NotifyIcon m_notifyIcon;
-
         public DashboardViewModel _dashboardVM;
         public static Stopwatch ProjectStopWatch = new Stopwatch();
         public DispatcherTimer IsInternet = new DispatcherTimer();
@@ -69,7 +71,6 @@ namespace WorkStatus.Views
             this.Position = new PixelPoint(3, 0);
             this.SizeToContent = SizeToContent.Manual;
             InitializeComponent();
-
 
             _dashboardVM = new DashboardViewModel(this);
             this.DataContext = _dashboardVM;
@@ -385,29 +386,49 @@ namespace WorkStatus.Views
             }
             return null;
         }
+
+        public void GetNotification_Linux(string popupMessage)
+        {
+            try
+            {
+                if (isLinux)
+                {
+                    Notification linuxPopup = new Notification("WORKSTATUS", popupMessage, 5000, "DotsIcon.png");
+                    linuxPopup.Show();
+                    // Console.WriteLine("WorkStatus Screen Captured");
+                }
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+        }
         public void GetNotification(string popupMessage)
         {
             try
             {
-                PopupNotifier popup = new PopupNotifier();
-                popup.TitleText = "WORKSTATUS";
-                popup.TitleColor = Color.White;
-                popup.TitleFont = new Font("Tahoma", 13F);
-                popup.BodyColor = Color.FromArgb(33, 26, 35);
-                popup.ContentColor = Color.White;
-                popup.ContentText = popupMessage;
-                popup.Image = LoadEmbeddedResources("/Assets/DotsIcon.png");
-                popup.ImageSize = new System.Drawing.Size(25, 10);
-                popup.ContentFont = new Font("Tahoma", 13F);
-                popup.Size = new System.Drawing.Size(350, 75);
-                popup.ShowGrip = false;
-                popup.HeaderHeight = 2;
-                popup.AnimationDuration = 5000;
-                popup.AnimationInterval = 1;
-                popup.HeaderColor = Color.FromArgb(33, 26, 35);
-                popup.ShowCloseButton = false;
-                System.Media.SystemSounds.Asterisk.Play();
-                popup.Popup();
+                if (isWindows)
+                {
+                    PopupNotifier popup = new PopupNotifier();
+                    popup.TitleText = "WORKSTATUS";
+                    popup.TitleColor = Color.White;
+                    popup.TitleFont = new Font("Tahoma", 13F);
+                    popup.BodyColor = Color.FromArgb(33, 26, 35);
+                    popup.ContentColor = Color.White;
+                    popup.ContentText = popupMessage;
+                    popup.Image = LoadEmbeddedResources("/Assets/DotsIcon.png");
+                    popup.ImageSize = new System.Drawing.Size(25, 10);
+                    popup.ContentFont = new Font("Tahoma", 13F);
+                    popup.Size = new System.Drawing.Size(350, 75);
+                    popup.ShowGrip = false;
+                    popup.HeaderHeight = 2;
+                    popup.AnimationDuration = 5000;
+                    popup.AnimationInterval = 1;
+                    popup.HeaderColor = Color.FromArgb(33, 26, 35);
+                    popup.ShowCloseButton = false;
+                    System.Media.SystemSounds.Asterisk.Play();
+                    popup.Popup();
+                }
             }
             catch (Exception ex)
             {
@@ -415,101 +436,13 @@ namespace WorkStatus.Views
             }
         }
 
-        //private async void GetScreenShots(object sender, EventArgs e)
-        //{
-        //    if (!_dashboardVM.IsPlaying && _dashboardVM.IsStop && !Common.Storage.IsScreenShotCapture)
-        //    {
-        //        try
-        //        {
-        //            Screen sc = Screens.Primary;
-        //            PixelRect _pr = sc.WorkingArea;
-        //            int width = _pr.Width;
-        //            int height = _pr.Height;
-        //            string serverScreenShotImageName = string.Empty;
-
-        //            Bitmap bmpScreenshot = new Bitmap(width, height);
-        //            Graphics gfxScreenshot = Graphics.FromImage(bmpScreenshot);
-        //            gfxScreenshot.CopyFromScreen(0, 0, 0, 0, new System.Drawing.Size(width, height), CopyPixelOperation.SourceCopy);
-        //            var qualityEncoder = Encoder.Quality;
-        //            var quality = 15;
-        //            var ratio = new EncoderParameter(qualityEncoder, quality);
-        //            var codecParams = new EncoderParameters(1);
-        //            codecParams.Param[0] = ratio;
-
-        //            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
-        //            var jpegCodecInfo = codecs.Single(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
-        //            string filename = string.Empty;
-        //            if (isWindows)
-        //            {
-        //                var orgPath = Common.Storage.CurrentOrganisationName + @"\" + _dashboardVM.HeaderProjectName + @"\";
-
-        //                var directoryPath = fullPath + orgPath;
-
-        //                if (!Directory.Exists(directoryPath))
-        //                {
-        //                    Directory.CreateDirectory(directoryPath);
-        //                }
-
-        //                filename = directoryPath + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
-        //                bmpScreenshot.Save(filename, jpegCodecInfo, codecParams);
-
-        //                bmpScreenshot.Save(filename, jpegCodecInfo, codecParams);
-        //            }
-
-        //            else
-        //            {
-        //                filename = fullPath + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
-        //                bmpScreenshot.Save(filename, jpegCodecInfo, codecParams);
-        //            }
-
-
-        //            var isInternetConnected = true;
-        //            if (isInternetConnected)
-        //            {
-
-        //                serverScreenShotImageName = filename;
-        //            }
-        //            else
-        //            {
-
-        //                serverScreenShotImageName = filename;
-        //            }
-        //            gfxScreenshot.Dispose();
-        //            bmpScreenshot.Dispose();
-        //            byte[] ImageData = System.IO.File.ReadAllBytes(filename);
-        //            ScreenShotRequestModel model = new ScreenShotRequestModel() { screenshot = filename };
-        //            _dashboardVM.SendScreenShotsToServer(filename, ImageData);
-        //            //if (Common.Storage.ScreenURl != null && Common.Storage.ScreenURl != "")
-        //            //{
-        //            //    if (File.Exists(Path.Combine(directoryPath, filename)))
-        //            //    {
-        //            //        // If file found, delete it    
-        //            //        File.Delete(Path.Combine(directoryPath, filename));
-        //            //    }
-        //            //}
-        //            // api call
-        //            if (isWindows)
-        //            {
-        //                GetNotification("WorkStatus\nScreen Captured");
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            var msg = ex.Message;
-        //        }
-        //        finally
-        //        {
-
-        //        }
-        //    }
-        //}
         private void GetScreenShots(object? sender, EventArgs e)
         {
             if (!_dashboardVM.IsPlaying && _dashboardVM.IsStop && !Common.Storage.IsScreenShotCapture)
             {
                 try
                 {
-                    Screen sc = Screens.Primary;
+                    Avalonia.Platform.Screen sc = Screens.Primary;
                     PixelRect _pr = sc.WorkingArea;
                     int width = _pr.Width;
                     int height = _pr.Height;
@@ -543,9 +476,9 @@ namespace WorkStatus.Views
                     }
                     if (isLinux)
                     {
-                        orgPath = Common.Storage.CurrentOrganisationName +"/"+_dashboardVM.HeaderProjectName;
+                        orgPath = Common.Storage.CurrentOrganisationName + "/" + _dashboardVM.HeaderProjectName;
                         fullPath = ConfigurationManager.AppSettings["LinuxOSPath"].ToString();
-                        directoryPath = fullPath+"/"+orgPath;
+                        directoryPath = fullPath + "/" + orgPath;
                         updatedPath = directoryPath.Replace("|", "_");
                         updatedPath = directoryPath.Replace(" ", "");
                         if (!Directory.Exists(updatedPath))
@@ -553,7 +486,7 @@ namespace WorkStatus.Views
                             Directory.CreateDirectory(updatedPath);
                         }
 
-                        filename = updatedPath+"/"+DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
+                        filename = updatedPath + "/" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
                         //OS = "LINUX";	
                     }
 
@@ -587,6 +520,10 @@ namespace WorkStatus.Views
                     if (isWindows)
                     {
                         GetNotification("WorkStatus\nScreen Captured");
+                    }
+                    if (isLinux)
+                    {
+                        GetNotification_Linux("WorkStatus Screen Captured");
                     }
                     //D:\Projects\Workstatus\WorkStatus24062021\WorkStatus\Screenshots\
                 }

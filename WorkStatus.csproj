@@ -9,6 +9,9 @@
     <Version>1.0.0</Version>
     <StartupObject />   
   </PropertyGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.WindowsDesktop.App" />
+	</ItemGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
@@ -99,6 +102,7 @@
     <PackageReference Include="Indieteur.GlobalHooks" Version="1.0.0" />
     <PackageReference Include="Interop.UIAutomationClient" Version="10.19041.0" />
     <PackageReference Include="IronPython" Version="2.7.11" />
+    <PackageReference Include="libnotify.net" Version="0.0.4" />
     <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
     <PackageReference Include="MessageBox.Avalonia" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />

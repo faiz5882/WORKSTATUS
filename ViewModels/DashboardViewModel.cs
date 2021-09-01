@@ -32,6 +32,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Tulpep.NotificationWindow;
+using Notify;
 //using System.Windows.Media;
 //using System.Windows.Media.Imaging;
 using WorkStatus.APIServices;
@@ -7784,6 +7786,64 @@ namespace WorkStatus.ViewModels
 
         #endregion
 
+        public Bitmap LoadEmbeddedResources1(string localFilePath)
+        {
+            try
+            {
+                string assemblyName = Assembly.GetEntryAssembly().GetName().Name;
+                var rawUri = localFilePath;
+                var uri = new Uri($"avares://{assemblyName}{rawUri}");
+
+                var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
+                var asset = assets.Open(uri);
+
+                return new Bitmap(asset);
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+            return null;
+        }
+        public void GetNotification1(string popupMessage)
+        {
+            try
+            {
+                if (!isWindows)
+                {
+                    PopupNotifier popup = new PopupNotifier();
+                    popup.TitleText = "WORKSTATUS";
+                    popup.TitleColor = System.Drawing.Color.White;
+                    popup.TitleFont = new Font("Tahoma", 13F);
+                    popup.BodyColor = System.Drawing.Color.FromArgb(33, 26, 35);
+                    popup.ContentColor = System.Drawing.Color.White;
+                    popup.ContentText = popupMessage;
+                    popup.Image = LoadEmbeddedResources1("/Assets/DotsIcon.png");
+                    popup.ImageSize = new System.Drawing.Size(25, 10);
+                    popup.ContentFont = new Font("Tahoma", 13F);
+                    popup.Size = new System.Drawing.Size(350, 75);
+                    popup.ShowGrip = false;
+                    popup.HeaderHeight = 2;
+                    popup.AnimationDuration = 5000;
+                    popup.AnimationInterval = 1;
+                    popup.HeaderColor = System.Drawing.Color.FromArgb(33, 26, 35);
+                    popup.ShowCloseButton = false;
+                    System.Media.SystemSounds.Asterisk.Play();
+                    popup.Popup();
+                }
+                else 
+                {
+                    var linuxPopup = new Notify.Notification("WORKSTATUS", popupMessage, 5000, "DotsIcon.png");
+                    linuxPopup.Show();
+                    // Console.WriteLine("WorkStatus Screen Captured");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+        }
         #endregion
 
         #region MVVM INotifyPropertyChanged     
