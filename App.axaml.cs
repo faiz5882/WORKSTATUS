@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using WorkStatus.Models;
+using WorkStatus.Models.WriteDTO;
 using WorkStatus.Utility;
 using WorkStatus.ViewModels;
 using WorkStatus.Views;
@@ -32,6 +33,16 @@ namespace WorkStatus
             CheckSingleton();
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+
+                //===02/09/2021========
+                List<tbl_Organisation_Projects> _OrganisationProjects = new List<tbl_Organisation_Projects>();
+                BaseService<tbl_Organisation_Projects> dbServiceProject = new BaseService<tbl_Organisation_Projects>();
+                dbServiceProject.Delete(new tbl_Organisation_Projects());
+                BaseService<tbl_ServerTodoDetails> dbServiceTodo = new BaseService<tbl_ServerTodoDetails>();
+                dbServiceTodo.Delete(new tbl_ServerTodoDetails());
+                BaseService<tbl_ToDoAttachments> dbService3 = new BaseService<tbl_ToDoAttachments>();
+                dbService3.Delete(new tbl_ToDoAttachments());
+                //===02/09/2021========
 
                 List<tbl_UserDetails> userList = new List<tbl_UserDetails>();
                 BaseService<tbl_UserDetails> dbService = new BaseService<tbl_UserDetails>();

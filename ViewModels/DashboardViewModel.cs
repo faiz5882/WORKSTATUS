@@ -97,10 +97,11 @@ namespace WorkStatus.ViewModels
         int counter = 0;
         DispatcherTimer dispatcherTimerNotes = new DispatcherTimer();
         public System.Timers.Timer timerproject;
+        public System.Timers.Timer timerAutoIdle;
         System.Timers.Timer timerToDo;
         ThemeManager themeManager = null;
         string currentTime = string.Empty;
-        int h1, m1, s1, h2, m2, s2, h3, m3, s3;
+        int h1, m1, s1, h2, m2, s2, h3, m3, s3, autoIdleHour, autoIdleMinute, autoIdleSecound;
         int TotalSecound, TotalSMinute, Totalhour;
 
         public DispatcherTimer AppandUrlTracking = new DispatcherTimer();
@@ -231,6 +232,7 @@ namespace WorkStatus.ViewModels
                 _selectedOrganisationItems = value;
                 if (_selectedOrganisationItems != null)
                 {
+                    
                     HeaderOrgId = SelectedOrganisationItems.OrganizationId;
                     HeaderOrgName = SelectedOrganisationItems.OrganizationName;
                     WeeklylimitText = SelectedOrganisationItems.WeeklyLimit != null ? SelectedOrganisationItems.WeeklyLimit : "No Weekly Limit";
@@ -240,7 +242,7 @@ namespace WorkStatus.ViewModels
                     //    Pbar.IsVisible = true; //Make Progressbar visible
                     //}), DispatcherPriority.Background);
                     Dispatcher.UIThread.InvokeAsync(new Action(() =>
-                    {
+                    {                       
                         BindUserProjectlistByOrganizationID(SelectedOrganisationItems.OrganizationId);
                     }), DispatcherPriority.Background);
 
@@ -1158,16 +1160,46 @@ namespace WorkStatus.ViewModels
             GetScreeshotIntervelFromServer();
             Dispatcher.UIThread.InvokeAsync(new Action(() => BindUserOrganisationListFromApi()));
             timerproject = new System.Timers.Timer();
+            timerAutoIdle = new System.Timers.Timer();
             timerToDo = new System.Timers.Timer();
             timerproject.Interval = 1000;
             timerToDo.Interval = 1000;
+            timerAutoIdle.Interval = 1000;
             timerproject.Elapsed += Timerproject_Elapsed;
+            timerAutoIdle.Elapsed += TimerAutoIdle_Elapsed;
             timerToDo.Elapsed += TimerToDo_Elapsed;
             SlotTimerObject.Tick += new EventHandler(SlotTimerObject_Elapsed);
-
+            //autoIdleHour = 0;
+            //autoIdleMinute = 20;
+            //autoIdleSecound = 50;
             SyncDataToServer();
-
+            //CheckIdleTimeFromDb();
+            //IsIdleTimeClose = true;
+            //IsIdleTimeQuitAlert = true;
+            //timerAutoIdle.Start();
             //}
+        }
+
+        private void TimerAutoIdle_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            autoIdleSecound += 1;
+            if (autoIdleSecound == 60)
+            {
+
+                autoIdleMinute += 1;
+            }
+            if (autoIdleMinute == 60)
+            {
+                autoIdleMinute = 0;
+                autoIdleHour += 1;
+            }
+            
+
+            if (autoIdleSecound == 60)
+                autoIdleSecound = 0;
+            string totalTimeStr = String.Format("{0}:{1}:{2}", autoIdleHour.ToString().PadLeft(2, '0'), autoIdleMinute.ToString().PadLeft(2, '0'), autoIdleSecound.ToString().PadLeft(2, '0'));
+            IdleTimeMessage = "You are idle from last " + totalTimeStr + "";
+            
         }
 
         #endregion
@@ -1444,26 +1476,33 @@ namespace WorkStatus.ViewModels
                 {
                     if (userIdleTimeList.Count > 0)
                     {
-                        if (userIdleTimeList.Count >= 2) //>=2
+                        if (userIdleTimeList.Count >= 2)
                         {
+                            autoIdleHour = 0;
+                            autoIdleMinute = 0;
+                            autoIdleSecound = 0;
+
                             IsIdleTimeClose = true;
                             IsIdleTimeQuitAlert = true;
-                            string aa;
+                           
                             DateTime dt = Convert.ToDateTime(userIdleTimeList[0].ProjectIdleStartTime);
                             DateTime dt2 = Convert.ToDateTime(userIdleTimeList[userIdleTimeList.Count - 1].ProjectIdleEndTime);
                             TimeSpan ts = (dt2 - dt);
                             if (ts.Hours == 0)
                             {
                                 Storage.ContinueProjectEventCountTime = ts.Minutes;
-                                aa = String.Format("{0} Minute", ts.Minutes);
+                               
                             }
                             else
                             {
                                 Storage.ContinueProjectEventCountTime = ts.Hours + ts.Minutes;
-                                aa = String.Format("{0}hour {1}Minute", ts.Hours, ts.Minutes);
+                                
                             }
-
-                            IdleTimeMessage = "You are idle from last " + aa + "";
+                          
+                            autoIdleHour = ts.Hours;
+                            autoIdleMinute = ts.Minutes;
+                            autoIdleSecound = ts.Seconds;
+                            timerAutoIdle.Start();
                             if (isWindows)
                             {
                                 try
@@ -1538,6 +1577,7 @@ namespace WorkStatus.ViewModels
         }
         public void ReassignIdleTimeCall()
         {
+            timerAutoIdle.Stop();
             IsIdleTimeClose = false;
             IsIdleTimeQuitAlert = false;
             IsReassignBtnClick = true;
@@ -1570,6 +1610,7 @@ namespace WorkStatus.ViewModels
         }
         public void StopIdleTimeCall()
         {
+            timerAutoIdle.Stop();
             if (RemeberMeKeepIdle)
             {
                 //==============stop timer send to server intevel and stop timer
@@ -1610,6 +1651,7 @@ namespace WorkStatus.ViewModels
         }
         public void ContinueIdleTimeCall()
         {
+            timerAutoIdle.Stop();
             if (RemeberMeKeepIdle)
             {
                 //==============stop timer send to server intevel and continue timer
@@ -6771,7 +6813,7 @@ namespace WorkStatus.ViewModels
                         }
                         else
                         {
-
+                            Common.Storage.CurrentOrganisationId = OrganizationID.ToInt32();
                             pgrProject.IsVisible = false;
                             pgrToDO.IsVisible = false;
                         }

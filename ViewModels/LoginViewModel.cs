@@ -220,6 +220,16 @@ namespace WorkStatus.ViewModels
                             // BaseService<tbl_IdleTimeDetails> dbService2= new BaseService<tbl_IdleTimeDetails>();
                             // dbService2.Delete(new tbl_IdleTimeDetails());
 
+                            //===02/09/2021========
+                            List<tbl_Organisation_Projects> _OrganisationProjects = new List<tbl_Organisation_Projects>();
+                            BaseService<tbl_Organisation_Projects> dbServiceProject = new BaseService<tbl_Organisation_Projects>();
+                            dbServiceProject.Delete(new tbl_Organisation_Projects());
+                            BaseService<tbl_ServerTodoDetails> dbServiceTodo = new BaseService<tbl_ServerTodoDetails>();
+                            dbServiceTodo.Delete(new tbl_ServerTodoDetails());
+                            BaseService<tbl_ToDoAttachments> dbService3 = new BaseService<tbl_ToDoAttachments>();
+                            dbService3.Delete(new tbl_ToDoAttachments());
+                            //===02/09/2021========
+
                             Common.Storage.TokenId = _loginResponse.Response.Data.Token;
                             Common.Storage.ServerOrg_Id = _loginResponse.Response.Data.Org_Id;
                             Common.Storage.ServerSd_Token = _loginResponse.Response.Data.Sd_Token;
