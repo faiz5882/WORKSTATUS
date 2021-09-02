@@ -6814,6 +6814,8 @@ namespace WorkStatus.ViewModels
                         else
                         {
                             Common.Storage.CurrentOrganisationId = OrganizationID.ToInt32();
+                            HeaderTime = "00:00:00";
+                            HeaderProjectName = string.Empty;
                             pgrProject.IsVisible = false;
                             pgrToDO.IsVisible = false;
                         }
@@ -7468,6 +7470,7 @@ namespace WorkStatus.ViewModels
                         updateTotalwork(arryT[2].ToInt32(), arryT[1].ToInt32(), arryT[0].ToInt32());
                     }
                 }
+               
                 Common.Storage.IsActivityCall = true;
                 // timerproject.Start();
             }
