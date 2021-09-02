@@ -15,8 +15,14 @@ namespace WorkStatus.Common
         //Creating a function that uses the API function...  
         public static bool IsConnectedToInternet()
         {
-            int Desc;
-            return true;  // InternetGetConnectedState(out Desc, 0);
+          bool  isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+
+            if (isWindows)
+            {
+                int Desc;
+                return InternetGetConnectedState(out Desc, 0);
+            }
+            return true;
         }
 
       
