@@ -7,7 +7,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
 using Avalonia.Threading;
-using Notify;
+//using Notify;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,7 +35,6 @@ using ListBox = Avalonia.Controls.ListBox;
 
 namespace WorkStatus.Views
 {
-
 
     public class Dashboard : Window
     {
@@ -393,8 +392,8 @@ namespace WorkStatus.Views
             {
                 if (isLinux)
                 {
-                    Notification linuxPopup = new Notification("WORKSTATUS", popupMessage, 5000, "DotsIcon.png");
-                    linuxPopup.Show();
+                   // Notification linuxPopup = new Notification("WORKSTATUS", popupMessage, 5000, "DotsIcon.png");
+                  //  linuxPopup.Show();
                     // Console.WriteLine("WorkStatus Screen Captured");
                 }
             }

@@ -113,6 +113,42 @@ namespace WorkStatus.Utility
                 return false;
             }
         }
+
+        public static bool ActivityAPILogApiResponse(string strMessage)
+        {
+            try
+            {
+                string fullPath = string.Empty;
+                if (isLinux)
+                { fullPath = "LogWorkStatus"; }
+                else
+                {
+                    fullPath = ConfigurationManager.AppSettings["LogPath"].ToString();
+                }
+                string directoryPath = fullPath;
+                string updatedPath = directoryPath.Replace("|", "_");
+                updatedPath = directoryPath.Replace(" ", "");
+                if (!Directory.Exists(updatedPath))
+                {
+                    Directory.CreateDirectory(updatedPath);
+                }
+                string strFileName = DateTime.Now.ToString("yyyyMMdd") + "APIActivity.txt";
+                FileStream objFilestream = new FileStream(string.Format("{0}/{1}", updatedPath, strFileName), FileMode.Append, FileAccess.Write);
+                StreamWriter objStreamWriter = new StreamWriter((Stream)objFilestream);
+
+                objStreamWriter.WriteLine("-------------------START-------------" + DateTime.Now);
+                objStreamWriter.WriteLine(strMessage);
+                objStreamWriter.WriteLine("-------------------END-------------" + DateTime.Now);
+                objStreamWriter.Close();
+                objFilestream.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public static bool WriteMessageLog(string strMessage)
         {
             try

@@ -253,6 +253,7 @@ namespace WorkStatus.APIServices
                 WebResponse response1 = request.GetResponse();
                 var streamReader = new StreamReader(response1.GetResponseStream());
                 var result = streamReader.ReadToEnd();
+                LogFile.ActivityAPILogApiResponse(result);
                 objFPResponse = JsonConvert.DeserializeObject<CommonResponseModel>(result);                
                 return objFPResponse;
             }

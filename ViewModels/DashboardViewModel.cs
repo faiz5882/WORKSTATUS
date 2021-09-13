@@ -33,9 +33,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Tulpep.NotificationWindow;
-using Notify;
-//using System.Windows.Media;
-//using System.Windows.Media.Imaging;
 using WorkStatus.APIServices;
 using WorkStatus.Common;
 using WorkStatus.Configuration;
@@ -102,6 +99,7 @@ namespace WorkStatus.ViewModels
         ThemeManager themeManager = null;
         string currentTime = string.Empty;
         int h1, m1, s1, h2, m2, s2, h3, m3, s3, autoIdleHour, autoIdleMinute, autoIdleSecound;
+        string sH2, sM2, sS2;
         int TotalSecound, TotalSMinute, Totalhour;
 
         public DispatcherTimer AppandUrlTracking = new DispatcherTimer();
@@ -189,8 +187,8 @@ namespace WorkStatus.ViewModels
             }
         }
 
-        private ObservableCollection<tbl_Organisation_Projects> _findUserProjectList;
-        public ObservableCollection<tbl_Organisation_Projects> FindUserProjectList
+        private List<tbl_Organisation_Projects> _findUserProjectList;
+        public List<tbl_Organisation_Projects> FindUserProjectList
         {
             get => _findUserProjectList;
             set
@@ -200,8 +198,8 @@ namespace WorkStatus.ViewModels
             }
         }
 
-        private ObservableCollection<Organisation_Projects> _getProjectsList;
-        public ObservableCollection<Organisation_Projects> GetProjectsList
+        private List<Organisation_Projects> _getProjectsList;
+        public List<Organisation_Projects> GetProjectsList
         {
             get { return _getProjectsList; }
             set
@@ -232,7 +230,7 @@ namespace WorkStatus.ViewModels
                 _selectedOrganisationItems = value;
                 if (_selectedOrganisationItems != null)
                 {
-                    
+
                     HeaderOrgId = SelectedOrganisationItems.OrganizationId;
                     HeaderOrgName = SelectedOrganisationItems.OrganizationName;
                     WeeklylimitText = SelectedOrganisationItems.WeeklyLimit != null ? SelectedOrganisationItems.WeeklyLimit : "No Weekly Limit";
@@ -242,7 +240,7 @@ namespace WorkStatus.ViewModels
                     //    Pbar.IsVisible = true; //Make Progressbar visible
                     //}), DispatcherPriority.Background);
                     Dispatcher.UIThread.InvokeAsync(new Action(() =>
-                    {                       
+                    {
                         BindUserProjectlistByOrganizationID(SelectedOrganisationItems.OrganizationId);
                     }), DispatcherPriority.Background);
 
@@ -264,7 +262,6 @@ namespace WorkStatus.ViewModels
                 _selectedproject = value;
                 if (Selectedproject != null)
                 {
-
                     HeaderProjectName = Selectedproject.ProjectName;
                     HeaderProjectId = Selectedproject.ProjectId;
 
@@ -328,8 +325,8 @@ namespace WorkStatus.ViewModels
             }
         }
 
-        private ObservableCollection<tbl_Organisation_Projects> _ProjectsList;
-        public ObservableCollection<tbl_Organisation_Projects> ProjectsList
+        private List<tbl_Organisation_Projects> _ProjectsList;
+        public List<tbl_Organisation_Projects> ProjectsList
         {
             get { return _ProjectsList; }
             set
@@ -1193,13 +1190,13 @@ namespace WorkStatus.ViewModels
                 autoIdleMinute = 0;
                 autoIdleHour += 1;
             }
-            
+
 
             if (autoIdleSecound == 60)
                 autoIdleSecound = 0;
             string totalTimeStr = String.Format("{0}:{1}:{2}", autoIdleHour.ToString().PadLeft(2, '0'), autoIdleMinute.ToString().PadLeft(2, '0'), autoIdleSecound.ToString().PadLeft(2, '0'));
             IdleTimeMessage = "You are idle from last " + totalTimeStr + "";
-            
+
         }
 
         #endregion
@@ -1323,14 +1320,15 @@ namespace WorkStatus.ViewModels
                 m = m * 60;
             }
             TotalTimeinSecond = h + m + s;
-
+            UrlName = string.IsNullOrEmpty(UrlName) ? "NA" : UrlName;
+            urlPath = string.IsNullOrEmpty(urlPath) ? "NA" : urlPath;
             var urldata = new tbl_URLTracking()
             {
                 Start = Common.Storage.ProjectStartTime,
                 URLStartDateTime = startDate,
                 URLEndDateTime = endDate,
                 URLConsumedTime = timeFrame,
-                UrlName = UrlName,
+                UrlName = UrlName.Replace("'", "''"),
                 urlPath = urlPath,
                 TotalTimeSpent = TotalTimeinSecond.ToStrVal(),
                 IsOffline = 1
@@ -1484,21 +1482,21 @@ namespace WorkStatus.ViewModels
 
                             IsIdleTimeClose = true;
                             IsIdleTimeQuitAlert = true;
-                           
+
                             DateTime dt = Convert.ToDateTime(userIdleTimeList[0].ProjectIdleStartTime);
                             DateTime dt2 = Convert.ToDateTime(userIdleTimeList[userIdleTimeList.Count - 1].ProjectIdleEndTime);
                             TimeSpan ts = (dt2 - dt);
                             if (ts.Hours == 0)
                             {
                                 Storage.ContinueProjectEventCountTime = ts.Minutes;
-                               
+
                             }
                             else
                             {
                                 Storage.ContinueProjectEventCountTime = ts.Hours + ts.Minutes;
-                                
+
                             }
-                          
+
                             autoIdleHour = ts.Hours;
                             autoIdleMinute = ts.Minutes;
                             autoIdleSecound = ts.Seconds;
@@ -1515,7 +1513,7 @@ namespace WorkStatus.ViewModels
                                         activityTracker.globalMouseHook = null;
                                         LogFile.WriteMessageLog("Dispose");
                                     }
-                                  
+
                                 }
                                 catch (Exception ex)
                                 {
@@ -1523,7 +1521,7 @@ namespace WorkStatus.ViewModels
                                     LogFile.ErrorLog(ex);
                                 }
                             }
-                           
+
                         }
                     }
                     else
@@ -1726,7 +1724,7 @@ namespace WorkStatus.ViewModels
                     LogFile.WriteaActivityLog("Continue success");
                 }
             }
-           
+
         }
         public void AssignIdleTimeCall(int Id)
         {
@@ -2100,9 +2098,10 @@ namespace WorkStatus.ViewModels
                 }
                 if (Selectedproject != null)
                 {
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>();
-                    GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = new List<Organisation_Projects>();
+                    // GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
+                    //GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = GetProjectsList2;
                 }
 
                 string currentDate = DateTime.Now.ToString();
@@ -2362,9 +2361,10 @@ namespace WorkStatus.ViewModels
                 }
                 if (Selectedproject != null)
                 {
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>();
-                    GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = new List<Organisation_Projects>();
+                    //GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
+                    //GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = GetProjectsList2;
                 }
 
                 string currentDate = DateTime.Now.ToString();
@@ -2722,9 +2722,10 @@ namespace WorkStatus.ViewModels
 
                 if (Selectedproject != null)
                 {
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>();
-                    GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = new List<Organisation_Projects>();
+                    // GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
+                    //GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = GetProjectsList2;
                 }
             }
             catch (Exception ex)
@@ -3430,9 +3431,7 @@ namespace WorkStatus.ViewModels
                 }
                 if (Selectedproject != null)
                 {
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>();
-                    GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = GetProjectsList2;
                 }
                 ActivityTimerObject.Stop();
                 string currentDate = DateTime.Now.ToString();
@@ -3508,9 +3507,11 @@ namespace WorkStatus.ViewModels
                 }
                 if (Selectedproject != null)
                 {
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>();
-                    GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = new List<Organisation_Projects>();
+                    // GetProjectsList2[1] = Selectedproject;
+                    //GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
+                    //GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = GetProjectsList2;
                 }
 
                 string currentDate = DateTime.Now.ToString();
@@ -3871,7 +3872,7 @@ namespace WorkStatus.ViewModels
                 {
                     for (int i = 0; i <= listproject.ItemContainerGenerator.Containers.Count() - 1; i++)
                     {
-                        var data = (ObservableCollection<Organisation_Projects>)listproject.Items;
+                        var data = (List<Organisation_Projects>)listproject.Items;
                         if (i % 2 == 0)
                         {
                             var listBoxItem = listproject.ItemContainerGenerator.ContainerFromIndex(listproject.ItemContainerGenerator.Containers.ToList()[i].Index);
@@ -3972,7 +3973,7 @@ namespace WorkStatus.ViewModels
                         activityTracker.MouseActivity(true);
                         LogFile.WriteaActivityLog("HeaderPlay Success");
                     }
-                  
+
                     //App & Url
                     AppandUrlTracking.Interval = TimeSpan.FromSeconds(Convert.ToInt32(10));
                     AppandUrlTracking.Tick += AppandUrlTracking_Tick;
@@ -4015,9 +4016,12 @@ namespace WorkStatus.ViewModels
                     //    m2 = 0;
                     //    h2 += 1;
                     //}
-                    h2 = Convert.ToInt32(arry[0]);
-                    m2 = Convert.ToInt32(arry[1]);
-                    s2 = Convert.ToInt32(arry[2]);
+                    if (arry.Length > 2)
+                    {
+                        h2 = Convert.ToInt32(arry[0]);
+                        m2 = Convert.ToInt32(arry[1]);
+                        s2 = Convert.ToInt32(arry[2]);
+                    }
 
                     ProjectTime = String.Format("{0}:{1}:{2}", h2.ToString().PadLeft(2, '0'), m2.ToString().PadLeft(2, '0'), s2.ToString().PadLeft(2, '0'));
 
@@ -4227,9 +4231,12 @@ namespace WorkStatus.ViewModels
                 RefreshSelectedItem(obj, true);
                 string _time = GetTimeFromProject(obj);
                 string[] arry = _time.Split(':');
-                h2 = Convert.ToInt32(arry[0]);
-                m2 = Convert.ToInt32(arry[1]);
-                s2 = Convert.ToInt32(arry[2]);
+                if (arry.Length > 2)
+                {
+                    h2 = Convert.ToInt32(arry[0]);
+                    m2 = Convert.ToInt32(arry[1]);
+                    s2 = Convert.ToInt32(arry[2]);
+                }
                 ProjectTime = String.Format("{0}:{1}:{2}", h2.ToString().PadLeft(2, '0'), m2.ToString().PadLeft(2, '0'), s2.ToString().PadLeft(2, '0'));
                 HeaderTime = ProjectTime;
                 Storage.IdleProjectTime = ProjectTime;
@@ -4363,7 +4370,7 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-                ObservableCollection<Organisation_Projects> ProjectListFinal = new ObservableCollection<Organisation_Projects>();
+                List<Organisation_Projects> ProjectListFinal = new List<Organisation_Projects>();
                 foreach (var item in GetProjectsList)
                 {
                     if (item.ProjectId == pid)
@@ -4379,9 +4386,10 @@ namespace WorkStatus.ViewModels
 
                 if (Selectedproject != null)
                 {
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>();
-                    GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = new List<Organisation_Projects>();
+                    // GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
+                    //GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = GetProjectsList2;
                 }
             }
             catch (Exception ex)
@@ -4425,9 +4433,10 @@ namespace WorkStatus.ViewModels
                 }
                 if (Selectedproject != null)
                 {
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>();
-                    GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = new List<Organisation_Projects>();
+                    //   GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
+                    //GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = GetProjectsList2;
                     Dispatcher.UIThread.InvokeAsync(new Action(() =>
                     {
                         int index = GetProjectsList.FindIndex(x => x.ProjectId == projectIdSelected);
@@ -4435,9 +4444,9 @@ namespace WorkStatus.ViewModels
                     }), DispatcherPriority.Background);
                 }
 
-                TotalSecound = 0;
-                TotalSMinute = 0;
-                Totalhour = 0;
+                //    TotalSecound = 0;
+                //   TotalSMinute = 0;
+                //   Totalhour = 0;
 
                 foreach (var itemT in GetProjectsList)
                 {
@@ -4842,13 +4851,13 @@ namespace WorkStatus.ViewModels
                 {
                     try
                     {
-                        //if (activityTracker.globalKeyHook == null && activityTracker.globalMouseHook == null)
-                        //{
-                        //    activityTracker.KeyBoardActivity(true);
-                        //    activityTracker.MouseActivity(true);
-                        //    LogFile.WriteaActivityLog("ToDoPlay success");
+                        if (activityTracker.globalKeyHook == null && activityTracker.globalMouseHook == null)
+                        {
+                            activityTracker.KeyBoardActivity(true);
+                            activityTracker.MouseActivity(true);
+                            LogFile.WriteaActivityLog("ToDoPlay success");
 
-                        //}
+                        }
                         //App & Url
                         AppandUrlTracking.Interval = TimeSpan.FromSeconds(Convert.ToInt32(10));
                         AppandUrlTracking.Tick += AppandUrlTracking_Tick;
@@ -4982,9 +4991,20 @@ namespace WorkStatus.ViewModels
                 //ProjectTime = String.Format("{0}:{1}:{2}", h2.ToString().PadLeft(2, '0'), m2.ToString().PadLeft(2, '0'), s2.ToString().PadLeft(2, '0'));
 
                 string[] arry = _time.Split(':');
-                h2 = Convert.ToInt32(arry[0]);
-                m2 = Convert.ToInt32(arry[1]);
-                s2 = Convert.ToInt32(arry[2]);
+                if (arry.Length > 2)
+                {
+                    try
+                    {
+                        h2 = Convert.ToInt32(arry[0]);
+                        m2 = Convert.ToInt32(arry[1]);
+                        s2 = Convert.ToInt32(arry[2]);
+                    }
+                    catch
+                    {
+
+                    }
+
+                }
                 ProjectTime = String.Format("{0}:{1}:{2}", h2.ToString().PadLeft(2, '0'), m2.ToString().PadLeft(2, '0'), s2.ToString().PadLeft(2, '0'));
                 HeaderTime = ProjectTime;
                 UpdateProjectList(projectIdSelected);
@@ -5200,11 +5220,11 @@ namespace WorkStatus.ViewModels
             try
             {
                 // FindUserProjectList = new ObservableCollection<tbl_Organisation_Projects>();
-                GetProjectsList = new ObservableCollection<Organisation_Projects>();
+                GetProjectsList = new List<Organisation_Projects>();
                 GetProjectsList2 = new List<Organisation_Projects>();
                 Organisation_Projects projects;
-                ObservableCollection<tbl_Organisation_Projects> FindUserProjectListFinal = new ObservableCollection<tbl_Organisation_Projects>();
-                FindUserProjectListFinal = new ObservableCollection<tbl_Organisation_Projects>(new DashboardSqliteService().GetProjectsByOrganisationId(OrganisationId));
+                List<tbl_Organisation_Projects> FindUserProjectListFinal = new List<tbl_Organisation_Projects>();
+                FindUserProjectListFinal = new List<tbl_Organisation_Projects>(new DashboardSqliteService().GetProjectsByOrganisationId(OrganisationId));
 
 
                 foreach (var item in FindUserProjectListFinal)
@@ -5328,12 +5348,12 @@ namespace WorkStatus.ViewModels
                     }
                 }
                 // FindUserProjectList = new ObservableCollection<tbl_Organisation_Projects>();
-                GetProjectsList = new ObservableCollection<Organisation_Projects>();
+                GetProjectsList = new List<Organisation_Projects>();
                 GetProjectsList2 = new List<Organisation_Projects>();
                 GetProjectsNameList = new List<string>();
                 Organisation_Projects projects;
-                ObservableCollection<tbl_Organisation_Projects> FindUserProjectListFinal = new ObservableCollection<tbl_Organisation_Projects>();
-                FindUserProjectListFinal = new ObservableCollection<tbl_Organisation_Projects>(new DashboardSqliteService().GetProjectsByOrganisationId(OrganisationId));
+                List<tbl_Organisation_Projects> FindUserProjectListFinal = new List<tbl_Organisation_Projects>();
+                FindUserProjectListFinal = new List<tbl_Organisation_Projects>(new DashboardSqliteService().GetProjectsByOrganisationId(OrganisationId));
                 foreach (var item in FindUserProjectListFinal)
                 {
                     //idle time
@@ -5455,7 +5475,7 @@ namespace WorkStatus.ViewModels
                 //    Pbar.IsVisible = true;
 
                 //}), DispatcherPriority.Background);
-                GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                GetProjectsList = new List<Organisation_Projects>(GetProjectsList2);
                 //if (Selectedproject != null)
                 //{
                 //    GetProjectsList = new ObservableCollection<Organisation_Projects>();
@@ -5524,9 +5544,20 @@ namespace WorkStatus.ViewModels
                     IsStop = true;
                     string _time = GetTimeFromProject(Common.Storage.CurrentProjectId.ToStrVal());
                     string[] arry = _time.Split(':');
-                    h2 = Convert.ToInt32(arry[0]);
-                    m2 = Convert.ToInt32(arry[1]);
-                    s2 = Convert.ToInt32(arry[2]);
+                    if (arry.Length > 2)
+                    {
+                        try
+                        {
+                            h2 = Convert.ToInt32(arry[0]);
+                            m2 = Convert.ToInt32(arry[1]);
+                            s2 = Convert.ToInt32(arry[2]);
+                        }
+                        catch
+                        {
+
+                        }
+
+                    }
                     HeaderTime = String.Format("{0}:{1}:{2}", h2.ToString().PadLeft(2, '0'), m2.ToString().PadLeft(2, '0'), s2.ToString().PadLeft(2, '0'));
 
                     timerproject.Start();
@@ -6044,9 +6075,10 @@ namespace WorkStatus.ViewModels
                 }
                 if (Selectedproject != null)
                 {
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>();
-                    GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = new List<Organisation_Projects>();
+                    // GetProjectsList2[GetProjectsList2.FindIndex(i => i.Equals(Selectedproject))] = Selectedproject;
+                    //GetProjectsList = new ObservableCollection<Organisation_Projects>(GetProjectsList2);
+                    GetProjectsList = GetProjectsList2;
                     // listproject.SelectedIndex = 0;
                 }
                 if (ToDoListData != null)
@@ -6161,78 +6193,82 @@ namespace WorkStatus.ViewModels
                 LogFile.ErrorLog(ex);
             }
         }
-        public string GetProjectTempTimeFromDB(int projectID, int OrganizationId, string logTime)
-        {
-            string strLogTime = "";
-            try
-            {
-                BaseService<tbl_Temp_SyncTimer> service2 = new BaseService<tbl_Temp_SyncTimer>();
-                tbl_Temp_SyncTimer p = new tbl_Temp_SyncTimer();
-                DateTime oCurrentDate = DateTime.Now;
-                p = service2.Gettbl_ProjectDetailsByIDs(projectID, OrganizationId, oCurrentDate.ToString("dd/MM/yyyy"));
-                if (p != null)
-                {
-                    if (!string.IsNullOrEmpty(p.TotalWorkedHours))
-                    {
-                        string[] arryT = p.TotalWorkedHours.Split(':');
-                        if (!string.IsNullOrEmpty(logTime))
-                        {
-                            string[] arryTlogTime = logTime.Split(':');
-                            int x, y, z;
-                            x = arryTlogTime[0].ToInt32();
-                            y = arryTlogTime[1].ToInt32();
-                            z = arryTlogTime[2].ToInt32();
-                            int c = arryT[2].ToInt32();
-                            z = c;
-                            if (z >= 60)
-                            {
-                                z = 0;
-                                y += 1;
+        //public string GetProjectTempTimeFromDB(int projectID, int OrganizationId, string logTime)
+        //{
+        //    string strLogTime = "";
+        //    try
+        //    {
+        //        BaseService<tbl_Temp_SyncTimer> service2 = new BaseService<tbl_Temp_SyncTimer>();
+        //        tbl_Temp_SyncTimer p = new tbl_Temp_SyncTimer();
+        //        DateTime oCurrentDate = DateTime.Now;
+        //        p = service2.Gettbl_ProjectDetailsByIDs(projectID, OrganizationId, oCurrentDate.ToString("dd/MM/yyyy"));
+        //        if (p != null)
+        //        {
+        //            if (!string.IsNullOrEmpty(p.TotalWorkedHours))
+        //            {
+        //                string[] arryT = p.TotalWorkedHours.Split(':');
+        //                if (!string.IsNullOrEmpty(logTime))
+        //                {
+        //                    string[] arryTlogTime = logTime.Split(':');
+        //                    int x, y, z;
+        //                    x = arryTlogTime[0].ToInt32();
+        //                    y = arryTlogTime[1].ToInt32();
+        //                    z = arryTlogTime[2].ToInt32();
+        //                    int c = arryT[2].ToInt32();
+        //                    z = c;
+        //                    if (z >= 60)
+        //                    {
+        //                        z = 0;
+        //                        y += 1;
 
-                            }
-                            if (y == 60)
-                            {
-                                y = 0;
-                                x += 1;
-                            }
-                            strLogTime = String.Format("{0}:{1}:{2}", x.ToString().PadLeft(2, '0'), y.ToString().PadLeft(2, '0'), z.ToString().PadLeft(2, '0'));
-                        }
-                        else
-                        {
-                            strLogTime = String.Format("{0}:{1}:{2}", arryT[0].ToString().PadLeft(2, '0'), arryT[1].ToString().PadLeft(2, '0'), arryT[2].ToString().PadLeft(2, '0'));
-                        }
-                    }
-                    else
-                    {
-                        strLogTime = logTime;
-                    }
-                    if (strLogTime == null)
-                    {
-                        strLogTime = "00:00:00";
-                    }
-                    return strLogTime;
-                }
-                else
-                {
-                    strLogTime = logTime;
-                    if (strLogTime == null)
-                    {
-                        strLogTime = "00:00:00";
-                    }
-                    return strLogTime;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogFile.ErrorLog(ex);
-            }
-            return strLogTime;
-        }
+        //                    }
+        //                    if (y == 60)
+        //                    {
+        //                        y = 0;
+        //                        x += 1;
+        //                    }
+        //                    strLogTime = String.Format("{0}:{1}:{2}", x.ToString().PadLeft(2, '0'), y.ToString().PadLeft(2, '0'), z.ToString().PadLeft(2, '0'));
+        //                }
+        //                else
+        //                {
+        //                    strLogTime = String.Format("{0}:{1}:{2}", arryT[0].ToString().PadLeft(2, '0'), arryT[1].ToString().PadLeft(2, '0'), arryT[2].ToString().PadLeft(2, '0'));
+        //                }
+        //            }
+        //            else
+        //            {
+        //                strLogTime = logTime;
+        //            }
+        //            if (strLogTime == null)
+        //            {
+        //                strLogTime = "00:00:00";
+        //            }
+        //            return strLogTime;
+        //        }
+        //        else
+        //        {
+        //            strLogTime = logTime;
+        //            if (strLogTime == null)
+        //            {
+        //                strLogTime = "00:00:00";
+        //            }
+        //            return strLogTime;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogFile.ErrorLog(ex);
+        //    }
+        //    return strLogTime;
+        //}
         public void BindTotalWorkTime()
         {
             try
             {
-
+                if (Selectedproject != null && GetProjectsList2 != null)
+                {
+                    GetProjectsList = new List<Organisation_Projects>();
+                    GetProjectsList = GetProjectsList2;
+                }
 
                 foreach (var itemT in GetProjectsList)
                 {
@@ -6431,10 +6467,10 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-                ProjectsList = new ObservableCollection<tbl_Organisation_Projects>();
+                ProjectsList = new List<tbl_Organisation_Projects>();
                 Organisation_Projects projects;
-                ObservableCollection<tbl_Organisation_Projects> FindUserProjectListFinal = new ObservableCollection<tbl_Organisation_Projects>();
-                FindUserProjectListFinal = new ObservableCollection<tbl_Organisation_Projects>(new DashboardSqliteService().GetProjectsByOrganisationId(OrganisationId));
+                List<tbl_Organisation_Projects> FindUserProjectListFinal = new List<tbl_Organisation_Projects>();
+                FindUserProjectListFinal = new List<tbl_Organisation_Projects>(new DashboardSqliteService().GetProjectsByOrganisationId(OrganisationId));
                 ProjectsList = FindUserProjectListFinal;
             }
             catch (Exception ex)
@@ -6588,9 +6624,9 @@ namespace WorkStatus.ViewModels
                     Organisation_Projects projects;
 
                     BaseService<tbl_Organisation_Projects> dbService = new BaseService<tbl_Organisation_Projects>();
-                    GetProjectsList = new ObservableCollection<Organisation_Projects>();
-                    ObservableCollection<tbl_Organisation_Projects> FindUserProjectListFinal = new ObservableCollection<tbl_Organisation_Projects>();
-                    FindUserProjectListFinal = new ObservableCollection<tbl_Organisation_Projects>(dbService.SearchProjectByString(searchtext, projectid, organization_id));
+                    GetProjectsList = new List<Organisation_Projects>();
+                    List<tbl_Organisation_Projects> FindUserProjectListFinal = new List<tbl_Organisation_Projects>();
+                    FindUserProjectListFinal = new List<tbl_Organisation_Projects>(dbService.SearchProjectByString(searchtext, projectid, organization_id));
                     foreach (var item in FindUserProjectListFinal)
                     {
                         bool IconProjectPlay = false;
@@ -6758,7 +6794,6 @@ namespace WorkStatus.ViewModels
             {
                 Selectedproject = null;
 
-
                 userProjectlistResponse = new UserProjectlistByOrganizationIDResponse();
                 objHeaderModel = new HeaderModel();
                 OrganizationDTOEntity entity = new OrganizationDTOEntity() { organization_id = OrganizationID, unarchived = "0" };
@@ -6814,7 +6849,7 @@ namespace WorkStatus.ViewModels
                         else
                         {
                             Common.Storage.CurrentOrganisationId = OrganizationID.ToInt32();
-                            HeaderTime = "00:00:00";
+                            // HeaderTime = "00:00:00";
                             HeaderProjectName = string.Empty;
                             pgrProject.IsVisible = false;
                             pgrToDO.IsVisible = false;
@@ -7470,7 +7505,7 @@ namespace WorkStatus.ViewModels
                         updateTotalwork(arryT[2].ToInt32(), arryT[1].ToInt32(), arryT[0].ToInt32());
                     }
                 }
-               
+
                 Common.Storage.IsActivityCall = true;
                 // timerproject.Start();
             }
@@ -7849,45 +7884,6 @@ namespace WorkStatus.ViewModels
                 var msg = ex.Message;
             }
             return null;
-        }
-        public void GetNotification1(string popupMessage)
-        {
-            try
-            {
-                if (!isWindows)
-                {
-                    PopupNotifier popup = new PopupNotifier();
-                    popup.TitleText = "WORKSTATUS";
-                    popup.TitleColor = System.Drawing.Color.White;
-                    popup.TitleFont = new Font("Tahoma", 13F);
-                    popup.BodyColor = System.Drawing.Color.FromArgb(33, 26, 35);
-                    popup.ContentColor = System.Drawing.Color.White;
-                    popup.ContentText = popupMessage;
-                    popup.Image = LoadEmbeddedResources1("/Assets/DotsIcon.png");
-                    popup.ImageSize = new System.Drawing.Size(25, 10);
-                    popup.ContentFont = new Font("Tahoma", 13F);
-                    popup.Size = new System.Drawing.Size(350, 75);
-                    popup.ShowGrip = false;
-                    popup.HeaderHeight = 2;
-                    popup.AnimationDuration = 5000;
-                    popup.AnimationInterval = 1;
-                    popup.HeaderColor = System.Drawing.Color.FromArgb(33, 26, 35);
-                    popup.ShowCloseButton = false;
-                    System.Media.SystemSounds.Asterisk.Play();
-                    popup.Popup();
-                }
-                else 
-                {
-                    var linuxPopup = new Notify.Notification("WORKSTATUS", popupMessage, 5000, "DotsIcon.png");
-                    linuxPopup.Show();
-                    // Console.WriteLine("WorkStatus Screen Captured");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                var msg = ex.Message;
-            }
         }
         #endregion
 
