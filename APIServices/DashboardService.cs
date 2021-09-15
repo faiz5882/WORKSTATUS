@@ -55,6 +55,7 @@ namespace WorkStatus.APIServices
                 WebResponse response = request.GetResponse();
                 var streamReader = new StreamReader(response.GetResponseStream());
                 var result = streamReader.ReadToEnd();
+                LogFile.OrgAPILogApiResponse(result);
                 objFPResponse = JsonConvert.DeserializeObject<UserProjectlistByOrganizationIDResponse>(result);
             }
             catch (Exception ex)

@@ -24,16 +24,16 @@ namespace WorkStatus.Models.WriteDTO
         public object Lat { get; set; }
         public object Lng { get; set; }
         public string Confirmation_token { get; set; }
-        public int Is_confirmed { get; set; }
+        public int? Is_confirmed { get; set; }
         public object Invitation_token { get; set; }
         public object Invitation_status { get; set; }
         public object Address { get; set; }
-        public int Client_status { get; set; }
+        public int? Client_status { get; set; }
         public object Firebase_token { get; set; }
-        public int Deactivate_user { get; set; }
+        public int? Deactivate_user { get; set; }
         public object Activation_token { get; set; }
         public object Phone_country_code_id { get; set; }
-        public int Invite_member_status { get; set; }
+        public int? Invite_member_status { get; set; }
         public bool Is_organiztion { get; set; }
         public string Token { get; set; }
         public string Org_Id { get; set; }

@@ -3771,11 +3771,13 @@ namespace WorkStatus.ViewModels
                                 }
                                 else
                                 {
+                                    Common.Storage.IsScreenShotCapture = false;
                                     result = false;
                                 }
                             }
                             else
                             {
+                                Common.Storage.IsScreenShotCapture = false;
                                 result = false;
                             }
                             //}
@@ -3784,6 +3786,7 @@ namespace WorkStatus.ViewModels
                 }
                 else
                 {
+                    Common.Storage.IsScreenShotCapture = false;
                     result = false;
                 }
 
@@ -3791,6 +3794,7 @@ namespace WorkStatus.ViewModels
             catch (Exception ex)
             {
                 LogFile.ErrorLog(ex);
+                Common.Storage.IsScreenShotCapture = false;
                 result = false;
             }
             return result;
@@ -4126,7 +4130,7 @@ namespace WorkStatus.ViewModels
                 Manualsync();
                 string _time = GetTimeFromProject(projectIdSelected);
                 HeaderTime = _time;
-                BindTotalWorkTime();
+                //BindTotalWorkTime();
             }
             catch (Exception ex)
             {
@@ -4307,7 +4311,7 @@ namespace WorkStatus.ViewModels
                 HeaderTime = _time;
 
                 Manualsync();
-                BindTotalWorkTime();
+                //BindTotalWorkTime();
                 AddZebraPatternToProjectList();
                 listproject.ScrollIntoView(listproject.SelectedItem);
             }
@@ -4452,9 +4456,11 @@ namespace WorkStatus.ViewModels
                     }), DispatcherPriority.Background);
                 }
 
-                //    TotalSecound = 0;
-                //   TotalSMinute = 0;
-                //   Totalhour = 0;
+                // Initalize TotalTodayWorkTime
+                TotalSecound = 0;
+                TotalSMinute = 0;
+                Totalhour = 0;
+
 
                 foreach (var itemT in GetProjectsList)
                 {
@@ -4474,7 +4480,7 @@ namespace WorkStatus.ViewModels
                         h += 1;
                     }
 
-                    updateTotalwork(s, m, h);
+                   updateTotalwork(s, m, h);
                 }
 
             }
@@ -6272,7 +6278,7 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-                if (Selectedproject != null && GetProjectsList2 != null)
+                if (GetProjectsList2 != null)
                 {
                     GetProjectsList = new List<Organisation_Projects>();
                     GetProjectsList = GetProjectsList2;
@@ -6773,6 +6779,17 @@ namespace WorkStatus.ViewModels
                             pgrToDO.IsVisible = false;
                         }
                     }
+
+                    else
+                    {
+                        RefreshTokenRequest refreshTokenRequest = new RefreshTokenRequest() { token = Common.Storage.TokenId };
+                        bool renewtoken = _services.RenewTokenAPI(true, objHeaderModel, refreshTokenRequest).Result;
+                        if (renewtoken)
+                        {
+                            objHeaderModel.SessionID = Common.Storage.TokenId;
+                            organisationListResponse = await _services.GetAsyncData_GetApi(new Get_API_Url().UserOrganizationlist(_baseURL, Common.Storage.LoginId), true, objHeaderModel, organisationListResponse);
+                        }
+                    }
                 }
                 BindUserOrganisationListFromLocalDB();
                 if (FindOrganisationDetails.Count > 0)
@@ -6863,6 +6880,17 @@ namespace WorkStatus.ViewModels
                             pgrToDO.IsVisible = false;
                         }
 
+                    }
+
+                    else
+                    {
+                        RefreshTokenRequest refreshTokenRequest = new RefreshTokenRequest() { token = Common.Storage.TokenId };
+                        bool renewtoken = _services.RenewTokenAPI(true, objHeaderModel, refreshTokenRequest).Result;
+                        if (renewtoken)
+                        {
+                            objHeaderModel.SessionID = Common.Storage.TokenId;
+                            userProjectlistResponse = _services.GetUserProjectlistByOrganizationIDAsync(new Get_API_Url().UserProjectlistByOrganizationID(_baseURL), true, objHeaderModel, entity);
+                        }
                     }
                 }
                 // BindUserProjectListFromLocalDB(OrganizationID);
@@ -7053,7 +7081,7 @@ namespace WorkStatus.ViewModels
             await dialog.ShowDialog(mainWindow);
             BaseService<tbl_ServerTodoDetails> service = new BaseService<tbl_ServerTodoDetails>();
             service.Delete(new tbl_ServerTodoDetails());
-            pgrToDO.IsVisible = true;
+            pgrToDO.IsVisible = true;               
             //Dispatcher.UIThread.InvokeAsync(new Action(() =>
             //{
 
@@ -7775,7 +7803,7 @@ namespace WorkStatus.ViewModels
                     if (screenshot.response.code == "200")
                     {
                         string intrval = DigitsOnly(screenshot.response.data.timeInterval);
-                        SlotInterval = 10; //intrval.ToInt32();//2;
+                        SlotInterval = intrval.ToInt32();//2;
                         Common.Storage.timeIntervel = SlotInterval;
                         Common.Storage.ActivityIntervel = SlotInterval;
                     }
