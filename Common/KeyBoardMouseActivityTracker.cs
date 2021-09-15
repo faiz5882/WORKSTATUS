@@ -98,6 +98,10 @@ namespace WorkStatus.Common
 
         public void MouseActivity(bool PlayStop)
         {
+            try
+            {
+
+            
             if (PlayStop)
             {
                 //Let's check if the globablMouseHook is instantiated.
@@ -116,6 +120,11 @@ namespace WorkStatus.Common
                     globalMouseHook.Dispose();
                     globalMouseHook = null; //Probably not needed but just to be sure.
                 }
+            }
+            }
+            catch (Exception)
+            {
+                
             }
         }
         private void GlobalMouseHook_OnMouseWheelScroll(object sender, GlobalMouseEventArgs e)

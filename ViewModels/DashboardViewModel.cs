@@ -1474,7 +1474,7 @@ namespace WorkStatus.ViewModels
                 {
                     if (userIdleTimeList.Count > 0)
                     {
-                        if (userIdleTimeList.Count >= 2)
+                        if (userIdleTimeList.Count >= 1)
                         {
                             autoIdleHour = 0;
                             autoIdleMinute = 0;
@@ -1664,10 +1664,12 @@ namespace WorkStatus.ViewModels
                 //============ Don’t keep idle time and Continue and remove idle intervals
                 if (Storage.IsProjectRuning && !Storage.IsToDoRuning)
                 {
-                    //Storage.ContinueProjectEventCountTime = GetTimeFromProject(projectIdSelected);
-                    ProjectTime = Storage.LastProjectEventCountTime;
                     SlotTimerObject.Stop();
                     timerproject.Stop();
+
+                    //Storage.ContinueProjectEventCountTime = GetTimeFromProject(projectIdSelected);
+                    ProjectTime = Storage.LastProjectEventCountTime;
+                    
                     IsStop = false;
                     IsPlaying = true;
                     TotalSecound = 0;
@@ -1675,9 +1677,9 @@ namespace WorkStatus.ViewModels
                     Totalhour = 0;
                     ProjectStopUpdate(projectIdSelected);
                     BindTotalWorkTime();
-                    timerproject.Start();
-                    IsStop = true;
-                    IsPlaying = false;
+                   // timerproject.Start();
+                   // IsStop = true;
+                   // IsPlaying = false;
                     ProjectPlayUpdate(projectIdSelected);
                     string _time = GetTimeFromProject(projectIdSelected);
                     Dispatcher.UIThread.InvokeAsync(new Action(() =>
@@ -1685,13 +1687,13 @@ namespace WorkStatus.ViewModels
                         HeaderTime = _time;
                     }), DispatcherPriority.Background);
 
-                    AddUpdateProjectTimeToDBinContinueIdle(false);
+                    AddUpdateProjectTimeToDBinContinueIdle(false); 
                     BaseService<tbl_IdleTimeDetails> service = new BaseService<tbl_IdleTimeDetails>();
                     service.Delete(new tbl_IdleTimeDetails());
                     BaseService<tbl_KeyMouseTrack_Slot_Idle> service1 = new BaseService<tbl_KeyMouseTrack_Slot_Idle>();
                     service1.Delete(new tbl_KeyMouseTrack_Slot_Idle());
-                    BaseService<tbl_Timer> service2 = new BaseService<tbl_Timer>();
-                    service2.Delete(new tbl_Timer());
+                    //BaseService<tbl_Timer> service2 = new BaseService<tbl_Timer>();
+                   // service2.Delete(new tbl_Timer());
 
                     ProjectPlay(projectIdSelected);
                 }
@@ -1703,7 +1705,7 @@ namespace WorkStatus.ViewModels
                     ProjectTime = Storage.LastProjectEventCountTime;
                     ProjectStopUpdate(projectIdSelected);
                     ContinueTimerAfterIdlePopUp();
-                    AddUpdateProjectTimeToDBinContinueIdle(false);
+                    // AddUpdateProjectTimeToDBinContinueIdle(false); //comment by inder on 14092021
                     BaseService<tbl_IdleTimeDetails> service = new BaseService<tbl_IdleTimeDetails>();
                     service.Delete(new tbl_IdleTimeDetails());
                     BaseService<tbl_KeyMouseTrack_Slot_Idle> service1 = new BaseService<tbl_KeyMouseTrack_Slot_Idle>();
@@ -1732,8 +1734,9 @@ namespace WorkStatus.ViewModels
             IsReassignPopUpOpen = false;
             if (RemeberMeKeepIdle)
             {
-                if (Selectedproject.ProjectId != IdleSelectedProject.ProjectId || SelectedprojectToDo.Id != IdleSelectedProjectToDo.Id)
-                {
+               
+                //if (Selectedproject.ProjectId != IdleSelectedProject.ProjectId || SelectedprojectToDo.Id != IdleSelectedProjectToDo.Id)
+                //{
                     //update project time of running project to last active time and old time set to project
                     ProjectTime = Storage.LastProjectEventCountTime == null ? ProjectTime : Storage.LastProjectEventCountTime;
                     ProjectPlayUpdate(Selectedproject.ProjectId);
@@ -1855,7 +1858,8 @@ namespace WorkStatus.ViewModels
                     {
                         ProjectPlay(projectIdSelected);
                     }
-                }
+                //}
+
                 if (isWindows && activityTracker.globalKeyHook == null && activityTracker.globalMouseHook == null)
                 {
                     activityTracker.KeyBoardActivity(true);
@@ -1865,8 +1869,8 @@ namespace WorkStatus.ViewModels
             }
             else
             {
-                if (Selectedproject.ProjectId != IdleSelectedProject.ProjectId || SelectedprojectToDo.Id != IdleSelectedProjectToDo.Id)
-                {
+               // if (Selectedproject.ProjectId != IdleSelectedProject.ProjectId || SelectedprojectToDo.Id != IdleSelectedProjectToDo.Id)
+                //{
                     // 1. update timer table
                     // 2. bind last active timer time to old project and todo
                     // 3. set selected project and todo from assign pop up
@@ -1968,7 +1972,7 @@ namespace WorkStatus.ViewModels
                         ProjectPlay(projectIdSelected);
                         //UpdateProjectIdandToDoIdinTimerTable(false, IdleSelectedProject.ProjectId, 0);
                     }
-                }
+               // }
             }
 
         }
@@ -2038,7 +2042,7 @@ namespace WorkStatus.ViewModels
                 AddNoteButtonOpacity = 0.5;
                 //SlotTimerObject.Stop();
                 //AddUpdateProjectTimeToDB(false);
-                AddUpdateProjectTimeToDBinContinueIdle(false);
+               // AddUpdateProjectTimeToDBinContinueIdle(false); //comment by inder on 14092021
                 //bool checkslot = CheckSlotExistNot();
                 //if (!checkslot)
                 //{
@@ -2307,11 +2311,13 @@ namespace WorkStatus.ViewModels
                                 }
                                 else
                                 {
+                                    Common.Storage.IsScreenShotCapture = false;
                                     result = false;
                                 }
                             }
                             else
                             {
+                                Common.Storage.IsScreenShotCapture = false;
                                 result = false;
                             }
                             //}
@@ -2320,6 +2326,7 @@ namespace WorkStatus.ViewModels
                 }
                 else
                 {
+                    Common.Storage.IsScreenShotCapture = false;
                     result = false;
                 }
 
@@ -2327,6 +2334,7 @@ namespace WorkStatus.ViewModels
             catch (Exception ex)
             {
                 LogFile.ErrorLog(ex);
+                Common.Storage.IsScreenShotCapture = false;
                 result = false;
                 // await MyMessageBox.Show(new Window(), ex.Message, "Error", MyMessageBox.MessageBoxButtons.Ok);
                 //throw new Exception(ex.Message);
@@ -7767,26 +7775,27 @@ namespace WorkStatus.ViewModels
                     if (screenshot.response.code == "200")
                     {
                         string intrval = DigitsOnly(screenshot.response.data.timeInterval);
-                        SlotInterval = intrval.ToInt32();//2;
+                        SlotInterval = 10; //intrval.ToInt32();//2;
                         Common.Storage.timeIntervel = SlotInterval;
                         Common.Storage.ActivityIntervel = SlotInterval;
                     }
                     else
                     {
-                        SlotInterval = 10;// 2;
+                        SlotInterval = 10;
                         Common.Storage.timeIntervel = SlotInterval;
                         Common.Storage.ActivityIntervel = SlotInterval;
                     }
                 }
                 else
                 {
-                    SlotInterval = 10; //2;
+                    SlotInterval = 10;
                     Common.Storage.timeIntervel = SlotInterval;
                     Common.Storage.ActivityIntervel = SlotInterval;
                 }
             }
             catch (Exception ex)
             {
+                SlotInterval = 10;
                 LogFile.ErrorLog(ex);
                 // throw new Exception(ex.Message);
             }
