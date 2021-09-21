@@ -95,7 +95,7 @@ namespace WorkStatus.Utility
                         {
                             appAndUrls = _appAndUrls,
                             location = _location,
-                            screenUrl = "",
+                            screenUrl = Common.Storage.ScreenURl,
                             activityLevel = activityLevel,
                             from = slot.IntervalStratTime.ToStrVal(),
                             to = slot.IntervalEndTime.ToStrVal(),

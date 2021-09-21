@@ -352,6 +352,33 @@ namespace WorkStatus.Views
         private void IsInternet_Tick(object? sender, EventArgs e)
         {
             _dashboardVM.IsUserOffline = Common.CommonServices.IsConnectedToInternet() ? false : true;
+            if (!_dashboardVM.IsUserOffline)
+            {
+                string folderPath = ConfigurationManager.AppSettings["TempWindowsPath"].ToString();
+                var files = Directory.GetDirectories(folderPath).ToList();
+                if (files != null && files.Count > 0)
+                {
+                    foreach (var item in files)
+                    {
+                        var subFiles = Directory.GetFiles(item).ToList();
+
+                        if (subFiles != null && subFiles.Count > 0)
+                        {
+                            foreach (var subItem in subFiles)
+                            {
+                                if (subItem != null)
+                                {
+                                    _dashboardVM.SendAfterOfflineScreenShotsToServer(subItem);
+                                }
+                                //var subFiles1 = Directory.GetFiles(subItem);
+                            }
+
+                        }
+                    }
+
+                }
+            }
+
         }
         private void Btnaddnote_Click(object? sender, RoutedEventArgs e)
         {
@@ -401,8 +428,8 @@ namespace WorkStatus.Views
             {
                 if (isLinux)
                 {
-                   // Notification linuxPopup = new Notification("WORKSTATUS", popupMessage, 5000, "DotsIcon.png");
-                  //  linuxPopup.Show();
+                    // Notification linuxPopup = new Notification("WORKSTATUS", popupMessage, 5000, "DotsIcon.png");
+                    //  linuxPopup.Show();
                     // Console.WriteLine("WorkStatus Screen Captured");
                 }
             }
@@ -446,6 +473,123 @@ namespace WorkStatus.Views
 
         private void GetScreenShots(object? sender, EventArgs e)
         {
+            if (_dashboardVM.IsSlotTimer)
+            {
+                if (Common.CommonServices.IsConnectedToInternet())
+                {
+                    if (!_dashboardVM.IsPlaying && _dashboardVM.IsStop && !Common.Storage.IsScreenShotCapture)
+                    {
+                        try
+                        {
+                            Avalonia.Platform.Screen sc = Screens.Primary;
+                            PixelRect _pr = sc.WorkingArea;
+                            int width = _pr.Width;
+                            int height = _pr.Height;
+                            string serverScreenShotImageName = string.Empty;
+                            Bitmap bmpScreenshot = new Bitmap(width, height + 40);
+                            Graphics gfxScreenshot = Graphics.FromImage(bmpScreenshot);
+                            gfxScreenshot.CopyFromScreen(0, 0, 0, 0, new System.Drawing.Size(width, height), CopyPixelOperation.SourceCopy);
+                            var qualityEncoder = Encoder.Quality;
+                            var quality = 25;
+                            var ratio = new EncoderParameter(qualityEncoder, quality);
+                            var codecParams = new EncoderParameters(1);
+                            codecParams.Param[0] = ratio;
+                            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+                            var jpegCodecInfo = codecs.Single(codec => codec.FormatID == ImageFormat.Jpeg.Guid);
+                            string orgPath = "";// Common.Storage.CurrentOrganisationName + @"\" + _dashboardVM.HeaderProjectName + @"\";
+                            string directoryPath = string.Empty;
+                            string updatedPath = string.Empty;
+                            string filename = string.Empty;
+                            if (isWindows)
+                            {
+
+                                orgPath = Common.Storage.CurrentOrganisationName + @"\" + _dashboardVM.HeaderProjectName + @"\";
+                                directoryPath = fullPath + orgPath;
+                                updatedPath = directoryPath.Replace("|", "_");
+                                updatedPath = directoryPath.Replace(" ", "");
+
+                                if (!Directory.Exists(updatedPath))
+                                {
+                                    Directory.CreateDirectory(updatedPath);
+                                }
+
+                                filename = updatedPath + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
+                            }
+                            if (isLinux)
+                            {
+                                orgPath = Common.Storage.CurrentOrganisationName + "/" + _dashboardVM.HeaderProjectName;
+                                fullPath = ConfigurationManager.AppSettings["LinuxOSPath"].ToString();
+                                directoryPath = fullPath + "/" + orgPath;
+                                updatedPath = directoryPath.Replace("|", "_");
+                                updatedPath = directoryPath.Replace(" ", "");
+                                if (!Directory.Exists(updatedPath))
+                                {
+                                    Directory.CreateDirectory(updatedPath);
+                                }
+
+                                filename = updatedPath + "/" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
+                                //OS = "LINUX";	
+                            }
+
+                            bmpScreenshot.Save(filename, jpegCodecInfo, codecParams);
+
+                            var isInternetConnected = true;
+                            if (isInternetConnected)
+                            {
+
+                                serverScreenShotImageName = filename;
+                            }
+                            else
+                            {
+
+                                serverScreenShotImageName = filename;
+                            }
+                            gfxScreenshot.Dispose();
+                            bmpScreenshot.Dispose();
+                            byte[] ImageData = System.IO.File.ReadAllBytes(filename);
+                            ScreenShotRequestModel model = new ScreenShotRequestModel() { screenshot = filename };
+                            _dashboardVM.SendScreenShotsToServer(filename, ImageData);
+                            if (Common.Storage.ScreenURl != null && Common.Storage.ScreenURl != "")
+                            {
+                                if (File.Exists(Path.Combine(directoryPath, filename)))
+                                {
+                                    // If file found, delete it    
+                                    File.Delete(Path.Combine(directoryPath, filename));
+                                }
+                            }
+                            // api call
+                            if (isWindows)
+                            {
+                                GetNotification("WorkStatus\nScreen Captured");
+                            }
+                            if (isLinux)
+                            {
+                                GetNotification_Linux("WorkStatus Screen Captured");
+                            }
+                            //D:\Projects\Workstatus\WorkStatus24062021\WorkStatus\Screenshots\
+                        }
+                        catch (Exception ex)
+                        {
+                            var msg = ex.Message;
+                            LogFile.ErrorLog(ex);
+                        }
+                        finally
+                        {
+                        }
+                    }
+                }
+                else
+                {
+                    GetOfflineScreenShots();
+                }
+
+                _dashboardVM.IsSlotTimer = false;
+            }
+        }
+
+
+        private void GetOfflineScreenShots()
+        {
             if (!_dashboardVM.IsPlaying && _dashboardVM.IsStop && !Common.Storage.IsScreenShotCapture)
             {
                 try
@@ -471,16 +615,24 @@ namespace WorkStatus.Views
                     string filename = string.Empty;
                     if (isWindows)
                     {
+                        string fullPath = ConfigurationManager.AppSettings["TempWindowsPath"].ToString();
                         orgPath = Common.Storage.CurrentOrganisationName + @"\" + _dashboardVM.HeaderProjectName + @"\";
                         directoryPath = fullPath + orgPath;
                         updatedPath = directoryPath.Replace("|", "_");
                         updatedPath = directoryPath.Replace(" ", "");
+
                         if (!Directory.Exists(updatedPath))
                         {
                             Directory.CreateDirectory(updatedPath);
                         }
 
-                        filename = updatedPath + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
+                        string imageName = DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
+                        filename = updatedPath + "/" + imageName;
+                        //if (imageName != null)
+                        //{
+                        //    Common.Storage.ScreenURl = imageName;
+                        //    //Common.Storage.IsScreenShotCapture = true;
+                        //}
                     }
                     if (isLinux)
                     {
@@ -493,37 +645,28 @@ namespace WorkStatus.Views
                         {
                             Directory.CreateDirectory(updatedPath);
                         }
-
-                        filename = updatedPath + "/" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
+                        string imageName = DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg";
+                        filename = updatedPath + "/" + imageName;
                         //OS = "LINUX";	
                     }
 
                     bmpScreenshot.Save(filename, jpegCodecInfo, codecParams);
 
-                    var isInternetConnected = true;
-                    if (isInternetConnected)
-                    {
+                    serverScreenShotImageName = filename;
 
-                        serverScreenShotImageName = filename;
-                    }
-                    else
-                    {
-
-                        serverScreenShotImageName = filename;
-                    }
                     gfxScreenshot.Dispose();
                     bmpScreenshot.Dispose();
                     byte[] ImageData = System.IO.File.ReadAllBytes(filename);
                     ScreenShotRequestModel model = new ScreenShotRequestModel() { screenshot = filename };
-                    _dashboardVM.SendScreenShotsToServer(filename, ImageData);
-                    if (Common.Storage.ScreenURl != null && Common.Storage.ScreenURl != "")
-                    {
-                        if (File.Exists(Path.Combine(directoryPath, filename)))
-                        {
-                            // If file found, delete it    
-                            File.Delete(Path.Combine(directoryPath, filename));
-                        }
-                    }
+                    //_dashboardVM.SendAfterOfflineScreenShotsToServer(filename);
+                    //if (Common.Storage.ScreenURl != null && Common.Storage.ScreenURl != "")
+                    //{
+                    //    if (File.Exists(Path.Combine(directoryPath, filename)))
+                    //    {
+                    //        // If file found, delete it    
+                    //        File.Delete(Path.Combine(directoryPath, filename));
+                    //    }
+                    //}
                     // api call
                     if (isWindows)
                     {

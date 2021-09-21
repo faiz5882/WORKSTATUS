@@ -1,5 +1,4 @@
 ﻿using Avalonia;
-using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
@@ -28,11 +27,8 @@ using System.Net.Http.Headers;
 using System.Reactive;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
-using Tulpep.NotificationWindow;
 using WorkStatus.APIServices;
 using WorkStatus.Common;
 using WorkStatus.Configuration;
@@ -43,7 +39,6 @@ using WorkStatus.Models.WriteDTO;
 using WorkStatus.Utility;
 using WorkStatus.Views;
 using static WorkStatus.Models.ReadDTO.ScreenshotIntervalResponse;
-using MessageBoxAvaloniaEnums = MessageBox.Avalonia.Enums;
 
 namespace WorkStatus.ViewModels
 {
@@ -53,10 +48,12 @@ namespace WorkStatus.ViewModels
 
         Window _window;
         DispatcherTimer SlotTimerObject;
+        public DispatcherTimer m_screen = new DispatcherTimer();
         bool SlotTimerRuning = false;
         bool IsSuspend = false;
         bool isWindows = false;
         int SlotInterval;
+        public bool IsSlotTimer = false;
         Task[] tasks;
         DispatcherTimer keyTimer = new DispatcherTimer();
         private RenewAppResponseModel renewAppResponseModel;
@@ -1496,7 +1493,7 @@ namespace WorkStatus.ViewModels
                 {
                     if (userIdleTimeList.Count > 0)
                     {
-                        if (userIdleTimeList.Count >= 1)
+                        if (userIdleTimeList.Count >= 2)
                         {
                             autoIdleHour = 0;
                             autoIdleMinute = 0;
@@ -2936,7 +2933,7 @@ namespace WorkStatus.ViewModels
             try
             {
 
-
+                IsSlotTimer = true;
                 //SlotTimerObject.Stop();
                 //
                 //SlotInterval = 2;
@@ -2953,6 +2950,7 @@ namespace WorkStatus.ViewModels
                 // throw;
             }
         }
+
         private void StartThreads(object sender, DoWorkEventArgs e)
         {
             try
@@ -3659,7 +3657,7 @@ namespace WorkStatus.ViewModels
                                 Entry = slot.Entry,
                                 appAndUrls = _appAndUrls,
                                 location = _location,
-                                screenUrl = slot.ScreenActivity.ToStrVal(),
+                                screenUrl = slot.ScreenActivity.ToStrVal()== string.Empty? Common.Storage.ScreenURl: slot.ScreenActivity.ToStrVal(),
                                 activityLevel = activityLevel,
                                 from = slot.IntervalStratTime.ToStrVal(),
                                 to = slot.IntervalEndTime.ToStrVal(),
@@ -6668,34 +6666,53 @@ namespace WorkStatus.ViewModels
                     GetProjectsList = new List<Organisation_Projects>();
                     List<tbl_Organisation_Projects> FindUserProjectListFinal = new List<tbl_Organisation_Projects>();
                     FindUserProjectListFinal = new List<tbl_Organisation_Projects>(dbService.SearchProjectByString(searchtext, projectid, organization_id));
-                    foreach (var item in FindUserProjectListFinal)
+                    if (FindUserProjectListFinal != null)
                     {
-                        bool IconProjectPlay = false;
-                        bool IconProjectStop = false;
-                        if (Common.Storage.IsProjectRuning == true)
+                        GetProjectsList = new List<Organisation_Projects>();
+                        GetProjectsList2 = new List<Organisation_Projects>();
+
+
+                        foreach (var item in FindUserProjectListFinal)
                         {
-                            if (item.ProjectId == Convert.ToString(Common.Storage.CurrentProjectId))
+                            bool IconProjectPlay = false;
+                            bool IconProjectStop = false;
+                            if (Common.Storage.IsProjectRuning == true)
                             {
-                                IconProjectPlay = false;
-                                IconProjectStop = true;
+                                if (item.ProjectId == Convert.ToString(Common.Storage.CurrentProjectId))
+                                {
+                                    IconProjectPlay = false;
+                                    IconProjectStop = true;
+                                }
+                                else
+                                {
+                                    IconProjectPlay = true;
+                                    IconProjectStop = false;
+                                }
                             }
                             else
                             {
                                 IconProjectPlay = true;
                                 IconProjectStop = false;
                             }
-                        }
-                        else
-                        {
-                            IconProjectPlay = true;
-                            IconProjectStop = false;
-                        }
-                        string ProjectTimeConsumed = "";
-                        if (Common.Storage.IsProjectRuning == true)
-                        {
-                            if (item.ProjectId == Convert.ToString(Common.Storage.CurrentProjectId))
+                            string ProjectTimeConsumed = "";
+                            if (Common.Storage.IsProjectRuning == true)
                             {
-                                ProjectTimeConsumed = ProjectTime;
+                                if (item.ProjectId == Convert.ToString(Common.Storage.CurrentProjectId))
+                                {
+                                    ProjectTimeConsumed = ProjectTime;
+                                }
+                                else
+                                {
+                                    if (string.IsNullOrEmpty(item.ProjectTimeConsumed))
+                                    {
+                                        ProjectTimeConsumed = "00:00:00";
+                                    }
+                                    else
+                                    {
+                                        ProjectTimeConsumed = item.ProjectTimeConsumed;
+                                    }
+                                }
+
                             }
                             else
                             {
@@ -6709,30 +6726,20 @@ namespace WorkStatus.ViewModels
                                 }
                             }
 
-                        }
-                        else
-                        {
-                            if (string.IsNullOrEmpty(item.ProjectTimeConsumed))
+                            projects = new Organisation_Projects()
                             {
-                                ProjectTimeConsumed = "00:00:00";
-                            }
-                            else
-                            {
-                                ProjectTimeConsumed = item.ProjectTimeConsumed;
-                            }
-                        }
+                                ProjectId = item.ProjectId,
+                                ProjectName = item.ProjectName.Trim(),
+                                OrganisationId = item.OrganisationId,
+                                ProjectTime = ProjectTimeConsumed,
+                                ProjectPlayIcon = IconProjectPlay,
+                                ProjectStopIcon = IconProjectStop,
+                                UserId = item.UserId
+                            };
+                            GetProjectsList2.Add(projects);
 
-                        projects = new Organisation_Projects()
-                        {
-                            ProjectId = item.ProjectId,
-                            ProjectName = item.ProjectName.Trim(),
-                            OrganisationId = item.OrganisationId,
-                            ProjectTime = ProjectTimeConsumed,
-                            ProjectPlayIcon = IconProjectPlay,
-                            ProjectStopIcon = IconProjectStop,
-                            UserId = item.UserId
-                        };
-                        GetProjectsList.Add(projects);
+                        }
+                        GetProjectsList = new List<Organisation_Projects>(GetProjectsList2);
                     }
                     RaisePropertyChanged("GetProjectsList");
                 }
@@ -6857,6 +6864,14 @@ namespace WorkStatus.ViewModels
                 _baseURL = Configurations.UrlConstant + Configurations.UserProjectlistByOrganizationIDApiConstant;
                 objHeaderModel.SessionID = Common.Storage.TokenId;
                 userProjectlistResponse = _services.GetUserProjectlistByOrganizationIDAsync(new Get_API_Url().UserProjectlistByOrganizationID(_baseURL), true, objHeaderModel, entity);
+                if (userProjectlistResponse.response == null)
+                {
+                    ChangeOrganizationAPICall(OrganizationID);
+                    _baseURL = Configurations.UrlConstant + Configurations.UserProjectlistByOrganizationIDApiConstant;
+                    objHeaderModel.SessionID = Common.Storage.TokenId;
+                    userProjectlistResponse = _services.GetUserProjectlistByOrganizationIDAsync(new Get_API_Url().UserProjectlistByOrganizationID(_baseURL), true, objHeaderModel, entity);
+
+                }
                 if (userProjectlistResponse.response != null)
                 {
                     if (userProjectlistResponse.response.code == "1001")
@@ -6871,42 +6886,7 @@ namespace WorkStatus.ViewModels
                     }
                     if (userProjectlistResponse.response.code == "200")
                     {
-                        if (userProjectlistResponse.response.data.Count > 0)
-                        {
-                            List<tbl_Organisation_Projects> _OrganisationProjects = new List<tbl_Organisation_Projects>();
-                            BaseService<tbl_Organisation_Projects> dbService = new BaseService<tbl_Organisation_Projects>();
-                            dbService.Delete(new tbl_Organisation_Projects());
-
-                            BaseService<tbl_ServerTodoDetails> dbService2 = new BaseService<tbl_ServerTodoDetails>();
-                            dbService2.Delete(new tbl_ServerTodoDetails());
-                            BaseService<tbl_ToDoAttachments> dbService3 = new BaseService<tbl_ToDoAttachments>();
-                            dbService3.Delete(new tbl_ToDoAttachments());
-
-                            foreach (var item in userProjectlistResponse.response.data)
-                            {
-                                tbl_organisation_Projects = new tbl_Organisation_Projects()
-                                {
-                                    ProjectId = Convert.ToString(item.id),
-                                    ProjectName = item.name.ToStrVal().Replace("'", "''"),
-                                    OrganisationId = Convert.ToString(item.organization_id),
-                                    UserId = Convert.ToString(item.user_id)
-                                };
-                                // _OrganisationProjects.Add(tbl_organisation_Projects);
-                                new DashboardSqliteService().InsertUserProjectsByOrganisationID(tbl_organisation_Projects);
-                                //Dispatcher.UIThread.InvokeAsync(new Action(() => BindUserToDoListFromApi(tbl_organisation_Projects.ProjectId.ToInt32(), tbl_organisation_Projects.OrganisationId.ToInt32(), tbl_organisation_Projects.UserId.ToInt32())));
-                                BindUserToDoListFromApi(tbl_organisation_Projects.ProjectId.ToInt32(), tbl_organisation_Projects.OrganisationId.ToInt32(), tbl_organisation_Projects.UserId.ToInt32());
-                            }
-                            //new DashboardSqliteService().InsertUserProjectsByOrganisationID(_OrganisationProjects);
-                        }
-                        else
-                        {
-                            Common.Storage.CurrentOrganisationId = OrganizationID.ToInt32();
-                            // HeaderTime = "00:00:00";
-                            HeaderProjectName = string.Empty;
-                            pgrProject.IsVisible = false;
-                            pgrToDO.IsVisible = false;
-                        }
-
+                        BindUserProjectListByResponse(orgdSelectedID);
                     }
 
                     else
@@ -6917,11 +6897,17 @@ namespace WorkStatus.ViewModels
                         {
                             objHeaderModel.SessionID = Common.Storage.TokenId;
                             userProjectlistResponse = _services.GetUserProjectlistByOrganizationIDAsync(new Get_API_Url().UserProjectlistByOrganizationID(_baseURL), true, objHeaderModel, entity);
+                          
+                            if (userProjectlistResponse.response != null && userProjectlistResponse.response.code == "200")
+                            {
+                                BindUserProjectListByResponse(orgdSelectedID);
+                            }
+
                         }
                     }
                 }
                 // BindUserProjectListFromLocalDB(OrganizationID);
-
+               
                 Dispatcher.UIThread.InvokeAsync(new Action(() =>
                 {
                     ActivitySyncTimerFromApi();
@@ -6936,6 +6922,46 @@ namespace WorkStatus.ViewModels
                 // throw new Exception(ex.Message);
             }
         }
+
+        public void  BindUserProjectListByResponse(string OrganizationID)
+        {
+                if (userProjectlistResponse.response.data.Count > 0)
+                {
+                    List<tbl_Organisation_Projects> _OrganisationProjects = new List<tbl_Organisation_Projects>();
+                    BaseService<tbl_Organisation_Projects> dbService = new BaseService<tbl_Organisation_Projects>();
+                    dbService.Delete(new tbl_Organisation_Projects());
+
+                    BaseService<tbl_ServerTodoDetails> dbService2 = new BaseService<tbl_ServerTodoDetails>();
+                    dbService2.Delete(new tbl_ServerTodoDetails());
+                    BaseService<tbl_ToDoAttachments> dbService3 = new BaseService<tbl_ToDoAttachments>();
+                    dbService3.Delete(new tbl_ToDoAttachments());
+
+                    foreach (var item in userProjectlistResponse.response.data)
+                    {
+                        tbl_organisation_Projects = new tbl_Organisation_Projects()
+                        {
+                            ProjectId = Convert.ToString(item.id),
+                            ProjectName = item.name.ToStrVal().Replace("'", "''"),
+                            OrganisationId = Convert.ToString(item.organization_id),
+                            UserId = Convert.ToString(item.user_id)
+                        };
+                        // _OrganisationProjects.Add(tbl_organisation_Projects);
+                        new DashboardSqliteService().InsertUserProjectsByOrganisationID(tbl_organisation_Projects);
+                        //Dispatcher.UIThread.InvokeAsync(new Action(() => BindUserToDoListFromApi(tbl_organisation_Projects.ProjectId.ToInt32(), tbl_organisation_Projects.OrganisationId.ToInt32(), tbl_organisation_Projects.UserId.ToInt32())));
+                        BindUserToDoListFromApi(tbl_organisation_Projects.ProjectId.ToInt32(), tbl_organisation_Projects.OrganisationId.ToInt32(), tbl_organisation_Projects.UserId.ToInt32());
+                    }
+                    //new DashboardSqliteService().InsertUserProjectsByOrganisationID(_OrganisationProjects);
+                }
+                else
+                {
+                    Common.Storage.CurrentOrganisationId = OrganizationID.ToInt32();
+                    // HeaderTime = "00:00:00";
+                    HeaderProjectName = string.Empty;
+                    pgrProject.IsVisible = false;
+                    pgrToDO.IsVisible = false;
+                }
+        }
+
         #endregion
 
         #region TODO List API
@@ -7740,21 +7766,81 @@ namespace WorkStatus.ViewModels
                 using var fileContent = new ByteArrayContent(await File.ReadAllBytesAsync(screenshotFileName));
                 fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
                 form.Add(fileContent, "screenshot", Path.GetFileName(screenshotFileName));
-                HttpClient _httpClient = new HttpClient();
-                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", objHeaderModel.SessionID);
-                _httpClient.DefaultRequestHeaders.Add("OrgID", Common.Storage.ServerOrg_Id);
-                _httpClient.DefaultRequestHeaders.Add("SDToken", Common.Storage.ServerSd_Token);
-                try
-                {
-                    Uri myUri = new Uri(_baseURL, UriKind.Absolute);
-                    var response = await _httpClient.PostAsync(myUri, form);
-                    response.EnsureSuccessStatusCode();
-                    var responseContent = await response.Content.ReadAsStringAsync();
-                    ScreenshotResponse = JsonConvert.DeserializeObject<ScreenShotResponseModel>(responseContent);
-                    if (ScreenshotResponse.response != null)
+               
+                     HttpClient _httpClient = new HttpClient();
+                    _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", objHeaderModel.SessionID);
+                    _httpClient.DefaultRequestHeaders.Add("OrgID", Common.Storage.ServerOrg_Id);
+                    _httpClient.DefaultRequestHeaders.Add("SDToken", Common.Storage.ServerSd_Token);
+                    try
                     {
-                        if (ScreenshotResponse.response.code == "200")
+                        Uri myUri = new Uri(_baseURL, UriKind.Absolute);
+                        var response = await _httpClient.PostAsync(myUri, form);
+                        response.EnsureSuccessStatusCode();
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        ScreenshotResponse = JsonConvert.DeserializeObject<ScreenShotResponseModel>(responseContent);
+                        if (ScreenshotResponse.response != null)
                         {
+                            if (ScreenshotResponse.response.code == "200")
+                            {
+                                if (ScreenshotResponse.response.data.imageName != null)
+                                {
+                                    Common.Storage.ScreenURl = ScreenshotResponse.response.data.imageName;
+                                    Common.Storage.IsScreenShotCapture = true;
+                                }
+                                else
+                                {
+                                    Common.Storage.ScreenURl = "";
+                                    Common.Storage.IsScreenShotCapture = false;
+
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LogFile.ErrorLog(ex);
+                        //throw new Exception(ex.Message);
+                    }
+
+                //ScreenshotResponse = _services.SendScreenshotToServerAPI(_baseURL, true, objHeaderModel, screenshotFileName).Result;
+
+            }
+            catch (Exception ex)
+            {
+                LogFile.ErrorLog(ex);
+                // throw new Exception(ex.Message);
+            }
+        }
+
+        public async void SendAfterOfflineScreenShotsToServer(string screenshotFileName)
+        {
+            try
+            {
+                _baseURL = Configurations.UrlConstant + Configurations.SendScreenshotsApiConstant;
+                ScreenshotResponse = new ScreenShotResponseModel();
+                objHeaderModel = new HeaderModel();
+                objHeaderModel.SessionID = Common.Storage.TokenId;
+                using var form = new MultipartFormDataContent();
+                using var fileContent = new ByteArrayContent(await File.ReadAllBytesAsync(screenshotFileName));
+                fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+                form.Add(fileContent, "screenshot", Path.GetFileName(screenshotFileName));
+                form.Add(fileContent, "type", "1");
+               
+                    HttpClient _httpClient = new HttpClient();
+                    _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", objHeaderModel.SessionID);
+                    _httpClient.DefaultRequestHeaders.Add("OrgID", Common.Storage.ServerOrg_Id);
+                    _httpClient.DefaultRequestHeaders.Add("SDToken", Common.Storage.ServerSd_Token);
+                    try
+                    {
+                        Uri myUri = new Uri(_baseURL, UriKind.Absolute);
+                        var response = await _httpClient.PostAsync(myUri, form);
+                        response.EnsureSuccessStatusCode();
+                        var responseContent = await response.Content.ReadAsStringAsync();
+                        ScreenshotResponse = JsonConvert.DeserializeObject<ScreenShotResponseModel>(responseContent);
+                        if (ScreenshotResponse.response != null)
+                        {
+                            if (ScreenshotResponse.response.code == "200")
+                            {
                             if (ScreenshotResponse.response.data.imageName != null)
                             {
                                 Common.Storage.ScreenURl = ScreenshotResponse.response.data.imageName;
@@ -7766,17 +7852,19 @@ namespace WorkStatus.ViewModels
                                 Common.Storage.IsScreenShotCapture = false;
 
                             }
+                            if (File.Exists(screenshotFileName))
+                                {
+                                    // If file found, delete it    
+                                    File.Delete(screenshotFileName);
+                                }
+                            }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    LogFile.ErrorLog(ex);
-                    //throw new Exception(ex.Message);
-                }
-
-                //ScreenshotResponse = _services.SendScreenshotToServerAPI(_baseURL, true, objHeaderModel, screenshotFileName).Result;
-
+                    catch (Exception ex)
+                    {
+                        LogFile.ErrorLog(ex);
+                        //throw new Exception(ex.Message);
+                    }
             }
             catch (Exception ex)
             {
