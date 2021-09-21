@@ -61,6 +61,7 @@ namespace WorkStatus.Views
         ComboBox ToDoListCombobox;
         bool isWindows = false;
         bool isLinux = false;
+        Button OkAddTaskbtn;
         public Dashboard()
         {
 
@@ -117,6 +118,10 @@ namespace WorkStatus.Views
             CancelAppbtn.Click += CancelAppbtn_Click;
             OkConfirmbtn = this.FindControl<Button>("okConfirmApp");
             OkConfirmbtn.Click += OkConfirmbtn_Click; ;
+
+            OkAddTaskbtn = this.FindControl<Button>("okAddTask");
+            OkAddTaskbtn.Click += OkAddTaskbtn_Click;
+
             //IdleTimeCheckbox = this.FindControl<CheckBox>("IdleTimeCheckbox");
             //IdleTimeCheckbox.Checked += IdleTimeCheckbox_Checked;
             //IdleTimeCheckbox.Unchecked += IdleTimeCheckbox_Unchecked;
@@ -162,7 +167,11 @@ namespace WorkStatus.Views
             _dashboardVM.IsSleepMode = false;
             _dashboardVM.IsSleepModeQuitAlert = false;
         }
-
+        private void OkAddTaskbtn_Click(object? sender, RoutedEventArgs e)
+        {
+            _dashboardVM.IsAddTaskMode = false;
+            _dashboardVM.IsAddTaskModeQuitAlert = false;
+        }
         private void ProjectListCombobox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
             try

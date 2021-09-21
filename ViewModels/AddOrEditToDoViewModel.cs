@@ -257,7 +257,7 @@ namespace WorkStatus.ViewModels
 
         #region Methods
         public bool CheckAddOrEditToDo()
-        {
+        {            
             if (Common.Storage.EditToDoId != 0)
             {
                 if (Common.Storage.EdittodoData != null)

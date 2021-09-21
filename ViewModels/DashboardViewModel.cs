@@ -429,6 +429,28 @@ namespace WorkStatus.ViewModels
                 RaisePropertyChanged("GetToDoAttachmentsList");
             }
         }
+
+        private bool _isAddTaskMode;
+        public bool IsAddTaskMode
+        {
+            get => _isAddTaskMode;
+            set
+            {
+                _isAddTaskMode = value;
+                RaisePropertyChanged("IsAddTaskMode");
+            }
+        }
+
+        private bool _isAddTaskModeQuitAlert;
+        public bool IsAddTaskModeQuitAlert
+        {
+            get => _isAddTaskModeQuitAlert;
+            set
+            {
+                _isAddTaskModeQuitAlert = value;
+                RaisePropertyChanged("IsAddTaskModeQuitAlert");
+            }
+        }
         #endregion
 
         #region Local properties
@@ -3571,8 +3593,13 @@ namespace WorkStatus.ViewModels
         {
             Double totalSeconds = timeinterval * 60;
             Double percentage = ((count * 100) / (totalSeconds));
+            if(percentage >= 100)
+            {
+                percentage = 100;
+            }
             return percentage.ToStrVal();
         }
+
         public List<Intervals> GetIntervalsList(string startTime)
         {
             List<Intervals> finalIntervals = new List<Intervals>();
@@ -7037,14 +7064,30 @@ namespace WorkStatus.ViewModels
         }
         public async void AddOrEditPageOpen(int selectedEditToDoId)
         {
+            if (Storage.IsProjectRuning)
+            {
+                IsAddTaskMode = true;
+                IsAddTaskModeQuitAlert = true;
+                return;
+            }
+            else
+            {
+                IsAddTaskMode = false;
+                IsAddTaskModeQuitAlert = false;
+            }
+
             IsToDoDetailsPopUp = false;
             IsStaysOpenToDoDetails = false;
             Common.Storage.EditToDoId = selectedEditToDoId == 0 ? 0 : selectedEditToDoId;
             var dialog = new AddOrEditToDo();
             var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
             await dialog.ShowDialog(mainWindow);
-            BaseService<tbl_ServerTodoDetails> service = new BaseService<tbl_ServerTodoDetails>();
-            service.Delete(new tbl_ServerTodoDetails());
+            IsUserOffline = Common.CommonServices.IsConnectedToInternet() ? false : true;
+            if (!IsUserOffline)
+            {
+                BaseService<tbl_ServerTodoDetails> service = new BaseService<tbl_ServerTodoDetails>();
+                service.Delete(new tbl_ServerTodoDetails());
+            }
             pgrToDO.IsVisible = true;
             //Dispatcher.UIThread.InvokeAsync(new Action(() =>
             //{
@@ -7079,8 +7122,12 @@ namespace WorkStatus.ViewModels
             var dialog = new AddOrEditToDo();
             var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
             await dialog.ShowDialog(mainWindow);
-            BaseService<tbl_ServerTodoDetails> service = new BaseService<tbl_ServerTodoDetails>();
-            service.Delete(new tbl_ServerTodoDetails());
+            IsUserOffline = Common.CommonServices.IsConnectedToInternet() ? false : true;
+            if (!IsUserOffline)
+            {
+                BaseService<tbl_ServerTodoDetails> service = new BaseService<tbl_ServerTodoDetails>();
+                service.Delete(new tbl_ServerTodoDetails());
+            }
             pgrToDO.IsVisible = true;               
             //Dispatcher.UIThread.InvokeAsync(new Action(() =>
             //{
@@ -7182,6 +7229,17 @@ namespace WorkStatus.ViewModels
         }
         public async void ToDoDetailCall(int toDoId)
         {
+            if (Storage.IsProjectRuning)
+            {
+                IsAddTaskMode = true;
+                IsAddTaskModeQuitAlert = true;
+                return;
+            }
+            else
+            {
+                IsAddTaskMode = false;
+                IsAddTaskModeQuitAlert = false;
+            }
             SelectedToDoItem = toDoId;
             ToDoDetailData = new ObservableCollection<tbl_ServerTodoDetails>(new DashboardSqliteService().GetToDoData(toDoId));
             if (ToDoDetailData != null)

@@ -24,6 +24,47 @@
 			<ColumnDefinition Width="Auto"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
 
+    <!-- DashBoard Add Task Alert PopUp while timer is runing-->
+    <Popup IsOpen="{Binding IsAddTaskMode}" StaysOpen="{Binding IsAddTaskModeQuitAlert}" Margin="30" Height="140" Width="420" HorizontalOffset="360" VerticalOffset="400">
+      <Border BoxShadow="0 0 0 gray" BorderThickness="0"  Height="120" Width="420" Background="WhiteSmoke" CornerRadius="5,5,5,5" Padding="5">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+          </Grid.ColumnDefinitions>
+          <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BoxShadow="0 0 0 gray" BorderThickness="0"  Height="20" Width="420" Background="#A3A3A3" CornerRadius="5,5,0,0" Margin="0,-10,0,0" Padding="0">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0"  Width="420">
+              <Image Margin="10,0,10,0" Source="/Assets/DotsIcon.png" VerticalAlignment="Center" HorizontalAlignment="Left"  Height="8"/>
+              <TextBlock TextWrapping="Wrap" Margin="100,0,0,0"
+							   TextAlignment="Center" Text="WorkStatus" Background="Transparent" HorizontalAlignment="Center"
+							   FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"
+							   Foreground="{Binding NewTextColor,Mode=TwoWay}" FontStyle="Normal" FontSize="14"/>
+            </StackPanel>
+          </Border>
+          <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!--<Image Grid.Row="0" Grid.Column="0" Margin="10,10,10,10" Source="/Assets/WorkStatuslogo_Minimal_1.png" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="70"/>-->
+            <Grid Grid.Row="0" Margin="10,0,10,20" HorizontalAlignment="Center">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
+
+              <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="While timer is runing you can not add task/edit task. Please, stop the Timer!" Foreground="{Binding NewTextColor,Mode=TwoWay}"   FontStyle="Normal" TextAlignment="Center" FontSize="14"  HorizontalAlignment="Center"  Margin="5,20,0,0" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
+              <Button  x:Name="okAddTask" Grid.Row="2" Content="OK" Margin="10,10,15,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14" FontWeight="SemiLight" Background="{Binding NewStackPanelLogoColor,Mode=TwoWay}" Foreground="White" Width="80" Height="30"/>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Border>
+    </Popup>
+    
 		<!-- Forcefully App Upgarde PopUp -->
 		<Popup IsOpen="{Binding IsForceUpgradeApp}" StaysOpen="{Binding IsStayOpen}" Margin="30" Height="250" Width="300" HorizontalOffset="355" VerticalOffset="200">
 			<Border BoxShadow="0 0 1 gray" BorderThickness="2" Height="250" Width="300" Background="WhiteSmoke" CornerRadius="8,8,8,8" Padding="5">

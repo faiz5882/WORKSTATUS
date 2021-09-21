@@ -47,7 +47,14 @@
         <Border Width="170" Height="35" BoxShadow="0 0 1 gray" BorderBrush="Black" Margin="0,20,0,0" CornerRadius="5"
                 BorderThickness="0" Background="White">
           <StackPanel Margin="1" Orientation="Horizontal">
-            <CalendarDatePicker x:Name="cdpStartdate" Text="{Binding StartDateAddOrEditTodo,Mode=TwoWay}" Watermark="Start Date" IsTodayHighlighted="True" VerticalContentAlignment="Center" Width="170" Height="35" FontSize="14" BorderThickness="0" BorderBrush="Gray" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
+            <CalendarDatePicker x:Name="cdpStartdate" 
+                                Text="{Binding StartDateAddOrEditTodo,Mode=TwoWay}" Watermark="Start Date" 
+                                IsTodayHighlighted="True" 
+                                VerticalContentAlignment="Center"
+                                Width="170" Height="35" FontSize="14"
+                                BorderThickness="0"
+                                BorderBrush="Gray"
+                                FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
           </StackPanel>
         </Border>
       </Grid>
@@ -55,7 +62,7 @@
         <Border Width="170" Height="35" BoxShadow="0 0 1 gray" BorderBrush="Gray" Margin="0,20,0,0" CornerRadius="5"
                BorderThickness="0" Background="White">
           <StackPanel Margin="1" Orientation="Horizontal">
-            <CalendarDatePicker x:Name="cdpEnddate" Text="{Binding EndDateAddOrEditTodo,Mode=TwoWay}" SelectedDateFormat="Custom" Watermark="End Date" VerticalContentAlignment="Center" Width="170" Height="35" FontSize="14" BorderThickness="0" BorderBrush="Gray" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
+            <CalendarDatePicker  x:Name="cdpEnddate" Text="{Binding EndDateAddOrEditTodo,Mode=TwoWay}" SelectedDateFormat="Custom" Watermark="End Date" VerticalContentAlignment="Center" Width="170" Height="35" FontSize="14" BorderThickness="0" BorderBrush="Gray" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
           </StackPanel>
         </Border>
       </Grid>
