@@ -11,5 +11,6 @@ namespace WorkStatus.Models.WriteDTO
         public string ImageName { get; set; }
         public string ImageIcon { get; set; }
         public String CloseIcon { get; set; }
+        public string Url {get;set;}
     }
 }

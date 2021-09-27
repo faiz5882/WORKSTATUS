@@ -7080,6 +7080,8 @@ namespace WorkStatus.ViewModels
                     if (getToDoDetailsResponseModel.response.code == "200")
                     {
                         Common.Storage.EdittodoData = getToDoDetailsResponseModel.response.data;
+                       
+                        
                     }
                 }
             }

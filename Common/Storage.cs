@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WorkStatus.Models.ReadDTO;
+using WorkStatus.Models.WriteDTO;
 
 namespace WorkStatus.Common
 {
@@ -86,5 +87,7 @@ namespace WorkStatus.Common
         public static ToDoDetailsData EdittodoData;
         public static double CurrentWindowHeight { get; set; }
         public static double CurrentWindowWidth { get; set; }
+
+        public static ObservableCollection<AddOrEditToDoAttachments> LocalTODODeleteAttachments = new ObservableCollection<AddOrEditToDoAttachments>();
     }
 }

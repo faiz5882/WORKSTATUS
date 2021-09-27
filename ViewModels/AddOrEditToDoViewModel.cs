@@ -262,6 +262,7 @@ namespace WorkStatus.ViewModels
             {
                 if (Common.Storage.EdittodoData != null)
                 {
+                    Common.Storage.LocalTODODeleteAttachments.Clear();
                     Title = "Edit- " + Common.Storage.EdittodoData.name;
                     NameAddOrEditTodo = Common.Storage.EdittodoData.name;
                     DescriptionAddOrEditTodo = Common.Storage.EdittodoData.description != null ? Common.Storage.EdittodoData.description : "";
@@ -303,13 +304,19 @@ namespace WorkStatus.ViewModels
                             {
                                 ImageIcon = "/Assets/attachment.png",
                                 CloseIcon = "/Assets/close.png",
-                                ImageName = a.name
+                                ImageName = a.name,
+                                Url = a.url
+                                
                             };
+                            
                             ToDoAttachmentListData.Add(attachments);
                             ListData.Add(attachments);
                             Imagelist.Add(a.name);
                             
                         }
+
+
+                     
                     }
                 }
                 return true;
@@ -324,7 +331,6 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-
                 ListData = new ObservableCollection<AddOrEditToDoAttachments>();
                 ListData.Clear();
                 OpenFileDialog OFD = new OpenFileDialog();
@@ -424,6 +430,13 @@ namespace WorkStatus.ViewModels
             foreach (var a in ListData)
             {
                 int listDataindex = ListData.FindIndex(x => x.ImageName == imageName);
+                AddOrEditToDoAttachments DeletedToDoAttachment = ToDoAttachmentListData.Where(x => x.ImageName == imageName).FirstOrDefault();
+
+                if (DeletedToDoAttachment != null)
+                {
+                    Common.Storage.LocalTODODeleteAttachments.Add(DeletedToDoAttachment);
+                }
+
                 int ToDoAttachmentindex = ToDoAttachmentListData.FindIndex(x => x.ImageName == imageName);
                 if (listDataindex == ToDoAttachmentindex)
                 {
@@ -477,6 +490,18 @@ namespace WorkStatus.ViewModels
                     //end_after = 7,
                     //recurrence_status = 1
                 };
+
+                if (Common.Storage.LocalTODODeleteAttachments != null && Common.Storage.LocalTODODeleteAttachments.Count > 0)
+                {
+                    foreach (AddOrEditToDoAttachments item in Common.Storage.LocalTODODeleteAttachments.ToList())
+                    {
+               int ToDoAttachmentindex = entity.attachments.FindIndex(x => x.Headers.ContentDisposition.FileName.Contains(item.ImageName));
+                        if (ToDoAttachmentindex > 0)
+                        {
+                            entity.attachments.RemoveAt(ToDoAttachmentindex);
+                        }
+                    }
+                }
                 objHeaderModel.SessionID = Common.Storage.TokenId;
                 addoreditTodoResponse = await _services.AddorEditToDoApiCall(_baseURL, objHeaderModel, entity);
                 if (addoreditTodoResponse.response != null)
