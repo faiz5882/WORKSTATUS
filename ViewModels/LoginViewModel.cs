@@ -235,6 +235,7 @@ namespace WorkStatus.ViewModels
                             Common.Storage.ServerSd_Token = _loginResponse.Response.Data.Sd_Token;
                             Common.Storage.LoginId = _loginResponse.Response.Data.Email;
                             Common.Storage.LoginUserID = _loginResponse.Response.Data.Id.ToStrVal();
+                            Common.Storage.AppTodayStartTM = DateTime.Now;
                             user = new tbl_UserDetails()
                             {
                                 UserId = _loginResponse.Response.Data.Id,

@@ -58,7 +58,7 @@
               </Grid.RowDefinitions>
 
               <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="While timer is runing you can not add task/edit task. Please, stop the Timer!" Foreground="{Binding NewTextColor,Mode=TwoWay}"   FontStyle="Normal" TextAlignment="Center" FontSize="14"  HorizontalAlignment="Center"  Margin="5,20,0,0" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
-              <Button  x:Name="okAddTask" Grid.Row="2" Content="OK" Margin="10,10,15,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14" FontWeight="SemiLight" Background="{Binding NewStackPanelLogoColor,Mode=TwoWay}" Foreground="White" Width="80" Height="30"/>
+              <Button  x:Name="okAddTaskRunning" Grid.Row="2" Content="OK" Margin="10,10,15,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14" FontWeight="SemiLight" Background="{Binding NewStackPanelLogoColor,Mode=TwoWay}" Foreground="White" Width="80" Height="30"/>
             </Grid>
           </Grid>
         </Grid>
@@ -556,7 +556,7 @@
 
 				<Label Grid.Row="0" Grid.Column="1" Content="{Binding LastUpdateText}" FontStyle="Normal" FontSize="14" FontWeight="400" Foreground="{Binding TxtWelcomeColor,Mode=TwoWay}" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" />
 				<ToggleButton x:Name="btntoggle1" Grid.Row="0" Grid.Column="2" IsChecked="false" Background="Transparent" Click="MinimizeItem_click">
-					<Image x:Name="imgMinimize" Height="20" Width="20" Source="/Assets/maximize.png"/>
+					<Image x:Name="imgMinimize" Height="20" Width="20" Source="/Assets/expendCloseIcon.png"/>
 				</ToggleButton>
 				<ToggleButton x:Name="btntoggle" Grid.Row="0" Grid.Column="3" IsChecked="false" Background="Transparent" Click="ExpanderItem_Click">
 					<Image x:Name="imgexpanderButton" Height="20" Width="20" Source="/Assets/arrowhead-right-white.png"/>

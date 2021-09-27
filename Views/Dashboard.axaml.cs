@@ -94,6 +94,8 @@ namespace WorkStatus.Views
             if (isWindows)
             {
                 fullPath = ConfigurationManager.AppSettings["WindowsPath"].ToString();
+                Common.Storage.OpreatingSystem = "4";
+                
                 //OS = "WIN";
             }
 
@@ -102,6 +104,7 @@ namespace WorkStatus.Views
                 fullPath = ConfigurationManager.AppSettings["LinuxOSPath"].ToString();
                 _dashboardVM.BashNoWait("python keyboardlogger.py");
                 _dashboardVM.BashNoWait("python mouselogger.py");
+                Common.Storage.OpreatingSystem = "5";
                 //OS = "LINUX";
             }
 
@@ -119,7 +122,7 @@ namespace WorkStatus.Views
             OkConfirmbtn = this.FindControl<Button>("okConfirmApp");
             OkConfirmbtn.Click += OkConfirmbtn_Click; ;
 
-            OkAddTaskbtn = this.FindControl<Button>("okAddTask");
+            OkAddTaskbtn = this.FindControl<Button>("okAddTaskRunning");
             OkAddTaskbtn.Click += OkAddTaskbtn_Click;
 
             //IdleTimeCheckbox = this.FindControl<CheckBox>("IdleTimeCheckbox");
@@ -704,7 +707,7 @@ namespace WorkStatus.Views
 
         #region Menu Item Click
         private async void OpenDashboard_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             var url = Configuration.Configurations.BaseAppUrlConstant + "dashboard/analytics";
             NavigateToBrowser(url);
         }
@@ -995,6 +998,22 @@ namespace WorkStatus.Views
                 if (IsMiniChecked == true)
                 {
                     IsMiniChecked = false;
+
+                    Avalonia.Media.Imaging.Bitmap AvIrBitmap;
+                    var MinImage = LoadEmbeddedResources("/Assets/expandIcon.png");
+                    Bitmap PlayPauseToDoButton;
+                    PlayPauseToDoButton = MinImage;
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        PlayPauseToDoButton.Save(memory, ImageFormat.Png);
+                        memory.Position = 0;
+
+                        //AvIrBitmap is our new Avalonia compatible image. You can pass this to your view
+                        AvIrBitmap = new Avalonia.Media.Imaging.Bitmap(memory);
+                    }
+
+                    imgexpanderButton = (Image)((Avalonia.Controls.ContentControl)sender).Content;
+                    imgexpanderButton.Source = AvIrBitmap;
                     this.Height = 250;
                     this.Width = 355;
 
@@ -1014,6 +1033,21 @@ namespace WorkStatus.Views
                     this.Height = 630;
                     this.Width = 358;
                     IsMiniChecked = true;
+                    Avalonia.Media.Imaging.Bitmap AvIrBitmap;
+                    var maxImage = LoadEmbeddedResources("/Assets/expendCloseIcon.png");
+                    Bitmap PlayPauseToDoButton;
+                    PlayPauseToDoButton = maxImage;
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        PlayPauseToDoButton.Save(memory, ImageFormat.Png);
+                        memory.Position = 0;
+
+                        //AvIrBitmap is our new Avalonia compatible image. You can pass this to your view
+                        AvIrBitmap = new Avalonia.Media.Imaging.Bitmap(memory);
+                    }
+
+                    imgexpanderButton = (Image)((Avalonia.Controls.ContentControl)sender).Content;
+                    imgexpanderButton.Source = AvIrBitmap;
                     this.FindControl<Grid>("TopLeftGrid").IsVisible = true;
                     this.FindControl<Grid>("MidLeftGrid").IsVisible = true;
                     this.FindControl<Grid>("BottomLeftGrid").IsVisible = true;

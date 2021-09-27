@@ -5,7 +5,7 @@
         mc:Ignorable="d" Width="400" Height="560"
         xmlns:progRings="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
         x:Class="WorkStatus.Views.AddOrEditToDo"
-        Icon="avares://WorkStatus/Assets/HeaderIcon.ico"
+        Icon="avares://WorkStatus/Assets/header_Logo.ico"
         Title="{Binding Title}" HorizontalContentAlignment="Center" CanResize="False">
   <Grid>
     <Grid.RowDefinitions>
@@ -141,7 +141,7 @@
     </Grid>
     
     <Grid Grid.Row="7" Margin="0,0,0,0">
-      <ItemsControl Items="{Binding ToDoAttachmentListData}" Background="White" Margin="5,0,0,0">
+      <ItemsControl Items="{Binding ToDoAttachmentListData}" Width="320" Background="White" Margin="5,0,0,0">
         <ItemsControl.ItemTemplate>
           <DataTemplate>
             <StackPanel Orientation="Horizontal" Height="50" Width="50" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,5,0,5">

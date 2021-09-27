@@ -631,13 +631,21 @@ namespace WorkStatus.ViewModels
 
         public void RaisePropertyChanged(string propertyName)
         {
-            if (!string.IsNullOrEmpty(propertyName))
+            try
             {
-                if (this.PropertyChanged != null)
+                if (!string.IsNullOrEmpty(propertyName))
                 {
-                    this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                    if (this.PropertyChanged != null)
+                    {
+                        this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                    }
                 }
             }
+            catch
+            {
+
+            }
+         
         }
         private void OnPropertyChanged(string propertyName)
         {

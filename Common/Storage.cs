@@ -34,7 +34,10 @@ namespace WorkStatus.Common
         public static long tblTimerSno { get; set; }
         public static long tblProjectSno { get; set; }
         public static long temp_SyncTimerSno { get; set; }
+        public static string AppEnvironment { get; set; }
+        public static string OpreatingSystem { get; set; }
 
+        public static DateTime? AppTodayStartTM { get; set; }
 
         public static string CurrentOrganisationName { get; set; }
         public static int CurrentOrganisationId { get; set; }

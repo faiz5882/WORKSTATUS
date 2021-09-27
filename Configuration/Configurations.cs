@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkStatus.Common;
 
 namespace WorkStatus.Configuration
 {
@@ -25,7 +26,9 @@ namespace WorkStatus.Configuration
             get
             {
                 return System.Configuration.ConfigurationSettings.AppSettings["ApiBaseLiveUrl"];
+
             }
+
         }
         public static string BaseAppMenuUrlConstant
         {
@@ -75,7 +78,7 @@ namespace WorkStatus.Configuration
             }
         }
 
-        
+
         #endregion
 
         #region OrganisationDetails APIEndPoints
