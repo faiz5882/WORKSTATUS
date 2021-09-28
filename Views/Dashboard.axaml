@@ -709,7 +709,7 @@
 									<ToggleButton Grid.Row="0" Grid.Column="0" IsVisible="{Binding ToDoCompleteIcon}">
 										<ToggleButton.Template>
 											<ControlTemplate TargetType="ToggleButton">
-												<Image  Width="25" Height="25" Source="/Assets/Done.png"/>
+												<Image  Width="25" Height="25" Source="/Assets/DoneIcon.png"/>
 											</ControlTemplate>
 										</ToggleButton.Template>
 									</ToggleButton>
@@ -762,7 +762,8 @@
 											<ColumnDefinition Width="*"/>
 										</Grid.ColumnDefinitions>
 										<TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding ToDoName}" TextTrimming="CharacterEllipsis" FontStyle="Normal" FontWeight="Normal" FontSize="14" Foreground="#1665D8" VerticalAlignment="Center" Margin="5,0,0,0" Padding="10,10,5,10" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>
-										<Image Grid.Row="0" Grid.Column="1" Width="17" Height="17" VerticalAlignment="Center" Source="/Assets/UnlockIcon.png"/>
+										<Image Grid.Row="0" Grid.Column="1" IsVisible="{Binding IsPublicCheck}" Width="17" Height="17" VerticalAlignment="Center" Source="/Assets/UnlockIcon.png"/>
+										<Image Grid.Row="0" Grid.Column="1" IsVisible="{Binding IsPrivateCheck}" Width="17" Height="17" VerticalAlignment="Center" Source="/Assets/LockIcon.png"/>
 
 										<!--<Border Grid.Row="0" Grid.Column="2" Width="55" Height="17" Background="{Binding SiteColor}" CornerRadius="2" Padding="2">
                                             <TextBlock Text="{Binding Site}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFFFFF" FontWeight="500" Opacity="0.9" FontSize="11" FontFamily="resm:WorkStatus.Assets.Fonts?assembly=WorkStatus#Airbnb Cereal App"/>

@@ -51,6 +51,8 @@ namespace WorkStatus.Models.WriteDTO
 		public List<string> AttachmentImage { get; set; }
         public bool IsMarkComplete { get; set; }
         public bool IsOnlyDeleteVisible { get; set; }
+        public bool IsPublicCheck { get => Privacy == "Public" ? true : false ; }
+        public bool IsPrivateCheck { get => Privacy == "Private" ? true : false; }
 
     }
 }
