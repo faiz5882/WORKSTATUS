@@ -12,44 +12,60 @@ namespace WorkStatus.Views
     {
         public AddOrEditToDoViewModel _addOrEditToDoVM;
         public static AddOrEditToDo AddorEditToDoInstance { get; private set; }
-        
+
         public AddOrEditToDo()
         {
             InitializeComponent();
-            _addOrEditToDoVM = new AddOrEditToDoViewModel(this);
-            this.DataContext = _addOrEditToDoVM;
-            AddorEditToDoInstance = this;
-            var cstartdate = this.FindControl<CalendarDatePicker>("cdpStartdate");
-            cstartdate.DisplayDateStart = DateTime.Today;
-            cstartdate.SelectedDateFormat = CalendarDatePickerFormat.Custom;
-            cstartdate.CustomDateFormatString = "yyyy-MM-dd";
-            cstartdate.SelectedDateChanged += Cstartdate_SelectedDateChanged;
-            var cenddate = this.FindControl<CalendarDatePicker>("cdpEnddate");
-            cenddate.DisplayDateStart = DateTime.Today;
-            cenddate.CustomDateFormatString = "yyyy-MM-dd";
-            cenddate.SelectedDateChanged += Cenddate_SelectedDateChanged;
-            if (Common.Storage.EditToDoId != 0 && !string.IsNullOrEmpty(Convert.ToString(Common.Storage.EdittodoData.startDate)))
+            try
             {
-                _addOrEditToDoVM.StartDateAddOrEditTodo = Common.Storage.EdittodoData.startDate;
-                _addOrEditToDoVM.EndDateAddOrEditTodo = Common.Storage.EdittodoData.endDate;
-            }
+                _addOrEditToDoVM = new AddOrEditToDoViewModel(this);
+                this.DataContext = _addOrEditToDoVM;
+                AddorEditToDoInstance = this;
+                var cstartdate = this.FindControl<CalendarDatePicker>("cdpStartdate");
+                cstartdate.DisplayDateStart = DateTime.Today;
+                cstartdate.SelectedDateFormat = CalendarDatePickerFormat.Custom;
+                cstartdate.CustomDateFormatString = "yyyy-MM-dd";
+                cstartdate.SelectedDateChanged += Cstartdate_SelectedDateChanged;
+                var cenddate = this.FindControl<CalendarDatePicker>("cdpEnddate");
+                cenddate.DisplayDateStart = DateTime.Today;
+                cenddate.CustomDateFormatString = "yyyy-MM-dd";
+                cenddate.SelectedDateChanged += Cenddate_SelectedDateChanged;
+                if (Common.Storage.EditToDoId != 0 && !string.IsNullOrEmpty(Convert.ToString(Common.Storage.EdittodoData.startDate)))
+                {
+                    _addOrEditToDoVM.StartDateAddOrEditTodo = Common.Storage.EdittodoData.startDate;
+                    _addOrEditToDoVM.EndDateAddOrEditTodo = Common.Storage.EdittodoData.endDate;
+                }
 #if DEBUG
-            this.AttachDevTools();
+                this.AttachDevTools();
 #endif
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
         private void Cstartdate_SelectedDateChanged(object? sender, SelectionChangedEventArgs e)
         {
-            var v = this.FindControl<CalendarDatePicker>("cdpStartdate").SelectedDate;
-            if (v != null)
+            try
             {
-                DateTime d = (DateTime)v;
-                var m = d.ToString("yyyy-MM-dd");
-                _addOrEditToDoVM.StartDateAddOrEditTodo = m;
+                var v = this.FindControl<CalendarDatePicker>("cdpStartdate").SelectedDate;
+                if (v != null)
+                {
+                    DateTime d = (DateTime)v;
+                    var m = d.ToString("yyyy-MM-dd");
+                    _addOrEditToDoVM.StartDateAddOrEditTodo = m;
+                }
+                else
+                {
+                    _addOrEditToDoVM.StartDateAddOrEditTodo = "Start Date";
+                }
             }
-            else
+
+            catch (Exception ex)
             {
-                _addOrEditToDoVM.StartDateAddOrEditTodo = "Start Date";
+
             }
+
         }
         private void Cenddate_SelectedDateChanged(object? sender, SelectionChangedEventArgs e)
         {

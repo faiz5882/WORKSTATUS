@@ -241,7 +241,7 @@ namespace WorkStatus.ViewModels
                         BindUserProjectlistByOrganizationID(SelectedOrganisationItems.OrganizationId);
                     }), DispatcherPriority.Background);
 
-                     Common.Storage.ServerOrg_Id = orgdSelectedID = SelectedOrganisationItems.OrganizationId;
+                    Common.Storage.ServerOrg_Id = orgdSelectedID = SelectedOrganisationItems.OrganizationId;
 
                 }
 
@@ -1456,28 +1456,21 @@ namespace WorkStatus.ViewModels
                 case PowerModes.Resume:
                     LogFile.WriteaActivityLog("e.Mode : " + e.Mode + DateTime.Now);
                     Task.Delay(500);
-                    //if (IsSuspend)
-                    //  {
-                    //   IsSuspend = !IsSuspend;
-                    //  }
                     IsSleepMode = true;
                     IsSleepModeQuitAlert = true;
-                    MessageBox.Avalonia.MessageBoxManager.GetMessageBoxCustomWindow(customMsgBox).ShowDialog(_window);
-
-                    if (Storage.AppTodayStartTM == null || Storage.AppTodayStartTM?.Date > DateTime.Now.Date)
+                    DateTime AppTodayStartTM = DateTime.Now;
+                    List<tbl_UserDetails> userList = new List<tbl_UserDetails>();
+                    BaseService<tbl_UserDetails> dbService = new BaseService<tbl_UserDetails>();
+                    userList = new List<tbl_UserDetails>(dbService.GetAll());
+                    if (userList != null && userList.Count > 0)
                     {
-                        List<tbl_UserDetails> userList = new List<tbl_UserDetails>();
-                        BaseService<tbl_UserDetails> dbService = new BaseService<tbl_UserDetails>();
-                        userList = new List<tbl_UserDetails>(dbService.GetAll());
-                        if (userList != null && userList.Count > 0)
-                        {
-                            Common.Storage.AppTodayStartTM = Convert.ToDateTime(userList[0].CreatedOn);
+                        AppTodayStartTM = Convert.ToDateTime(userList[0].CreatedOn);
 
-                        }
                     }
-                    if (Storage.AppTodayStartTM != null && Storage.AppTodayStartTM?.Date < DateTime.Now.Date)
+                    if (AppTodayStartTM.Date < DateTime.Now.Date)
                     {
                         Storage.AppTodayStartTM = DateTime.Now;
+                        Common.Storage.IsToDoRuning = false;
                         BindUserOrganisationListFromApi();
                     }
 
@@ -2719,7 +2712,7 @@ namespace WorkStatus.ViewModels
                 if (SelectedprojectToDo != null)
                 {
                     ToDoListData = null;
-                    GetToDoListTemp[GetToDoListTemp.FindIndex(i => i.Equals(SelectedprojectToDo))] = SelectedprojectToDo;
+                    // GetToDoListTemp[GetToDoListTemp.FindIndex(i => i.Equals(SelectedprojectToDo))] = SelectedprojectToDo;
                     ToDoListData = new ObservableCollection<tbl_ServerTodoDetails>(GetToDoListTemp);
 
                 }
@@ -4355,9 +4348,9 @@ namespace WorkStatus.ViewModels
 
                 Manualsync();
                 //BindTotalWorkTime();
-               // AddZebraPatternToProjectList();
-               // UpdateProjectList(projectIdSelected);
-               // listproject.ScrollIntoView(Selectedproject);
+                // AddZebraPatternToProjectList();
+                // UpdateProjectList(projectIdSelected);
+                // listproject.ScrollIntoView(Selectedproject);
             }
             catch (Exception ex)
             {
@@ -5087,14 +5080,14 @@ namespace WorkStatus.ViewModels
                 ToDoSelectedID = TodoID;
                 Common.Storage.IsProjectRuning = false;
                 Common.Storage.IsToDoRuning = false;
-               
+
                 AddUpdateProjectTimeToDBByToDoId(false, projectIdSelected);
                 bool checkslot = CheckSlotExistNot();
                 if (!checkslot)
                 {
                     AddSlot();
                 }
-               
+
                 TotalSecound = 0;
                 TotalSMinute = 0;
                 Totalhour = 0;
@@ -5171,7 +5164,7 @@ namespace WorkStatus.ViewModels
                 if (SelectedprojectToDo != null)
                 {
                     ToDoListData = null;
-                    GetToDoListTemp[GetToDoListTemp.FindIndex(i => i.Equals(SelectedprojectToDo))] = SelectedprojectToDo;
+                    // GetToDoListTemp[GetToDoListTemp.FindIndex(i => i.Equals(SelectedprojectToDo))] = SelectedprojectToDo;
                     ToDoListData = new ObservableCollection<tbl_ServerTodoDetails>(GetToDoListTemp);
 
                 }
@@ -5213,7 +5206,7 @@ namespace WorkStatus.ViewModels
                 if (SelectedprojectToDo != null)
                 {
                     ToDoListData = null;
-                    GetToDoListTemp[GetToDoListTemp.FindIndex(i => i.Equals(SelectedprojectToDo))] = SelectedprojectToDo;
+                    //GetToDoListTemp[GetToDoListTemp.FindIndex(i => i.Equals(SelectedprojectToDo))] = SelectedprojectToDo;
                     ToDoListData = new ObservableCollection<tbl_ServerTodoDetails>(GetToDoListTemp);
                 }
             }
@@ -6766,9 +6759,6 @@ namespace WorkStatus.ViewModels
         {
             try
             {
-
-
-
                 _baseURL = Configurations.UrlConstant + Configurations.UserOrganisationListApiConstant;
                 organisationListResponse = new UserOrganisationListResponse();
                 objHeaderModel = new HeaderModel();
@@ -7080,8 +7070,8 @@ namespace WorkStatus.ViewModels
                     if (getToDoDetailsResponseModel.response.code == "200")
                     {
                         Common.Storage.EdittodoData = getToDoDetailsResponseModel.response.data;
-                       
-                        
+
+
                     }
                 }
             }
@@ -7093,17 +7083,17 @@ namespace WorkStatus.ViewModels
         }
         public async void AddOrEditPageOpen(int selectedEditToDoId)
         {
-            if (Storage.IsProjectRuning)
-            {
-                IsAddTaskMode = true;
-                IsAddTaskModeQuitAlert = true;
-                return;
-            }
-            else
-            {
-                IsAddTaskMode = false;
-                IsAddTaskModeQuitAlert = false;
-            }
+            //if (Storage.IsProjectRuning)
+            //{
+            //    IsAddTaskMode = true;
+            //    IsAddTaskModeQuitAlert = true;
+            //    return;
+            //}
+            //else
+            //{
+            IsAddTaskMode = false;
+            IsAddTaskModeQuitAlert = false;
+            //  }
 
             IsToDoDetailsPopUp = false;
             IsStaysOpenToDoDetails = false;
@@ -7112,8 +7102,8 @@ namespace WorkStatus.ViewModels
             var mainWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
             await dialog.ShowDialog(mainWindow);
             IsUserOffline = Common.CommonServices.IsConnectedToInternet() ? false : true;
-          
-            
+
+
             if (!IsUserOffline)
             {
                 BaseService<tbl_ServerTodoDetails> service = new BaseService<tbl_ServerTodoDetails>();
@@ -7124,8 +7114,23 @@ namespace WorkStatus.ViewModels
             //{
 
             //}), DispatcherPriority.Background);
-            BindUserProjectlistByOrganizationID(Common.Storage.CurrentOrganisationId.ToStrVal());
-            BindUseToDoListFromLocalDB(Common.Storage.AddOrEditToDoProjectId);
+
+
+            // BindUserProjectlistByOrganizationID(Common.Storage.CurrentOrganisationId.ToStrVal());
+            List<tbl_Organisation_Projects> FindUserProjectListFinal = new List<tbl_Organisation_Projects>();
+            FindUserProjectListFinal = new List<tbl_Organisation_Projects>(new DashboardSqliteService().GetProjectsByOrganisationId(Common.Storage.CurrentOrganisationId.ToString()));
+
+            foreach (var item in FindUserProjectListFinal)
+            {
+                BindUserToDoListFromApi(Convert.ToInt32(item.ProjectId), Common.Storage.CurrentOrganisationId, Common.Storage.CurrentUserId);
+
+            }
+
+            ActivitySyncTimerTODOFromApi();
+
+            //  BindUseToDoListFromLocalDB(Common.Storage.AddOrEditToDoProjectId);
+
+
             pgrToDO.IsVisible = true;
 
             var data = GetProjectsList.FirstOrDefault(x => x.ProjectId == Common.Storage.AddOrEditToDoProjectId.ToStrVal());
@@ -7185,7 +7190,7 @@ namespace WorkStatus.ViewModels
                 listproject.SelectedIndex = indexT;
                 pgrToDO.IsVisible = false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogFile.ErrorLog(ex);
             }
@@ -7267,17 +7272,17 @@ namespace WorkStatus.ViewModels
         }
         public async void ToDoDetailCall(int toDoId)
         {
-            if (Storage.IsProjectRuning)
-            {
-                IsAddTaskMode = true;
-                IsAddTaskModeQuitAlert = true;
-                return;
-            }
-            else
-            {
-                IsAddTaskMode = false;
-                IsAddTaskModeQuitAlert = false;
-            }
+            //if (Storage.IsProjectRuning)
+            //{
+            //    IsAddTaskMode = true;
+            //    IsAddTaskModeQuitAlert = true;
+            //    return;
+            //}
+            //else
+            //{
+            IsAddTaskMode = false;
+            IsAddTaskModeQuitAlert = false;
+            //}
             SelectedToDoItem = toDoId;
             ToDoDetailData = new ObservableCollection<tbl_ServerTodoDetails>(new DashboardSqliteService().GetToDoData(toDoId));
             if (ToDoDetailData != null)
@@ -7543,7 +7548,7 @@ namespace WorkStatus.ViewModels
                                 {
                                     t = new Tlist()
                                     {
-                                        ProjectID = a.projectId,
+                                        ProjectID = Convert.ToInt32(a.projectId == null ? 0 : a.projectId),
                                         timeLog = a.timeLog,
                                         todoId = a.todoId
                                     };
@@ -7553,7 +7558,7 @@ namespace WorkStatus.ViewModels
                                 {
                                     p = new Plist()
                                     {
-                                        ProjectID = a.projectId,
+                                        ProjectID = Convert.ToInt32(a.projectId == null ? 0 : a.projectId),
                                         timeLog = a.timeLog
                                     };
                                     plst.Add(p);
@@ -7640,6 +7645,145 @@ namespace WorkStatus.ViewModels
 
                 Common.Storage.IsActivityCall = true;
                 // timerproject.Start();
+            }
+            catch (Exception ex)
+            {
+                LogFile.ErrorLog(ex);
+            }
+        }
+
+
+        public async void ActivitySyncTimerTODOFromApi()
+        {
+            try
+            {
+                tbl_ServerTodoDetails tbl_ServerTodo;
+                _baseURL = Configurations.UrlConstant + Configurations.UserActivitySyncTimertApiConstant;
+                activitySyncTimerResponseModel = new ActivitySyncTimerResponseModel();
+                objHeaderModel = new HeaderModel();
+                objHeaderModel.SessionID = Common.Storage.TokenId;
+
+                string currentDate = DateTime.Now.ToString("yyyy'-'MM'-'dd''");
+                string tracker = "0";
+                if (Common.Storage.IsProjectRuning)
+                {
+                    tracker = "1";
+                }
+                else
+                {
+                    tracker = "0";
+                }
+                ActivitySyncTimerRequestModel _activitySyncTime = new ActivitySyncTimerRequestModel()
+                {
+                    date = currentDate,
+                    tracker = tracker
+
+                };
+                activitySyncTimerResponseModel = await _services.GetActivitysynTimerDataAsync(new Get_API_Url().UserToDoList(_baseURL), true, objHeaderModel, _activitySyncTime);
+                if (activitySyncTimerResponseModel.response != null)
+                {
+
+                    if (activitySyncTimerResponseModel.response.code == "1001")
+                    {
+                        RefreshTokenRequest refreshTokenRequest = new RefreshTokenRequest() { token = Common.Storage.TokenId };
+                        bool renewtoken = _services.RenewTokenAPI(true, objHeaderModel, refreshTokenRequest).Result;
+                        if (renewtoken)
+                        {
+                            objHeaderModel.SessionID = Common.Storage.TokenId;
+                            activitySyncTimerResponseModel = await _services.GetActivitysynTimerDataAsync(new Get_API_Url().UserToDoList(_baseURL), true, objHeaderModel, _activitySyncTime);
+                        }
+                    }
+
+                    if (activitySyncTimerResponseModel.response.code == "200")
+                    {
+                        //add syncTimer tolocaldb
+                        tbl_SyncTimer tbl_SyncTimer;
+                        BaseService<tbl_SyncTimer> dbService = new BaseService<tbl_SyncTimer>();
+                        List<tbl_SyncTimer> listSynTimer = new List<tbl_SyncTimer>();
+                        dbService.Delete(new tbl_SyncTimer());
+                        ////=================new
+                        List<Plist> plst = new List<Plist>();
+                        List<Tlist> tlst = new List<Tlist>();
+
+                        Plist p;
+                        Tlist t;
+
+                        if (activitySyncTimerResponseModel.response.data == null)
+                        {
+                            return;
+                        }
+                        foreach (var a in activitySyncTimerResponseModel.response.data)
+                        {
+                            if (a.projectId > 0)
+                            {
+                                if (Convert.ToInt32(a.todoId) > 0)
+                                {
+                                    t = new Tlist()
+                                    {
+                                        ProjectID = Convert.ToInt32(a.projectId == null ? 0 : a.projectId),
+                                        timeLog = a.timeLog,
+                                        todoId = a.todoId
+                                    };
+                                    tlst.Add(t);
+                                }
+                                else
+                                {
+                                    p = new Plist()
+                                    {
+                                        ProjectID = Convert.ToInt32(a.projectId == null ? 0 : a.projectId),
+                                        timeLog = a.timeLog
+                                    };
+                                    plst.Add(p);
+                                }
+                            }
+                        }
+
+                        foreach (var x in tlst)
+                        {
+                            p = new Plist()
+                            {
+                                ProjectID = x.ProjectID,
+                                timeLog = x.timeLog
+                            };
+                            plst.Add(p);
+                        }
+
+                        var groupToDoList = tlst.GroupBy(z => z.todoId).ToList();
+                        foreach (var groupToDo in groupToDoList)
+                        {
+                            string localProjectID = "";
+                            foreach (var b in groupToDo)
+                            {
+                                localProjectID = b.ProjectID.ToStrVal();
+                                continue;
+                            }
+                            int totalTodto = groupToDo.Sum(a => Convert.ToInt32(a.timeLog));
+                            TimeSpan _time2 = TimeSpan.FromSeconds(totalTodto);
+                            string logtime = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                            _time2.Hours,
+                            _time2.Minutes,
+                            _time2.Seconds);
+                            BaseService<tbl_ServerTodoDetails> serviceTodo = new BaseService<tbl_ServerTodoDetails>();
+                            serviceTodo.UpdateToDoSyncTimeToLocalDB(logtime, groupToDo.Key.ToInt32(), localProjectID);
+                        }
+
+                        var groupedProjectList = plst.GroupBy(u => u.ProjectID).ToList();
+                        foreach (var groupedProject in groupedProjectList)
+                        {
+                            int total = groupedProject.Sum(x => Convert.ToInt32(x.timeLog));
+                            TimeSpan _time = TimeSpan.FromSeconds(total);
+                            string pTime = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                            _time.Hours,
+                            _time.Minutes,
+                            _time.Seconds
+                            );
+                            BaseService<tbl_Organisation_Projects> servicePro = new BaseService<tbl_Organisation_Projects>();
+                            servicePro.UpdateProjectSyncTimeToLocalDB(pTime, groupedProject.Key);
+                        }
+                        Common.Storage.IsActivityCall = true;
+                        BindUseToDoListFromLocalDB(Common.Storage.CurrentProjectId);
+                    }
+                }
             }
             catch (Exception ex)
             {

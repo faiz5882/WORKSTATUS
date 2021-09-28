@@ -13,7 +13,7 @@ namespace WorkStatus.Models.ReadDTO
     public class ActivitySyncTimerResponse
     {
         public string timeLog { get; set; }
-        public int projectId { get; set; }
+        public int? projectId { get; set; }
         public int? todoId { get; set; }
     }
 
