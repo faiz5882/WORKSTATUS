@@ -174,7 +174,7 @@ namespace WorkStatus.APIServices
                 WebResponse response1 = request.GetResponse();
                 var streamReader = new StreamReader(response1.GetResponseStream());
                 var result = streamReader.ReadToEnd();
-                LogFile.ActivityTimerDataApiResponse(result);
+                //LogFile.ActivityTimerDataApiResponse(result);
                 objFPResponse = JsonConvert.DeserializeObject<ActivitySyncTimerResponseModel>(result);
                
                 return objFPResponse;

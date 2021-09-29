@@ -1364,9 +1364,9 @@ namespace WorkStatus.ViewModels
 
             };
 
-            LogFile.WriteMessageLog("1. URL Start Time -" + startDate + "\n" + "2. End Time -" + endDate +
-                        "\n" + "3. UrlName : " + UrlName + "\n" + "4. TotalTimeSpent : " + TotalTimeinSecond.ToStrVal()
-                    + "\n" + "5." + DateTime.Now.ToString("hh:mm:ss"));
+            //LogFile.WriteMessageLog("1. URL Start Time -" + startDate + "\n" + "2. End Time -" + endDate +
+            //            "\n" + "3. UrlName : " + UrlName + "\n" + "4. TotalTimeSpent : " + TotalTimeinSecond.ToStrVal()
+            //        + "\n" + "5." + DateTime.Now.ToString("hh:mm:ss"));
 
             new DashboardSqliteService().InsertURLTrackingData(urldata);
         }
@@ -1399,9 +1399,9 @@ namespace WorkStatus.ViewModels
                 IsOffline = 1
 
             };
-            LogFile.WriteMessageLog("1.Start Time -" + startDate + "\n" + "End Time -" + endDate +
-                        "\n" + "3. activityName : " + activityName + "\n" + "4. Activity_TotalRun : " + TotalTimeinSecond.ToStrVal()
-                    + "\n" + "5." + DateTime.Now.ToString("hh:mm:ss"));
+            //LogFile.WriteMessageLog("1.Start Time -" + startDate + "\n" + "End Time -" + endDate +
+            //            "\n" + "3. activityName : " + activityName + "\n" + "4. Activity_TotalRun : " + TotalTimeinSecond.ToStrVal()
+            //        + "\n" + "5." + DateTime.Now.ToString("hh:mm:ss"));
 
             new DashboardSqliteService().InsertAppTrackingData(appdata);
         }
@@ -1550,7 +1550,7 @@ namespace WorkStatus.ViewModels
                                         activityTracker.globalMouseHook.Dispose();
                                         activityTracker.globalKeyHook = null;
                                         activityTracker.globalMouseHook = null;
-                                        LogFile.WriteMessageLog("Dispose");
+                                        //LogFile.WriteMessageLog("Dispose");
                                     }
 
                                 }
@@ -3084,7 +3084,7 @@ namespace WorkStatus.ViewModels
                 BaseService<tbl_URLTracking> service3 = new BaseService<tbl_URLTracking>();
                 service3.Delete(new tbl_URLTracking());
 
-                LogFile.WriteMessageLog("New app and url" + DateTime.Now);
+               // LogFile.WriteMessageLog("New app and url" + DateTime.Now);
                 //
 
                 if (Common.Storage.SlotRunning)
@@ -3110,7 +3110,7 @@ namespace WorkStatus.ViewModels
                 Common.Storage.SlotRunning = false;
                 Common.Storage.timeIntervel = SlotInterval;// 2;
                 // SlotTimerObject.Interval = new TimeSpan(0, 1, 0);
-
+                IsSlotTimer = true;
                 SlotTimerObject.Start();
                 if (AverageActivity == "0")
                 {
@@ -3227,6 +3227,7 @@ namespace WorkStatus.ViewModels
                 // new DashboardSqliteService().AddTimeIntervalToDB(oCurrentDate.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'00"), oCurrentDate.AddMinutes(result).ToString("yyyy'-'MM'-'dd' 'HH':'mm':'00"));
                 SlotTimerObject.Interval = new TimeSpan(0, result, 0); //new TimeSpan(0, 2, 0);  //
                 SlotTimerObject.Start();
+                IsSlotTimer = true;
             }
             catch (Exception ex)
             {
@@ -3357,7 +3358,7 @@ namespace WorkStatus.ViewModels
                 BaseService<tbl_URLTracking> service3 = new BaseService<tbl_URLTracking>();
                 service3.Delete(new tbl_URLTracking());
 
-                LogFile.WriteMessageLog("from Add Slot New app and url" + DateTime.Now);
+               // LogFile.WriteMessageLog("from Add Slot New app and url" + DateTime.Now);
                 //
 
                 tbl_KeyMouseTrack_Slot keyMouseTrack_Slot;
@@ -3722,7 +3723,7 @@ namespace WorkStatus.ViewModels
                             interval_time = Common.Storage.ActivityIntervel.ToStrVal(),
                             start = item.Start,
                             stop = item.Stop,
-                            time_type = item.SourceType,
+                            time_type = item.TimeType,
                             selfiVerification = item.SelfieVerification,
                             source_type = item.SourceType,
                             intervals = GetIntervalsList(item.Start),
@@ -7941,14 +7942,20 @@ namespace WorkStatus.ViewModels
                             if (ScreenshotResponse.response.data.imageName != null)
                             {
                                 Common.Storage.ScreenURl = ScreenshotResponse.response.data.imageName;
-                                Common.Storage.IsScreenShotCapture = true;
+                               // Common.Storage.IsScreenShotCapture = true;
                             }
                             else
                             {
                                 Common.Storage.ScreenURl = "";
                                 Common.Storage.IsScreenShotCapture = false;
-
+                                LogFile.LogApiResponseSceenShot("imageName "+ ScreenshotResponse.response.data.imageName);
                             }
+                        }
+                        else
+                        {
+                            Common.Storage.ScreenURl = "";
+                            Common.Storage.IsScreenShotCapture = false;
+                            LogFile.LogApiResponseSceenShot(ScreenshotResponse.response.code +" "+ ScreenshotResponse.response.message);
                         }
                     }
                 }

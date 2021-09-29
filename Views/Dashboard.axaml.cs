@@ -358,6 +358,10 @@ namespace WorkStatus.Views
             if (!_dashboardVM.IsUserOffline)
             {
                 string folderPath = ConfigurationManager.AppSettings["TempWindowsPath"].ToString();
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
                 var files = Directory.GetDirectories(folderPath).ToList();
                 if (files != null && files.Count > 0)
                 {
@@ -480,7 +484,7 @@ namespace WorkStatus.Views
             {
                 if (Common.CommonServices.IsConnectedToInternet())
                 {
-                    if (!_dashboardVM.IsPlaying && _dashboardVM.IsStop && !Common.Storage.IsScreenShotCapture)
+                    if (!_dashboardVM.IsPlaying && _dashboardVM.IsStop)//&& !Common.Storage.IsScreenShotCapture
                     {
                         try
                         {
@@ -579,6 +583,7 @@ namespace WorkStatus.Views
                         finally
                         {
                         }
+                        _dashboardVM.IsSlotTimer = false;
                     }
                 }
                 else
@@ -586,7 +591,7 @@ namespace WorkStatus.Views
                     GetOfflineScreenShots();
                 }
 
-                _dashboardVM.IsSlotTimer = false;
+                
             }
         }
 
