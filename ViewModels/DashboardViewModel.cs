@@ -1726,13 +1726,13 @@ namespace WorkStatus.ViewModels
                         HeaderTime = _time;
                     }), DispatcherPriority.Background);
 
-                    AddUpdateProjectTimeToDBinContinueIdle(false);
+                   // AddUpdateProjectTimeToDBinContinueIdle(false);
                     BaseService<tbl_IdleTimeDetails> service = new BaseService<tbl_IdleTimeDetails>();
                     service.Delete(new tbl_IdleTimeDetails());
                     BaseService<tbl_KeyMouseTrack_Slot_Idle> service1 = new BaseService<tbl_KeyMouseTrack_Slot_Idle>();
                     service1.Delete(new tbl_KeyMouseTrack_Slot_Idle());
-                    //BaseService<tbl_Timer> service2 = new BaseService<tbl_Timer>();
-                    // service2.Delete(new tbl_Timer());
+                    BaseService<tbl_Timer> service2 = new BaseService<tbl_Timer>();
+                    service2.Delete(new tbl_Timer());
 
                     ProjectPlay(projectIdSelected);
                 }
@@ -2255,7 +2255,7 @@ namespace WorkStatus.ViewModels
                             interval_time = Common.Storage.ActivityIntervel.ToStrVal(),
                             start = item.Start,
                             stop = item.Stop,
-                            time_type = item.SourceType,
+                            time_type = item.TimeType,
                             selfiVerification = item.SelfieVerification,
                             source_type = item.SourceType,
                             intervals = GetIdleIntervalsList(item.Start),
@@ -2461,7 +2461,7 @@ namespace WorkStatus.ViewModels
                             interval_time = Common.Storage.ActivityIntervel.ToStrVal(),
                             start = item.Start,
                             stop = item.Stop,
-                            time_type = item.SourceType,
+                            time_type = item.TimeType,
                             selfiVerification = item.SelfieVerification,
                             source_type = item.SourceType,
                             intervals = GetIdleIntervalsList(item.Start),
@@ -3222,10 +3222,10 @@ namespace WorkStatus.ViewModels
                 {
                     result = 10 - a;
                 }
-                Common.Storage.timeIntervel = result;//2;
+                Common.Storage.timeIntervel = result;
                 // Common.Storage.SlotTimerStartTime = oCurrentDate.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss");
                 // new DashboardSqliteService().AddTimeIntervalToDB(oCurrentDate.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'00"), oCurrentDate.AddMinutes(result).ToString("yyyy'-'MM'-'dd' 'HH':'mm':'00"));
-                SlotTimerObject.Interval = new TimeSpan(0, result, 0); //new TimeSpan(0, 2, 0);  //
+                SlotTimerObject.Interval = new TimeSpan(0, result, 0);  //new TimeSpan(0, result, 0); //new TimeSpan(0, 2, 0);  //
                 SlotTimerObject.Start();
                 IsSlotTimer = true;
             }
@@ -8112,27 +8112,27 @@ namespace WorkStatus.ViewModels
                     if (screenshot.response.code == "200")
                     {
                         string intrval = DigitsOnly(screenshot.response.data.timeInterval);
-                        SlotInterval = intrval.ToInt32();//2;
+                        SlotInterval = 5;// intrval.ToInt32();//2;
                         Common.Storage.timeIntervel = SlotInterval;
                         Common.Storage.ActivityIntervel = SlotInterval;
                     }
                     else
                     {
-                        SlotInterval = 10;
+                        SlotInterval = 5;
                         Common.Storage.timeIntervel = SlotInterval;
                         Common.Storage.ActivityIntervel = SlotInterval;
                     }
                 }
                 else
                 {
-                    SlotInterval = 10;
+                    SlotInterval = 5;
                     Common.Storage.timeIntervel = SlotInterval;
                     Common.Storage.ActivityIntervel = SlotInterval;
                 }
             }
             catch (Exception ex)
             {
-                SlotInterval = 10;
+                SlotInterval = 5;
                 LogFile.ErrorLog(ex);
                 // throw new Exception(ex.Message);
             }

@@ -53,7 +53,7 @@ namespace WorkStatus.Common
             {
                 string v = Assembly.GetEntryAssembly().GetName().Version.ToString();
                 string[] s = v.Split(".");
-                version = "Version " + s[0] + "." + s[1] + " (908)";
+                version = "Version " + s[0] + "." + s[1] + " (909)";
             }
             catch (Exception ex)
             {
